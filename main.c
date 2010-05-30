@@ -19,8 +19,8 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-#define WINDOZE 1
-//#define DETLEF 1
+//#define WINDOZE 1
+#define DETLEF 1
 //#define THINKSTUPID 1
 
 #define CRYPTICSEA 1
