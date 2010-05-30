@@ -8,18 +8,6 @@ Then simply issue good ol'
 
     make
 
-To play, you need the game's resources, more specifically the following directories:
-
-- animation
-- level
-- music
-- replay (may be empty)
-- sound
-- texture
-- tile01 ... tile07
-
-Copy them into this directory and run `./gish`.
-
 # How to compile (Windows with VS2008)
 
 Download and install required libraries:
@@ -34,9 +22,11 @@ From http://connect.creativelabs.com/openal/Downloads/Forms/AllItems.aspx:
 
 From http://xiph.org/downloads/:
     libogg-1.2.0.zip, unzip and compile using libogg-1.2.0\win32\VS2008\libogg_static.vcproj
-    libvorbis-1.3.1.zip, unzip and compile using libvorbis-1.3.1\win32\VS2008\libvorbis\libvorbis_static.vcproj and compile using     libvorbis-1.3.1\win32\VS2008\libvorbisfile\libvorbisfile_static.vcproj.
+    libvorbis-1.3.1.zip, unzip and:
+        - compile using libvorbis-1.3.1\win32\VS2008\libvorbis\libvorbis_static.vcproj
+        - compile using libvorbis-1.3.1\win32\VS2008\libvorbisfile\libvorbisfile_static.vcproj.
 
-HACK: because gish includes "AL\al.h" I created the directory "C:\Program Files\OpenAL 1.1 SDK\include\AL" and copied all files from "C:\Program Files\OpenAL 1.1 SDK\include".
+HACK: because gish includes `AL\al.h` I created the directory `C:\Program Files\OpenAL 1.1 SDK\include\AL` and copied all files from `C:\Program Files\OpenAL 1.1 SDK\include`.
 
 In Visual Studio add to your include-paths:
     ...\libvorbis-1.3.1\include
@@ -53,4 +43,21 @@ In Visual Studio add to your library-paths:
     ...\SDL_mixer-1.2.11\lib
     ...\SDL-1.2.14_VC8\lib
 
-Open gish.sln and compile.
+Open `gish.sln` and compile.
+
+# How to play
+To play, you need the game's resources, more specifically the following directories:
+
+- animation
+- level
+- music
+- replay (may be empty)
+- sound
+- texture
+- tile01 ... tile07
+
+Under Windows you'll also need the files:
+- OpenAL32.dll
+- SDL.DLL
+
+Copy them into the directory of your compiled binaries and run `./gish` or `gish.exe`.
