@@ -19,14 +19,20 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-#define WINDOWS 1
-//#define LINUX 1
-//#define MAC 1
+#ifdef __LINUX__
+ #define LINUX 1
+#endif
 
-#define CRYPTICSEA 1
+#ifdef _WIN32
+  #define WINDOWS 1
+#endif
+
+#ifdef __APPLE__
+  #define MAC 1
+#endif
 
 #ifdef MAC
-#define __MACOSX__
+  #define __MACOSX__
 #endif
 
 #include <math.h>
@@ -34,45 +40,41 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <string.h>
 
 #ifdef WINDOWS
-#include <io.h>
-#include <windows.h>
-#include <winsock.h>
-#endif
-
-#ifndef WINDOWS
-#include <netinet/in.h>
-#include <netdb.h>
-#include <arpa/inet.h>
-#include <sys/socket.h>
-#include <fcntl.h>
-#include <termios.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <dirent.h>
+  #include <io.h>
+  #include <windows.h>
+  #include <winsock.h>
+#else
+  #include <netinet/in.h>
+  #include <netdb.h>
+  #include <arpa/inet.h>
+  #include <sys/socket.h>
+  #include <fcntl.h>
+  #include <termios.h>
+  #include <sys/types.h>
+  #include <sys/stat.h>
+  #include <dirent.h>
 #endif
 
 #ifdef LINUX
-#include <sys/statfs.h>
+  #include <sys/statfs.h>
 #endif
 
 #ifdef WINDOWS
-#include <SDL.h>
-#endif
-
-#ifndef WINDOWS
-#include <SDL/SDL.h>
+  #include <SDL.h>
+#else
+  #include <SDL/SDL.h>
 #endif
 
 #ifndef MAC
-#include <GL/gl.h>
-#include <AL/al.h>
-#include <AL/alc.h>
+  #include <GL/gl.h>
+  #include <AL/al.h>
+  #include <AL/alc.h>
 #endif
 
 #ifdef MAC
-#include <OpenGL/gl.h>
-#include <OpenAL/al.h>
-#include <OpenAL/alc.h>
+  #include <OpenGL/gl.h>
+  #include <OpenAL/al.h>
+  #include <OpenAL/alc.h>
 #endif
 
 #include "video/glext.h"
@@ -87,15 +89,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 int debugit=0;
 
 #ifdef WINDOWS
-#define INLINE _inline
-#endif
-
-#ifdef LINUX
-#define INLINE inline
-#endif
-
-#ifdef MAC
-#define INLINE inline
+  #define INLINE _inline
+#else
+  #define INLINE inline
 #endif
 
 FILE *fp;
@@ -400,5 +396,3 @@ int main (int argc,char *argv[])
 
   return(0);
   }
-
-
