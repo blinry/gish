@@ -26,7 +26,7 @@ int vorbisseek(void *datasource,ogg_int64_t offset,int whence);
 int vorbisclose(void *datasource);
 long vorbistell(void *datasource);
 
-typedef struct OGGMEMORYFILE
+struct OGGMEMORYFILE
   {
   char *data;
   int datasize;
