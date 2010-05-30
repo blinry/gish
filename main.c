@@ -19,9 +19,17 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-//#define WINDOWS 1
-#define LINUX 1
-//#define MAC 1
+#ifdef __LINUX__
+ #define LINUX 1
+#endif
+
+#ifdef _WIN32
+  #define WINDOWS 1
+#endif
+
+#ifdef __APPLE__
+  #define MAC 1
+#endif
 
 #ifdef MAC
   #define __MACOSX__
