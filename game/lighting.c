@@ -56,10 +56,10 @@ void setuplightingtextures(void)
     green=128.0f+vec[1]*127.0f;
     blue=128.0f+vec[2]*127.0f;
     alpha=255;
-#ifndef THINKSTUPID
+#ifndef MAC
     texture[texturenum].rgba[0][count*128+count2]=(alpha<<24)+(blue<<16)+(green<<8)+red;
 #endif
-#ifdef THINKSTUPID
+#ifdef MAC
     texture[texturenum].rgba[0][count*128+count2]=(red<<24)+(green<<16)+(blue<<8)+alpha;
 #endif
     }
@@ -117,10 +117,10 @@ void setuplightingtextures(void)
     //red&=(~31);
     //green&=(~31);
     //blue&=(~31);
-#ifndef THINKSTUPID
+#ifndef MAC
     texture[texturenum].rgba[0][count*128+count2]=(alpha<<24)+(blue<<16)+(green<<8)+red;
 #endif
-#ifdef THINKSTUPID
+#ifdef MAC
     texture[texturenum].rgba[0][count*128+count2]=(red<<24)+(green<<16)+(blue<<8)+alpha;
 #endif
     }

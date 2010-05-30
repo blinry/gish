@@ -36,11 +36,11 @@ unsigned int rotint(unsigned int x,int rotnum)
 
 void launchwebpage(char *webpagename)
   {
-#ifdef WINDOZE
+#ifdef WINDOWS
   SDL_WM_IconifyWindow();
   ShellExecute(NULL,"open",webpagename,"","c:\\",SW_SHOWNORMAL);
 #endif
-#ifdef THINKSTUPID
+#ifdef MAC
   /*
   OSStatus err;
   ICInstance inst;

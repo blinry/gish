@@ -19,7 +19,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-#ifdef WINDOZE
+#ifdef WINDOWS
 void getcputime(__int64 *ptime)
   {
   __asm
@@ -39,14 +39,14 @@ void resettimer(int timernum)
 
 void starttimer(int timernum)
   {
-#ifdef WINDOZE
+#ifdef WINDOWS
   getcputime(&timer[timernum].starttime);
 #endif
   }
 
 void stoptimer(int timernum)
   {
-#ifdef WINDOZE
+#ifdef WINDOWS
   getcputime(&timetemp);
 
   timer[timernum].totaltime+=(timetemp-timer[timernum].starttime);

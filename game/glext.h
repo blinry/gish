@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 void loadglextentions(void);
 
-#ifdef WINDOZE
+#ifdef WINDOWS
 PFNGLACTIVETEXTUREARBPROC glActiveTextureARB=NULL;
 PFNGLCLIENTACTIVETEXTUREARBPROC glClientActiveTextureARB=NULL;
 PFNGLMULTITEXCOORD2FARBPROC glMultiTexCoord2fARB=NULL;

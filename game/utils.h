@@ -19,14 +19,14 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-#ifdef WINDOZE
+#ifdef WINDOWS
 void getcputime(__int64 *ptime);
 #endif
 void resettimer(int timernum);
 void starttimer(int timernum);
 void stoptimer(int timernum);
 
-#ifdef WINDOZE
+#ifdef WINDOWS
 struct
   {
   __int64 starttime;
@@ -36,7 +36,7 @@ struct
 __int64 timetemp;
 #endif
 
-#ifndef WINDOZE
+#ifndef WINDOWS
 struct
   {
   int starttime;

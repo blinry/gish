@@ -49,7 +49,7 @@ int checkfilespec(char *filespec,char *filename)
 
 void listfiles(char *filespec,char filelist[1024][32],int directories)
   {
-#ifdef WINDOZE
+#ifdef WINDOWS
   int count,count2;
   int handle;
   struct _finddata_t fileinfo;
@@ -87,7 +87,7 @@ void listfiles(char *filespec,char filelist[1024][32],int directories)
   qsort(filelist,count,32,comparestrings);
 #endif
 
-#ifdef DETLEF
+#ifdef LINUX
   int count;
   struct dirent *dp;
   DIR *dfd;
@@ -138,10 +138,10 @@ size_t fread2(void *ptr,size_t psize,size_t pnum,FILE *pfp)
   int count;
   unsigned char *cptr;
 
-#ifndef THINKSTUPID
+#ifndef MAC
   fread(ptr,psize,pnum,pfp);
 #endif
-#ifdef THINKSTUPID
+#ifdef MAC
   cptr=(unsigned char *) ptr;
   if (psize==1)
     {
@@ -174,10 +174,10 @@ size_t fwrite2(const void *ptr,size_t psize,size_t pnum,FILE *pfp)
   int count;
   unsigned char *cptr;
 
-#ifndef THINKSTUPID
+#ifndef MAC
   fwrite(ptr,psize,pnum,pfp);
 #endif
-#ifdef THINKSTUPID
+#ifdef MAC
   cptr=(unsigned char *) ptr;
   if (psize==1)
     {

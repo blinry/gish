@@ -19,13 +19,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-//#define WINDOZE 1
-#define DETLEF 1
-//#define THINKSTUPID 1
+//#define WINDOWS 1
+#define LINUX 1
+//#define MAC 1
 
 #define CRYPTICSEA 1
 
-#ifdef THINKSTUPID
+#ifdef MAC
 #define __MACOSX__
 #endif
 
@@ -33,13 +33,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <stdio.h>
 #include <string.h>
 
-#ifdef WINDOZE
+#ifdef WINDOWS
 #include <io.h>
 #include <windows.h>
 #include <winsock.h>
 #endif
 
-#ifndef WINDOZE
+#ifndef WINDOWS
 #include <netinet/in.h>
 #include <netdb.h>
 #include <arpa/inet.h>
@@ -51,25 +51,25 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <dirent.h>
 #endif
 
-#ifdef DETLEF
+#ifdef LINUX
 #include <sys/statfs.h>
 #endif
 
-#ifdef WINDOZE
+#ifdef WINDOWS
 #include <SDL.h>
 #endif
 
-#ifndef WINDOZE
+#ifndef WINDOWS
 #include <SDL/SDL.h>
 #endif
 
-#ifndef THINKSTUPID
+#ifndef MAC
 #include <GL/gl.h>
 #include <AL/al.h>
 #include <AL/alc.h>
 #endif
 
-#ifdef THINKSTUPID
+#ifdef MAC
 #include <OpenGL/gl.h>
 #include <OpenAL/al.h>
 #include <OpenAL/alc.h>
@@ -86,15 +86,15 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 int debugit=0;
 
-#ifdef WINDOZE
+#ifdef WINDOWS
 #define INLINE _inline
 #endif
 
-#ifdef DETLEF
+#ifdef LINUX
 #define INLINE inline
 #endif
 
-#ifdef THINKSTUPID
+#ifdef MAC
 #define INLINE inline
 #endif
 

@@ -26,7 +26,7 @@ void loadglextentions(void)
 
   glversion=(char *) glGetString(GL_VERSION);
   ext=(char *) glGetString(GL_EXTENSIONS);
-#ifdef WINDOZE
+#ifdef WINDOWS
   if (strstr(ext,"GL_ARB_multitexture")!=NULL || SDL_GL_GetProcAddress("glActiveTextureARB")!=NULL)
     {
     glActiveTextureARB=(void *) SDL_GL_GetProcAddress("glActiveTextureARB");
@@ -47,7 +47,7 @@ void loadglextentions(void)
     glext.multitexture=1;
     }
 #endif
-#ifndef WINDOZE
+#ifndef WINDOWS
   glext.multitexture=1;
 #endif
   if (strstr(ext,"GL_ARB_texture_env_dot3")!=NULL || (glversion[0]>='2' || glversion[2]>='3'))
