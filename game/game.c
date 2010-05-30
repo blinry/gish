@@ -807,6 +807,7 @@ void getinputs(void)
 		if (sizing != 0.0f)
 		{
 			sizing = 1.0f + sizing * 0.005f;
+			object[count].gravitymultiplier *= sizing;
 			object[count].mass *= sizing;
 			object[count].size[0] *= sizing;
 			object[count].size[1] *= sizing;
@@ -815,6 +816,7 @@ void getinputs(void)
 				if (object[count].type == 1)
 				{
 					particle[object[count].particle[i]].mass *= sizing;
+					particle[object[count].particle[i]].gravity *= sizing;
 					for (j = 0; j < numofbonds; j++)
 						if (bond[j].part1 == object[count].particle[i] || bond[j].part2 == object[count].particle[i])
 						{
