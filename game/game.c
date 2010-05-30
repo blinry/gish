@@ -806,10 +806,25 @@ void getinputs(void)
 		sizing = (keyboard[SCAN_M] ? 1.0f : 0.0f) - (keyboard[SCAN_N] ? 1.0f : 0.0f);
 		if (sizing != 0.0f)
 		{
+			sizing = 1.0f + sizing * 0.005f;
+			object[count].mass *= sizing;
+			object[count].size[0] *= sizing;
+			object[count].size[1] *= sizing;
 			for(i = 0; i < object[count].numofparticles; i++)
-				for (j = 0; j < numofbonds; j++)
-					if (bond[j].part1 == object[count].particle[i] || bond[j].part2 == object[count].particle[i])
-						bond[j].length *= 1.0f + sizing * 0.005f;
+			{
+				if (object[count].type == 1)
+				{
+					particle[object[count].particle[i]].mass *= sizing;
+					for (j = 0; j < numofbonds; j++)
+						if (bond[j].part1 == object[count].particle[i] || bond[j].part2 == object[count].particle[i])
+						{
+							bond[j].length *= sizing;
+							bond[j].oomass *= sizing;
+							scalevector(bond[j].bondnormal, bond[j].bondnormal, sizing);
+							bond[j].veclength *= sizing;
+						}
+				}
+			}
 		}
     if (keyboard[control[count].key[0]])
       object[count].axis[0]-=1.0f;
