@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 void saveblock(int blocknum);
 void loadblock(int blocknum);
-void setupblockflags(blocknum);
+void setupblockflags(int blocknum);
 void setupblockalpha(int blocknum);
 
 struct

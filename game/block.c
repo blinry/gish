@@ -130,7 +130,7 @@ void loadblock(int blocknum)
     chdir("..");
   }
 
-void setupblockflags(blocknum)
+void setupblockflags(int blocknum)
   {
   int count;
 
