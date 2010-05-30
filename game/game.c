@@ -791,7 +791,9 @@ void simulation(void)
 
 void getinputs(void)
   {
+  int i;
   int count;
+  float sizing;
 
   for (count=0;count<4;count++)
     {
@@ -801,6 +803,14 @@ void getinputs(void)
     }
   for (count=0;count<4;count++)
     {
+		sizing = (keyboard[SCAN_M] ? 1.0f : 0.0f) - (keyboard[SCAN_N] ? 1.0f : 0.0f);
+		if (sizing != 0.0f)
+		{
+			for(i = 0; i < 32; i++)
+			{
+				bond[i].length *= 1.0f + sizing * 0.005f;
+			}
+		}
     if (keyboard[control[count].key[0]])
       object[count].axis[0]-=1.0f;
     if (keyboard[control[count].key[1]])
