@@ -114,6 +114,7 @@ void createtarboy(float position[3])
 
   memset(&object[numofobjects],0,sizeof(object[numofobjects]));
 
+  object[numofobjects].gravitymultiplier = 1.0f;
   object[numofobjects].type=1;
   object[numofobjects].timetolive=10000;
   object[numofobjects].radius=1.5f;
