@@ -60,7 +60,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/LTCG"
-				AdditionalDependencies="shell32.lib glew32.lib SDL.lib SDLmain.lib SDL_mixer.lib OpenGL32.lib OpenAL32.lib libogg_static.lib libvorbisfile_static.lib libvorbis_static.lib $(NOINHERIT)"
+				AdditionalDependencies="shell32.lib SDL.lib SDLmain.lib SDL_mixer.lib OpenGL32.lib OpenAL32.lib libogg_static.lib libvorbisfile_static.lib libvorbis_static.lib $(NOINHERIT)"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
 				SubSystem="1"
