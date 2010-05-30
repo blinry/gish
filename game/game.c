@@ -791,7 +791,7 @@ void simulation(void)
 
 void getinputs(void)
   {
-  int i;
+  int i,j,k,l,m;
   int count;
   float sizing;
 
@@ -806,10 +806,10 @@ void getinputs(void)
 		sizing = (keyboard[SCAN_M] ? 1.0f : 0.0f) - (keyboard[SCAN_N] ? 1.0f : 0.0f);
 		if (sizing != 0.0f)
 		{
-			for(i = 0; i < 32; i++)
-			{
-				bond[i].length *= 1.0f + sizing * 0.005f;
-			}
+			for(i = 0; i < object[count].numofparticles; i++)
+				for (j = 0; j < numofbonds; j++)
+					if (bond[j].part1 == object[count].particle[i] || bond[j].part2 == object[count].particle[i])
+						bond[j].length *= 1.0f + sizing * 0.005f;
 		}
     if (keyboard[control[count].key[0]])
       object[count].axis[0]-=1.0f;
