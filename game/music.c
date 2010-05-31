@@ -38,11 +38,6 @@ void checkmusic(void)
   if (game.songnum>8)
     game.songnum=0;
 
-#ifdef DEMO
-  if (game.songnum>0 && game.songnum<8)
-    game.songnum=0;
-#endif
-
   if (game.songnum!=game.currentsongnum)
     {
     if (game.currentsongnum!=-1)
@@ -141,7 +136,6 @@ void loadoggs(void)
     fclose(fp);
     }
 
-#ifndef DEMO
   oggnum=1;
   if ((fp=fopen("cave.ogg","rb"))!=NULL)
     {
@@ -252,7 +246,6 @@ void loadoggs(void)
 
     fclose(fp);
     }
-#endif
 
   oggnum=8;
   if ((fp=fopen("intro.ogg","rb"))!=NULL)

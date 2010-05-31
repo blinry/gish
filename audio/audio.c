@@ -74,7 +74,6 @@ void setupaudio(void)
   if (changeddir==0)
     chdir("..");
 
-#ifndef DEMO
   changeddir=chdir("data");
 
   loadwav(21,"cubemap.dat");
@@ -84,7 +83,6 @@ void setupaudio(void)
 
   if (changeddir==0)
     chdir("..");
-#endif
 
   alGenSources(1,&oggsource);
 

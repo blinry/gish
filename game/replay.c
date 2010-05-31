@@ -166,7 +166,6 @@ int loadreplay(char *filename)
 
 void replaymenu(void)
   {
-#ifndef DEMO
   int count,count2;
   int changeddir;
   int numoffiles;
@@ -275,116 +274,5 @@ void replaymenu(void)
     }
 
   resetmenuitems();
-#else
-  int count;
-  char filename[32];
-
-  filename[0]=0;
-
-  resetmenuitems();
-
-  joymenunum=1;
-
-  while (!menuitem[0].active && !windowinfo.shutdown)
-    {
-    glClearColor(0.0f,0.0f,0.0f,0.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
-
-    numofmenuitems=0;
-    createmenuitem(TXT_EXIT,0,0,16,1.0f,1.0f,1.0f,1.0f);
-    setmenuitem(MO_HOTKEY,SCAN_ESC);
-
-    createmenuitem(TXT_PLAY_REPLAY" 1",64,352,16,1.0f,1.0f,1.0f,1.0f);
-    setmenuitem(MO_HOTKEY,SCAN_1);
-    createmenuitem(TXT_PLAY_REPLAY" 2",64,368,16,1.0f,1.0f,1.0f,1.0f);
-    setmenuitem(MO_HOTKEY,SCAN_2);
-    createmenuitem(TXT_PLAY_REPLAY" 3",64,384,16,1.0f,1.0f,1.0f,1.0f);
-    setmenuitem(MO_HOTKEY,SCAN_3);
-    createmenuitem(TXT_PLAY_REPLAY" 4",64,400,16,1.0f,1.0f,1.0f,1.0f);
-    setmenuitem(MO_HOTKEY,SCAN_4);
-
-    checksystemmessages();
-    checkkeyboard();
-    checkmouse();
-    checkjoystick();
-    checkmenuitems();
-
-    setuptextdisplay();
-
-    glColor4f(1.0f,1.0f,1.0f,1.0f);
-    displaybackground(620);
-
-    drawtext("Replay Mode",(320|TEXT_CENTER),304,16,1.0f,1.0f,1.0f,1.0f);
-
-    drawmenuitems();
-
-    drawmousecursor(768+font.cursornum,mouse.x,mouse.y,16,1.0f,1.0f,1.0f,1.0f);
-
-    SDL_GL_SwapBuffers();
-
-    if (menuitem[1].active)
-      {
-      count=loadreplay("demo01.gre");
-    
-      if (count!=-1)
-        {
-        game.levelnum=count-100;
-        loadstorylevel(game.levelnum);
-      
-        game.playreplay=1;
-        gameloop();
-        game.playreplay=0;
-        }
-      menuitem[1].active=0;
-      }
-    if (menuitem[2].active)
-      {
-      count=loadreplay("demo02.gre");
-    
-      if (count!=-1)
-        {
-        game.levelnum=count-100;
-        loadstorylevel(game.levelnum);
-      
-        game.playreplay=1;
-        gameloop();
-        game.playreplay=0;
-        }
-      menuitem[2].active=0;
-      }
-    if (menuitem[3].active)
-      {
-      count=loadreplay("demo03.gre");
-    
-      if (count!=-1)
-        {
-        game.levelnum=count-100;
-        loadstorylevel(game.levelnum);
-      
-        game.playreplay=1;
-        gameloop();
-        game.playreplay=0;
-        }
-      menuitem[3].active=0;
-      }
-    if (menuitem[4].active)
-      {
-      count=loadreplay("demo04.gre");
-    
-      if (count!=-1)
-        {
-        game.levelnum=count-100;
-        loadstorylevel(game.levelnum);
-      
-        game.playreplay=1;
-        gameloop();
-        game.playreplay=0;
-        }
-      menuitem[4].active=0;
-      }
-    }
-
-  resetmenuitems();
-#endif
   }
 

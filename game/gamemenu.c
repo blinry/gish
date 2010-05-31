@@ -282,22 +282,6 @@ void pregamemenu(void)
           }
         }
 
-#ifdef DEMO
-      if (game.levelnum==4)
-      if (game.exit==4 || game.exit==5)
-        {
-        game.score[0]+=(object[0].hitpoints/50)*10;
-        postgamemenu();
-        game.totalscore+=game.score[0];
-
-        endingmenu();
-        menuitem[0].active=1;
-
-        game.levelnum=5;
-
-        goto changelevelbypass;
-        }
-#endif
       if (game.levelnum==34)
       if (game.exit==4 || game.exit==5)
         {
@@ -491,7 +475,6 @@ void gameovermenu(void)
 
 void endingmenu(void)
   {
-#ifndef DEMO
   int count;
 
   resetmenuitems();
@@ -627,64 +610,5 @@ void endingmenu(void)
     }
 
   resetmenuitems();
-#endif
-#ifdef DEMO
-  int count;
-
-  resetmenuitems();
-
-  while (!menuitem[0].active && !windowinfo.shutdown)
-    {
-    glClearColor(0.0f,0.0f,0.0f,0.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
-
-    numofmenuitems=0;
-    createmenuitem("Next",(640|TEXT_END),0,16,1.0f,1.0f,1.0f,1.0f);
-    setmenuitem(MO_HOTKEY,SCAN_ESC);
-
-    checksystemmessages();
-    checkkeyboard();
-    checkmouse();
-    checkjoystick();
-    checkmenuitems();
-
-    setuptextdisplay();
-
-    glColor4f(1.0f,1.0f,1.0f,1.0f);
-    displaybackground(580);
-
-    count=128;
-
-    drawtext("Congratulations, you have completed",64,count,14,1.0f,1.0f,1.0f,1.0f);
-    count+=14;
-    drawtext("the demo.  Buy the full game and get:",64,count,14,1.0f,1.0f,1.0f,1.0f);
-    count+=14;
-    count+=14;
-    drawtext("-34 action packed story mode levels",64,count,14,1.0f,1.0f,1.0f,1.0f);
-    count+=14;
-    drawtext("-23 time trial collection challenges",64,count,14,1.0f,1.0f,1.0f,1.0f);
-    count+=14;
-    drawtext("-5 competitive versus modes",64,count,14,1.0f,1.0f,1.0f,1.0f);
-    count+=14;
-    drawtext("-5 hidden bonus levels",64,count,14,1.0f,1.0f,1.0f,1.0f);
-    count+=14;
-    drawtext("-6 intense boss fights",64,count,14,1.0f,1.0f,1.0f,1.0f);
-    count+=14;
-    drawtext("-Over 55 secrets to discover",64,count,14,1.0f,1.0f,1.0f,1.0f);
-    count+=14;
-    drawtext("-And much much more...",64,count,14,1.0f,1.0f,1.0f,1.0f);
-    count+=14;
-
-    drawtext("Total Points:/i",64,400,16,1.0f,1.0f,1.0f,1.0f,game.totalscore);
-
-    drawmenuitems();
-
-    drawmousecursor(768+font.cursornum,mouse.x,mouse.y,16,1.0f,1.0f,1.0f,1.0f);
-
-    SDL_GL_SwapBuffers();
-    }
-
-  resetmenuitems();
-#endif
   }
 
