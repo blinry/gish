@@ -2,10 +2,11 @@
 
 To compile, you need to install at least the following packages:
 
-    libopenal-dev libsdl1.2-dev
+    libopenal-dev libsdl1.2-dev cmake
 
-Then simply issue good ol'
+Then simply issue:
 
+    cmake .
     make
 
 # How to compile (Windows with VS2008)
