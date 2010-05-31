@@ -182,18 +182,6 @@ void pregamemenu(void)
     glColor4f(1.0f,1.0f,1.0f,1.0f);
     displaybackground(540);
 
-#ifdef TESTIT
-  if (game.levelnum>=1 && game.levelnum<=34)
-    {
-    if (keyboard[SCAN_R] && !prevkeyboard[SCAN_R])
-    if (game.levelnum<34)
-      game.levelnum++;
-    if (keyboard[SCAN_F] && !prevkeyboard[SCAN_F])
-    if (game.levelnum>1)
-      game.levelnum--;
-    }
-#endif
-
     if (game.levelnum<35)
       {
       count=(game.levelnum-1)/7+1;

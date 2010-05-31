@@ -301,18 +301,6 @@ void gameloop(void)
     if (level.gametype==12)
       game.songnum=4;
     */
-#ifdef TESTIT
-    if (keyboard[SCAN_M] && !prevkeyboard[SCAN_M])
-      {
-      game.songnum++;
-      if (game.songnum>3)
-        game.songnum=0;
-      }
-    if (keyboard[SCAN_N] && !prevkeyboard[SCAN_N])
-      game.songnum=-1;
-    if (keyboard[SCAN_T] && !prevkeyboard[SCAN_T])
-      game.turbomode^=1;
-#endif
     if (game.levelnum==0)
     if (keyboard[SCAN_F5] && !prevkeyboard[SCAN_F5])
       {
@@ -325,12 +313,6 @@ void gameloop(void)
     //  movie.record^=1;
 
     view.zoom=10.0f;
-#ifdef TESTIT
-    if (keyboard[SCAN_EQUALS])
-      view.zoom=20.0f;
-    if (keyboard[SCAN_MINUS])
-      view.zoom=5.0f;
-#endif
     if (game.oldschool==2)
       view.zoom=16.0f;
     if (game.oldschool==3)
@@ -395,10 +377,6 @@ void gameloop(void)
     //starttimer(7);
 
     renderlevel();
-#ifdef TESTIT
-    if (keyboard[SCAN_B])
-      renderbonds();
-#endif
     renderlevelfore();
 
     //stoptimer(7);
@@ -525,39 +503,6 @@ void gameloop(void)
         recordframe();
       drawtext("RECORD",0,64,16,1.0f,0.0f,0.0f,1.0f);
       }
-#ifdef TESTIT
-    /*
-    fuckedup[0]=timer[0].totaltime;
-    fuckedup[1]=timer[1].totaltime;
-    fuckedup[2]=timer[2].totaltime;
-    fuckedup[3]=timer[3].totaltime;
-    fuckedup[4]=timer[4].totaltime;
-    fuckedup[5]=timer[5].totaltime;
-    fuckedup[6]=timer[6].totaltime;
-    fuckedup[7]=timer[7].totaltime;
-    fuckedup[8]=timer[8].totaltime;
-    fuckedup[9]=frame.numoflights;
-    fuckedup[10]=numofsounds;
-    fuckedup[11]=game.bonus[7];
-    fuckedup[12]=numofanimations;
-    */
-    fuckedup[7]=game.levelnum;
-    for (count=0;count<16;count++)
-      {
-      if (fuckedup[count]<8000000)
-        drawtext("/i",0,128+count*12,12,1.0f,1.0f,1.0f,1.0f,fuckedup[count]);
-      else
-        drawtext("/i",0,128+count*12,12,1.0f,0.0f,0.0f,1.0f,fuckedup[count]);
-      }
-
-    drawtext("/f",0,368,16,1.0f,1.0f,1.0f,1.0f,object[0].data[0]);
-    drawtext("/f",0,384,16,1.0f,1.0f,1.0f,1.0f,object[0].data[1]);
-    drawtext("/i",0,400,16,1.0f,1.0f,1.0f,1.0f,fps);
-    drawtext("/i",0,416,16,1.0f,1.0f,1.0f,1.0f,numofbonds);
-    drawtext("/i",0,432,16,1.0f,1.0f,1.0f,1.0f,numofparticles);
-    drawtext("/i",0,448,16,1.0f,1.0f,1.0f,1.0f,numofobjects);
-    drawtext("/i",0,464,16,1.0f,1.0f,1.0f,1.0f,numofobjectrenders);
-#endif
 
     if (game.playreplay)
       drawtext(TXT_REPLAY,(612|TEXT_END),64,16,1.0f,1.0f,0.0f,1.0f);
