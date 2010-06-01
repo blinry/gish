@@ -1,4 +1,4 @@
-# How to compile (Linux)
+# How to compile (Linux, yay!)
 
 To compile, you need to install at least the following packages:
 
@@ -6,10 +6,11 @@ To compile, you need to install at least the following packages:
 
 Then simply issue
 
-    cmake .
+    mkdir build && cd build
+    cmake ..
     make
 
-# How to compile (Windows with VS2008)
+# How to compile (Windows with VS2008, poor fool :( )
 
 Download and install the required libraries:
 
