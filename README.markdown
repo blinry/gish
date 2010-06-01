@@ -2,7 +2,7 @@
 
 To compile, you need to install at least the following packages:
 
-    libopenal-dev libsdl1.2-dev cmake
+    libopenal-dev libsdl1.2-dev libvorbis-dev cmake
 
 Then simply issue
 
