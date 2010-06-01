@@ -1,8 +1,8 @@
 # How to compile (Linux)
 
-To compile, you need to install at least the following packages:
+Make sure CMake and the development libraries for SDL, OpenAL and Vorbis are installed. In Debian-based systems, you need to install the following packages:
 
-    libopenal-dev libsdl1.2-dev libvorbis-dev cmake
+    cmake libsdl1.2-dev libopenal-dev libvorbis-dev
 
 Then simply issue
 
