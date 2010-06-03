@@ -490,16 +490,16 @@ void objectcycle(void)
         {
         for (count2=0;count2<object[count].numofparticles;count2++)
           {
-          particle[object[count].particle[count2]].gravity=10.0f/(PHYSICSCYCLE*PHYSICSCYCLE) * object[count].gravitymultiplier;
-          particle[object[count].particle[count2]].mass=0.5f * object[count].gravitymultiplier;
+          particle[object[count].particle[count2]].gravity=10.0f/(PHYSICSCYCLE*PHYSICSCYCLE);
+          particle[object[count].particle[count2]].mass=0.5f;
           }
         }
       else
         {
         for (count2=0;count2<object[count].numofparticles;count2++)
           {
-          particle[object[count].particle[count2]].gravity=4.0f/(PHYSICSCYCLE*PHYSICSCYCLE) * object[count].gravitymultiplier;
-          particle[object[count].particle[count2]].mass=0.25f * object[count].gravitymultiplier;
+          particle[object[count].particle[count2]].gravity=4.0f/(PHYSICSCYCLE*PHYSICSCYCLE);
+          particle[object[count].particle[count2]].mass=0.25f;
           }
         }
       }
