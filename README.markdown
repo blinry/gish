@@ -44,21 +44,20 @@ In Visual Studio add to your library-paths:
 
 Open *gish.sln* and compile.
 
-# How to play
-
-To play, you need the game's resources, more specifically the following directories:
-
-- animation
-- level
-- music
-- replay (may be empty)
-- sound
-- texture
-- tile01 ... tile07
-
-Under Windows you'll also need the files:
+You will need the following files to be present:
 
 - OpenAL32.dll
 - SDL.DLL
 
-Copy them into the directory of your compiled binaries and run `./gish` or `gish.exe`.
+# How to play
+
+Simply run `./gish` or `gish.exe`. There are some assets included (codenamed the *FreeGish* project), making Gish a completely free game! There is also one level available, `freegish.lvl`, you'll find it under "Custom Levels". Try it and replace what you don't like.
+
+If you own the original assets, you may also copy those into this directory. You'll need:
+
+- animation
+- level
+- music
+- sound
+- texture
+- tile01 ... tile07
