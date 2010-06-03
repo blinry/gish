@@ -19,7 +19,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-#ifdef __LINUX__
+#ifdef __linux__
  #define LINUX 1
 #endif
 
@@ -55,26 +55,20 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
   #include <dirent.h>
 #endif
 
-#ifdef LINUX
-  #include <sys/statfs.h>
-#endif
-
 #ifdef WINDOWS
   #include <SDL.h>
 #else
   #include <SDL/SDL.h>
 #endif
 
-#ifndef MAC
-  #include <GL/gl.h>
-  #include <AL/al.h>
-  #include <AL/alc.h>
-#endif
-
 #ifdef MAC
   #include <OpenGL/gl.h>
   #include <OpenAL/al.h>
   #include <OpenAL/alc.h>
+#else
+  #include <GL/gl.h>
+  #include <AL/al.h>
+  #include <AL/alc.h>
 #endif
 
 #include "video/glext.h"
