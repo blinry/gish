@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_RECORD_H
+#define GISH_GAME_RECORD_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -21,8 +23,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 void recordframe(void);
 
-struct
+typedef struct
   {
   int record;
   int framenum;
-  } movie;
+  } _movie;
+
+extern _movie movie;
+
+#endif /* GISH_GAME_RECORD_H */

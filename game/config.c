@@ -19,6 +19,34 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#ifdef MAC
+  #include <OpenGL/gl.h>
+#else
+  #include <GL/gl.h>
+#endif
+
+#ifdef WINDOWS
+  #include <SDL.h>
+#else
+  #include <SDL/SDL.h>
+#endif
+
+#include <stdio.h>
+
+#include "config.h"
+#include "options.h"
+#include "socket.h"
+#include "../input/keyboard.h"
+#include "../input/mouse.h"
+#include "../menu/menu.h"
+#include "../parser/parser.h"
+#include "../sdl/event.h"
+#include "../video/text.h"
+
+_config config;
+
 void loadconfig(void)
   {
   int count,count2;
@@ -137,6 +165,7 @@ void saveconfig(void)
   {
   int count,count2;
   char tempstr[32];
+  FILE *fp;
 
   config.resolutionx=windowinfo.resolutionx;
   config.resolutiony=windowinfo.resolutiony;
@@ -148,43 +177,43 @@ void saveconfig(void)
   if ((fp=fopen("config.txt","wb"))==NULL)
     return;
 
-  optionwriteint(&config.resolutionx,"screenwidth=");
-  optionwriteint(&config.resolutiony,"screenheight=");
-  optionwriteint(&config.bitsperpixel,"bitsperpixel=");
-  optionwriteint(&config.depthbits,"depthbits=");
-  optionwriteint(&config.stencilbits,"stencilbits=");
-  optionwriteint(&config.fullscreen,"fullscreen=");
-  optionwriteint(&config.sound,"sound=");
-  optionwriteint(&config.music,"music=");
-  optionwriteint(&config.joystick,"joystick=");
+  optionwriteint(fp, &config.resolutionx,"screenwidth=");
+  optionwriteint(fp, &config.resolutiony,"screenheight=");
+  optionwriteint(fp, &config.bitsperpixel,"bitsperpixel=");
+  optionwriteint(fp, &config.depthbits,"depthbits=");
+  optionwriteint(fp, &config.stencilbits,"stencilbits=");
+  optionwriteint(fp, &config.fullscreen,"fullscreen=");
+  optionwriteint(fp, &config.sound,"sound=");
+  optionwriteint(fp, &config.music,"music=");
+  optionwriteint(fp, &config.joystick,"joystick=");
 
-  optionwriteint(&option.sound,"soundon=");
-  optionwriteint(&option.music,"musicon=");
+  optionwriteint(fp, &option.sound,"soundon=");
+  optionwriteint(fp, &option.music,"musicon=");
   count=option.soundvolume*100.0f;
-  optionwriteint(&count,"soundvolume=");
+  optionwriteint(fp, &count,"soundvolume=");
   count=option.musicvolume*100.0f;
-  optionwriteint(&count,"musicvolume=");
+  optionwriteint(fp, &count,"musicvolume=");
 
   for (count=0;count<4;count++)
     {
     for (count2=0;count2<16;count2++)
       {
       sprintf(tempstr,"player%dkey%d=",count+1,count2+1);
-      optionwriteint(&control[count].key[count2],tempstr);
+      optionwriteint(fp, &control[count].key[count2],tempstr);
       }
 
     sprintf(tempstr,"player%djoysticknum=",count+1);
-    optionwriteint(&control[count].joysticknum,tempstr);
+    optionwriteint(fp, &control[count].joysticknum,tempstr);
 
     for (count2=0;count2<4;count2++)
       {
       sprintf(tempstr,"player%daxis%d=",count+1,count2+1);
-      optionwriteint(&control[count].axis[count2],tempstr);
+      optionwriteint(fp, &control[count].axis[count2],tempstr);
       }
     for (count2=0;count2<16;count2++)
       {
       sprintf(tempstr,"player%dbutton%d=",count+1,count2+1);
-      optionwriteint(&control[count].button[count2],tempstr);
+      optionwriteint(fp, &control[count].button[count2],tempstr);
       }
     }
 
@@ -198,6 +227,7 @@ void notsupportedmenu(void)
   char *glrenderer;
   char *glversion;
   char *ext;
+  FILE *fp;
 
   glvendor=(char *) glGetString(GL_VENDOR);
   glrenderer=(char *) glGetString(GL_RENDERER);
@@ -290,11 +320,11 @@ void optionreadint(int *ptr,char *str)
   parser.textloc=0;
   }
 
-void optionwriteint(int *ptr,char *str)
+void optionwriteint(FILE *fp, int *ptr,char *str)
   {
   fprintf(fp,"%s%d\r\n",str,*ptr);
   }
-
+/*
 void optionreadstring(char *ptr,char *str,int size)
   {
   if (findstring(str))
@@ -303,8 +333,8 @@ void optionreadstring(char *ptr,char *str,int size)
   parser.textloc=0;
   }
 
-void optionwritestring(char *ptr,char *str,int size)
+void optionwritestring(FILE *fp, char *ptr,char *str,int size)
   {
   fprintf(fp,"%s%s\r\n",str,ptr);
   }
-
+*/

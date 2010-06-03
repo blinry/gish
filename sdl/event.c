@@ -19,10 +19,24 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#ifdef WINDOWS
+  #include <SDL.h>
+#else
+  #include <SDL/SDL.h>
+#endif
+
+#include "event.h"
+#include "../game/game.h"
+#include "../video/texture.h"
+
+_windowinfo windowinfo;
+
 void checksystemmessages(void)
   {
   int count;
-	SDL_Event event;
+  SDL_Event event;
 
   if (windowinfo.minimized)
     SDL_Delay(20);
@@ -50,8 +64,8 @@ void checksystemmessages(void)
       if (event.active.state&SDL_APPINPUTFOCUS)
         if (event.active.gain==0)
           {
-					if(game.exit==0)
-	          game.pause=1;	
+          if(game.exit==0)
+            game.pause=1;
           windowinfo.minimized=1;
           }
       }

@@ -19,6 +19,18 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+
+#include "sprite.h"
+#include "../math/vector.h"
+
+int numofsprites;
+_sprite sprite[256];
+
 void createsprite(int points,float position[3])
   {
   sprite[numofsprites].type=1;

@@ -1,3 +1,5 @@
+#ifndef GISH_MATH_INTERSEC_H
+#define GISH_MATH_INTERSEC_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -25,3 +27,5 @@ int pointintersectline(float *point,float *vertex1,float *vertex2,float bias);
 int lineintersectline(float *intersectpoint,float *normal,float *scale,float *startpoint,float *endpoint,float *vertex1,float *vertex2);
 float intersectdistance(float *point,float *startpoint,float *endpoint,float *normal);
 void generatepolygonnormal(float *normal,float *vertex1,float *vertex2,float *vertex3);
+
+#endif /* GISH_MATH_INTERSEC_H */

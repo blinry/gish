@@ -19,11 +19,29 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#if defined(LINUX) || defined(MAC)
+  #include <unistd.h>
+#endif
+
+#include <stdio.h>
+
+#include "block.h"
+#include "../sdl/endian.h"
+#include "../sdl/file.h"
+#include "../video/texture.h"
+
+_block block[1024];
+int numofpolygontemps;
+_polygontemp polygontemp[16];
+
 void saveblock(int blocknum)
   {
   int count;
   int changeddir;
   char filename[13]="blck000.blk";
+  FILE *fp;
 
   changeddir=chdir("block");
 

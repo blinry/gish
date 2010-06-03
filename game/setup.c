@@ -19,6 +19,27 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#include <stdlib.h>
+#include <time.h>
+
+#include "setup.h"
+#include "animation.h"
+#include "audio.h"
+#include "boss.h"
+#include "editor.h"
+#include "game.h"
+#include "level.h"
+#include "object.h"
+#include "physics.h"
+#include "random.h"
+#include "replay.h"
+#include "sprite.h"
+#include "../math/vector.h"
+#include "../physics/bond.h"
+#include "../physics/particle.h"
+
 void setuplevel(void)
   {
   int count,count2;
@@ -319,7 +340,7 @@ void setupgame(void)
     {
     if (level.grid[count][count2]>=240 && level.grid[count][count2]<=247)
       game.numofbonus[level.grid[count][count2]-240]++;
-    if (level.grid[count][count2]>=248 && level.grid[count][count2]<=255)
+    if (level.grid[count][count2]>=248 /*&& level.grid[count][count2]<=255*/)
       game.numofbonus[level.grid[count][count2]-248]++;
     }
 

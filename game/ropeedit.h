@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_ROPEEDIT_H
+#define GISH_GAME_ROPEEDIT_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -22,7 +24,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 void editlevelrope(void);
 void renderropeedit(void);
 
-struct
+typedef struct
   {
   int numofpoints;
   struct
@@ -34,4 +36,8 @@ struct
   int pointnum;
   int pointhighlight;
   int texturenum;
-  } ropeedit;
+  } _ropeedit;
+
+extern _ropeedit ropeedit;
+
+#endif /* GISH_GAME_ROPEEDIT_H */

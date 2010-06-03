@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_GAME_H
+#define GISH_GAME_GAME_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -24,16 +26,16 @@ void renderlevel(void);
 void simulation(void);
 void getinputs(void);
 
-struct
+typedef struct
   {
   float position[3];
   float orientation[3][3];
   float zoom;
   int zoomx;
   int zoomy;
-  } view;
+  } _view;
 
-struct
+typedef struct
   {
   int pause;
   int type;
@@ -63,9 +65,14 @@ struct
   int oldschoolsound;
   int turbomode;
   int supersize;
-  int simspeed;
+  unsigned int simspeed;
   int playreplay;
   int editing;
   int godmode;
   int godparticle;
-  } game;
+  } _game;
+
+extern _view view;
+extern _game game;
+
+#endif /* GISH_GAME_GAME_H */

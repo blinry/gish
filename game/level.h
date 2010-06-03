@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_LEVEL_H
+#define GISH_GAME_LEVEL_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -33,22 +35,15 @@ void encryptdata(unsigned int code,unsigned int codepair,int cryptdatasize);
 void decryptdata(unsigned int code,int cryptdatasize);
 void byteswapdata(int cryptdatasize);
 
-unsigned int cryptdata[1048576];
-
-int textureused[512];
-
-struct
+typedef struct
   {
   int blocknum;
   int blockx;
   int blocky;
   float friction;
-  } collision;
+  } _collision;
 
-int levelblocknum;
-float levelfriction;
-
-struct
+typedef struct
   {
   char background[32];
   int tileset;
@@ -90,4 +85,17 @@ struct
     int obj2;
     int obj2part;
     } rope[1024];
-  } level;
+  } _level;
+
+extern unsigned int cryptdata[1048576];
+
+extern int textureused[512];
+
+extern _collision collision;
+
+extern int levelblocknum;
+extern float levelfriction;
+
+extern _level level;
+
+#endif /* GISH_GAME_LEVEL_H */

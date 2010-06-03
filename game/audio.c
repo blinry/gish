@@ -19,14 +19,29 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#include <string.h>
+
+#include "audio.h"
+#include "game.h"
+#include "object.h"
+#include "options.h"
+#include "../audio/audio.h"
+#include "../math/vector.h"
+#include "../physics/particle.h"
+
+int numofsounds;
+_sound sound[64];
+
 void soundsimulation(float position[3],float orientation[3][3])
   {
   int count;
   int state;
   float vec[3];
   float alorientation[6];
-  float intersectpoint[3];
-  float normal[3];
+  //float intersectpoint[3];
+  //float normal[3];
   float scale;
 
   if (!soundenabled)
@@ -72,9 +87,9 @@ void playsound(int buffernum,float position[3],float velocity[3],float volume,in
   {
   int count,count2;
   float vec[3];
-  float intersectpoint[3];
-  float normal[3];
-  float scale;
+  //float intersectpoint[3];
+  //float normal[3];
+  //float scale;
 
   if (!soundenabled)
     return;
@@ -158,7 +173,7 @@ void playsound(int buffernum,float position[3],float velocity[3],float volume,in
 
 void deletesound(int soundnum)
   {
-  int count,count2;
+  int count/*,count2*/;
   ALuint alnametemp;
 
   if (!soundenabled)

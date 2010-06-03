@@ -1,3 +1,5 @@
+#ifndef GISH_INPUT_MOUSE_H
+#define GISH_INPUT_MOUSE_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -21,7 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 void checkmouse(void);
 
-struct {
+typedef struct {
   int x;
   int y;
   int xdif;
@@ -30,4 +32,8 @@ struct {
   int rmb;
   int lmbr;
   int rmbr;
-  } mouse, prevmouse;
+  } _mouse;
+
+extern _mouse mouse, prevmouse;
+
+#endif /* GISH_INPUT_MOUSE_H */

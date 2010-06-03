@@ -19,6 +19,19 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#include <string.h>
+
+#include "boss.h"
+#include "animation.h"
+#include "object.h"
+#include "render.h"
+#include "../math/vector.h"
+
+int numofbosses;
+_boss boss[16];
+
 void createboss(int type,float position[3])
   {
   memset(&boss[numofbosses],0,sizeof(boss[0]));
@@ -35,7 +48,7 @@ void createboss(int type,float position[3])
 
 void bosssimulation(void)
   {
-  int count,count2;
+  int count/*,count2*/;
   float vec[3];
 
   for (count=0;count<numofbosses;count++)

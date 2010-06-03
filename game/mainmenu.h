@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_MAINMENU_H
+#define GISH_GAME_MAINMENU_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -25,3 +27,5 @@ void displaybackground(int texturenum);
 void versusmenu(void);
 void storyscreen(void);
 void introscreen(void);
+
+#endif /* GISH_GAME_MAINMENU_H */

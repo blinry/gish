@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_CUSTOM_H
+#define GISH_GAME_CUSTOM_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -29,9 +31,7 @@ void loadmappack(void);
 void savemappack(void);
 void newmappackmenu(void);
 
-char levellist[1024][32];
-
-struct
+typedef struct
   {
   int active;
   int numoflevels;
@@ -41,14 +41,19 @@ struct
   char levelname[64][32];
   char levelmusic[64][32];
   char ending[16][64];
-  } mappack;
+  } _mappack;
 
-struct
+typedef struct
   {
   int levelnum;
   int numoflives;
   int totalscore;
   int difficulty;
   int highscore;
-  } playermappack[16];
+  } _playermappack;
 
+extern char levellist[1024][32];
+extern _mappack mappack;
+extern _playermappack playermappack[16];
+
+#endif /* GISH_GAME_CUSTOM_H */

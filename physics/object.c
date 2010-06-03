@@ -19,9 +19,16 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-void objectsimulation(void)
-  {
-  }
+#include "../config.h"
+
+#include <math.h>
+
+#include "object.h"
+#include "particle.h"
+#include "../game/level.h"
+#include "../game/object.h"
+#include "../game/physics.h"
+#include "../math/vector.h"
 
 int lineintersectobject(float *intersectpoint,float *normal,float *scale,float *startpoint,float *endpoint,int objectnum,int *particlelist)
   {

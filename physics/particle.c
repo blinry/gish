@@ -19,13 +19,30 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#include <string.h>
+
+#include "particle.h"
+#include "bond.h"
+#include "../game/block.h"
+#include "../game/game.h"
+#include "../game/level.h"
+#include "../game/object.h"
+#include "../game/physics.h"
+#include "../math/vector.h"
+
+int numofparticles;
+_particle particle[16384];
+_particletype particletype[16384];
+
 void particlecollisionlevel(int particlenum)
   {
   int count;
-  float vec[3],vec2[3],vec3[3];
+  float vec[3],vec2[3]/*,vec3[3]*/;
   float normal[3];
   float intersectpoint[3];
-  float friction;
+  //float friction;
   float scale;
   float scaletemp;
 
@@ -84,10 +101,10 @@ void calculatefriction(float *nforce,float *fforce,float *normal,float cofric)
 
 void particlesimulation(void)
   {
-  int count,count2;
+  int count/*,count2*/;
   int x,y;
   int blocknum;
-  float vec[3];
+  //float vec[3];
   float scale;
 
   for (count=0;count<numofparticles;count++)
@@ -171,7 +188,7 @@ void particletimetolive(void)
 
 void createparticle(int type,float *position,float *velocity,float mass,int objectnum,int timetolive)
   {
-  float scale;
+  //float scale;
 
   if (numofparticles>10000)
     return;

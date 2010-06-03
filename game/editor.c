@@ -19,6 +19,45 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#ifdef MAC
+  #include <OpenGL/gl.h>
+#else
+  #include <GL/gl.h>
+#endif
+
+#ifdef WINDOWS
+  #include <SDL.h>
+#else
+  #include <SDL/SDL.h>
+#endif
+
+#include "editor.h"
+#include "block.h"
+#include "english.h"
+#include "game.h"
+#include "level.h"
+#include "lighting.h"
+#include "mainmenu.h"
+#include "objedit.h"
+#include "prerender.h"
+#include "render.h"
+#include "ropeedit.h"
+#include "setup.h"
+#include "texture.h"
+#include "../input/keyboard.h"
+#include "../input/mouse.h"
+#include "../math/vector.h"
+#include "../menu/menu.h"
+#include "../sdl/endian.h"
+#include "../sdl/event.h"
+#include "../video/glfunc.h"
+#include "../video/text.h"
+#include "../video/texture.h"
+
+_editor editor;
+
 void editlevel(void)
   {
   int count,count2;
@@ -452,7 +491,7 @@ void setblock(int x,int y,int blocknum)
 
 int getblock(int x,int y)
   {
-  int blocknum;
+  int blocknum=0;
 
   if (x<0)
     return(0);
@@ -477,8 +516,8 @@ void rendereditblocks(void)
   {
   int count,count2;
   int x,y;
-  int blocknum;
-  float vec[3];
+  //int blocknum;
+  //float vec[3];
 
   glDisable(GL_TEXTURE_2D);
 
@@ -532,15 +571,15 @@ void rendereditblocks(void)
 
 void editblock(void)
   {
-  int count,count2,count3;
+  int count,count2/*,count3*/;
   int x,y;
   int simtimer;
   int simcount;
   float friction;
-  float vec[3],vec2[3];
-  float normal[3];
-  char filename[13]="text000.tga";
-  int changeddir;
+  float vec[3]/*,vec2[3]*/;
+  //float normal[3];
+  //char filename[13]="text000.tga";
+  //int changeddir;
 
   /*
   changeddir=changetilesetdir();

@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_BLOCK_H
+#define GISH_GAME_BLOCK_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -24,7 +26,7 @@ void loadblock(int blocknum);
 void setupblockflags(int blocknum);
 void setupblockalpha(int blocknum);
 
-struct
+typedef struct
   {
   int numoflines;
   float line[64][8];
@@ -37,12 +39,17 @@ struct
   int animation;
   int animationspeed;
   int flags;
-  } block[1024];
+  } _block;
 
-int numofpolygontemps;
-struct
+typedef struct
   {
   int numofverts;
   float vertex[16][2];
   int ivertex[16][2];
-  } polygontemp[16];
+  } _polygontemp;
+
+extern _block block[1024];
+extern int numofpolygontemps;
+extern _polygontemp polygontemp[16];
+
+#endif /* GISH_GAME_BLOCK_H */

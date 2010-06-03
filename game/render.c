@@ -19,6 +19,36 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#ifdef MAC
+  #include <OpenGL/gl.h>
+#else
+  #include <GL/gl.h>
+#endif
+
+#include <math.h>
+
+#include "render.h"
+#include "block.h"
+#include "editor.h"
+#include "game.h"
+#include "level.h"
+#include "lighting.h"
+#include "object.h"
+#include "physics.h"
+#include "prerender.h"
+#include "sprite.h"
+#include "../audio/audio.h"
+#include "../math/vector.h"
+#include "../physics/bond.h"
+#include "../physics/particle.h"
+#include "../sdl/event.h"
+#include "../video/text.h"
+#include "../video/texture.h"
+
+_frame frame;
+
 void renderlevelback(void)
   {
   int count,count2;
@@ -26,7 +56,7 @@ void renderlevelback(void)
   int blocknum;
   int lightrange;
   float vec[3];
-  float texcoord[2];
+  //float texcoord[2];
 
   updateogg();
 

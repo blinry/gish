@@ -19,9 +19,29 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#if defined(LINUX) || defined(MAC)
+  #include <unistd.h>
+#endif
+
+#include <stdlib.h>
+#include <string.h>
+
+#include "music.h"
+#include "config.h"
+#include "game.h"
+#include "options.h"
+#include "../audio/audio.h"
+#include "../sdl/file.h"
+
+_oggmemoryfile oggmemoryfile[16];
+ov_callbacks vorbiscallbacks;
+
 void checkmusic(void)
   {
-  int count,count2;
+  unsigned int count;
+  int count2;
   int queued;
   float vec[3];
 
@@ -107,17 +127,18 @@ void checkmusic(void)
 
   if (game.currentsongnum!=-1)
     {
-    alGetSourcei(oggsource,AL_SOURCE_STATE,&count);
-    if (count!=AL_PLAYING)
+    alGetSourcei(oggsource,AL_SOURCE_STATE,&count2);
+    if (count2!=AL_PLAYING)
       alSourcePlay(oggsource);
     }
   }
 
 void loadoggs(void)
   {
-  int count;
+  //int count;
   int oggnum;
   int changeddir;
+  FILE *fp;
 
   changeddir=chdir("music");
 
@@ -269,10 +290,10 @@ void loadoggs(void)
 size_t vorbisread(void *ptr,size_t bytesize,size_t sizetoread,void *datasource)
   {
   int actualsizetoread;
-  int spacetoeof;
-  struct OGGMEMORYFILE *vorbisdata;
+  size_t spacetoeof;
+  _oggmemoryfile *vorbisdata;
 
-  vorbisdata=(struct OGGMEMORYFILE *)datasource;
+  vorbisdata=(_oggmemoryfile *)datasource;
 
   spacetoeof=vorbisdata->datasize-vorbisdata->dataread;
 
@@ -294,9 +315,9 @@ int vorbisseek(void *datasource,ogg_int64_t offset,int whence)
   {
   int spacetoeof;
   ogg_int64_t actualoffset;
-  struct OGGMEMORYFILE *vorbisdata;
+  _oggmemoryfile *vorbisdata;
 
-  vorbisdata=(struct OGGMEMORYFILE *)datasource;
+  vorbisdata=(_oggmemoryfile *)datasource;
 
   if (whence==SEEK_SET)
     {
@@ -330,9 +351,9 @@ int vorbisclose(void *datasource)
 
 long vorbistell(void *datasource)
   {
-  struct OGGMEMORYFILE *vorbisdata;
+  _oggmemoryfile *vorbisdata;
 
-  vorbisdata=(struct OGGMEMORYFILE *)datasource;
+  vorbisdata=(_oggmemoryfile *)datasource;
 
   return(vorbisdata->dataread);
   }

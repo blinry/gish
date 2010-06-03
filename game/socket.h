@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_SOCKET_H
+#define GISH_GAME_SOCKET_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -22,4 +24,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 unsigned int rotint(unsigned int x,int rotnum);
 void launchwebpage(char *webpagename);
 
-char sockdata[1024];
+extern char sockdata[1024];
+
+#endif /* GISH_GAME_SOCKET_H */

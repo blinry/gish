@@ -19,18 +19,33 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#ifdef WINDOWS
+  #include <SDL.h>
+#else
+  #include <SDL/SDL.h>
+#endif
+
+#include <string.h>
+
+#include "keyboard.h"
+
+unsigned char keyboard[323];
+unsigned char prevkeyboard[323];
+
 void checkkeyboard(void)
   {
-	memcpy(prevkeyboard,keyboard,323);
+  memcpy(prevkeyboard,keyboard,323);
 
   memcpy(keyboard,SDL_GetKeyState(NULL),323);
 
-	if (keyboard[SDLK_KP_ENTER])
-		keyboard[SDLK_RETURN]=1;
-	if (keyboard[SDLK_RCTRL])
-		keyboard[SDLK_LCTRL]=1;
-	if (keyboard[SDLK_RSHIFT])
-		keyboard[SDLK_LSHIFT]=1;
+  if (keyboard[SDLK_KP_ENTER])
+    keyboard[SDLK_RETURN]=1;
+  if (keyboard[SDLK_RCTRL])
+    keyboard[SDLK_LCTRL]=1;
+  if (keyboard[SDLK_RSHIFT])
+    keyboard[SDLK_LSHIFT]=1;
 
   if (keyboard[SCAN_NUMLEFT])
     keyboard[SCAN_LEFT]=1;

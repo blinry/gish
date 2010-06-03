@@ -1,3 +1,5 @@
+#ifndef GISH_SDL_VIDEO_H
+#define GISH_SDL_VIDEO_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -21,10 +23,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 void listvideomodes(void);
 
-int numofsdlvideomodes;
-struct
+typedef struct
   {
   int resolutionx;
   int resolutiony;
   int bitsperpixel;
-  } sdlvideomode[4096];
+  } _sdlvideomode;
+
+extern int numofsdlvideomodes;
+extern _sdlvideomode sdlvideomode[4096];
+
+#endif /* GISH_SDL_VIDEO_H */

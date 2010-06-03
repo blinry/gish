@@ -1,3 +1,5 @@
+#ifndef GISH_MATH_VECTOR_H
+#define GISH_MATH_VECTOR_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -37,6 +39,6 @@ INLINE void scaleaddvectors2(float *result,float *vec,float *vec2,float scale);
 void resetorientation(float orientation[3][3]);
 void rotateorientation(float orientation[3][3],float *rotationvector,float rotationangle);
 
-float xaxis[3]={ 1.0f,0.0f,0.0f };
-float yaxis[3]={ 0.0f,1.0f,0.0f };
-float zaxis[3]={ 0.0f,0.0f,1.0f };
+extern float xaxis[3], yaxis[3], zaxis[3];
+
+#endif /* GISH_MATH_VECTOR_H */

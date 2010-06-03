@@ -19,6 +19,24 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#include <stdlib.h>
+#include <math.h>
+
+#include "lighting.h"
+#include "block.h"
+#include "game.h"
+#include "glext.h"
+#include "level.h"
+#include "object.h"
+#include "prerender.h"
+#include "render.h"
+#include "../math/vector.h"
+#include "../physics/particle.h"
+#include "../sdl/event.h"
+#include "../video/texture.h"
+
 void setuplightingtextures(void)
   {
   int count,count2;
@@ -184,7 +202,7 @@ void setuplightingtextures(void)
 
 void setupframelighting(void)
   {
-  int count,count2;
+  int count/*,count2*/;
   float vec[3];
 
   frame.numoflights=0;
@@ -225,7 +243,7 @@ void rendershadows(void)
   int blocknum;
   float vec[3],vec2[3],vec3[3];
   float normal[3];
-  float scale;
+  //float scale;
 
   glDisable(GL_TEXTURE_2D);
   glColorMask(GL_FALSE,GL_FALSE,GL_FALSE,GL_FALSE);
@@ -350,11 +368,11 @@ void rendershadows(void)
 
 void renderobjectspecular(int objectnum)
   {
-  int count,count2;
+  int count/*,count2*/;
   int lightcount;
-  float vec[3],vec2[3],vec3[3];
-  float normal[3];
-  float windowsize;
+  float vec[3],vec2[3]/*,vec3[3]*/;
+  //float normal[3];
+  //float windowsize;
   float scale;
   char tempcolor[4];
 
