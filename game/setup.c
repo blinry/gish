@@ -398,7 +398,6 @@ void setupgame(void)
 
 void loadstorylevel(int levelnum)
   {
-#ifndef DEMO
   if (levelnum==1)
     loadlevel("sewer1.lvl");
   if (levelnum==2)
@@ -481,18 +480,6 @@ void loadstorylevel(int levelnum)
     loadlevel("death.lvl");
   if (levelnum==68)
     loadlevel("death2.lvl");
-#else
-  if (levelnum==1)
-    loadlevel("demo1.lvl");
-  if (levelnum==2)
-    loadlevel("demo2.lvl");
-  if (levelnum==3)
-    loadlevel("demo3.lvl");
-  if (levelnum==4)
-    loadlevel("demo4.lvl");
-  if (levelnum==5)
-    loadlevel("demo5.lvl");
-#endif
   }
 
 void loadcollectionlevel(int levelnum)

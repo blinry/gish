@@ -49,17 +49,10 @@ void versusmodemenu(int versusnum)
     count+=20;
     createmenuitem(TXT_LEVEL" 2",(320|TEXT_CENTER),count,20,1.0f,1.0f,1.0f,1.0f);
     setmenuitem(MO_HOTKEY,SCAN_2);
-#ifdef DEMO
-    setmenuitem(MO_HIGHLIGHT,0);
-#endif
     count+=20;
     createmenuitem(TXT_LEVEL" 3",(320|TEXT_CENTER),count,20,1.0f,1.0f,1.0f,1.0f);
     setmenuitem(MO_HOTKEY,SCAN_3);
-#ifdef DEMO
-    setmenuitem(MO_HIGHLIGHT,0);
-#endif
     count+=20;
-#ifndef DEMO
     if (unlocked)
       {
       createmenuitem(TXT_LEVEL" 4",(320|TEXT_CENTER),count,20,1.0f,1.0f,1.0f,1.0f);
@@ -68,8 +61,6 @@ void versusmodemenu(int versusnum)
       }
     else
       createmenuitemempty();
-#endif
-#ifndef DEMO
     count=360;
     if (versusnum==0 || versusnum==1)
       {
@@ -80,7 +71,6 @@ void versusmodemenu(int versusnum)
       setmenuitem(MO_HOTKEY,SCAN_6);
       count+=20;
       }
-#endif
 
     checksystemmessages();
     checkkeyboard();

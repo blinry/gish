@@ -316,23 +316,10 @@ void playerstartmenu(void)
       createmenuitem(TXT_REPLAY,48,count,16,1.0f,1.0f,1.0f,1.0f);
       setmenuitem(MO_HOTKEY,SCAN_R);
       count+=16;
-#ifndef DEMO
-      /*
-      if (player[playernum].unlock[0])
-        {
-        createmenuitem(TXT_SINGLE_LEVEL,48,count,16,1.0f,1.0f,1.0f,1.0f);
-        setmenuitem(MO_HOTKEY,SCAN_S);
-        count+=16;
-        }
-      else
-      */
-        createmenuitemempty();
-#endif
-#ifndef DEMO
+      createmenuitemempty();
       createmenuitem(TXT_CUSTOM_LEVELS,48,count,16,1.0f,1.0f,1.0f,1.0f);
       setmenuitem(MO_HOTKEY,SCAN_U);
       count+=16;
-#endif
       }
     else
       {
@@ -349,21 +336,10 @@ void playerstartmenu(void)
       createmenuitem(TXT_REPLAY,48,count,16,1.0f,1.0f,1.0f,1.0f);
       setmenuitem(MO_HOTKEY,SCAN_R);
       count+=16;
-      /*
-      if (player[playernum].unlock[0])
-        {
-        createmenuitem(TXT_SINGLE_LEVEL,48,count,16,1.0f,1.0f,1.0f,1.0f);
-        setmenuitem(MO_HOTKEY,SCAN_S);
-        count+=16;
-        }
-      else
-      */
-        createmenuitemempty();
-#ifndef DEMO
+      createmenuitemempty();
       createmenuitem(TXT_CUSTOM_LEVELS,48,count,16,1.0f,1.0f,1.0f,1.0f);
       setmenuitem(MO_HOTKEY,SCAN_U);
       count+=16;
-#endif
       }
 
     checksystemmessages();
@@ -472,15 +448,6 @@ void playerstartmenu(void)
       if (player[playernum].highscore<player[playernum].totalscore)
         player[playernum].highscore=player[playernum].totalscore;
 
-#ifdef DEMO
-      if (player[playernum].levelnum==6)
-        {
-        player[playernum].levelnum=0;
-        player[playernum].totalscore=0;
-        player[playernum].numoflives=5;
-        player[playernum].gamepassed=1;
-        }
-#endif
       if (player[playernum].levelnum==35)
         {
         if (player[playernum].difficulty==1 || player[playernum].difficulty==2)
@@ -542,15 +509,6 @@ void playerstartmenu(void)
       if (player[playernum].highscore<player[playernum].totalscore)
         player[playernum].highscore=player[playernum].totalscore;
 
-#ifdef DEMO
-      if (player[playernum].levelnum==6)
-        {
-        player[playernum].levelnum=0;
-        player[playernum].totalscore=0;
-        player[playernum].numoflives=5;
-        player[playernum].gamepassed=1;
-        }
-#endif
       if (player[playernum].levelnum==35)
         {
         if (player[playernum].difficulty==1 || player[playernum].difficulty==2)
@@ -707,117 +665,54 @@ void collectionmenu(void)
 
     count=320;
     createmenuitem(TXT_LEVEL" 1",64,count,16,1.0f,1.0f,1.0f,1.0f);
-#ifdef DEMO
-    setmenuitem(MO_HIGHLIGHT,0);
-#endif
     count+=16;
     createmenuitem(TXT_LEVEL" 2",64,count,16,1.0f,1.0f,1.0f,1.0f);
-#ifdef DEMO
-    setmenuitem(MO_HIGHLIGHT,0);
-#endif
     count+=16;
     createmenuitem(TXT_LEVEL" 3",64,count,16,1.0f,1.0f,1.0f,1.0f);
-#ifdef DEMO
-    setmenuitem(MO_HIGHLIGHT,0);
-#endif
     count+=16;
     createmenuitem(TXT_LEVEL" 4",64,count,16,1.0f,1.0f,1.0f,1.0f);
-#ifdef DEMO
-    setmenuitem(MO_HIGHLIGHT,0);
-#endif
     count+=16;
     createmenuitem(TXT_LEVEL" 5",64,count,16,1.0f,1.0f,1.0f,1.0f);
-#ifdef DEMO
-    setmenuitem(MO_HIGHLIGHT,0);
-#endif
     count+=16;
     createmenuitem(TXT_LEVEL" 6",64,count,16,1.0f,1.0f,1.0f,1.0f);
     count+=16;
     createmenuitem(TXT_LEVEL" 7",64,count,16,1.0f,1.0f,1.0f,1.0f);
-#ifdef DEMO
-    setmenuitem(MO_HIGHLIGHT,0);
-#endif
     count+=16;
     createmenuitem(TXT_LEVEL" 8",64,count,16,1.0f,1.0f,1.0f,1.0f);
-#ifdef DEMO
-    setmenuitem(MO_HIGHLIGHT,0);
-#endif
     count+=16;
 
     count=320;
     createmenuitem(TXT_LEVEL" 9",240,count,16,1.0f,1.0f,1.0f,1.0f);
-#ifdef DEMO
-    setmenuitem(MO_HIGHLIGHT,0);
-#endif
     count+=16;
     createmenuitem(TXT_LEVEL" 10",240,count,16,1.0f,1.0f,1.0f,1.0f);
     count+=16;
     createmenuitem(TXT_LEVEL" 11",240,count,16,1.0f,1.0f,1.0f,1.0f);
-#ifdef DEMO
-    setmenuitem(MO_HIGHLIGHT,0);
-#endif
     count+=16;
     createmenuitem(TXT_LEVEL" 12",240,count,16,1.0f,1.0f,1.0f,1.0f);
-#ifdef DEMO
-    setmenuitem(MO_HIGHLIGHT,0);
-#endif
     count+=16;
     createmenuitem(TXT_LEVEL" 13",240,count,16,1.0f,1.0f,1.0f,1.0f);
-#ifdef DEMO
-    setmenuitem(MO_HIGHLIGHT,0);
-#endif
     count+=16;
     createmenuitem(TXT_LEVEL" 14",240,count,16,1.0f,1.0f,1.0f,1.0f);
-#ifdef DEMO
-    setmenuitem(MO_HIGHLIGHT,0);
-#endif
     count+=16;
     createmenuitem(TXT_LEVEL" 15",240,count,16,1.0f,1.0f,1.0f,1.0f);
-#ifdef DEMO
-    setmenuitem(MO_HIGHLIGHT,0);
-#endif
     count+=16;
     createmenuitem(TXT_LEVEL" 16",240,count,16,1.0f,1.0f,1.0f,1.0f);
-#ifdef DEMO
-    setmenuitem(MO_HIGHLIGHT,0);
-#endif
     count+=16;
 
     count=320;
     createmenuitem(TXT_LEVEL" 17",416,count,16,1.0f,1.0f,1.0f,1.0f);
-#ifdef DEMO
-    setmenuitem(MO_HIGHLIGHT,0);
-#endif
     count+=16;
     createmenuitem(TXT_LEVEL" 18",416,count,16,1.0f,1.0f,1.0f,1.0f);
-#ifdef DEMO
-    setmenuitem(MO_HIGHLIGHT,0);
-#endif
     count+=16;
     createmenuitem(TXT_LEVEL" 19",416,count,16,1.0f,1.0f,1.0f,1.0f);
-#ifdef DEMO
-    setmenuitem(MO_HIGHLIGHT,0);
-#endif
     count+=16;
     createmenuitem(TXT_LEVEL" 20",416,count,16,1.0f,1.0f,1.0f,1.0f);
-#ifdef DEMO
-    setmenuitem(MO_HIGHLIGHT,0);
-#endif
     count+=16;
     createmenuitem(TXT_LEVEL" 21",416,count,16,1.0f,1.0f,1.0f,1.0f);
-#ifdef DEMO
-    setmenuitem(MO_HIGHLIGHT,0);
-#endif
     count+=16;
     createmenuitem(TXT_LEVEL" 22",416,count,16,1.0f,1.0f,1.0f,1.0f);
-#ifdef DEMO
-    setmenuitem(MO_HIGHLIGHT,0);
-#endif
     count+=16;
     createmenuitem(TXT_LEVEL" 23",416,count,16,1.0f,1.0f,1.0f,1.0f);
-#ifdef DEMO
-    setmenuitem(MO_HIGHLIGHT,0);
-#endif
     count+=16;
     createmenuitem(TXT_HIGH_SCORE,416,count,16,1.0f,1.0f,1.0f,1.0f);
     setmenuitem(MO_HOTKEY,SCAN_H);
