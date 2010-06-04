@@ -106,7 +106,7 @@ void gameloop(void)
 
   simtimer=SDL_GetTicks();
 
-  game.exit=0;
+  game.exit=none;
 
   scorenum=-1;
 
@@ -130,7 +130,7 @@ void gameloop(void)
       displaybackground(660);
 
     if (game.over!=0 && level.gametype<10)
-    if (game.exit==0)
+    if (game.exit==none)
       {
       if (game.over>=3 && game.over<=5)
         {
@@ -139,12 +139,12 @@ void gameloop(void)
         }
       if (game.over==2)
         {
-        game.exit=4;
+        game.exit=won;
         game.exitdelay=100;
         }
       if (game.over==1)
         {
-        game.exit=3;
+        game.exit=died;
         game.exitdelay=100;
         if (game.levelnum==65)
           game.exitdelay=200;
@@ -152,7 +152,7 @@ void gameloop(void)
       }
 
     numofmenuitems=0;
-    if (game.exit==0)
+    if (game.exit==none)
       {
       createmenuitem("",0,0,16,1.0f,1.0f,1.0f,1.0f);
       setmenuitem(MO_HOTKEY,SCAN_ESC);
@@ -194,7 +194,7 @@ void gameloop(void)
       setmenuitem(MO_SET,&game.exit,2);
       count+=16;
       }
-    if (game.exit==3)
+    if (game.exit==died)
       {
       if (game.time>0)
         {
@@ -207,7 +207,7 @@ void gameloop(void)
         setmenuitem(MO_SET,&game.exitdelay,0);
         }
       }
-    if (game.exit==4)
+    if (game.exit==won)
       {
       createmenuitem(TXT_COMPLETE,524|TEXT_CENTER,266,20,1.0f,1.0f,1.0f,1.0f);
       setmenuitem(MO_IMAGE,462);
@@ -245,7 +245,7 @@ void gameloop(void)
       setuplevel();
       setupgame();
 
-      game.exit=0;
+      game.exit=none;
       menuitem[1].active=0;
       }
 
@@ -277,7 +277,7 @@ void gameloop(void)
           if (game.dialog==4)
             {
             game.numoflives=99;
-            game.exit=4;
+            game.exit=won;
             game.exitdelay=0;
             }
           }
@@ -363,7 +363,7 @@ void gameloop(void)
       setuplevel();
       setupgame();
       }
-    if (keyboard[SCAN_P] && !prevkeyboard[SCAN_P] && game.exit==0)
+    if (keyboard[SCAN_P] && !prevkeyboard[SCAN_P] && game.exit==none)
       game.pause^=1;
     //if (keyboard[SCAN_R] && !prevkeyboard[SCAN_R])
     //  movie.record^=1;
@@ -455,7 +455,7 @@ void gameloop(void)
 
     setuptextdisplay();
 
-    if (game.exit==4 || game.exit==5)
+    if (game.exit==won || game.exit==5)
       {
       glDisable(GL_TEXTURE_2D);
 
@@ -472,7 +472,7 @@ void gameloop(void)
 
       glEnable(GL_TEXTURE_2D);
       }
-    if (game.exit==3)
+    if (game.exit==died)
       {
       glDisable(GL_TEXTURE_2D);
 
@@ -512,7 +512,7 @@ void gameloop(void)
 
     drawmenuitems();
 
-    if (game.exit==3 || game.exit==4 || game.exit==5)
+    if (game.exit==died || game.exit==won || game.exit==5)
     if (game.exitdelay<20)
       {
       glDisable(GL_TEXTURE_2D);
@@ -540,13 +540,13 @@ void gameloop(void)
     if (game.playreplay)
       drawtext(TXT_REPLAY,(612|TEXT_END),64,16,1.0f,1.0f,0.0f,1.0f);
 
-    if (game.pause && game.exit==0)
+    if (game.pause && game.exit==none)
       {
       drawtext(TXT_PAUSED,(320|TEXT_CENTER),240,16,1.0f,1.0f,1.0f,1.0f);
       drawtext(TXT_PRESS_P,(320|TEXT_CENTER),256,12,1.0f,1.0f,1.0f,1.0f);
       }
 
-    if (game.exit!=0 || game.godmode)
+    if (game.exit!=none || game.godmode)
       drawmousecursor(768+font.cursornum,mouse.x,mouse.y,16,1.0f,1.0f,1.0f,1.0f);
 
     simcount=0;
@@ -571,7 +571,7 @@ void gameloop(void)
       if (keyboard[SCAN_ESC])
         game.exitdelay=0;
 
-      if (game.exit==0 && !game.pause && game.dialog==0 && !game.over)
+      if (game.exit==none && !game.pause && game.dialog==0 && !game.over)
         {
         getinputs();
 

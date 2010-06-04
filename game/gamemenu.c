@@ -124,10 +124,10 @@ void postgamemenu(void)
       }
     else
       {
-      if (game.levelnum==34 && game.exit==4)
+      if (game.levelnum==34 && game.exit==won)
         drawtext(TXT_GF_RESCUING_BONUS,64,336,16,1.0f,1.0f,1.0f,1.0f);
       drawtext(TXT_LIFE_BONUS":/i",64,352,16,1.0f,1.0f,1.0f,1.0f,(object[0].hitpoints/50)*10);
-      if (game.levelnum==34 && game.exit==4)
+      if (game.levelnum==34 && game.exit==won)
         drawtext(TXT_BOSS_POINTS":/i",64,368,16,1.0f,1.0f,1.0f,1.0f,game.score[0]-(object[0].hitpoints/50)*10-1);
       else
         drawtext(TXT_BOSS_POINTS":/i",64,368,16,1.0f,1.0f,1.0f,1.0f,game.score[0]-(object[0].hitpoints/50)*10);
@@ -165,7 +165,7 @@ void postgamemenu(void)
     }
 
   if (menuitem[0].active)
-    game.exit=2;
+    game.exit=menu;
 
   for (count=numofsounds-1;count>=0;count--)
     deletesound(count);
@@ -180,7 +180,7 @@ void pregamemenu(void)
   int simcount;
   int startdelay;
 
-  game.exit=0;
+  game.exit=none;
 
   startdelay=0;
   simtimer=SDL_GetTicks();
@@ -270,7 +270,7 @@ void pregamemenu(void)
 
       gameloop();
 
-      if (game.exit==2 || game.exit==3)
+      if (game.exit==menu || game.exit==died)
       if (game.levelnum<64)
         {
         if (game.numoflives<99)
@@ -301,10 +301,10 @@ void pregamemenu(void)
         }
 
       if (game.levelnum==34)
-      if (game.exit==4 || game.exit==5)
+      if (game.exit==won || game.exit==5)
         {
         game.score[0]=10000;
-        if (game.levelnum==34 && game.exit==4)
+        if (game.levelnum==34 && game.exit==won)
           game.score[0]+=1;
 
         game.score[0]+=(object[0].hitpoints/50)*10;
@@ -319,7 +319,7 @@ void pregamemenu(void)
         goto changelevelbypass;
         }
 
-      if (game.exit==4)
+      if (game.exit==won)
         {
         //if (!game.bosslevel)
         if (game.levelnum!=68 || game.dialog==0)
@@ -339,16 +339,16 @@ void pregamemenu(void)
           if (game.levelnum==68)
             game.score[0]=20000;
 
-          //if (game.levelnum==34 && game.exit==4)
+          //if (game.levelnum==34 && game.exit==won)
           //  game.score[0]+=10;
 
           game.oldschool=0;
           game.score[0]+=(object[0].hitpoints/50)*10;
           postgamemenu();
           game.totalscore+=game.score[0];
-          if (game.exit==2)
+          if (game.exit==menu)
             {
-            game.exit=4;
+            game.exit=won;
             menuitem[0].active=1;
             }
           }
@@ -381,7 +381,7 @@ void pregamemenu(void)
         }
       if (game.levelnum==67)
         {
-        if (game.exit==2 || game.exit==3)
+        if (game.exit==menu || game.exit==died)
           game.levelnum=19;
         else
           game.levelnum=68;
@@ -430,7 +430,7 @@ void pregamemenu(void)
       //startdelay++;
       }
 
-    if (game.exit==2)
+    if (game.exit==menu)
       menuitem[0].active=1;
     }
 
@@ -484,9 +484,9 @@ void gameovermenu(void)
     }
 
   if (menuitem[0].active)
-    game.exit=2;
+    game.exit=menu;
   if (menuitem[1].active)
-    game.exit=3;
+    game.exit=died;
 
   resetmenuitems();
   }
@@ -518,7 +518,7 @@ void endingmenu(void)
     displaybackground(580);
 
     count=192;
-    if (game.exit==4)
+    if (game.exit==won)
       {
       drawbackground(520,(320|TEXT_CENTER),48,256,128,640,480);
 

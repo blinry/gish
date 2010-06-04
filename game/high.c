@@ -65,7 +65,7 @@ void highscoremenu(int levelnum)
 
   count2=-1;
 
-  if (game.exit==4)
+  if (game.exit==won)
     {
     count2=10;
 
@@ -95,7 +95,7 @@ void highscoremenu(int levelnum)
     createmenuitem(TXT_BACK,0,0,16,1.0f,1.0f,1.0f,1.0f);
     setmenuitem(MO_HOTKEY,SCAN_ESC);
 
-    if (game.exit==4)
+    if (game.exit==won)
     if (!replaysaved)
       createmenuitem(TXT_SAVEREPLAY,96,356,16,1.0f,1.0f,1.0f,1.0f);
 
@@ -211,7 +211,7 @@ void highscoremenu(int levelnum)
       else
         drawtext("/i:0/i./i",96+320,112+count*16,16,bright,bright,bright,1.0f,(highscore[levelnum][count].time/3000),((highscore[levelnum][count].time/50)%60),((highscore[levelnum][count].time/5)%10));
       }
-    if (game.exit==4)
+    if (game.exit==won)
       {
       drawtext(player[playernum].name,96+64,292,16,1.0f,1.0f,1.0f,1.0f);
       if (((game.time/50)%60)>=10)
@@ -219,7 +219,7 @@ void highscoremenu(int levelnum)
       else
         drawtext("/i:0/i./i",96+320,292,16,1.0f,1.0f,1.0f,1.0f,(game.time/3000),((game.time/50)%60),((game.time/5)%10));
       }
-    if (game.exit==4)
+    if (game.exit==won)
     if (replaysaved)
       createmenuitem(TXT_REPLAYSAVED,96,356,16,1.0f,1.0f,1.0f,1.0f);
 
@@ -229,7 +229,7 @@ void highscoremenu(int levelnum)
 
     SDL_GL_SwapBuffers();
 
-    if (game.exit==4)
+    if (game.exit==won)
     if (menuitem[1].active)
       {
       savereplay(levelnum);

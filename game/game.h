@@ -26,6 +26,15 @@ void renderlevel(void);
 void simulation(void);
 void getinputs(void);
 
+typedef enum e_gameexittype {
+	none = 0,
+	// Haven't figured out yet what 1 is.
+	menu = 2,
+	died = 3,
+	won = 4
+	// Haven't figured out yet what 5 is.
+} gameexittype;
+
 typedef struct
   {
   float position[3];
@@ -60,7 +69,7 @@ typedef struct
   int over;
   int numoflives;
   char text[256];
-  int exit;
+  gameexittype exit;
   int oldschool;
   int oldschoolsound;
   int turbomode;
