@@ -58,7 +58,7 @@ void soundsimulation(float position[3],float orientation[3][3])
 
   if (game.currentsongnum!=-1)
     {
-    if (game.exit!=none)
+    if (game.exit!=GAMEEXIT_NONE)
       scale=0.3f-(float)(100-game.exitdelay)*0.003f;
     else
       scale=0.3f;

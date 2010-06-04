@@ -798,14 +798,14 @@ void collectionmenu(void)
       gameloop();
 
       if (!game.playreplay)
-      if (game.exit==won)
+      if (game.exit==GAMEEXIT_WON)
         highscoremenu(count);
 
       joymenunum=count;
       }
     if (menuitem[24].active)
       {
-      game.exit=died;
+      game.exit=GAMEEXIT_DIED;
       highscoremenu(1);
       }
     }

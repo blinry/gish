@@ -64,7 +64,7 @@ void checksystemmessages(void)
       if (event.active.state&SDL_APPINPUTFOCUS)
         if (event.active.gain==0)
           {
-          if(game.exit==none)
+          if(game.exit==GAMEEXIT_NONE)
             game.pause=1;
           windowinfo.minimized=1;
           }

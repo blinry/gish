@@ -272,7 +272,7 @@ void setupgame(void)
   game.startdelay=0;
   game.exitdelay=0;
   game.over=0;
-  game.exit=none;
+  game.exit=GAMEEXIT_NONE;
   game.time=level.time;
   game.pause=0;
   game.framenum=0;

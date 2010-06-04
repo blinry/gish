@@ -151,7 +151,7 @@ void mappackpostgamemenu(void)
     }
 
   if (menuitem[0].active)
-    game.exit=menu;
+    game.exit=GAMEEXIT_EXITGAME;
 
   for (count=numofsounds-1;count>=0;count--)
     deletesound(count);
@@ -166,7 +166,7 @@ void mappackpregamemenu(void)
   int simcount;
   int startdelay;
 
-  game.exit=none;
+  game.exit=GAMEEXIT_NONE;
 
   startdelay=0;
   simtimer=SDL_GetTicks();
@@ -227,7 +227,7 @@ void mappackpregamemenu(void)
 
       mappack.active=0;
 
-      if (game.exit==menu || game.exit==died)
+      if (game.exit==GAMEEXIT_EXITGAME || game.exit==GAMEEXIT_DIED)
         {
         if (playermappack[playernum].numoflives<99)
           playermappack[playernum].numoflives--;
@@ -244,7 +244,7 @@ void mappackpregamemenu(void)
           gameovermenu();
           }
         }
-      else if (game.exit==won)
+      else if (game.exit==GAMEEXIT_WON)
         {
         game.score[0]+=(object[0].hitpoints/50)*10;
         mappackpostgamemenu();
@@ -257,12 +257,12 @@ void mappackpregamemenu(void)
           {
           mappackendingmenu();
           playermappack[playernum].levelnum=0;
-          game.exit=menu;
+          game.exit=GAMEEXIT_EXITGAME;
           }
         else
           playermappack[playernum].levelnum++;
 
-        if (game.exit==menu)
+        if (game.exit==GAMEEXIT_EXITGAME)
           menuitem[0].active=1;
         }
 
@@ -280,7 +280,7 @@ void mappackpregamemenu(void)
       simtimer=SDL_GetTicks()-count;
       }
 
-    if (game.exit==menu)
+    if (game.exit==GAMEEXIT_EXITGAME)
       menuitem[0].active=1;
     }
 

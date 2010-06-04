@@ -124,10 +124,10 @@ void postgamemenu(void)
       }
     else
       {
-      if (game.levelnum==34 && game.exit==won)
+      if (game.levelnum==34 && game.exit==GAMEEXIT_WON)
         drawtext(TXT_GF_RESCUING_BONUS,64,336,16,1.0f,1.0f,1.0f,1.0f);
       drawtext(TXT_LIFE_BONUS":/i",64,352,16,1.0f,1.0f,1.0f,1.0f,(object[0].hitpoints/50)*10);
-      if (game.levelnum==34 && game.exit==won)
+      if (game.levelnum==34 && game.exit==GAMEEXIT_WON)
         drawtext(TXT_BOSS_POINTS":/i",64,368,16,1.0f,1.0f,1.0f,1.0f,game.score[0]-(object[0].hitpoints/50)*10-1);
       else
         drawtext(TXT_BOSS_POINTS":/i",64,368,16,1.0f,1.0f,1.0f,1.0f,game.score[0]-(object[0].hitpoints/50)*10);
@@ -164,9 +164,9 @@ void postgamemenu(void)
       }
     }
 
-  if (menuitem[0].active)
-    game.exit=menu;
-
+  if (menuitem[0].active) {
+    game.exit=GAMEEXIT_EXITGAME;
+  }
   for (count=numofsounds-1;count>=0;count--)
     deletesound(count);
 
@@ -180,7 +180,7 @@ void pregamemenu(void)
   int simcount;
   int startdelay;
 
-  game.exit=none;
+  game.exit=GAMEEXIT_NONE;
 
   startdelay=0;
   simtimer=SDL_GetTicks();
@@ -270,7 +270,7 @@ void pregamemenu(void)
 
       gameloop();
 
-      if (game.exit==menu || game.exit==died)
+      if (game.exit==GAMEEXIT_EXITGAME || game.exit==GAMEEXIT_DIED)
       if (game.levelnum<64)
         {
         if (game.numoflives<99)
@@ -301,10 +301,10 @@ void pregamemenu(void)
         }
 
       if (game.levelnum==34)
-      if (game.exit==won || game.exit==5)
+      if (game.exit==GAMEEXIT_WON || game.exit==GAMEXIT_WARPZONE)
         {
         game.score[0]=10000;
-        if (game.levelnum==34 && game.exit==won)
+        if (game.levelnum==34 && game.exit==GAMEEXIT_WON)
           game.score[0]+=1;
 
         game.score[0]+=(object[0].hitpoints/50)*10;
@@ -319,7 +319,7 @@ void pregamemenu(void)
         goto changelevelbypass;
         }
 
-      if (game.exit==won)
+      if (game.exit==GAMEEXIT_WON)
         {
         //if (!game.bosslevel)
         if (game.levelnum!=68 || game.dialog==0)
@@ -346,9 +346,9 @@ void pregamemenu(void)
           game.score[0]+=(object[0].hitpoints/50)*10;
           postgamemenu();
           game.totalscore+=game.score[0];
-          if (game.exit==menu)
+          if (game.exit==GAMEEXIT_EXITGAME)
             {
-            game.exit=won;
+            game.exit=GAMEEXIT_WON;
             menuitem[0].active=1;
             }
           }
@@ -381,7 +381,7 @@ void pregamemenu(void)
         }
       if (game.levelnum==67)
         {
-        if (game.exit==menu || game.exit==died)
+        if (game.exit==GAMEEXIT_EXITGAME || game.exit==GAMEEXIT_DIED)
           game.levelnum=19;
         else
           game.levelnum=68;
@@ -394,7 +394,7 @@ void pregamemenu(void)
 
         goto changelevelbypass;
         }
-      if (game.exit==5)
+      if (game.exit==GAMEXIT_WARPZONE)
         {
         game.totalscore+=game.score[0];
 
@@ -430,7 +430,7 @@ void pregamemenu(void)
       //startdelay++;
       }
 
-    if (game.exit==menu)
+    if (game.exit==GAMEEXIT_EXITGAME)
       menuitem[0].active=1;
     }
 
@@ -484,9 +484,9 @@ void gameovermenu(void)
     }
 
   if (menuitem[0].active)
-    game.exit=menu;
+    game.exit=GAMEEXIT_EXITGAME;
   if (menuitem[1].active)
-    game.exit=died;
+    game.exit=GAMEEXIT_DIED;
 
   resetmenuitems();
   }
@@ -518,7 +518,7 @@ void endingmenu(void)
     displaybackground(580);
 
     count=192;
-    if (game.exit==won)
+    if (game.exit==GAMEEXIT_WON)
       {
       drawbackground(520,(320|TEXT_CENTER),48,256,128,640,480);
 
@@ -548,7 +548,7 @@ void endingmenu(void)
       drawtext(TXT_ENDING_LINE12,64,count,14,1.0f,1.0f,1.0f,1.0f);
       count+=14;
       }
-    if (game.exit==5)
+    if (game.exit==GAMEXIT_WARPZONE)
       {
       drawbackground(519,(320|TEXT_CENTER),48,256,128,640,480);
 
@@ -617,7 +617,7 @@ void endingmenu(void)
     glColor4f(1.0f,1.0f,1.0f,1.0f);
     displaybackground(560);
 
-    if (game.exit==5)
+    if (game.exit==GAMEXIT_WARPZONE)
       drawbackground(256+68,288,320,96,96,640,480);
 
     drawmenuitems();
