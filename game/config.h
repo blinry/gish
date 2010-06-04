@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_CONFIG_H
+#define GISH_GAME_CONFIG_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -19,10 +21,28 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include <stdio.h>
+
 void loadconfig(void);
 void saveconfig(void);
 void notsupportedmenu(void);
 void optionreadint(int *ptr,char *str);
-void optionwriteint(int *ptr,char *str);
-void optionreadstring(char *ptr,char *str,int size);
-void optionwritestring(char *ptr,char *str,int size);
+void optionwriteint(FILE *fp, int *ptr,char *str);
+/*void optionreadstring(char *ptr,char *str,int size);
+void optionwritestring(FILE *fp, char *ptr,char *str,int size);*/
+
+typedef struct {
+  int resolutionx;
+  int resolutiony;
+  int bitsperpixel;
+  int depthbits;
+  int stencilbits;
+  int fullscreen;
+  int sound;
+  int music;
+  int joystick;
+  } _config;
+
+extern _config config;
+
+#endif /* GISH_GAME_CONFIG_H */

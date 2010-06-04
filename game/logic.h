@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_LOGIC_H
+#define GISH_GAME_LOGIC_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -24,3 +26,5 @@ void gamedisplay(void);
 void drawtextbitmap(int x,int y,int sizex,int sizey);
 void drawkeybitmap(int x,int y,int sizex,int sizey,int keynum,int keyhighlight,int keyhighlight2);
 void drawkeybitmap2(int x,int y,int sizex,int sizey,int keynum,int highlight);
+
+#endif /* GISH_GAME_LOGIC_H */

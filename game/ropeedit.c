@@ -19,6 +19,38 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#ifdef MAC
+  #include <OpenGL/gl.h>
+#else
+  #include <GL/gl.h>
+#endif
+
+#ifdef WINDOWS
+  #include <SDL.h>
+#else
+  #include <SDL/SDL.h>
+#endif
+
+#include "ropeedit.h"
+#include "english.h"
+#include "game.h"
+#include "level.h"
+#include "lighting.h"
+#include "mainmenu.h"
+#include "objedit.h"
+#include "render.h"
+#include "../input/keyboard.h"
+#include "../input/mouse.h"
+#include "../math/vector.h"
+#include "../menu/menu.h"
+#include "../sdl/event.h"
+#include "../video/glfunc.h"
+#include "../video/text.h"
+
+_ropeedit ropeedit;
+
 void editlevelrope(void)
   {
   int count,count2;

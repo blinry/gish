@@ -19,6 +19,39 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#ifdef MAC
+  #include <OpenGL/gl.h>
+#else
+  #include <GL/gl.h>
+#endif
+
+#if defined(LINUX) || defined(MAC)
+  #include <unistd.h>
+#endif
+
+#include <stdio.h>
+
+#include "replay.h"
+#include "custom.h"
+#include "english.h"
+#include "game.h"
+#include "mainmenu.h"
+#include "object.h"
+#include "player.h"
+#include "setup.h"
+#include "../input/joystick.h"
+#include "../input/keyboard.h"
+#include "../input/mouse.h"
+#include "../menu/menu.h"
+#include "../sdl/event.h"
+#include "../sdl/file.h"
+#include "../video/text.h"
+
+int numofreplayframes;
+_replayframe replayframe[65536];
+
 void saveinputs(void)
   {
   if (numofreplayframes>=65535)
@@ -61,6 +94,7 @@ void savereplay(int levelnum)
   int version;
   int changeddir;
   char filename[32];
+  FILE *fp;
 
   count=0;
   while (count<12 && player[playernum].name[count]!=0)
@@ -122,6 +156,7 @@ int loadreplay(char *filename)
   int levelnum;
   int changeddir;
   char filenametemp[32];
+  FILE *fp;
 
   count=0;
   while (count<16 && filename[count]!=0 && filename[count]!='.')

@@ -1,3 +1,5 @@
+#ifndef GISH_SDL_EVENT_H
+#define GISH_SDL_EVENT_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -21,7 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 void checksystemmessages(void);
 
-struct {
+typedef struct {
   int resolutionx;
   int resolutiony;
   int redbits;
@@ -35,5 +37,8 @@ struct {
   int shutdown;
   int minimized;
   int opengl;
-  } windowinfo;
+  } _windowinfo;
 
+extern _windowinfo windowinfo;
+
+#endif /* GISH_SDL_EVENT_H */

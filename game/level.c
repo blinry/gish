@@ -19,12 +19,53 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#ifdef MAC
+  #include <OpenGL/gl.h>
+#else
+  #include <GL/gl.h>
+#endif
+
+#if defined(LINUX) || defined(MAC) 
+  #include <unistd.h> 
+#endif
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "level.h"
+#include "block.h"
+#include "editor.h"
+#include "game.h"
+#include "mainmenu.h"
+#include "object.h"
+#include "physics.h"
+#include "socket.h"
+#include "../math/vector.h"
+#include "../physics/particle.h"
+#include "../sdl/endian.h"
+#include "../sdl/file.h"
+#include "../video/texture.h"
+
+unsigned int cryptdata[1048576];
+
+int textureused[512];
+
+_collision collision;
+
+int levelblocknum;
+float levelfriction;
+
+_level level;
+
 int lineintersectlevel(float *intersectpoint,float *normal,float *scale,float *startpoint,float *endpoint)
   {
   int count,count2,count3;
   int blocknum;
   int min[2],max[2];
-  float vec[3],vec2[3],vec3[3],vec4[3];
+  float vec[3],vec2[3]/*,vec3[3],vec4[3]*/;
   float intersectpointtemp[3];
   float normaltemp[3];
   float scaletemp;
@@ -109,6 +150,7 @@ void savelevel(char *filename)
   int blocknum;
   int changeddir;
   int version;
+  FILE *fp;
 
   for (count=0;count<256;count++)
     textureused[count]=1;
@@ -233,7 +275,8 @@ void loadlevel(char *filename)
   int count,count2;
   int changeddir;
   int version;
-  unsigned int x,y;
+  unsigned int x/*,y*/;
+  FILE *fp;
 
   x=0x17AF2E03;
 

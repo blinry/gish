@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_SPRITE_H
+#define GISH_GAME_SPRITE_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -24,8 +26,7 @@ void spritetimetolive(void);
 void deletesprite(int spritenum);
 void spritesimulation(void);
 
-int numofsprites;
-struct
+typedef struct
   {
   int type;
   int timetolive;
@@ -36,4 +37,9 @@ struct
   float blue;
   float alpha;
   int size;
-  } sprite[256];
+  } _sprite;
+
+extern int numofsprites;
+extern _sprite sprite[256];
+
+#endif /* GISH_GAME_SPRITE_H */

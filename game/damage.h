@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_DAMAGE_H
+#define GISH_GAME_DAMAGE_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -20,3 +22,5 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
 void applydamageobject(int objectnum,int hitpoints);
+
+#endif /* GISH_GAME_DAMAGE_H */

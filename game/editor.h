@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_EDITOR_H
+#define GISH_GAME_EDITOR_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -26,7 +28,7 @@ void rendereditblocks(void);
 void editblock(void);
 void renderlevellines(void);
 
-struct
+typedef struct
   {
   int active;
   int mode;
@@ -41,5 +43,8 @@ struct
   int copysize[2];
   int copybuffer[128][128];
   int paste;
-  } editor;
+  } _editor;
 
+extern _editor editor;
+
+#endif /* GISH_GAME_EDITOR_H */

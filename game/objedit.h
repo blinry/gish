@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_OBJEDIT_H
+#define GISH_GAME_OBJEDIT_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -23,3 +25,5 @@ void editlevelobjects(void);
 void renderlevelobjects(void);
 void deletelevelobject(int objectnum);
 void deletelevelrope(int ropenum);
+
+#endif /* GISH_GAME_OBJEDIT_H */

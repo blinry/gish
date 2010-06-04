@@ -1,3 +1,5 @@
+#ifndef GISH_VIDEO_TEXTURE_H
+#define GISH_VIDEO_TEXTURE_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -19,15 +21,19 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#ifdef MAC
+  #include <OpenGL/gl.h>
+#else
+  #include <GL/gl.h>
+#endif
+
 void loadtexturetga(int texturenum,char *filename,int mipmap,int wraps,int wrapt,int magfilter,int minfilter);
 void loadtexturetganodir(int texturenum,char *filename,int mipmap,int wraps,int wrapt,int magfilter,int minfilter);
 void loadtexturetgapartial(int texturenum,char *filename,int startx,int starty,int sizex,int sizey);
 void generatemipmap(int texturenum);
 void setuptexture(int texturenum);
 
-char lasttextureloaded[32];
-
-struct
+typedef struct
   {
   int sizex;
   int sizey;
@@ -41,19 +47,25 @@ struct
   int alphamap;
   int normalmap;
   int glossmap;
-  int glname;
+  GLuint glname;
   unsigned int *rgba[16];
   int glnamenormal;
   unsigned int *normal[16];
   int glnamegloss;
   unsigned char *gloss[16];
-  } texture[2048];
+  } _texture;
 
-struct
+typedef struct
   {
   unsigned char imagetypecode;
   short int imagewidth;
   short int imageheight;
   unsigned char pixeldepth;
   unsigned int imagedata[1024*1024];
-  } tgaheader;
+  } _tgaheader;
+
+extern char lasttextureloaded[32];
+extern _texture texture[2048];
+extern _tgaheader tgaheader;
+
+#endif /* GISH_VIDEO_TEXTURE_H */

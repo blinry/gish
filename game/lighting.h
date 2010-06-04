@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_LIGHTING_H
+#define GISH_GAME_LIGHTING_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -23,3 +25,5 @@ void setuplightingtextures(void);
 void renderobjectspecular(int objectnum);
 void setupframelighting(void);
 void rendershadows(void);
+
+#endif /* GISH_GAME_LIGHTING_H */

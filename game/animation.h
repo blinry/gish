@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_ANIMATION_H
+#define GISH_GAME_ANIMATION_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -22,12 +24,16 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 void objectanimation(void);
 void loadanimations(void);
 
-int numofanimations;
-struct
+typedef struct
   {
   int loaded;
   int stand[2];
   int walk[2];
   int attack[2];
   int die[2];
-  } animation[128];
+  } _animation;
+
+extern int numofanimations;
+extern _animation animation[128];
+
+#endif /* GISH_GAME_ANIMATION_H */

@@ -19,6 +19,32 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#ifdef MAC
+  #include <OpenGL/gl.h>
+#else
+  #include <GL/gl.h>
+#endif
+
+#include <string.h>
+
+#include "vsmode.h"
+#include "audio.h"
+#include "english.h"
+#include "game.h"
+#include "level.h"
+#include "mainmenu.h"
+#include "music.h"
+#include "player.h"
+#include "../audio/audio.h"
+#include "../input/joystick.h"
+#include "../input/keyboard.h"
+#include "../input/mouse.h"
+#include "../menu/menu.h"
+#include "../sdl/event.h"
+#include "../video/text.h"
+
 void versusmodemenu(int versusnum)
   {
   int count;

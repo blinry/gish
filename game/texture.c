@@ -19,9 +19,47 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#ifdef MAC
+  #include <OpenGL/gl.h>
+#else
+  #include <GL/gl.h>
+#endif
+
+#ifdef WINDOWS
+  #include <SDL.h>
+#else
+  #include <SDL/SDL.h>
+#endif
+
+#if defined(LINUX) || defined(MAC)
+  #include <unistd.h>
+#endif
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "texture.h"
+#include "block.h"
+#include "editor.h"
+#include "english.h"
+#include "game.h"
+#include "level.h"
+//#include "../input/joystick.h"
+#include "../input/keyboard.h"
+#include "../input/mouse.h"
+#include "../menu/menu.h"
+#include "../sdl/event.h"
+#include "../sdl/file.h"
+#include "../video/text.h"
+#include "../video/texture.h"
+
+_textureedit textureedit;
+
 void edittextures(void)
   {
-  int count,count2;
+  int count/*,count2*/;
   int texturenum;
   float vec[3];
 
@@ -315,7 +353,8 @@ void loadleveltiles(char *filename)
   int count,count2;
   int changeddir;
   int version;
-  unsigned int x,y;
+  unsigned int x/*,y*/;
+  FILE *fp;
 
   x=0x17AF2E03;
   changeddir=chdir("level");

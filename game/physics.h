@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_PHYSICS_H
+#define GISH_GAME_PHYSICS_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -26,7 +28,7 @@ void objectcollisionobject(int objectnum);
 void bondsimulation2(void);
 int lineintersectline2(float *intersectpoint,float *normal,float *scale,float *startpoint,float *endpoint,float *vertex1,float *vertex2);
 
-struct
+typedef struct
   {
   int numofbonds;
   struct
@@ -50,10 +52,9 @@ struct
     int blocky;
     float forceapplied[2][3];
     } bond[8192];
-  } physicstemp;
+  } _physicstemp;
 
-int numoflevellines;
-struct
+typedef struct
   {
   float line[2][3];
   float normal[3];
@@ -61,4 +62,11 @@ struct
   int blocknum;
   int blockx;
   int blocky;
-  } levelline[1024];
+  } _levelline;
+
+extern _physicstemp physicstemp;
+
+extern int numoflevellines;
+extern _levelline levelline[1024];
+
+#endif /* GISH_GAME_PHYSICS_H */

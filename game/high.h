@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_HIGH_H
+#define GISH_GAME_HIGH_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -23,8 +25,12 @@ void highscoremenu(int levelnum);
 void savescores(void);
 void loadscores(void);
 
-struct
+typedef struct
   {
   char name[32];
   int time;
-  } highscore[32][16];
+  } _highscore;
+
+extern _highscore highscore[32][16];
+
+#endif /* GISH_GAME_HIGH_H */

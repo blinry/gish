@@ -19,6 +19,17 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#include <string.h>
+#include <math.h>
+
+#include "vector.h"
+
+float xaxis[3]={ 1.0f,0.0f,0.0f };
+float yaxis[3]={ 0.0f,1.0f,0.0f };
+float zaxis[3]={ 0.0f,0.0f,1.0f };
+
 INLINE float dotproduct(float *vec,float *vec2)
   {
   return(vec[0]*vec2[0]+vec[1]*vec2[1]+vec[2]*vec2[2]);

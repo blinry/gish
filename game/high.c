@@ -19,6 +19,42 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#ifdef MAC
+  #include <OpenGL/gl.h> 
+#else
+  #include <GL/gl.h> 
+#endif
+
+#ifdef WINDOWS
+  #include <SDL.h>
+#else
+  #include <SDL/SDL.h>
+#endif
+
+#include <stdio.h>
+#include <string.h>
+
+#include "high.h"
+#include "audio.h"
+#include "english.h"
+#include "game.h"
+#include "mainmenu.h"
+#include "music.h"
+#include "player.h"
+#include "replay.h"
+#include "../audio/audio.h"
+#include "../input/joystick.h"
+#include "../input/keyboard.h"
+#include "../input/mouse.h"
+#include "../menu/menu.h"
+#include "../sdl/event.h"
+#include "../sdl/file.h"
+#include "../video/text.h"
+
+_highscore highscore[32][16];
+
 void highscoremenu(int levelnum)
   {
   int count,count2;
@@ -209,6 +245,7 @@ void savescores(void)
   {
   int count,count2;
   int version;
+  FILE *fp;
 
   if ((fp=fopen("gish.his","wb"))!=NULL)
     {
@@ -228,6 +265,7 @@ void loadscores(void)
   {
   int count,count2;
   int version;
+  FILE *fp;
 
   for (count=0;count<32;count++)
   for (count2=0;count2<16;count2++)

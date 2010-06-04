@@ -19,6 +19,22 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#ifdef WINDOWS
+  #include <SDL.h>
+  #include <windows.h>
+#endif
+#ifdef LINUX
+  #include <SDL/SDL.h>
+  #include <stdlib.h>
+  #include <string.h>
+#endif
+
+#include "socket.h"
+
+char sockdata[1024];
+
 unsigned int rotint(unsigned int x,int rotnum)
   {
   int count;
@@ -58,5 +74,11 @@ void launchwebpage(char *webpagename)
     }
   ICStop(inst);
   */
+#endif
+#ifdef LINUX
+  char command[100] = "xdg-open http://";
+  strcat(command, webpagename);
+  SDL_WM_IconifyWindow();
+  system((const char*)command);
 #endif
   }

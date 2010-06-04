@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_GAMEMENU_H
+#define GISH_GAME_GAMEMENU_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -23,3 +25,5 @@ void postgamemenu(void);
 void pregamemenu(void);
 void gameovermenu(void);
 void endingmenu(void);
+
+#endif /* GISH_GAME_GAMEMENU_H */

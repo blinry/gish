@@ -1,3 +1,5 @@
+#ifndef GISH_PHYSICS_BOND_H
+#define GISH_PHYSICS_BOND_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -25,8 +27,7 @@ void checkbonds(void);
 void createbond(int part1,int part2,int type,int objectnum);
 void deletebond(int bondnum);
 
-int numofbonds;
-struct
+typedef struct
   {
   int part1;
   int part2;
@@ -47,9 +48,9 @@ struct
   float bondnormal[3];
   float veclength;
   float oomass;
-  } bond[16384];
+  } _bond;
 
-struct
+typedef struct
   {
   float elasticity;
   float compression;
@@ -57,5 +58,10 @@ struct
   int cycles;
   int rendertype;
   float rendersize;
-  } bondtype[256];
+  } _bondtype;
 
+extern int numofbonds;
+extern _bond bond[16384];
+extern _bondtype bondtype[256];
+
+#endif /* GISH_PHYSICS_BOND_H */

@@ -19,11 +19,30 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-void drawtext(unsigned char *textstring,int x,int y,int textsize,float red,float green,float blue,float alpha,...)
+#include "../config.h"
+
+#ifdef MAC
+  #include <OpenGL/gl.h>
+#else
+  #include <GL/gl.h>
+#endif
+
+#include <stdio.h>
+#include <string.h>
+
+#include "text.h"
+#include "texture.h"
+#include "../sdl/event.h"
+
+char textstring2[1024];
+char textstring3[1024];
+_font font;
+
+void drawtext(char *textstring,int x,int y,int textsize,float red,float green,float blue,float alpha,...)
   {
   int count,count2;
   int variabletemp;
-  int texturenum;
+  //int texturenum;
   va_list ap;
   float vec[3];
   float texcoord[2];

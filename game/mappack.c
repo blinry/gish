@@ -19,6 +19,37 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#ifdef MAC
+  #include <OpenGL/gl.h>
+#else
+  #include <GL/gl.h>
+#endif
+
+#ifdef WINDOWS
+  #include <SDL.h>
+#else
+  #include <SDL/SDL.h>
+#endif
+
+#include "mappack.h"
+#include "audio.h"
+#include "custom.h"
+#include "english.h"
+#include "game.h"
+#include "gamemenu.h"
+#include "level.h"
+#include "mainmenu.h"
+#include "object.h"
+#include "player.h"
+#include "../input/joystick.h"
+#include "../input/keyboard.h"
+#include "../input/mouse.h"
+#include "../menu/menu.h"
+#include "../sdl/event.h"
+#include "../video/text.h"
+
 void mappackpostgamemenu(void)
   {
   int count;
@@ -130,7 +161,7 @@ void mappackpostgamemenu(void)
 
 void mappackpregamemenu(void)
   {
-  int count,count2;
+  int count/*,count2*/;
   int simtimer;
   int simcount;
   int startdelay;
@@ -211,12 +242,9 @@ void mappackpregamemenu(void)
             playermappack[playernum].levelnum=0;
 
           gameovermenu();
-
-          goto changelevelbypass;
           }
         }
-
-      if (game.exit==4)
+      else if (game.exit==4)
         {
         game.score[0]+=(object[0].hitpoints/50)*10;
         mappackpostgamemenu();
@@ -237,8 +265,6 @@ void mappackpregamemenu(void)
         if (game.exit==2)
           menuitem[0].active=1;
         }
-
-      changelevelbypass:;
 
       simtimer=SDL_GetTicks();
       startdelay=0;
@@ -263,7 +289,7 @@ void mappackpregamemenu(void)
 
 void mappackendingmenu(void)
   {
-  int count;
+  //int count;
 
   resetmenuitems();
 

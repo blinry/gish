@@ -19,41 +19,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-#ifdef __linux__
- #define LINUX 1
-#endif
-
-#ifdef _WIN32
-  #define WINDOWS 1
-#endif
-
-#ifdef __APPLE__
-  #define MAC 1
-#endif
-
-#ifdef MAC
-  #define __MACOSX__
-#endif
-
-#include <math.h>
-#include <stdio.h>
-#include <string.h>
-
-#ifdef WINDOWS
-  #include <io.h>
-  #include <windows.h>
-  #include <winsock.h>
-#else
-  #include <netinet/in.h>
-  #include <netdb.h>
-  #include <arpa/inet.h>
-  #include <sys/socket.h>
-  #include <fcntl.h>
-  #include <termios.h>
-  #include <sys/types.h>
-  #include <sys/stat.h>
-  #include <dirent.h>
-#endif
+#include "config.h"
 
 #ifdef WINDOWS
   #include <SDL.h>
@@ -63,166 +29,32 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #ifdef MAC
   #include <OpenGL/gl.h>
-  #include <OpenAL/al.h>
-  #include <OpenAL/alc.h>
 #else
   #include <GL/gl.h>
-  #include <AL/al.h>
-  #include <AL/alc.h>
 #endif
 
-#include "video/glext.h"
-
-#include <ogg/ogg.h>
-#include <vorbis/codec.h>
-#include <vorbis/vorbisenc.h>
-#include <vorbis/vorbisfile.h>
-
-#define pi 3.14159265359
-
-int debugit=0;
-
-#ifdef WINDOWS
-  #define INLINE _inline
-#else
-  #define INLINE inline
-#endif
-
-FILE *fp;
-
-char versiontext[]="Version 1.53";
-
-struct {
-  int resolutionx;
-  int resolutiony;
-  int bitsperpixel;
-  int depthbits;
-  int stencilbits;
-  int fullscreen;
-  int sound;
-  int music;
-  int joystick;
-  } config;
-
-const SDL_VideoInfo *sdlvideoinfo;
-SDL_PixelFormat *sdlpixelformat;
-
+#include "main.h"
 #include "audio/audio.h"
-#include "game/ai.h"
-#include "game/animation.h"
-#include "game/audio.h"
-#include "game/block.h"
-#include "game/boss.h"
 #include "game/config.h"
-#include "game/credits.h"
-#include "game/custom.h"
-#include "game/damage.h"
-#include "game/editor.h"
-#include "game/english.h"
-#include "game/game.h"
-#include "game/gamemenu.h"
 #include "game/glext.h"
 #include "game/high.h"
-#include "game/level.h"
-#include "game/lighting.h"
-#include "game/logic.h"
 #include "game/mainmenu.h"
-#include "game/mappack.h"
-#include "game/music.h"
-#include "game/object.h"
-#include "game/objedit.h"
-#include "game/objfunc.h"
-#include "game/options.h"
-#include "game/physics.h"
 #include "game/player.h"
-#include "game/prerender.h"
-#include "game/random.h"
-#include "game/record.h"
-#include "game/render.h"
-#include "game/replay.h"
-#include "game/ropeedit.h"
-#include "game/setup.h"
-#include "game/socket.h"
-#include "game/sprite.h"
-#include "game/tileset.h"
-#include "game/texture.h"
-#include "game/utils.h"
-#include "game/vsmode.h"
-#include "input/keyboard.h"
-#include "input/mouse.h"
+#include "game/options.h"
 #include "input/joystick.h"
-#include "math/vector.h"
-#include "math/intersec.h"
 #include "menu/menu.h"
-#include "parser/parser.h"
-#include "physics/bond.h"
-#include "physics/object.h"
-#include "physics/particle.h"
 #include "sdl/endian.h"
 #include "sdl/event.h"
-#include "sdl/file.h"
 #include "sdl/video.h"
-#include "video/glfunc.h"
 #include "video/text.h"
 #include "video/texture.h"
 
-#include "audio/audio.c"
-#include "game/ai.c"
-#include "game/animation.c"
-#include "game/audio.c"
-#include "game/block.c"
-#include "game/boss.c"
-#include "game/config.c"
-#include "game/credits.c"
-#include "game/custom.c"
-#include "game/damage.c"
-#include "game/editor.c"
-#include "game/game.c"
-#include "game/gamemenu.c"
-#include "game/glext.c"
-#include "game/high.c"
-#include "game/level.c"
-#include "game/lighting.c"
-#include "game/logic.c"
-#include "game/mainmenu.c"
-#include "game/mappack.c"
-#include "game/music.c"
-#include "game/object.c"
-#include "game/objedit.c"
-#include "game/objfunc.c"
-#include "game/options.c"
-#include "game/physics.c"
-#include "game/player.c"
-#include "game/prerender.c"
-#include "game/random.c"
-#include "game/record.c"
-#include "game/render.c"
-#include "game/replay.c"
-#include "game/ropeedit.c"
-#include "game/setup.c"
-#include "game/socket.c"
-#include "game/sprite.c"
-#include "game/tileset.c"
-#include "game/texture.c"
-#include "game/utils.c"
-#include "game/vsmode.c"
-#include "input/keyboard.c"
-#include "input/mouse.c"
-#include "input/joystick.c"
-#include "math/vector.c"
-#include "math/intersec.c"
-#include "menu/menu.c"
-#include "parser/parser.c"
-#include "physics/bond.c"
-#include "physics/object.c"
-#include "physics/particle.c"
-#include "sdl/endian.c"
-#include "sdl/event.c"
-#include "sdl/file.c"
-#include "sdl/video.c"
-#include "video/glfunc.c"
-#include "video/text.c"
-#include "video/texture.c"
+int debugit=0;
+
+char versiontext[]="Version 1.53";
+
+const SDL_VideoInfo *sdlvideoinfo;
+SDL_PixelFormat *sdlpixelformat;
 
 Uint8 iconmask[128]={
 0x00,0x00,0x00,0x00,

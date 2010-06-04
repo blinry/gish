@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_VSMODE_H
+#define GISH_GAME_VSMODE_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -20,3 +22,5 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
 void versusmodemenu(int versusnum);
+
+#endif /* GISH_GAME_VSMODE_H */

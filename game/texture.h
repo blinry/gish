@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_TEXTURE_H
+#define GISH_GAME_TEXTURE_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -24,12 +26,15 @@ void copytexture(int texturenum,int oldtexturenum);
 void loadtilesettemp(void);
 void loadleveltiles(char *filename);
 
-struct
+typedef struct
   {
   int pagenum;
   int texturenum;
   int tileset;
   int tilepagenum;
   char filename[32];
-  } textureedit;
+  } _textureedit;
 
+extern _textureedit textureedit;
+
+#endif /* GISH_GAME_TEXTURE_H */

@@ -19,16 +19,35 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+#include "objfunc.h"
+#include "ai.h"
+#include "audio.h"
+#include "block.h"
+#include "game.h"
+#include "level.h"
+#include "object.h"
+#include "sprite.h"
+#include "../audio/audio.h"
+#include "../math/vector.h"
+#include "../physics/bond.h"
+#include "../physics/particle.h"
+
 void objectcycle(void)
   {
   int count,count2,count3,count4;
   int x,y;
   float vec[3],vec2[3];
-  float veclength,bondlength;
+  float veclength/*,bondlength*/;
   float angle,spin;
-  float intersectpoint[3];
+  //float intersectpoint[3];
   float normal[3];
-  float scale,scale2;
+  float scale=0/*,scale2*/;
 
   for (count=0;count<numofropes;count++)
     {
@@ -310,7 +329,7 @@ void objectcycle(void)
             }
           if (block[level.foregrid[y][x]].foredamage!=0)
             object[count].hitpoints-=block[level.foregrid[y][x]].foredamage;
-          if ((level.grid[y][x]>=248 && level.grid[y][x]<=255 && level.gridmod[y][x]==0) || (level.grid[y][x]>=240 && level.grid[y][x]<=247 && level.gridmod[y][x]==2))
+          if ((level.grid[y][x]>=248 /*&& level.grid[y][x]<=255*/ && level.gridmod[y][x]==0) || (level.grid[y][x]>=240 && level.grid[y][x]<=247 && level.gridmod[y][x]==2))
             {
             vec[0]=(float)x+0.5f;
             vec[1]=(float)y+0.5f;
@@ -374,7 +393,7 @@ void objectcycle(void)
 
               level.gridmod[y][x]=1;
 
-              if (level.grid[y][x]>=248 && level.grid[y][x]<=255)
+              if (level.grid[y][x]>=248 /*&& level.grid[y][x]<=255*/)
                 game.bonus[level.grid[y][x]-248]++;
               if (level.grid[y][x]>=240 && level.grid[y][x]<=247)
                 game.bonus[level.grid[y][x]-240]++;

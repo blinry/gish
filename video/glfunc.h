@@ -1,3 +1,5 @@
+#ifndef GISH_VIDEO_GLFUNC_H
+#define GISH_VIDEO_GLFUNC_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -26,4 +28,6 @@ void setupobjectrender(float *position,float orientation[3][3]);
 void screenshot(void);
 void setupglext(void);
 
-int screenshotbuffer[1280*960];
+extern int screenshotbuffer[1280*960];
+
+#endif /* GISH_VIDEO_GLFUNC_H */

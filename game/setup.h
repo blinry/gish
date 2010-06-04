@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_SETUP_H
+#define GISH_GAME_SETUP_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -23,3 +25,5 @@ void setuplevel(void);
 void setupgame(void);
 void loadstorylevel(int levelnum);
 void loadcollectionlevel(int levelnum);
+
+#endif /* GISH_GAME_SETUP_H */

@@ -19,6 +19,22 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#ifdef WINDOWS
+  #include <io.h>
+#endif
+
+#ifdef LINUX
+  #include <dirent.h>
+  #include <sys/stat.h>
+#endif
+
+#include <stdlib.h>
+#include <string.h>
+
+#include "file.h"
+
 int comparestrings(const void *arg1,const void *arg2)
   {
   return(strcmp(arg1,arg2));
@@ -208,7 +224,7 @@ size_t fwrite2(const void *ptr,size_t psize,size_t pnum,FILE *pfp)
 
 size_t freadswap(void *ptr,size_t psize,size_t pnum,FILE *pfp)
   {
-  int count;
+  size_t count;
   unsigned char *cptr;
 
   cptr=(unsigned char *) ptr;
@@ -241,7 +257,7 @@ size_t freadswap(void *ptr,size_t psize,size_t pnum,FILE *pfp)
 
 size_t fwriteswap(const void *ptr,size_t psize,size_t pnum,FILE *pfp)
   {
-  int count;
+  size_t count;
   unsigned char *cptr;
 
   cptr=(unsigned char *) ptr;

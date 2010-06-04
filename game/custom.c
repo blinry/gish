@@ -19,6 +19,48 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#ifdef MAC
+  #include <OpenGL/gl.h>
+#else
+  #include <GL/gl.h>
+#endif
+
+#ifdef WINDOWS
+  #include <SDL.h>
+#else
+  #include <SDL/SDL.h>
+#endif
+
+#if defined(LINUX) || defined(MAC)
+  #include <unistd.h>
+#endif
+
+#include <stdio.h>
+
+#include "custom.h"
+#include "audio.h"
+#include "english.h"
+#include "game.h"
+#include "level.h"
+#include "mainmenu.h"
+#include "mappack.h"
+#include "music.h"
+#include "player.h"
+#include "../audio/audio.h"
+#include "../input/joystick.h"
+#include "../input/keyboard.h"
+#include "../input/mouse.h"
+#include "../menu/menu.h"
+#include "../sdl/event.h"
+#include "../sdl/file.h"
+#include "../video/text.h"
+
+char levellist[1024][32];
+_mappack mappack;
+_playermappack playermappack[16];
+
 void custommenu(void)
   {
   int count;
@@ -400,6 +442,7 @@ void loadplayermappack(void)
   int version;
   int changeddir;
   char filename[32];
+  FILE *fp;
 
   changeddir=chdir("player");
 
@@ -442,6 +485,7 @@ void saveplayermappack(void)
   int version;
   int changeddir;
   char filename[32];
+  FILE *fp;
 
   changeddir=chdir("player");
 
@@ -479,6 +523,7 @@ void loadmappack(void)
   int count;
   int version;
   int changeddir;
+  FILE *fp;
 
   changeddir=chdir("level");
 
@@ -512,6 +557,7 @@ void savemappack(void)
   int count;
   int version;
   int changeddir;
+  FILE *fp;
 
   changeddir=chdir("level");
 

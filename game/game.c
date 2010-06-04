@@ -19,16 +19,72 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#ifdef MAC
+  #include <OpenGL/gl.h>
+#else
+  #include <GL/gl.h>
+#endif
+
+#ifdef WINDOWS
+  #include <SDL.h>
+#else
+  #include <SDL/SDL.h>
+#endif
+
+#include <stdlib.h>
+#include <time.h>
+
+#include "game.h"
+#include "animation.h"
+#include "audio.h"
+#include "boss.h"
+#include "custom.h"
+#include "editor.h"
+#include "english.h"
+#include "level.h"
+#include "lighting.h"
+#include "logic.h"
+#include "mainmenu.h"
+#include "music.h"
+#include "object.h"
+#include "objfunc.h"
+#include "options.h"
+#include "physics.h"
+#include "prerender.h"
+#include "random.h"
+#include "record.h"
+#include "render.h"
+#include "replay.h"
+#include "setup.h"
+#include "sprite.h"
+#include "../audio/audio.h"
+#include "../input/joystick.h"
+#include "../input/keyboard.h"
+#include "../input/mouse.h"
+#include "../math/vector.h"
+#include "../menu/menu.h"
+#include "../physics/bond.h"
+#include "../physics/particle.h"
+#include "../sdl/event.h"
+#include "../video/glfunc.h"
+#include "../video/text.h"
+#include "../video/texture.h"
+
+_view view;
+_game game;
+
 void gameloop(void)
   {
   int count,count2;
-  int simtimer;
+  unsigned int simtimer;
   int simcount;
   int frametimer,fps;
-  float vec[3];
-  char filename[13]="text000.tga";
+  //float vec[3];
+  //char filename[13]="text000.tga";
   int scorenum;
-  unsigned int x;
+  //unsigned int x;
 
   game.godparticle=-1;
 
@@ -344,26 +400,9 @@ void gameloop(void)
 
     setuprenderobjects();
 
-    /*
-    resettimer(4);
-    resettimer(5);
-    resettimer(6);
-    resettimer(7);
-    */
-
-    //starttimer(4);
-
     rendershadows();
 
-    //stoptimer(4);
-
-    //starttimer(5);
-
     renderlevelback();
-
-    //stoptimer(5);
-
-    //starttimer(6);
 
     renderparticles();
 
@@ -372,14 +411,8 @@ void gameloop(void)
 
     renderparticles2();
 
-    //stoptimer(6);
-
-    //starttimer(7);
-
     renderlevel();
     renderlevelfore();
-
-    //stoptimer(7);
 
     if (game.oldschool==1)// || game.oldschool==3)
       {
@@ -547,14 +580,10 @@ void gameloop(void)
         else
           loadinputs();
 
-        //resettimer(8);
-        //starttimer(8);
-
         if (game.startdelay==0)
           simulation();
         gamelogic();
 
-        //stoptimer(8);
         }
       }
 
@@ -605,8 +634,8 @@ void simulation(void)
   {
   int count,count2;
   float vec[3],vec2[3];
-  float intersectpoint[3];
-  float normal[3];
+  //float intersectpoint[3];
+  //float normal[3];
   float scale;
 
   game.framenum++;

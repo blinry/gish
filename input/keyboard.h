@@ -1,3 +1,5 @@
+#ifndef GISH_INPUT_KEYBOARD_H
+#define GISH_INPUT_KEYBOARD_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -21,8 +23,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 void checkkeyboard(void);
 
-unsigned char keyboard[323];
-unsigned char prevkeyboard[323];
+extern unsigned char keyboard[323];
+extern unsigned char prevkeyboard[323];
 
 #define SCAN_ESC          27
 #define SCAN_0            48
@@ -37,8 +39,8 @@ unsigned char prevkeyboard[323];
 #define SCAN_9            57
 #define SCAN_MINUS        45
 #define SCAN_EQUALS       61
-#define SCAN_BKSP         8 
-#define SCAN_TAB          9 
+#define SCAN_BKSP         8
+#define SCAN_TAB          9
 #define SCAN_LFT_BRACKET  91
 #define SCAN_RGT_BRACKET  93
 #define SCAN_ENTER        13
@@ -102,29 +104,31 @@ unsigned char prevkeyboard[323];
 #define SCAN_END          279
 #define SCAN_PAGEUP       280
 #define SCAN_PAGEDOWN     281
-#define SCAN_A			  97
-#define SCAN_B			  98
-#define SCAN_C			  99
-#define SCAN_D			  100
-#define SCAN_E			  101
-#define SCAN_F			  102
-#define SCAN_G			  103
-#define SCAN_H			  104
-#define SCAN_I			  105
-#define SCAN_J			  106
-#define SCAN_K			  107
-#define SCAN_L			  108
-#define SCAN_M			  109
-#define SCAN_N			  110
-#define SCAN_O			  111
-#define SCAN_P			  112
-#define SCAN_Q        113
-#define SCAN_R			  114
-#define SCAN_S			  115
-#define SCAN_T			  116
-#define SCAN_U			  117
-#define SCAN_V			  118
-#define SCAN_W			  119
-#define SCAN_X			  120
-#define SCAN_Y			  121
-#define SCAN_Z			  122
+#define SCAN_A            97
+#define SCAN_B            98
+#define SCAN_C            99
+#define SCAN_D            100
+#define SCAN_E            101
+#define SCAN_F            102
+#define SCAN_G            103
+#define SCAN_H            104
+#define SCAN_I            105
+#define SCAN_J            106
+#define SCAN_K            107
+#define SCAN_L            108
+#define SCAN_M            109
+#define SCAN_N            110
+#define SCAN_O            111
+#define SCAN_P            112
+#define SCAN_Q            113
+#define SCAN_R            114
+#define SCAN_S            115
+#define SCAN_T            116
+#define SCAN_U            117
+#define SCAN_V            118
+#define SCAN_W            119
+#define SCAN_X            120
+#define SCAN_Y            121
+#define SCAN_Z            122
+
+#endif /* GISH_INPUT_KEYBOARD_H */
