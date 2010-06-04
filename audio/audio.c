@@ -185,9 +185,8 @@ int streamogg(int buffernum)
     if (result>0)
       size+=result;
     else
-      goto streamoggbypass;
+      break;
     }
-  streamoggbypass:;
 
   if (size==0)
     return(0);

@@ -1,0 +1,12 @@
+The contents of
+
+- animation
+- level
+- sound
+- texture
+- tile01
+- tile02
+- tile03
+
+were created by Megagun and are licensed under
+http://creativecommons.org/licenses/by-sa/3.0/

@@ -242,12 +242,9 @@ void mappackpregamemenu(void)
             playermappack[playernum].levelnum=0;
 
           gameovermenu();
-
-          goto changelevelbypass;
           }
         }
-
-      if (game.exit==won)
+      else if (game.exit==won)
         {
         game.score[0]+=(object[0].hitpoints/50)*10;
         mappackpostgamemenu();
@@ -268,8 +265,6 @@ void mappackpregamemenu(void)
         if (game.exit==menu)
           menuitem[0].active=1;
         }
-
-      changelevelbypass:;
 
       simtimer=SDL_GetTicks();
       startdelay=0;
