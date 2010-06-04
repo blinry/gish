@@ -19,6 +19,27 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#include <string.h>
+#include <math.h>
+
+#include "object.h"
+#include "animation.h"
+#include "audio.h"
+#include "game.h"
+#include "level.h"
+#include "../math/vector.h"
+#include "../physics/bond.h"
+#include "../physics/particle.h"
+
+int numofobjects;
+_object object[512];
+_objecttype objecttype[128];
+
+int numofropes;
+_rope rope[1024];
+
 void createbox(float position[3],float sizex,float sizey,float mass,float friction)
   {
   int count,count2;
@@ -339,7 +360,7 @@ void setupobjecttypes(void)
 
 void createrope(int type,int particlenum,int particlenum2,int objectnum,int objectnum2,int texturenum)
   {
-  int count,count2;
+  int count/*,count2*/;
   int length;
   float vec[3],vec2[3];
   float mass;
@@ -482,7 +503,7 @@ void createrope(int type,int particlenum,int particlenum2,int objectnum,int obje
 
 void createanchor(float position[3])
   {
-  int count;
+  //int count;
   float vec[3];
 
   memset(&object[numofobjects],0,sizeof(object[numofobjects]));

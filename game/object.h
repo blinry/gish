@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_OBJECT_H
+#define GISH_GAME_OBJECT_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -31,14 +33,14 @@ void createbeast(int beasttype,float position[3],float sizex,float sizey,float m
 void createbobble(int beasttype,float position[3],float sizex,float sizey,float mass,float friction);
 void createhead(float position[3],float sizex,float sizey,float mass,float friction);
 void createamber(float position[3]);
+void createareaswitch(float position[3],float sizex,float sizey);
 void creategenerator(float position[3],float mass);
 void deleteobject(int objectnum);
 void deleterope(int ropenum);
 void objecttimetolive(void);
 void createcar(float position[3],float sizex,float sizey,float mass,float friction);
 
-int numofobjects;
-struct
+typedef struct
   {
   int type;
   int texturenum;
@@ -85,9 +87,9 @@ struct
   int rotate;
   int ai;
   int beasttype;
-  } object[512];
+  } _object;
 
-struct
+typedef struct
   {
   int collide[256];
   int numofpoints;
@@ -104,10 +106,9 @@ struct
     int part1;
     int part2;
     } link[256];
-  } objecttype[128];
+  } _objecttype;
 
-int numofropes;
-struct
+typedef struct
   {
   int type;
   int part1;
@@ -120,4 +121,13 @@ struct
   float cyclelength;
   float cyclecount;
   float range;
-  } rope[1024];
+  } _rope;
+
+extern int numofobjects;
+extern _object object[512];
+extern _objecttype objecttype[128];
+
+extern int numofropes;
+extern _rope rope[1024];
+
+#endif /* GISH_GAME_OBJECT_H */

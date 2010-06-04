@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_GLEXT_H
+#define GISH_GAME_GLEXT_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -19,6 +21,23 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#ifdef MAC
+  #include <OpenGL/gl.h>
+  #include <OpenGL/glext.h>
+#else
+  #include <GL/gl.h>
+#endif
+
+#ifdef LINUX
+  #include <GL/glext.h>
+#endif
+
+#ifdef WINDOWS
+  #include "video/glext.h"
+#endif
+
 void loadglextentions(void);
 
 #ifdef WINDOWS
@@ -30,11 +49,15 @@ PFNGLMULTITEXCOORD3FARBPROC glMultiTexCoord3fARB=NULL;
 PFNGLMULTITEXCOORD4FARBPROC glMultiTexCoord4fARB=NULL;
 #endif
 
-struct
+typedef struct
   {
   int compiled_vertex_array;
   int multitexture;
   int texture_env_dot3;
   int stencil_two_side;
   int fragment_program;
-  } glext;
+  } _glext;
+
+extern _glext glext;
+
+#endif /* GISH_GAME_GLEXT_H */

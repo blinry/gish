@@ -19,6 +19,36 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#ifdef MAC
+  #include <OpenGL/gl.h>
+#else
+  #include <GL/gl.h>
+#endif
+
+#ifdef WINDOWS
+  #include <SDL.h>
+#else
+  #include <SDL/SDL.h>
+#endif
+
+#include "gamemenu.h"
+#include "audio.h"
+#include "english.h"
+#include "game.h"
+#include "mainmenu.h"
+#include "object.h"
+#include "player.h"
+#include "replay.h"
+#include "setup.h"
+#include "../input/joystick.h"
+#include "../input/keyboard.h"
+#include "../input/mouse.h"
+#include "../menu/menu.h"
+#include "../sdl/event.h"
+#include "../video/text.h"
+
 void postgamemenu(void)
   {
   int count;
@@ -409,11 +439,11 @@ void pregamemenu(void)
 
 void gameovermenu(void)
   {
-  int count;
-  int scoretemp;
-  int scorecountdelay;
-  int simtimer;
-  int simcount;
+  //int count;
+  //int scoretemp;
+  //int scorecountdelay;
+  //int simtimer;
+  //int simcount;
 
   resetmenuitems();
 

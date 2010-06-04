@@ -19,6 +19,19 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#include <string.h>
+
+#include "bond.h"
+#include "particle.h"
+#include "../game/object.h"
+#include "../math/vector.h"
+
+int numofbonds;
+_bond bond[16384];
+_bondtype bondtype[256];
+
 void bondsimulation(void)
   {
   int count,count2;
@@ -67,12 +80,12 @@ void bondsimulation(void)
 
 void checkbonds(void)
   {
-  int count,count2;
-  int numofbondstemp;
+  int count/*,count2*/;
+  //int numofbondstemp;
   int part1,part2;
-  float vec[3],vec2[3];
+  float vec[3]/*,vec2[3]*/;
   float veclength;
-  float scale;
+  //float scale;
 
   for (count=0;count<numofbonds;count++)
   if (bond[count].type==4 || bond[count].type==6 || bond[count].type==16)

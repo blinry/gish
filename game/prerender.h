@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_PRERENDER_H
+#define GISH_GAME_PRERENDER_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -23,8 +25,7 @@ void setuprenderobjects(void);
 int setuprenderobjectlight(int objectnum);
 int setuprenderropelight(int ropenum,float radius);
 
-int numofobjectrenders;
-struct
+typedef struct
   {
   int type;
   int texturenum;
@@ -42,4 +43,9 @@ struct
   float edgenormal[32][3];
   float depth;
   float alpha;
-  } objectrender[512];
+  } _objectrender;
+
+int numofobjectrenders;
+_objectrender objectrender[512];
+
+#endif /* GISH_GAME_PRERENDER_H */

@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_BOSS_H
+#define GISH_GAME_BOSS_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -24,8 +26,7 @@ void bosssimulation(void);
 void bosstimetolive(void);
 void deleteboss(int bossnum);
 
-int numofbosses;
-struct
+typedef struct
   {
   int type;
   float position[3];
@@ -38,4 +39,9 @@ struct
   int frame;
   float size[2];
   float framedelay;
-  } boss[16];
+  } _boss;
+
+extern int numofbosses;
+extern _boss boss[16];
+
+#endif /* GISH_GAME_BOSS_H */

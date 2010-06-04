@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_ENGLISH_H
+#define GISH_GAME_ENGLISH_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -427,3 +429,5 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define TXT_LEVEL_EDITOR                "Level Editor"
 #define TXT_ADD_LEVEL                   "Add Level"
 #define TXT_DELETE_LEVEL                "Delete Level"
+
+#endif /* GISH_GAME_ENGLISH_H */

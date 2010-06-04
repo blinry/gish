@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_RENDER_H
+#define GISH_GAME_RENDER_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -31,7 +33,7 @@ void renderparticles2(void);
 void renderobjects(void);
 void rendersprites(void);
 
-struct
+typedef struct
   {
   int numoflights;
   struct
@@ -40,4 +42,8 @@ struct
     float color[3];
     float intensity;
     } light[16];
-  } frame;
+  } _frame;
+
+extern _frame frame;
+
+#endif /* GISH_GAME_RENDER_H */

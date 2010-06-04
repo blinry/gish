@@ -1,0 +1,72 @@
+CC = gcc
+CFLAGS = -O2 $(shell pkg-config openal gl vorbisfile --cflags) $(shell sdl-config --cflags)
+LD = gcc
+LDFLAGS = $(shell pkg-config openal gl vorbisfile --libs) $(shell sdl-config --libs)
+OBJS = audio/audio.o \
+       game/ai.o \
+       game/animation.o \
+       game/audio.o \
+       game/block.o \
+       game/boss.o \
+       game/config.o \
+       game/credits.o \
+       game/custom.o \
+       game/damage.o \
+       game/editor.o \
+       game/game.o \
+       game/gamemenu.o \
+       game/glext.o \
+       game/high.o \
+       game/level.o \
+       game/lighting.o \
+       game/logic.o \
+       game/mainmenu.o \
+       game/mappack.o \
+       game/music.o \
+       game/object.o \
+       game/objedit.o \
+       game/objfunc.o \
+       game/options.o \
+       game/physics.o \
+       game/player.o \
+       game/prerender.o \
+       game/random.o \
+       game/record.o \
+       game/render.o \
+       game/replay.o \
+       game/ropeedit.o \
+       game/setup.o \
+       game/socket.o \
+       game/sprite.o \
+       game/texture.o \
+       game/vsmode.o \
+       input/joystick.o \
+       input/keyboard.o \
+       input/mouse.o \
+       math/intersec.o \
+       math/vector.o \
+       menu/menu.o \
+       parser/parser.o \
+       physics/bond.o \
+       physics/object.o \
+       physics/particle.o \
+       sdl/endian.o \
+       sdl/event.o \
+       sdl/file.o \
+       sdl/video.o \
+       video/glfunc.o \
+       video/text.o \
+       video/texture.o \
+       main.o
+EXE = gish
+
+all: $(EXE)
+
+$(EXE): $(OBJS)
+	$(LD) $^ -o $@ $(LDFLAGS)
+
+%.o: %.c
+	$(CC) $< -o $@ -c $(CFLAGS)
+
+clean:
+	rm -f $(EXE) $(OBJS)

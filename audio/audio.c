@@ -19,13 +19,49 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#ifdef WINDOWS
+  #include <SDL.h>
+#else
+  #include <SDL/SDL.h>
+#endif
+
+#if defined(LINUX) || defined(MAC)
+  #include <unistd.h>
+#endif
+
+#include "audio.h"
+#include "../game/audio.h"
+#include "../game/game.h"
+#include "../game/options.h"
+#include "../sdl/endian.h"
+
+ALCcontext *alcontext;
+ALCdevice *aldevice;
+
+int soundenabled;
+ALuint soundbuffer[64];
+int bufferloaded[64];
+
+OggVorbis_File oggstream[2];
+
+vorbis_info *vorbisinfo;
+vorbis_comment *vorbiscomment;
+
+ALenum oggformat;
+char oggdata[OGGBUFFERSIZE];
+
+ALuint oggsource;
+ALuint oggbuffer[2];
+
 void setupaudio(void)
   {
   int count;
-  ALsizei size,freq;
-  ALenum format;
-  ALvoid *data;
-  ALboolean loop;
+  //ALsizei size,freq;
+  //ALenum format;
+  //ALvoid *data;
+  //ALboolean loop;
   int changeddir;
 
   aldevice=alcOpenDevice(NULL);
@@ -95,7 +131,7 @@ void setupaudio(void)
 int updateogg(void)
   {
   int processed;
-  int buffernum;
+  ALuint buffernum;
   int active;
 
   if (!soundenabled)
@@ -182,7 +218,7 @@ void shutdownaudio(void)
 
 void loadwav(int buffernum,char *filename)
   {
-  int count;
+  unsigned int count;
   SDL_AudioSpec wavspec;
   unsigned int wavlength;
   unsigned char *wavbuffer;

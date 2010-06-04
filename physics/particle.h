@@ -1,3 +1,5 @@
+#ifndef GISH_PHYSICS_PARTICLE_H
+#define GISH_PHYSICS_PARTICLE_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -30,8 +32,7 @@ void deleteparticle(int particlenum);
 void applyforceparticle(int particlenum,float force[3]);
 void getforceparticle(int particlenum,float force[3]);
 
-int numofparticles;
-struct
+typedef struct
   {
   float position[3];
   float prevposition[3];
@@ -52,9 +53,9 @@ struct
   int rendertype;
   float rendersize;
   int texturenum;
-  } particle[16384];
+  } _particle;
 
-struct 
+typedef struct
   {
   float drag;
   float gravity;
@@ -63,4 +64,10 @@ struct
   int levelcollision;
   int objectcollision;
   int rendertype;
-  } particletype[16384];
+  } _particletype;
+
+extern int numofparticles;
+extern _particle particle[16384];
+extern _particletype particletype[16384];
+
+#endif /* GISH_PHYSICS_PARTICLE_H */

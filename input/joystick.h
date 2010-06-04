@@ -1,3 +1,5 @@
+#ifndef GISH_INPUT_JOYSTICK_H
+#define GISH_INPUT_JOYSTICK_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -19,15 +21,15 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#ifdef WINDOWS
+  #include <SDL.h>
+#else
+  #include <SDL/SDL.h>
+#endif
+
 void checkjoystick(void);
 
-int numofjoysticks;
-SDL_Joystick *joy[16];
-
-int joystickenabled;
-int joystickused;
-
-struct {
+typedef struct {
   int x;
   int y;
   float axis[2];
@@ -37,9 +39,9 @@ struct {
   int numofhats;
   int hat[4];
   char name[64];
-  } joystick[16];
+  } _joystick;
 
-struct {
+typedef struct {
   int x;
   int y;
   float axis[2];
@@ -49,5 +51,15 @@ struct {
   int numofhats;
   int hat[4];
   char name[64];
-  } prevjoystick[16];
+  } _prevjoystick;
 
+extern int numofjoysticks;
+extern SDL_Joystick *joy[16];
+
+extern int joystickenabled;
+extern int joystickused;
+
+extern _joystick joystick[16];
+extern _prevjoystick prevjoystick[16];
+
+#endif /* GISH_INPUT_JOYSTICK_H */

@@ -19,12 +19,38 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#ifdef MAC
+  #include <OpenGL/gl.h>
+#else
+  #include <GL/gl.h>
+#endif
+
+#if defined(LINUX) || defined(MAC)
+  #include <unistd.h>
+#endif
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "texture.h"
+#include "../main.h"
+#include "../sdl/endian.h"
+#include "../sdl/file.h"
+
+char lasttextureloaded[32];
+_texture texture[2048];
+_tgaheader tgaheader;
+
 void loadtexturetga(int texturenum,char *filename,int mipmap,int wraps,int wrapt,int magfilter,int minfilter)
   {
   int count,count2;
-	int red,green,blue,alpha;
+  int red,green,blue,alpha;
   int changeddir;
   unsigned char origin;
+  FILE *fp;
 
   changeddir=chdir("texture");
 
@@ -149,8 +175,9 @@ void loadtexturetga(int texturenum,char *filename,int mipmap,int wraps,int wrapt
 void loadtexturetganodir(int texturenum,char *filename,int mipmap,int wraps,int wrapt,int magfilter,int minfilter)
   {
   int count,count2;
-	int red,green,blue,alpha;
+  int red,green,blue,alpha;
   unsigned char origin;
+  FILE *fp;
 
   if ((fp=fopen(filename,"rb"))==NULL)
     {
@@ -265,9 +292,10 @@ void loadtexturetganodir(int texturenum,char *filename,int mipmap,int wraps,int 
 void loadtexturetgapartial(int texturenum,char *filename,int startx,int starty,int sizex,int sizey)
   {
   int count,count2;
-	int red,green,blue,alpha;
+  int red,green,blue,alpha;
   int changeddir;
   unsigned char origin;
+  FILE *fp;
 
   if (strcmp(lasttextureloaded,filename)!=0)
     {

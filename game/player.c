@@ -19,6 +19,46 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#ifdef MAC
+  #include <OpenGL/gl.h>
+#else
+  #include <GL/gl.h>
+#endif
+
+#ifdef WINDOWS
+  #include <SDL.h>
+#else
+  #include <SDL/SDL.h>
+#endif
+
+#include <stdio.h>
+
+#include "player.h"
+#include "audio.h"
+#include "custom.h"
+#include "english.h"
+#include "game.h"
+#include "gamemenu.h"
+#include "high.h"
+#include "level.h"
+#include "mainmenu.h"
+#include "music.h"
+#include "replay.h"
+#include "setup.h"
+#include "../audio/audio.h"
+#include "../input/joystick.h"
+#include "../input/keyboard.h"
+#include "../input/mouse.h"
+#include "../menu/menu.h"
+#include "../sdl/event.h"
+#include "../sdl/file.h"
+#include "../video/text.h"
+
+int playernum;
+_player player[16];
+
 void playermenu(void)
   {
   int count,count2,count3;
@@ -218,6 +258,7 @@ void saveplayers(void)
   {
   int count;
   int version;
+  FILE *fp;
 
   if ((fp=fopen("gish.pla","wb"))!=NULL)
     {
@@ -242,6 +283,7 @@ void loadplayers(void)
   {
   int count;
   int version;
+  FILE *fp;
 
   if ((fp=fopen("gish.pla","rb"))!=NULL)
     {

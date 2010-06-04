@@ -1,3 +1,5 @@
+#ifndef GISH_SDL_ENDIAN_H
+#define GISH_SDL_ENDIAN_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -21,5 +23,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 void checkbigendian(void);
 
-int bigendian;
+extern int bigendian;
 
+#endif /* GISH_SDL_ENDIAN_H */

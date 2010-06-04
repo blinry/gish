@@ -19,6 +19,26 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#ifdef MAC
+  #include <OpenGL/gl.h>
+#else
+  #include <GL/gl.h>
+#endif
+
+#if defined(LINUX) || defined(MAC)
+  #include <unistd.h>
+#endif
+
+#include <stdio.h>
+
+#include "record.h"
+#include "../sdl/event.h"
+#include "../video/glfunc.h"
+
+_movie movie;
+
 void recordframe(void)
   {
   int count,count2;
@@ -26,9 +46,10 @@ void recordframe(void)
   char filename[16]="gish0000.bmp";
   short bmpheader[27]={19778,4150,14,0,0,54,0,40,0,480,0,272,0,1,24,0,0,4096,14,0,0,0,0,0,0,0};
   int red,green,blue;
-  unsigned char bytetemp;
-  short shorttemp;
-  int inttemp;
+  //unsigned char bytetemp;
+  //short shorttemp;
+  //int inttemp;
+  FILE *fp;
 
   glReadBuffer(GL_BACK);
   glReadPixels(0,0,windowinfo.resolutionx,windowinfo.resolutiony,GL_RGBA,GL_UNSIGNED_BYTE,screenshotbuffer);

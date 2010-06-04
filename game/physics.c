@@ -19,6 +19,30 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#include <string.h>
+#include <math.h>
+
+#include "physics.h"
+#include "audio.h"
+#include "block.h"
+#include "game.h"
+#include "level.h"
+#include "object.h"
+#include "sprite.h"
+#include "../audio/audio.h"
+#include "../math/intersec.h"
+#include "../math/vector.h"
+#include "../physics/bond.h"
+#include "../physics/object.h"
+#include "../physics/particle.h"
+
+_physicstemp physicstemp;
+
+int numoflevellines;
+_levelline levelline[1024];
+
 void setupphysics(void)
   {
   int count;
@@ -169,7 +193,7 @@ void setupphysics(void)
 
 void particlecollision(int particlenum)
   {
-  float vec[3],vec2[3],vec3[3];
+  float vec[3],vec2[3]/*,vec3[3]*/;
   float intersectpoint[3];
   float normal[3];
   float scale;
@@ -200,17 +224,17 @@ void particlecollision(int particlenum)
 
 void objectcollision(int objectnum)
   {
-  int count,count2;
+  int count/*,count2*/;
   int part1,part2;
   int blocknum;
   int particlenum;
   int particlelist[2];
-  float vec[3],vec2[3],vec3[3];
+  float vec[3],vec2[3]/*,vec3[3]*/;
   float intersectpoint[3];
   float normal[3];
   float force[2];
   float scale;
-  float friction;
+  //float friction;
 
   copyvector(object[objectnum].prevposition,object[objectnum].position);
 
@@ -380,7 +404,7 @@ void objectcollisionobject(int objectnum)
   int objectcount;
   int particlenum;
   int particlelist[2];
-  float vec[3],vec2[3],vec3[3];
+  float vec[3],vec2[3]/*,vec3[3]*/;
   float intersectpoint[3];
   float normal[3];
   float force[2];
@@ -655,8 +679,8 @@ void bondsimulation2(void)
   int count,count2;
   int part1,part2,part3;
   int blocknum;
-  unsigned int x;
-  float vec[3],vec2[3],vec3[3];
+  //unsigned int x;
+  float vec[3],vec2[3]/*,vec3[3]*/;
   float bondnormal[3];
   float veclength;
   float force[2];
@@ -681,8 +705,6 @@ void bondsimulation2(void)
 
   for (count=0;count<32;count++)
     {
-    //starttimer(0);
-
     updateogg();
 
     for (count2=0;count2<numofparticles;count2++)
@@ -722,9 +744,6 @@ void bondsimulation2(void)
       scaleaddvectors2(particle[part1].velocity,particle[part1].velocity,bondnormal,force[0]);
       scaleaddvectors2(particle[part2].velocity,particle[part2].velocity,bondnormal,-force[1]);
       }
-    //stoptimer(0);
-
-    //starttimer(1);
 
     for (count2=0;count2<physicstemp.numofbonds;count2++)
     if ((count&physicstemp.bond[count2].cycles)==0)
@@ -880,7 +899,6 @@ void bondsimulation2(void)
         addvectors2(physicstemp.bond[count2].forceapplied[1],physicstemp.bond[count2].forceapplied[1],vec);
         }
       }
-    //stoptimer(1);
     }
 
   for (count2=0;count2<physicstemp.numofbonds;count2++)

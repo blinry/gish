@@ -19,6 +19,22 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#ifdef MAC
+  #include <OpenGL/gl.h>
+#else
+  #include <GL/gl.h>
+#endif
+
+#include <stdio.h>
+
+#include "glfunc.h"
+#include "text.h"
+#include "../sdl/event.h"
+
+int screenshotbuffer[1280*960];
+
 void setupperspectiveviewport(int viewportx,int viewporty,int viewportwidth,int viewportheight,float nearplane,float farplane)
   {
   float heightwidthratio;
@@ -131,7 +147,8 @@ void screenshot(void)
   int red,green,blue;
   unsigned char bytetemp;
   short shorttemp;
-  int inttemp;
+  //int inttemp;
+  FILE *fp;
 
   glReadBuffer(GL_BACK);
   glReadPixels(0,0,windowinfo.resolutionx,windowinfo.resolutiony,GL_RGBA,GL_UNSIGNED_BYTE,screenshotbuffer);

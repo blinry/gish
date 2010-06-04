@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_PLAYER_H
+#define GISH_GAME_PLAYER_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -27,8 +29,7 @@ void playerdifficultymenu(void);
 void collectionmenu(void);
 void singlelevelmenu(void);
 
-int playernum;
-struct
+typedef struct
   {
   char name[32];
   int levelnum;
@@ -38,4 +39,9 @@ struct
   int gamepassed;
   int highscore;
   int unlock[16];
-  } player[16];
+  } _player;
+
+extern int playernum;
+extern _player player[16];
+
+#endif /* GISH_GAME_PLAYER_H */

@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_OPTIONS_H
+#define GISH_GAME_OPTIONS_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -24,20 +26,23 @@ void videooptionsmenu(void);
 void drawsliderbars(void);
 void optionsmenu2(void);
 
-struct
+typedef struct
   {
   int sound;
   int music;
   float soundvolume;
   float musicvolume;
-  } option;
+  } _option;
 
-struct
+typedef struct
   {
   int key[16];
   int joysticknum;
   int axis[4];
   int button[16];
-  } control[8];
+  } _control;
 
+extern _option option;
+extern _control control[8];
 
+#endif /* GISH_GAME_OPTIONS_H */

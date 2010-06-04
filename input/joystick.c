@@ -19,6 +19,22 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#include <string.h>
+
+#include "joystick.h"
+#include "../game/config.h"
+
+int numofjoysticks;
+SDL_Joystick *joy[16];
+
+int joystickenabled;
+int joystickused;
+
+_joystick joystick[16];
+_prevjoystick prevjoystick[16];
+
 void checkjoystick(void)
   {
   int count,count2;

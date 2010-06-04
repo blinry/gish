@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_REPLAY_H
+#define GISH_GAME_REPLAY_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -25,8 +27,12 @@ void savereplay(int levelnum);
 int loadreplay(char *filename);
 void replaymenu(void);
 
-int numofreplayframes;
-struct
+typedef struct
   {
   unsigned char button;
-  } replayframe[65536];
+  } _replayframe;
+
+extern int numofreplayframes;
+extern _replayframe replayframe[65536];
+
+#endif /* GISH_GAME_REPLAY_H */

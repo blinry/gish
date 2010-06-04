@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_OBJFUNC_H
+#define GISH_GAME_OBJFUNC_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -21,3 +23,5 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 void objectcycle(void);
 void objectsound(int objectnum);
+
+#endif /* GISH_GAME_OBJFUNC_H */

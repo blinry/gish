@@ -19,11 +19,24 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#include <math.h>
+
+#include "prerender.h"
+#include "boss.h"
+#include "game.h"
+#include "object.h"
+#include "render.h"
+#include "../math/vector.h"
+#include "../physics/bond.h"
+#include "../physics/particle.h"
+
 void setuprenderobjects(void)
   {
   int count,count2;
   float vec[3],vec2[3];
-  float intersectpoint[3];
+  //float intersectpoint[3];
   float normal[3];
   float angle;
   float scale;

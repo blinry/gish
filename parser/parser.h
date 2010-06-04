@@ -1,3 +1,5 @@
+#ifndef GISH_PARSER_PARSER_H
+#define GISH_PARSER_PARSER_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -27,10 +29,14 @@ int getint(void);
 float getfloat(void);
 void getstring(char *str,int size);
 
-struct
+typedef struct
   {
   int textloc;
   int textsize;
   char text[1048576];
   char numtemp[256];
-  } parser;
+  } _parser;
+
+extern _parser parser;
+
+#endif /* GISH_PARSER_PARSER_H */

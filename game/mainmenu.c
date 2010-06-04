@@ -19,14 +19,52 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../config.h"
+
+#ifdef MAC
+  #include <OpenGL/gl.h>
+#else
+  #include <GL/gl.h>
+#endif
+
+#include <stdlib.h>
+#include <time.h>
+
+#include "mainmenu.h"
+#include "animation.h"
+#include "audio.h"
+#include "config.h"
+#include "credits.h"
+#include "editor.h"
+#include "english.h"
+#include "game.h"
+#include "lighting.h"
+#include "music.h"
+#include "object.h"
+#include "options.h"
+#include "physics.h"
+#include "player.h"
+#include "socket.h"
+#include "vsmode.h"
+#include "../main.h"
+#include "../audio/audio.h"
+#include "../input/joystick.h"
+#include "../input/keyboard.h"
+#include "../input/mouse.h"
+#include "../math/vector.h"
+#include "../menu/menu.h"
+#include "../sdl/event.h"
+#include "../video/text.h"
+#include "../video/texture.h"
+
 void mainmenu(void)
   {
   int count,temp;
   int prevjoymenunum;
-  int registered;
+  //int registered;
   char loadfilename[32]="loading00.tga";
   char texfilename[32]="text000.tga";
-  unsigned int x,y;
+  //unsigned int x,y;
 
   srand(time(NULL));
   count=(rand()%11)+1;
@@ -551,7 +589,7 @@ void storyscreen(void)
 
 void introscreen(void)
   {
-  int count,count2;
+  int count,count2=0;
   int simtimer;
   int simcount;
   int loaddelay;
