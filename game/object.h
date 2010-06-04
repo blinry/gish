@@ -85,7 +85,6 @@ struct
   int rotate;
   int ai;
   int beasttype;
-  float gravitymultiplier;
   } object[512];
 
 struct
