@@ -35,6 +35,20 @@ void encryptdata(unsigned int code,unsigned int codepair,int cryptdatasize);
 void decryptdata(unsigned int code,int cryptdatasize);
 void byteswapdata(int cryptdatasize);
 
+typedef enum {
+        GAMETYPE_CAMPAIGN = 0,
+        GAMETYPE_COLLECTION = 1,
+        GAMETYPE_2FOOTBALL = 10,
+        GAMETYPE_2SUMO = 11,
+        GAMETYPE_2GREED = 12,
+        GAMETYPE_2PITFALL = 13,
+        GAMETYPE_2DRAGSTER = 14,
+        GAMETYPE_2COLLECTION = 15,
+        GAMETYPE_2RACING = 16,
+        GAMETYPE_4FOOTBALL = 17,
+        GAMETYPE_4SUMO = 18
+} gametype;
+
 typedef struct
   {
   int blocknum;
@@ -47,7 +61,7 @@ typedef struct
   {
   char background[32];
   int tileset;
-  int gametype;
+  gametype gametype;
   int time;
   int area[64][4];
   unsigned char backgrid[256][256];

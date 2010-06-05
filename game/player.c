@@ -306,6 +306,10 @@ void loadplayers(void)
         fread2(&player[count].gamepassed,4,1,fp);
         fread2(&player[count].highscore,4,1,fp);
         fread2(player[count].unlock,4,16,fp);
+        player[count].unlock[0] = 1;
+        player[count].unlock[1] = 1;
+        player[count].unlock[2] = 1;
+        player[count].unlock[3] = 1;
         }
       }
     fclose(fp);

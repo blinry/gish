@@ -121,7 +121,7 @@ void gameloop(void)
     if (level.background[0]!=0)
       displaybackground(660);
 
-    if (game.over!=0 && level.gametype<10)
+    if (game.over!=0 && level.gametype<GAMETYPE_2FOOTBALL)
     if (game.exit==GAMEEXIT_NONE)
       {
       if (game.over>=3 && game.over<=5)
@@ -166,19 +166,19 @@ void gameloop(void)
 
       if (game.levelnum<64)
         {
-        if (level.gametype==0 && (game.levelnum>0 || mappack.active) && !game.playreplay)
+        if (level.gametype==GAMETYPE_CAMPAIGN && (game.levelnum>0 || mappack.active) && !game.playreplay)
           createmenuitem(TXT_RESETLEVEL_MINUSONE,(320|TEXT_CENTER),count,16,1.0f,1.0f,1.0f,1.0f);
         else
           createmenuitem(TXT_RESETLEVEL,(320|TEXT_CENTER),count,16,1.0f,1.0f,1.0f,1.0f);
         setmenuitem(MO_HOTKEY,SCAN_R);
-        if (level.gametype==0)
+        if (level.gametype==GAMETYPE_CAMPAIGN)
           setmenuitem(MO_SET,&game.exit,GAMEEXIT_DIED);
         count+=16;
         }
       else
         createmenuitemempty();
 
-      if (game.over==0 && game.levelnum<64 && level.gametype==0 && game.levelnum>0 && !game.playreplay)
+      if (game.over==0 && game.levelnum<64 && level.gametype==GAMETYPE_CAMPAIGN && game.levelnum>0 && !game.playreplay)
         createmenuitem(TXT_EXITGAME_MINUSONE,(320|TEXT_CENTER),count,16,1.0f,1.0f,1.0f,1.0f);
       else
         createmenuitem(TXT_EXITGAME,(320|TEXT_CENTER),count,16,1.0f,1.0f,1.0f,1.0f);
@@ -231,7 +231,7 @@ void gameloop(void)
     checkmenuitems();
 
     if (game.exit==GAMEEXIT_INGAMEMENU)
-    if (level.gametype!=0)
+    if (level.gametype!=GAMETYPE_CAMPAIGN)
     if (menuitem[1].active)
       {
       setuplevel();
@@ -339,14 +339,14 @@ void gameloop(void)
       if (game.songnum==-1)
         game.songnum=rand()%5;
       }
-    if (level.gametype==11)
+    if (level.gametype==GAMETYPE_2SUMO)
       game.songnum=7;
     /*
-    if (level.gametype==10)
+    if (level.gametype==GAMETYPE_2FOOTBALL)
       game.songnum=4;
-    if (level.gametype==11)
+    if (level.gametype==GAMETYPE_2SUMO)
       game.songnum=5;
-    if (level.gametype==12)
+    if (level.gametype==GAMETYPE_2GREED)
       game.songnum=4;
     */
     if (game.levelnum==0)
@@ -366,11 +366,11 @@ void gameloop(void)
     if (game.oldschool==3)
       view.zoom=26.0f;
 
-    if (level.gametype==15)
+    if (level.gametype==GAMETYPE_2COLLECTION)
       view.zoom=24.0f;
-    if (level.gametype==16)
+    if (level.gametype==GAMETYPE_2RACING)
       view.zoom=24.0f;
-    if (level.gametype==17 || level.gametype==18)
+    if (level.gametype==GAMETYPE_4FOOTBALL || level.gametype==GAMETYPE_4SUMO)
       view.zoom=14.0f;
 
     view.zoomx=view.zoom+0.5f;
@@ -485,7 +485,7 @@ void gameloop(void)
       glEnable(GL_TEXTURE_2D);
       }
 
-    if (game.oldschool==0 && !game.bosslevel && level.gametype!=15)
+    if (game.oldschool==0 && !game.bosslevel && level.gametype!=GAMETYPE_2COLLECTION)
       rendersprites();
 
     glColor4f(1.0f,1.0f,1.0f,1.0f);
@@ -685,7 +685,7 @@ void simulation(void)
   for (count=0;count<numofobjects;count++)
     object[count].prevhitpoints=object[count].hitpoints;
 
-  if (level.gametype!=16)
+  if (level.gametype!=GAMETYPE_2RACING)
   for (count=0;count<numofparticles;count++)
     particle[count].velocity[1]-=particle[count].gravity;
 
