@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include <stdio.h>
 
-#include "block.h"
+#include "../game/block.h"
 #include "../sdl/endian.h"
 #include "../sdl/file.h"
 #include "../video/texture.h"

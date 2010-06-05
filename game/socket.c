@@ -31,7 +31,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
   #include <string.h>
 #endif
 
-#include "socket.h"
+#include "../game/socket.h"
 
 char sockdata[1024];
 

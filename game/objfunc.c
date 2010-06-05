@@ -25,14 +25,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <stdlib.h>
 #include <math.h>
 
-#include "objfunc.h"
-#include "ai.h"
-#include "audio.h"
-#include "block.h"
-#include "game.h"
-#include "level.h"
-#include "object.h"
-#include "sprite.h"
+#include "../game/objfunc.h"
+#include "../game/ai.h"
+#include "../game/gameaudio.h"
+#include "../game/block.h"
+#include "../game/game.h"
+#include "../game/level.h"
+#include "../game/gameobject.h"
+#include "../game/sprite.h"
 #include "../audio/audio.h"
 #include "../math/vector.h"
 #include "../physics/bond.h"

@@ -20,21 +20,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
 #include "../config.h"
-
-#ifdef MAC
-  #include <OpenGL/gl.h>
-  #include <OpenGL/glext.h>
-#else
-  #include <GL/gl.h>
-#endif
-
-#ifdef LINUX
-  #include <GL/glext.h>
-#endif
-
-#ifdef WINDOWS
-  #include "video/glext.h"
-#endif
+#include "../video/opengl.h"
 
 #if defined(LINUX) || defined(MAC)
   #include <unistd.h>
@@ -43,12 +29,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <math.h>
 #include <string.h>
 
-#include "animation.h"
-#include "audio.h"
-#include "game.h"
-#include "object.h"
-#include "random.h"
-#include "sprite.h"
+#include "../game/animation.h"
+#include "../game/gameaudio.h"
+#include "../game/game.h"
+#include "../game/gameobject.h"
+#include "../game/random.h"
+#include "../game/sprite.h"
 #include "../math/vector.h"
 #include "../physics/object.h"
 #include "../physics/particle.h"

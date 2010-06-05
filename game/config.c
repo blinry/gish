@@ -20,24 +20,15 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
 #include "../config.h"
+#include "../video/opengl.h"
 
-#ifdef MAC
-  #include <OpenGL/gl.h>
-#else
-  #include <GL/gl.h>
-#endif
-
-#ifdef WINDOWS
-  #include <SDL.h>
-#else
-  #include <SDL/SDL.h>
-#endif
+#include "../sdl/sdl.h"
 
 #include <stdio.h>
 
-#include "config.h"
-#include "options.h"
-#include "socket.h"
+#include "../game/config.h"
+#include "../game/options.h"
+#include "../game/socket.h"
 #include "../input/keyboard.h"
 #include "../input/mouse.h"
 #include "../menu/menu.h"

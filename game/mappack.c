@@ -21,28 +21,20 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "../config.h"
 
-#ifdef MAC
-  #include <OpenGL/gl.h>
-#else
-  #include <GL/gl.h>
-#endif
+#include "../video/opengl.h"
 
-#ifdef WINDOWS
-  #include <SDL.h>
-#else
-  #include <SDL/SDL.h>
-#endif
+#include "../sdl/sdl.h"
 
-#include "mappack.h"
-#include "audio.h"
-#include "custom.h"
-#include "english.h"
-#include "game.h"
-#include "gamemenu.h"
-#include "level.h"
-#include "mainmenu.h"
-#include "object.h"
-#include "player.h"
+#include "../game/mappack.h"
+#include "../game/gameaudio.h"
+#include "../game/custom.h"
+#include "../game/english.h"
+#include "../game/game.h"
+#include "../game/gamemenu.h"
+#include "../game/level.h"
+#include "../game/mainmenu.h"
+#include "../game/gameobject.h"
+#include "../game/player.h"
 #include "../input/joystick.h"
 #include "../input/keyboard.h"
 #include "../input/mouse.h"

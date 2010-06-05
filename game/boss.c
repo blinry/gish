@@ -23,10 +23,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include <string.h>
 
-#include "boss.h"
-#include "animation.h"
-#include "object.h"
-#include "render.h"
+#include "../game/boss.h"
+#include "../game/animation.h"
+#include "../game/gameobject.h"
+#include "../game/render.h"
 #include "../math/vector.h"
 
 int numofbosses;

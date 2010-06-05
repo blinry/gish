@@ -1,3 +1,5 @@
+#ifndef GISH_GAME_GAMEAUDIO_H
+#define GISH_GAME_GAMEAUDIO_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -19,35 +21,21 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-#include "../config.h"
+void soundsimulation(float position[3],float orientation[3][3]);
+void playsound(int buffernum,float position[3],float velocity[3],float volume,int looping,float pitch,int objectnum,int objectsoundnum);
+void deletesound(int soundnum);
 
-#include <stdio.h>
-
-#include "../sdl/endian.h"
-#include "../sdl/file.h"
-
-int bigendian;
-
-void checkbigendian(void)
+typedef struct
   {
-  unsigned int x;
-  char *c;
+  int buffernum;
+  int objectnum;
+  int looping;
+  int pitchshift;
+  unsigned int alname;
+  int delay;
+  } _sound;
 
-  x=0x12345678;
-  c=(char *)&x;
-  if (*c==0x12)
-    bigendian=1;
-  else
-    bigendian=0;
+extern int numofsounds;
+extern _sound sound[64];
 
-  if (bigendian)
-    {
-    fread2=freadswap;
-    fwrite2=fwriteswap;
-    }
-  else
-    {
-    fread2=fread;
-    fwrite2=fwrite;
-    }
-  }
+#endif /* GISH_GAME_GAMEAUDIO_H */

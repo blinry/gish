@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <stdio.h>
 #include <string.h>
 
-#include "parser.h"
+#include "../parser/parser.h"
 
 _parser parser;
 

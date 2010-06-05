@@ -21,24 +21,20 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "../config.h"
 
-#ifdef MAC
-  #include <OpenGL/gl.h>
-#else
-  #include <GL/gl.h>
-#endif
+#include "../video/opengl.h"
 
 #include <math.h>
 
-#include "render.h"
-#include "block.h"
-#include "editor.h"
-#include "game.h"
-#include "level.h"
-#include "lighting.h"
-#include "object.h"
-#include "physics.h"
-#include "prerender.h"
-#include "sprite.h"
+#include "../game/render.h"
+#include "../game/block.h"
+#include "../game/editor.h"
+#include "../game/game.h"
+#include "../game/level.h"
+#include "../game/lighting.h"
+#include "../game/gameobject.h"
+#include "../game/physics.h"
+#include "../game/prerender.h"
+#include "../game/sprite.h"
 #include "../audio/audio.h"
 #include "../math/vector.h"
 #include "../physics/bond.h"
@@ -118,7 +114,6 @@ void renderlevelback(void)
   glBlendFunc(GL_SRC_ALPHA,GL_ONE);
 
   glEnable(GL_STENCIL_TEST);
-
   glActiveTextureARB(GL_TEXTURE1_ARB);
   glEnable(GL_TEXTURE_2D);
   glBindTexture(GL_TEXTURE_2D,texture[332].glname);

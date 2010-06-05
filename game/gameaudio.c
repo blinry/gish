@@ -23,10 +23,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include <string.h>
 
-#include "audio.h"
-#include "game.h"
-#include "object.h"
-#include "options.h"
+#include "../game/gameaudio.h"
+#include "../game/game.h"
+#include "../game/gameobject.h"
+#include "../game/options.h"
 #include "../audio/audio.h"
 #include "../math/vector.h"
 #include "../physics/particle.h"

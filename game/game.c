@@ -21,44 +21,36 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "../config.h"
 
-#ifdef MAC
-  #include <OpenGL/gl.h>
-#else
-  #include <GL/gl.h>
-#endif
+#include "../video/opengl.h"
 
-#ifdef WINDOWS
-  #include <SDL.h>
-#else
-  #include <SDL/SDL.h>
-#endif
+#include "../sdl/sdl.h"
 
 #include <stdlib.h>
 #include <time.h>
 
-#include "game.h"
-#include "animation.h"
-#include "audio.h"
-#include "boss.h"
-#include "custom.h"
-#include "editor.h"
-#include "english.h"
-#include "level.h"
-#include "lighting.h"
-#include "logic.h"
-#include "mainmenu.h"
-#include "music.h"
-#include "object.h"
-#include "objfunc.h"
-#include "options.h"
-#include "physics.h"
-#include "prerender.h"
-#include "random.h"
-#include "record.h"
-#include "render.h"
-#include "replay.h"
-#include "setup.h"
-#include "sprite.h"
+#include "../game/game.h"
+#include "../game/animation.h"
+#include "../game/gameaudio.h"
+#include "../game/boss.h"
+#include "../game/custom.h"
+#include "../game/editor.h"
+#include "../game/english.h"
+#include "../game/level.h"
+#include "../game/lighting.h"
+#include "../game/logic.h"
+#include "../game/mainmenu.h"
+#include "../game/music.h"
+#include "../game/gameobject.h"
+#include "../game/objfunc.h"
+#include "../game/options.h"
+#include "../game/physics.h"
+#include "../game/prerender.h"
+#include "../game/random.h"
+#include "../game/record.h"
+#include "../game/render.h"
+#include "../game/replay.h"
+#include "../game/setup.h"
+#include "../game/sprite.h"
 #include "../audio/audio.h"
 #include "../input/joystick.h"
 #include "../input/keyboard.h"

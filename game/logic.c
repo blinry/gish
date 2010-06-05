@@ -21,26 +21,22 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "../config.h"
 
-#ifdef MAC
-  #include <OpenGL/gl.h>
-#else
-  #include <GL/gl.h>
-#endif
+#include "../video/opengl.h"
 
 #include <stdlib.h>
 #include <string.h>
 
-#include "logic.h"
-#include "audio.h"
-#include "boss.h"
-#include "custom.h"
-#include "english.h"
-#include "game.h"
-#include "level.h"
-#include "object.h"
-#include "options.h"
-#include "player.h"
-#include "setup.h"
+#include "../game/logic.h"
+#include "../game/gameaudio.h"
+#include "../game/boss.h"
+#include "../game/custom.h"
+#include "../game/english.h"
+#include "../game/game.h"
+#include "../game/level.h"
+#include "../game/gameobject.h"
+#include "../game/options.h"
+#include "../game/player.h"
+#include "../game/setup.h"
 #include "../input/keyboard.h"
 #include "../menu/menu.h"
 #include "../physics/particle.h"

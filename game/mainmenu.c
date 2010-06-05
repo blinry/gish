@@ -21,32 +21,28 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "../config.h"
 
-#ifdef MAC
-  #include <OpenGL/gl.h>
-#else
-  #include <GL/gl.h>
-#endif
+#include "../video/opengl.h"
 
 #include <stdlib.h>
 #include <time.h>
 
-#include "mainmenu.h"
-#include "animation.h"
-#include "audio.h"
-#include "config.h"
-#include "credits.h"
-#include "editor.h"
-#include "english.h"
-#include "game.h"
-#include "lighting.h"
-#include "music.h"
-#include "object.h"
-#include "options.h"
-#include "physics.h"
-#include "player.h"
-#include "socket.h"
-#include "vsmode.h"
-#include "../main.h"
+#include "../game/mainmenu.h"
+#include "../game/animation.h"
+#include "../game/gameaudio.h"
+#include "../game/config.h"
+#include "../game/credits.h"
+#include "../game/editor.h"
+#include "../game/english.h"
+#include "../game/game.h"
+#include "../game/lighting.h"
+#include "../game/music.h"
+#include "../game/gameobject.h"
+#include "../game/options.h"
+#include "../game/physics.h"
+#include "../game/player.h"
+#include "../game/socket.h"
+#include "../game/vsmode.h"
+#include "../game/debug.h"
 #include "../audio/audio.h"
 #include "../input/joystick.h"
 #include "../input/keyboard.h"
@@ -316,7 +312,7 @@ void mainmenu(void)
 
     if (game.turbomode)
       drawtext(TXT_TURBO_EDITION,(640|TEXT_END),470,10,1.0f,1.0f,1.0f,1.0f);
-    drawtext(versiontext,0,470,10,1.0f,1.0f,1.0f,1.0f);
+    drawtext("Version 1.53",0,470,10,1.0f,1.0f,1.0f,1.0f);
 
     drawtext(TXT_COPYRIGHT,(320|TEXT_CENTER),470,10,0.75f,0.75f,0.75f,1.0f);
 
@@ -736,7 +732,7 @@ void introscreen(void)
 
       if (game.turbomode)
         drawtext(TXT_TURBO_EDITION,(640|TEXT_END),470,10,1.0f,1.0f,1.0f,1.0f);
-      drawtext(versiontext,0,470,10,1.0f,1.0f,1.0f,1.0f);
+      drawtext("Version 1.53",0,470,10,1.0f,1.0f,1.0f,1.0f);
 
       drawtext(TXT_COPYRIGHT,(320|TEXT_CENTER),470,10,0.75f,0.75f,0.75f,alpha);
       }

@@ -24,14 +24,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <stdlib.h>
 #include <math.h>
 
-#include "lighting.h"
-#include "block.h"
-#include "game.h"
-#include "glext.h"
-#include "level.h"
-#include "object.h"
-#include "prerender.h"
-#include "render.h"
+#include "../game/lighting.h"
+#include "../game/block.h"
+#include "../game/game.h"
+#include "../game/level.h"
+#include "../game/gameobject.h"
+#include "../game/prerender.h"
+#include "../game/render.h"
 #include "../math/vector.h"
 #include "../physics/particle.h"
 #include "../sdl/event.h"

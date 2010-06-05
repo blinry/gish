@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "../config.h"
 
-#include "intersec.h"
-#include "vector.h"
+#include "../math/intersec.h"
+#include "../math/vector.h"
 
 int lineintersectplane(float *intersectpoint,float *normal,float *scale,float *startpoint,float *endpoint,float *point)
   {

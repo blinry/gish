@@ -21,17 +21,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "../config.h"
 
-#ifdef MAC
-  #include <OpenGL/gl.h>
-#else
-  #include <GL/gl.h>
-#endif
+#include "../video/opengl.h"
 
 #include <stdio.h>
 #include <string.h>
 
-#include "text.h"
-#include "texture.h"
+#include "../video/text.h"
+#include "../video/texture.h"
 #include "../sdl/event.h"
 
 char textstring2[1024];
