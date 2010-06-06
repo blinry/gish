@@ -23,9 +23,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include <string.h>
 
-#include "bond.h"
-#include "particle.h"
-#include "../game/object.h"
+#include "../physics/bond.h"
+#include "../physics/particle.h"
+#include "../game/gameobject.h"
 #include "../math/vector.h"
 
 int numofbonds;

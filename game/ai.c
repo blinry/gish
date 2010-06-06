@@ -23,11 +23,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include <math.h>
 
-#include "ai.h"
-#include "game.h"
-#include "level.h"
-#include "object.h"
-#include "random.h"
+#include "../game/ai.h"
+#include "../game/game.h"
+#include "../game/level.h"
+#include "../game/gameobject.h"
+#include "../game/random.h"
 #include "../math/vector.h"
 
 void objectai(int objectnum)

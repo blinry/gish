@@ -21,11 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "../config.h"
 
-#ifdef MAC
-  #include <OpenGL/gl.h>
-#else
-  #include <GL/gl.h>
-#endif
+#include "../video/opengl.h"
 
 #if defined(LINUX) || defined(MAC) 
   #include <unistd.h> 
@@ -35,14 +31,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <stdlib.h>
 #include <string.h>
 
-#include "level.h"
-#include "block.h"
-#include "editor.h"
-#include "game.h"
-#include "mainmenu.h"
-#include "object.h"
-#include "physics.h"
-#include "socket.h"
+#include "../game/level.h"
+#include "../game/block.h"
+#include "../game/editor.h"
+#include "../game/game.h"
+#include "../game/mainmenu.h"
+#include "../game/gameobject.h"
+#include "../game/physics.h"
+#include "../game/socket.h"
 #include "../math/vector.h"
 #include "../physics/particle.h"
 #include "../sdl/endian.h"

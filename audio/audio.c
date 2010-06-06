@@ -21,18 +21,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "../config.h"
 
-#ifdef WINDOWS
-  #include <SDL.h>
-#else
-  #include <SDL/SDL.h>
-#endif
+#include "../sdl/sdl.h"
 
 #if defined(LINUX) || defined(MAC)
   #include <unistd.h>
 #endif
 
-#include "audio.h"
-#include "../game/audio.h"
+#include "../audio/audio.h"
+#include "../game/gameaudio.h"
 #include "../game/game.h"
 #include "../game/options.h"
 #include "../sdl/endian.h"

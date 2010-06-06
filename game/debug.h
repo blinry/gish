@@ -1,5 +1,5 @@
-#ifndef GISH_GAME_TEXTURE_H
-#define GISH_GAME_TEXTURE_H
+#ifndef GISH_GAME_DEBUG_H
+#define GISH_GAME_DEBUG_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -21,20 +21,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-void edittextures(void);
-void copytexture(int texturenum,int oldtexturenum);
-void loadtilesettemp(void);
-void loadleveltiles(char *filename);
+extern int debugit;
 
-typedef struct
-  {
-  int pagenum;
-  int texturenum;
-  int tileset;
-  int tilepagenum;
-  char filename[32];
-  } _textureedit;
-
-extern _textureedit textureedit;
-
-#endif /* GISH_GAME_TEXTURE_H */
+#endif /* GISH_GAME_DEBUG_H */

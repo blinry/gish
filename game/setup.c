@@ -24,18 +24,18 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <stdlib.h>
 #include <time.h>
 
-#include "setup.h"
-#include "animation.h"
-#include "audio.h"
-#include "boss.h"
-#include "editor.h"
-#include "game.h"
-#include "level.h"
-#include "object.h"
-#include "physics.h"
-#include "random.h"
-#include "replay.h"
-#include "sprite.h"
+#include "../game/setup.h"
+#include "../game/animation.h"
+#include "../game/gameaudio.h"
+#include "../game/boss.h"
+#include "../game/editor.h"
+#include "../game/game.h"
+#include "../game/level.h"
+#include "../game/gameobject.h"
+#include "../game/physics.h"
+#include "../game/random.h"
+#include "../game/replay.h"
+#include "../game/sprite.h"
 #include "../math/vector.h"
 #include "../physics/bond.h"
 #include "../physics/particle.h"
@@ -99,7 +99,7 @@ void setuplevel(void)
       }
     if (level.object[count].type==4)
       {
-      if (level.gametype!=16)
+      if (level.gametype!=GAMETYPE_2RACING)
         {
         createbox(level.object[count].position,level.object[count].size[0],level.object[count].size[1],level.object[count].mass,level.object[count].friction);
         vec[0]=level.object[count].position[0]-(level.object[count].size[0]-1.0f)*0.5f;
@@ -272,7 +272,7 @@ void setupgame(void)
   game.startdelay=0;
   game.exitdelay=0;
   game.over=0;
-  game.exit=0;
+  game.exit=GAMEEXIT_NONE;
   game.time=level.time;
   game.pause=0;
   game.framenum=0;
@@ -322,11 +322,11 @@ void setupgame(void)
     game.dialogdelay=1000;
     }
 
-  if (level.gametype==10)
+  if (level.gametype==GAMETYPE_2FOOTBALL)
     game.time=6000;
-  if (level.gametype==12)
+  if (level.gametype==GAMETYPE_2GREED)
     game.time=6000;
-  if (level.gametype==17)
+  if (level.gametype==GAMETYPE_4FOOTBALL)
     game.time=6000;
 
   for (count=0;count<16;count++)
@@ -349,13 +349,13 @@ void setupgame(void)
   if (object[count].idata[1]==2)
     game.numofbonus[8]++;
 
-  if (level.gametype==1)
+  if (level.gametype==GAMETYPE_COLLECTION)
     game.startdelay=100;
 
-  if ((level.gametype>=10 && level.gametype<=14) || level.gametype==17 || level.gametype==18)
+  if ((level.gametype>=GAMETYPE_2FOOTBALL && level.gametype<=GAMETYPE_2DRAGSTER) || level.gametype==GAMETYPE_4FOOTBALL || level.gametype==GAMETYPE_4SUMO)
     game.startdelay=100;
 
-  if (level.gametype<10 && !editor.active)
+  if (level.gametype<GAMETYPE_2FOOTBALL && !editor.active)
     {
     view.position[0]=object[0].position[0];
     view.position[1]=object[0].position[1];
@@ -371,43 +371,43 @@ void setupgame(void)
       view.position[1]=126.0f;
       }
     }
-  if (level.gametype==10)
+  if (level.gametype==GAMETYPE_2FOOTBALL)
     {
     view.position[0]=127.5f;
     view.position[1]=127.5f;
     view.position[2]=10.0f;
     }
-  if (level.gametype==11)
+  if (level.gametype==GAMETYPE_2SUMO)
     {
     view.position[0]=127.0f;
     view.position[1]=124.5f;
     view.position[2]=10.0f;
     }
-  if (level.gametype==12)
+  if (level.gametype==GAMETYPE_2GREED)
     {
     view.position[0]=126.5f;
     view.position[1]=130.0f;
     view.position[2]=10.0f;
     }
-  if (level.gametype==13)
+  if (level.gametype==GAMETYPE_2PITFALL)
     {
     view.position[0]=127.0f;
     view.position[1]=124.5f;
     view.position[2]=10.0f;
     }
-  if (level.gametype==14)
+  if (level.gametype==GAMETYPE_2DRAGSTER)
     {
     view.position[0]=127.5f;
     view.position[1]=127.5f;
     view.position[2]=10.0f;
     }
-  if (level.gametype==17)
+  if (level.gametype==GAMETYPE_4FOOTBALL)
     {
     view.position[0]=127.5f;
     view.position[1]=127.5f;
     view.position[2]=10.0f;
     }
-  if (level.gametype==18)
+  if (level.gametype==GAMETYPE_4SUMO)
     {
     view.position[0]=127.0f;
     view.position[1]=127.5f;

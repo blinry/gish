@@ -21,29 +21,21 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "../config.h"
 
-#ifdef MAC
-  #include <OpenGL/gl.h> 
-#else
-  #include <GL/gl.h> 
-#endif
+#include "../video/opengl.h"
 
-#ifdef WINDOWS
-  #include <SDL.h>
-#else
-  #include <SDL/SDL.h>
-#endif
+#include "../sdl/sdl.h"
 
 #include <stdio.h>
 #include <string.h>
 
-#include "high.h"
-#include "audio.h"
-#include "english.h"
-#include "game.h"
-#include "mainmenu.h"
-#include "music.h"
-#include "player.h"
-#include "replay.h"
+#include "../game/high.h"
+#include "../game/gameaudio.h"
+#include "../game/english.h"
+#include "../game/game.h"
+#include "../game/mainmenu.h"
+#include "../game/music.h"
+#include "../game/player.h"
+#include "../game/replay.h"
 #include "../audio/audio.h"
 #include "../input/joystick.h"
 #include "../input/keyboard.h"
@@ -65,7 +57,7 @@ void highscoremenu(int levelnum)
 
   count2=-1;
 
-  if (game.exit==4)
+  if (game.exit==GAMEEXIT_WON)
     {
     count2=10;
 
@@ -95,11 +87,11 @@ void highscoremenu(int levelnum)
     createmenuitem(TXT_BACK,0,0,16,1.0f,1.0f,1.0f,1.0f);
     setmenuitem(MO_HOTKEY,SCAN_ESC);
 
-    if (game.exit==4)
+    if (game.exit==GAMEEXIT_WON)
     if (!replaysaved)
       createmenuitem(TXT_SAVEREPLAY,96,356,16,1.0f,1.0f,1.0f,1.0f);
 
-    if (game.exit!=4)
+    if (game.exit!=GAMEEXIT_WON)
       {
       count=320;
       createmenuitem(TXT_LEVEL" 1",64,count,16,1.0f,1.0f,1.0f,1.0f);
@@ -211,7 +203,7 @@ void highscoremenu(int levelnum)
       else
         drawtext("/i:0/i./i",96+320,112+count*16,16,bright,bright,bright,1.0f,(highscore[levelnum][count].time/3000),((highscore[levelnum][count].time/50)%60),((highscore[levelnum][count].time/5)%10));
       }
-    if (game.exit==4)
+    if (game.exit==GAMEEXIT_WON)
       {
       drawtext(player[playernum].name,96+64,292,16,1.0f,1.0f,1.0f,1.0f);
       if (((game.time/50)%60)>=10)
@@ -219,7 +211,7 @@ void highscoremenu(int levelnum)
       else
         drawtext("/i:0/i./i",96+320,292,16,1.0f,1.0f,1.0f,1.0f,(game.time/3000),((game.time/50)%60),((game.time/5)%10));
       }
-    if (game.exit==4)
+    if (game.exit==GAMEEXIT_WON)
     if (replaysaved)
       createmenuitem(TXT_REPLAYSAVED,96,356,16,1.0f,1.0f,1.0f,1.0f);
 
@@ -229,7 +221,7 @@ void highscoremenu(int levelnum)
 
     SDL_GL_SwapBuffers();
 
-    if (game.exit==4)
+    if (game.exit==GAMEEXIT_WON)
     if (menuitem[1].active)
       {
       savereplay(levelnum);

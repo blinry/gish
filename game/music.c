@@ -28,10 +28,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <stdlib.h>
 #include <string.h>
 
-#include "music.h"
-#include "config.h"
-#include "game.h"
-#include "options.h"
+#include "../game/music.h"
+#include "../game/config.h"
+#include "../game/game.h"
+#include "../game/options.h"
 #include "../audio/audio.h"
 #include "../sdl/file.h"
 

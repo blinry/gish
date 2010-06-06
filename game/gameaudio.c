@@ -23,10 +23,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include <string.h>
 
-#include "audio.h"
-#include "game.h"
-#include "object.h"
-#include "options.h"
+#include "../game/gameaudio.h"
+#include "../game/game.h"
+#include "../game/gameobject.h"
+#include "../game/options.h"
 #include "../audio/audio.h"
 #include "../math/vector.h"
 #include "../physics/particle.h"
@@ -58,7 +58,7 @@ void soundsimulation(float position[3],float orientation[3][3])
 
   if (game.currentsongnum!=-1)
     {
-    if (game.exit!=0)
+    if (game.exit!=GAMEEXIT_NONE)
       scale=0.3f-(float)(100-game.exitdelay)*0.003f;
     else
       scale=0.3f;

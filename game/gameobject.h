@@ -1,5 +1,5 @@
-#ifndef GISH_GAME_OBJECT_H
-#define GISH_GAME_OBJECT_H
+#ifndef GISH_GAME_GAMEOBJECT_H
+#define GISH_GAME_GAMEOBJECT_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -130,4 +130,4 @@ extern _objecttype objecttype[128];
 extern int numofropes;
 extern _rope rope[1024];
 
-#endif /* GISH_GAME_OBJECT_H */
+#endif /* GISH_GAME_GAMEOBJECT_H */

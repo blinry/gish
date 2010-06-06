@@ -21,13 +21,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "../config.h"
 
-#ifdef WINDOWS
-  #include <SDL.h>
-#else
-  #include <SDL/SDL.h>
-#endif
+#include "../sdl/sdl.h"
 
-#include "video.h"
+#include "../sdl/video.h"
 
 int numofsdlvideomodes;
 _sdlvideomode sdlvideomode[4096];

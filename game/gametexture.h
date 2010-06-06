@@ -1,5 +1,5 @@
-#ifndef GISH_GAME_AUDIO_H
-#define GISH_GAME_AUDIO_H
+#ifndef GISH_GAME_GAMETEXTURE_H
+#define GISH_GAME_GAMETEXTURE_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -21,21 +21,20 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-void soundsimulation(float position[3],float orientation[3][3]);
-void playsound(int buffernum,float position[3],float velocity[3],float volume,int looping,float pitch,int objectnum,int objectsoundnum);
-void deletesound(int soundnum);
+void edittextures(void);
+void copytexture(int texturenum,int oldtexturenum);
+void loadtilesettemp(void);
+void loadleveltiles(char *filename);
 
 typedef struct
   {
-  int buffernum;
-  int objectnum;
-  int looping;
-  int pitchshift;
-  unsigned int alname;
-  int delay;
-  } _sound;
+  int pagenum;
+  int texturenum;
+  int tileset;
+  int tilepagenum;
+  char filename[32];
+  } _textureedit;
 
-extern int numofsounds;
-extern _sound sound[64];
+extern _textureedit textureedit;
 
-#endif /* GISH_GAME_AUDIO_H */
+#endif /* GISH_GAME_GAMETEXTURE_H */

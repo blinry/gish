@@ -23,11 +23,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include <math.h>
 
-#include "prerender.h"
-#include "boss.h"
-#include "game.h"
-#include "object.h"
-#include "render.h"
+#include "../game/prerender.h"
+#include "../game/boss.h"
+#include "../game/game.h"
+#include "../game/gameobject.h"
+#include "../game/render.h"
 #include "../math/vector.h"
 #include "../physics/bond.h"
 #include "../physics/particle.h"

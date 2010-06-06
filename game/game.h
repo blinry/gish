@@ -26,6 +26,15 @@ void renderlevel(void);
 void simulation(void);
 void getinputs(void);
 
+typedef enum {
+	GAMEEXIT_NONE = 0,
+	GAMEEXIT_INGAMEMENU = 1,
+	GAMEEXIT_EXITGAME = 2,
+	GAMEEXIT_DIED = 3,
+	GAMEEXIT_WON = 4,
+	GAMEXIT_WARPZONE = 5
+} gameexit;
+
 typedef struct
   {
   float position[3];
@@ -38,7 +47,6 @@ typedef struct
 typedef struct
   {
   int pause;
-  int type;
   int framenum;
   int levelnum;
   int bosslevel;
@@ -60,7 +68,7 @@ typedef struct
   int over;
   int numoflives;
   char text[256];
-  int exit;
+  gameexit exit;
   int oldschool;
   int oldschoolsound;
   int turbomode;

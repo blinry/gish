@@ -1,3 +1,5 @@
+#ifndef GISH_SDL_SDL_H
+#define GISH_SDL_SDL_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -19,35 +21,10 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-#include "../config.h"
+#ifdef WINDOWS
+#include <SDL.h>
+#else
+#include <SDL/SDL.h>
+#endif
 
-#include <stdio.h>
-
-#include "../sdl/endian.h"
-#include "../sdl/file.h"
-
-int bigendian;
-
-void checkbigendian(void)
-  {
-  unsigned int x;
-  char *c;
-
-  x=0x12345678;
-  c=(char *)&x;
-  if (*c==0x12)
-    bigendian=1;
-  else
-    bigendian=0;
-
-  if (bigendian)
-    {
-    fread2=freadswap;
-    fwrite2=fwriteswap;
-    }
-  else
-    {
-    fread2=fread;
-    fwrite2=fwrite;
-    }
-  }
+#endif /* GISH_SDL_VIDEO_H */

@@ -20,12 +20,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
 #include "../config.h"
-
-#ifdef MAC
-  #include <OpenGL/gl.h>
-#else
-  #include <GL/gl.h>
-#endif
+#include "../video/opengl.h"
 
 #ifdef WINDOWS
   #include <SDL.h>
@@ -33,9 +28,16 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include <string.h>
 
-#include "glext.h"
-
 _glext glext;
+
+#ifdef WINDOWS
+PFNGLACTIVETEXTUREARBPROC glActiveTextureARB=NULL;
+PFNGLCLIENTACTIVETEXTUREARBPROC glClientActiveTextureARB=NULL;
+PFNGLMULTITEXCOORD2FARBPROC glMultiTexCoord2fARB=NULL;
+PFNGLMULTITEXCOORD2FVARBPROC glMultiTexCoord2fvARB=NULL;
+PFNGLMULTITEXCOORD3FARBPROC glMultiTexCoord3fARB=NULL;
+PFNGLMULTITEXCOORD4FARBPROC glMultiTexCoord4fARB=NULL;
+#endif
 
 void loadglextentions(void)
   {
@@ -44,7 +46,7 @@ void loadglextentions(void)
 
   glversion=(char *) glGetString(GL_VERSION);
   ext=(char *) glGetString(GL_EXTENSIONS);
-#ifdef WINDOWS
+  #ifdef WINDOWS
   if (strstr(ext,"GL_ARB_multitexture")!=NULL || SDL_GL_GetProcAddress("glActiveTextureARB")!=NULL)
     {
     glActiveTextureARB=(void *) SDL_GL_GetProcAddress("glActiveTextureARB");

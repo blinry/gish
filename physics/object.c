@@ -23,10 +23,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include <math.h>
 
-#include "object.h"
-#include "particle.h"
+#include "../physics/object.h"
+#include "../physics/particle.h"
 #include "../game/level.h"
-#include "../game/object.h"
+#include "../game/gameobject.h"
 #include "../game/physics.h"
 #include "../math/vector.h"
 

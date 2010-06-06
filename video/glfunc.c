@@ -21,16 +21,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "../config.h"
 
-#ifdef MAC
-  #include <OpenGL/gl.h>
-#else
-  #include <GL/gl.h>
-#endif
+#include "../video/opengl.h"
 
 #include <stdio.h>
 
-#include "glfunc.h"
-#include "text.h"
+#include "../video/glfunc.h"
+#include "../video/text.h"
 #include "../sdl/event.h"
 
 int screenshotbuffer[1280*960];

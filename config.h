@@ -23,8 +23,4 @@
   #define INLINE inline
 #endif
 
-#define pi 3.14159265359
-
-#define GL_GLEXT_PROTOTYPES
-
 #endif /* GISH_CONFIG_H */

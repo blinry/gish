@@ -1,5 +1,5 @@
-#ifndef GISH_GAME_GLEXT_H
-#define GISH_GAME_GLEXT_H
+#ifndef GISH_VIDEO_OPENGL_H
+#define GISH_VIDEO_OPENGL_H
 /*
 Copyright (C) 2005, 2010 - Cryptic Sea
 
@@ -20,44 +20,48 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
-
-#include "../config.h"
-
 #ifdef MAC
-  #include <OpenGL/gl.h>
-  #include <OpenGL/glext.h>
-#else
-  #include <GL/gl.h>
-#endif
-
-#ifdef LINUX
-  #include <GL/glext.h>
+#include <OpenGL/gl.h>
+#include <OpenGL/glext.h>
 #endif
 
 #ifdef WINDOWS
-  #include "video/glext.h"
+
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+
+// Yes... the pi is a lie.
+#undef pi
+
+#include <GL/gl.h>
+#include "../video/glext.h"
+#endif
+
+#ifdef LINUX
+#include <GL/gl.h>
+#include <GL/glext.h>
 #endif
 
 void loadglextentions(void);
 
 #ifdef WINDOWS
-PFNGLACTIVETEXTUREARBPROC glActiveTextureARB=NULL;
-PFNGLCLIENTACTIVETEXTUREARBPROC glClientActiveTextureARB=NULL;
-PFNGLMULTITEXCOORD2FARBPROC glMultiTexCoord2fARB=NULL;
-PFNGLMULTITEXCOORD2FVARBPROC glMultiTexCoord2fvARB=NULL;
-PFNGLMULTITEXCOORD3FARBPROC glMultiTexCoord3fARB=NULL;
-PFNGLMULTITEXCOORD4FARBPROC glMultiTexCoord4fARB=NULL;
+extern PFNGLACTIVETEXTUREARBPROC glActiveTextureARB;
+extern PFNGLCLIENTACTIVETEXTUREARBPROC glClientActiveTextureARB;
+extern PFNGLMULTITEXCOORD2FARBPROC glMultiTexCoord2fARB;
+extern PFNGLMULTITEXCOORD2FVARBPROC glMultiTexCoord2fvARB;
+extern PFNGLMULTITEXCOORD3FARBPROC glMultiTexCoord3fARB;
+extern PFNGLMULTITEXCOORD4FARBPROC glMultiTexCoord4fARB;
 #endif
 
 typedef struct
-  {
-  int compiled_vertex_array;
-  int multitexture;
-  int texture_env_dot3;
-  int stencil_two_side;
-  int fragment_program;
-  } _glext;
+{
+	int compiled_vertex_array;
+	int multitexture;
+	int texture_env_dot3;
+	int stencil_two_side;
+	int fragment_program;
+} _glext;
 
 extern _glext glext;
 
-#endif /* GISH_GAME_GLEXT_H */
+#endif /* GISH_VIDEO_OPENGL_H */

@@ -21,28 +21,20 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "../config.h"
 
-#ifdef MAC
-  #include <OpenGL/gl.h>
-#else
-  #include <GL/gl.h>
-#endif
+#include "../video/opengl.h"
 
-#ifdef WINDOWS
-  #include <SDL.h>
-#else
-  #include <SDL/SDL.h>
-#endif
+#include "../sdl/sdl.h"
 
-#include "mappack.h"
-#include "audio.h"
-#include "custom.h"
-#include "english.h"
-#include "game.h"
-#include "gamemenu.h"
-#include "level.h"
-#include "mainmenu.h"
-#include "object.h"
-#include "player.h"
+#include "../game/mappack.h"
+#include "../game/gameaudio.h"
+#include "../game/custom.h"
+#include "../game/english.h"
+#include "../game/game.h"
+#include "../game/gamemenu.h"
+#include "../game/level.h"
+#include "../game/mainmenu.h"
+#include "../game/gameobject.h"
+#include "../game/player.h"
 #include "../input/joystick.h"
 #include "../input/keyboard.h"
 #include "../input/mouse.h"
@@ -151,7 +143,7 @@ void mappackpostgamemenu(void)
     }
 
   if (menuitem[0].active)
-    game.exit=2;
+    game.exit=GAMEEXIT_EXITGAME;
 
   for (count=numofsounds-1;count>=0;count--)
     deletesound(count);
@@ -166,7 +158,7 @@ void mappackpregamemenu(void)
   int simcount;
   int startdelay;
 
-  game.exit=0;
+  game.exit=GAMEEXIT_NONE;
 
   startdelay=0;
   simtimer=SDL_GetTicks();
@@ -227,7 +219,7 @@ void mappackpregamemenu(void)
 
       mappack.active=0;
 
-      if (game.exit==2 || game.exit==3)
+      if (game.exit==GAMEEXIT_EXITGAME || game.exit==GAMEEXIT_DIED)
         {
         if (playermappack[playernum].numoflives<99)
           playermappack[playernum].numoflives--;
@@ -244,7 +236,7 @@ void mappackpregamemenu(void)
           gameovermenu();
           }
         }
-      else if (game.exit==4)
+      else if (game.exit==GAMEEXIT_WON)
         {
         game.score[0]+=(object[0].hitpoints/50)*10;
         mappackpostgamemenu();
@@ -257,12 +249,12 @@ void mappackpregamemenu(void)
           {
           mappackendingmenu();
           playermappack[playernum].levelnum=0;
-          game.exit=2;
+          game.exit=GAMEEXIT_EXITGAME;
           }
         else
           playermappack[playernum].levelnum++;
 
-        if (game.exit==2)
+        if (game.exit==GAMEEXIT_EXITGAME)
           menuitem[0].active=1;
         }
 
@@ -280,7 +272,7 @@ void mappackpregamemenu(void)
       simtimer=SDL_GetTicks()-count;
       }
 
-    if (game.exit==2)
+    if (game.exit==GAMEEXIT_EXITGAME)
       menuitem[0].active=1;
     }
 

@@ -21,17 +21,19 @@ set(GISH_SRCS
     audio/audio.c
     game/ai.c
     game/animation.c
-    game/audio.c
     game/block.c
     game/boss.c
     game/config.c
     game/credits.c
     game/custom.c
     game/damage.c
+    game/debug.c
     game/editor.c
     game/game.c
+    game/gameaudio.c
     game/gamemenu.c
-    game/glext.c
+    game/gameobject.c
+    game/gametexture.c
     game/high.c
     game/level.c
     game/lighting.c
@@ -39,7 +41,6 @@ set(GISH_SRCS
     game/mainmenu.c
     game/mappack.c
     game/music.c
-    game/object.c
     game/objedit.c
     game/objfunc.c
     game/options.c
@@ -54,7 +55,6 @@ set(GISH_SRCS
     game/setup.c
     game/socket.c
     game/sprite.c
-    game/texture.c
     game/vsmode.c
     input/joystick.c
     input/keyboard.c
@@ -71,6 +71,7 @@ set(GISH_SRCS
     sdl/file.c
     sdl/video.c
     video/glfunc.c
+    video/opengl.c
     video/text.c
     video/texture.c
     main.c
@@ -80,18 +81,20 @@ set(GISH_H
     audio/audio.h
     game/ai.h
     game/animation.h
-    game/audio.h
     game/block.h
     game/boss.h
     game/config.h
     game/credits.h
     game/custom.h
     game/damage.h
+    game/debug.h
     game/editor.h
     game/english.h
     game/game.h
+    game/gameaudio.h
     game/gamemenu.h
-    game/glext.h
+    game/gameobject.h
+    game/gametexture.h
     game/high.h
     game/level.h
     game/lighting.h
@@ -99,7 +102,6 @@ set(GISH_H
     game/mainmenu.h
     game/mappack.h
     game/music.h
-    game/object.h
     game/objedit.h
     game/objfunc.h
     game/options.h
@@ -114,12 +116,12 @@ set(GISH_H
     game/setup.h
     game/socket.h
     game/sprite.h
-    game/texture.h
     game/vsmode.h
     input/joystick.h
     input/keyboard.h
     input/mouse.h
     math/intersec.h
+    math/math.h
     math/vector.h
     menu/menu.h
     parser/parser.h
@@ -129,13 +131,14 @@ set(GISH_H
     sdl/endian.h
     sdl/event.h
     sdl/file.h
+    sdl/sdl.h
     sdl/video.h
     video/glext.h
     video/glfunc.h
+    video/opengl.h
     video/text.h
     video/texture.h
     config.h
-    main.h
 )
 
 add_executable(gish ${GISH_SRCS} ${GISH_H})

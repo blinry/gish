@@ -21,13 +21,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "../config.h"
 
-#ifdef WINDOWS
-  #include <SDL.h>
-#else
-  #include <SDL/SDL.h>
-#endif
+#include "../sdl/sdl.h"
 
-#include "event.h"
+#include "../sdl/event.h"
 #include "../game/game.h"
 #include "../video/texture.h"
 
@@ -64,7 +60,7 @@ void checksystemmessages(void)
       if (event.active.state&SDL_APPINPUTFOCUS)
         if (event.active.gain==0)
           {
-          if(game.exit==0)
+          if(game.exit==GAMEEXIT_NONE)
             game.pause=1;
           windowinfo.minimized=1;
           }

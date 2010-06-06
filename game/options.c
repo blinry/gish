@@ -21,15 +21,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "../config.h"
 
-#ifdef MAC
-  #include <OpenGL/gl.h>
-#else
-  #include <GL/gl.h>
-#endif
+#include "../video/opengl.h"
 
-#include "options.h"
-#include "english.h"
-#include "glext.h"
+#include "../game/options.h"
+#include "../game/english.h"
 #include "../input/keyboard.h"
 #include "../input/mouse.h"
 #include "../input/joystick.h"

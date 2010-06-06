@@ -21,11 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "../config.h"
 
-#ifdef MAC
-  #include <OpenGL/gl.h>
-#else
-  #include <GL/gl.h>
-#endif
+#include "../video/opengl.h"
 
 #if defined(LINUX) || defined(MAC)
   #include <unistd.h>
@@ -35,8 +31,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <stdlib.h>
 #include <string.h>
 
-#include "texture.h"
-#include "../main.h"
+#include "../video/texture.h"
+#include "../game/debug.h"
 #include "../sdl/endian.h"
 #include "../sdl/file.h"
 
