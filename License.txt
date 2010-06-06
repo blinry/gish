@@ -1,7 +1,6 @@
 The contents of
 
 - animation
-- level
 - sound
 - texture
 - tile01
