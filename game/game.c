@@ -251,7 +251,7 @@ void gameloop(void)
         count2=0;
         if (game.dialogdelay==0)
           count2=1;
-        for (count=4;count<8;count++)
+        for (count=4;count<KEYALIAS_LENGTH;count++)
         if (keyboard[control[0].key[count]] && !prevkeyboard[control[0].key[count]])
           count2=1;
         if (control[0].joysticknum!=-1)
@@ -277,9 +277,9 @@ void gameloop(void)
       else
         {
         count2=0;
-        if (keyboard[control[0].key[2]] && !prevkeyboard[control[0].key[2]])
+        if (keyboard[control[0].key[KEYALIAS_DOWN]] && !prevkeyboard[control[0].key[KEYALIAS_DOWN]])
           count2=1;
-        if (keyboard[control[0].key[3]] && !prevkeyboard[control[0].key[3]])
+        if (keyboard[control[0].key[KEYALIAS_UP]] && !prevkeyboard[control[0].key[KEYALIAS_UP]])
           count2=1;
         if (control[0].joysticknum!=-1)
           {
@@ -297,7 +297,7 @@ void gameloop(void)
           }
 
         count2=0;
-        for (count=4;count<8;count++)
+        for (count=4;count<KEYALIAS_LENGTH;count++)
         if (keyboard[control[0].key[count]] && !prevkeyboard[control[0].key[count]])
           count2=1;
         if (control[0].joysticknum!=-1)
@@ -765,23 +765,23 @@ void getinputs(void)
     object[count].axis[1]=0.0f;
     object[count].button=0;
     }
-  for (count=0;count<4;count++)
+  for (count=0;count<CONTROLS_LENGTH;count++)
     {
-    if (keyboard[control[count].key[0]])
+    if (keyboard[control[count].key[KEYALIAS_LEFT]])
       object[count].axis[0]-=1.0f;
-    if (keyboard[control[count].key[1]])
+    if (keyboard[control[count].key[KEYALIAS_RIGHT]])
       object[count].axis[0]+=1.0f;
-    if (keyboard[control[count].key[2]])
+    if (keyboard[control[count].key[KEYALIAS_DOWN]])
       object[count].axis[1]-=1.0f;
-    if (keyboard[control[count].key[3]])
+    if (keyboard[control[count].key[KEYALIAS_UP]])
       object[count].axis[1]+=1.0f;
-    if (keyboard[control[count].key[4]])
+    if (keyboard[control[count].key[KEYALIAS_STICK]])
       object[count].button|=1;
-    if (keyboard[control[count].key[5]])
+    if (keyboard[control[count].key[KEYALIAS_JUMP]])
       object[count].button|=2;
-    if (keyboard[control[count].key[6]])
+    if (keyboard[control[count].key[KEYALIAS_SLIDE]])
       object[count].button|=4;
-    if (keyboard[control[count].key[7]])
+    if (keyboard[control[count].key[KEYALIAS_HEAVY]])
       object[count].button|=8;
 
     if (control[count].joysticknum!=-1)

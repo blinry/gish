@@ -650,7 +650,7 @@ void introscreen(void)
       game.turbomode=1;
       }
 
-    for (count=0;count<8;count++)
+    for (count=0;count<KEYALIAS_LENGTH;count++)
       {
       if (keyboard[control[0].key[count]] && !prevkeyboard[control[0].key[count]])
         {

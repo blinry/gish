@@ -21,10 +21,27 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include "../input/keyboard.h"
+
+#define CONTROLS_LENGTH 4
+
 void optionsmenu(void);
 void videooptionsmenu(void);
 void drawsliderbars(void);
 void optionsmenu2(void);
+
+typedef enum {
+	KEYALIAS_LEFT = 0,
+	KEYALIAS_RIGHT = 1,
+	KEYALIAS_DOWN = 2,
+	KEYALIAS_UP = 3,
+	KEYALIAS_STICK = 4,
+	KEYALIAS_JUMP = 5,
+	KEYALIAS_SLIDE = 6,
+	KEYALIAS_HEAVY = 7,
+	KEYALIAS_LAST = KEYALIAS_HEAVY,
+	KEYALIAS_LENGTH = KEYALIAS_LAST+1
+} keyalias;
 
 typedef struct
   {
@@ -34,15 +51,17 @@ typedef struct
   float musicvolume;
   } _option;
 
+
+// TODO: MAKE ALL REFERENCES USE KEYALIAS.
 typedef struct
   {
-  int key[16];
+  keyboardkey key[KEYALIAS_LENGTH];
   int joysticknum;
   int axis[4];
   int button[16];
   } _control;
 
 extern _option option;
-extern _control control[8];
+extern _control control[CONTROLS_LENGTH];
 
 #endif /* GISH_GAME_OPTIONS_H */
