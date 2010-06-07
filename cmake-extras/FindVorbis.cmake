@@ -44,18 +44,19 @@ find_path(Vorbis_INCLUDE_DIR vorbis/vorbisenc.h
   /opt/local/include
   /usr/local/include
   /usr/include
+  /mingw/include
 )
 
 set(Vorbis_NAMES vorbis)
 find_library(Vorbis_LIBRARY
   NAMES ${Vorbis_NAMES}
-  PATHS /usr/lib /usr/local/lib /opt/local/lib
+  PATHS /usr/lib /usr/local/lib /opt/local/lib /mingw/lib
 )
 
 set(VorbisFile_NAMES vorbisfile)
 find_library(VorbisFile_LIBRARY
   NAMES ${VorbisFile_NAMES}
-  PATHS /usr/lib /usr/local/lib /opt/local/lib
+  PATHS /usr/lib /usr/local/lib /opt/local/lib /mingw/lib
 )
 set(Vorbis_LIBRARIES ${Vorbis_LIBRARY} ${VorbisFile_LIBRARY})
 
