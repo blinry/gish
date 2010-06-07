@@ -52,7 +52,6 @@ typedef struct
   } _option;
 
 
-// TODO: MAKE ALL REFERENCES USE KEYALIAS.
 typedef struct
   {
   keyboardkey key[KEYALIAS_LENGTH];
