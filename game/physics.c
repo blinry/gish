@@ -502,7 +502,7 @@ void objectcollisionobject(int objectnum)
           if (object[objectcount].timetolive>16)
             {
             object[objectcount].timetolive=16;
-            if (level.gametype==12)
+            if (level.gametype==GAMETYPE_2GREED)
               {
               if (objectnum==0)
                 game.score[0]++;
@@ -608,7 +608,7 @@ void objectcollisionobject(int objectnum)
       }
     }
 
-  if (level.gametype>=10)
+  if (level.gametype>=GAMETYPE_2FOOTBALL)
   for (objectcount=0;objectcount<numofobjects;objectcount++)
   if (object[objectcount].type==1)
     {
@@ -979,7 +979,7 @@ void bondsimulation2(void)
         vec[2]=0.0f;
         playsound(0,vec,NULL,0.75f,0,0.5f/block[blocknum].breakpoint,-1,0);
 
-        if (level.gametype==0)
+        if (level.gametype==GAMETYPE_CAMPAIGN)
           {
           game.score[0]+=10;
           createsprite(10,vec);

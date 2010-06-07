@@ -51,7 +51,7 @@ void gamelogic(void)
   vec[1]=127.5f;
   vec[2]=10.0f;
 
-  if (level.gametype<10)
+  if (level.gametype<GAMETYPE_2FOOTBALL)
     {
     if (view.position[0]<object[0].position[0]-2.0f)
       view.position[0]=object[0].position[0]-2.0f;
@@ -81,31 +81,31 @@ void gamelogic(void)
     }
   else
     {
-    if (level.gametype==10)
+    if (level.gametype==GAMETYPE_2FOOTBALL)
       {
       view.position[0]=127.5f;
       view.position[1]=127.5f;
       view.position[2]=10.0f;
       }
-    if (level.gametype==11)
+    if (level.gametype==GAMETYPE_2SUMO)
       {
       view.position[0]=127.0f;
       view.position[1]=124.5f;
       view.position[2]=10.0f;
       }
-    if (level.gametype==12)
+    if (level.gametype==GAMETYPE_2GREED)
       {
       view.position[0]=126.5f;
       view.position[1]=130.0f;
       view.position[2]=10.0f;
       }
-    if (level.gametype==13)
+    if (level.gametype==GAMETYPE_2PITFALL)
       {
       view.position[0]=127.0f;
       view.position[1]=124.5f;
       view.position[2]=10.0f;
       }
-    if (level.gametype==14)
+    if (level.gametype==GAMETYPE_2DRAGSTER)
       {
       if (view.position[0]<object[0].position[0]-4.0f)
         view.position[0]=object[0].position[0]-4.0f;
@@ -114,25 +114,25 @@ void gamelogic(void)
       view.position[1]=127.5f;
       view.position[2]=10.0f;
       }
-    if (level.gametype==15)
+    if (level.gametype==GAMETYPE_2COLLECTION)
       {
       view.position[0]=122.0f;
       view.position[1]=133.5f;
       view.position[2]=10.0f;
       }
-    if (level.gametype==16)
+    if (level.gametype==GAMETYPE_2RACING)
       {
       view.position[0]=127.5f;
       view.position[1]=127.5f;
       view.position[2]=10.0f;
       }
-    if (level.gametype==17)
+    if (level.gametype==GAMETYPE_4FOOTBALL)
       {
       view.position[0]=127.5f;
       view.position[1]=127.5f;
       view.position[2]=10.0f;
       }
-    if (level.gametype==18)
+    if (level.gametype==GAMETYPE_4SUMO)
       {
       view.position[0]=127.5f;
       view.position[1]=127.5f;
@@ -143,7 +143,7 @@ void gamelogic(void)
   if (game.over!=0)
     return;
 
-  if (level.gametype==0)
+  if (level.gametype==GAMETYPE_CAMPAIGN)
     {
     if (game.combo>1)
       {
@@ -236,7 +236,7 @@ void gamelogic(void)
 
     game.time++;
     }
-  if (level.gametype==1)
+  if (level.gametype==GAMETYPE_COLLECTION)
   if (game.startdelay==0)
     {
     if (object[0].hitpoints<=0)
@@ -253,7 +253,7 @@ void gamelogic(void)
       game.over=2;
     }
 
-  if (level.gametype==12)
+  if (level.gametype==GAMETYPE_2GREED)
     {
     if (game.startdelay==0)
       {
@@ -277,7 +277,7 @@ void gamelogic(void)
       }
     }
 
-  if (level.gametype==10)
+  if (level.gametype==GAMETYPE_2FOOTBALL)
     {
     if (game.scoredelay==0)
       {
@@ -335,7 +335,7 @@ void gamelogic(void)
         }
       }
     }
-  if (level.gametype==11)
+  if (level.gametype==GAMETYPE_2SUMO)
     {
     if (game.scoredelay==0)
       {
@@ -373,7 +373,7 @@ void gamelogic(void)
         }
       }
     }
-  if (level.gametype==13)
+  if (level.gametype==GAMETYPE_2PITFALL)
     {
     if (game.scoredelay==0)
       {
@@ -412,7 +412,7 @@ void gamelogic(void)
         }
       }
     }
-  if (level.gametype==14)
+  if (level.gametype==GAMETYPE_2DRAGSTER)
     {
     if (game.scoredelay==0)
       {
@@ -492,7 +492,7 @@ void gamelogic(void)
         }
       }
     }
-  if (level.gametype==15)
+  if (level.gametype==GAMETYPE_2COLLECTION)
     {
     if (game.score[0]==game.numofbonus[5]/2)
       game.over=1;
@@ -500,7 +500,7 @@ void gamelogic(void)
       game.over=1;
     }
 
-  if (level.gametype==17)
+  if (level.gametype==GAMETYPE_4FOOTBALL)
     {
     if (game.scoredelay==0)
       {
@@ -558,7 +558,7 @@ void gamelogic(void)
         }
       }
     }
-  if (level.gametype==18)
+  if (level.gametype==GAMETYPE_4SUMO)
     {
     if (game.scoredelay==0)
       {
@@ -603,7 +603,7 @@ void gamelogic(void)
 
   if (game.startdelay>0)
     {
-    //if (level.gametype==11 && game.startdelay==100)
+    //if (level.gametype==GAMETYPE_2SUMO && game.startdelay==100)
     //  playsound(8,vec,NULL,0.8f,0,1.0f);
       
     game.startdelay--;
@@ -620,7 +620,7 @@ void gamedisplay(void)
 
   if (game.over==0)
     {
-    if ((level.gametype>=10 && level.gametype<=14) || level.gametype==17 || level.gametype==18)
+    if ((level.gametype>=GAMETYPE_2FOOTBALL && level.gametype<=GAMETYPE_2DRAGSTER) || level.gametype==GAMETYPE_4FOOTBALL || level.gametype==GAMETYPE_4SUMO)
       {
       if (game.scoredelay>0)
         drawtext(game.text,(320|TEXT_CENTER),(240|TEXT_CENTER),24,1.0f,1.0f,0.0f,1.0f);
@@ -634,7 +634,7 @@ void gamedisplay(void)
         }
       }
     }
-  if (level.gametype==0 || level.gametype==1)
+  if (level.gametype==GAMETYPE_CAMPAIGN || level.gametype==GAMETYPE_COLLECTION)
     {
     drawbackground(720,16,0,48,48,640,480);
 
@@ -652,7 +652,7 @@ void gamedisplay(void)
     glColor3f(1.0f,1.0f,1.0f);
 
     //drawtext("/i",(40|TEXT_CENTER),24,16,1.0f,1.0f,1.0f,1.0f,object[0].hitpoints/10);
-    if (level.gametype==0)
+    if (level.gametype==GAMETYPE_CAMPAIGN)
       {
       if (!game.bosslevel)
         {
@@ -1140,7 +1140,7 @@ void gamedisplay(void)
           }
         }
       }
-    if (level.gametype==1)
+    if (level.gametype==GAMETYPE_COLLECTION)
       {
       drawbackground(722,528,0,96,48,640,480);
 
@@ -1151,27 +1151,27 @@ void gamedisplay(void)
         drawtext(TXT_GETREADY,(320|TEXT_CENTER),(240|TEXT_END),24,1.0f,1.0f,0.0f,1.0f);
       }
 
-    if (level.gametype==0)
+    if (level.gametype==GAMETYPE_CAMPAIGN)
       {
       if (((game.time/50)%60)>=10)
         drawtext("/i:/i",0,0,0,1.0f,1.0f,1.0f,1.0f,(game.time/3000),((game.time/50)%60));
       else
         drawtext("/i:0/i",0,0,0,1.0f,1.0f,1.0f,1.0f,(game.time/3000),((game.time/50)%60));
       }
-    if (level.gametype==1)
+    if (level.gametype==GAMETYPE_COLLECTION)
       {
       if (((game.time/50)%60)>=10)
         drawtext("/i:/i./i",0,0,0,1.0f,1.0f,1.0f,1.0f,(game.time/3000),((game.time/50)%60),((game.time/5)%10));
       else
         drawtext("/i:0/i./i",0,0,0,1.0f,1.0f,1.0f,1.0f,(game.time/3000),((game.time/50)%60),((game.time/5)%10));
       }
-    if (level.gametype==0)
+    if (level.gametype==GAMETYPE_CAMPAIGN)
       drawtextbitmap((320|TEXT_CENTER),16,24,24);
-    if (level.gametype==1)
+    if (level.gametype==GAMETYPE_COLLECTION)
       drawtextbitmap((320|TEXT_CENTER),16,32,32);
     }
 
-  if ((level.gametype>=10 && level.gametype<=14) || level.gametype==17 || level.gametype==18)
+  if ((level.gametype>=GAMETYPE_2FOOTBALL && level.gametype<=GAMETYPE_2DRAGSTER) || level.gametype==GAMETYPE_4FOOTBALL || level.gametype==GAMETYPE_4SUMO)
     {
     glColor4f(1.0f,1.0f,1.0f,1.0f);
     drawbackground(720,16,0,48,48,640,480);
@@ -1185,7 +1185,7 @@ void gamedisplay(void)
     drawtext("/i",0,0,0,1.0f,1.0f,1.0f,1.0f,game.score[1]);
     drawtextbitmap((576|TEXT_END),8,32,32);
     }
-  if (level.gametype==15)
+  if (level.gametype==GAMETYPE_2COLLECTION)
     {
     glColor4f(1.0f,1.0f,1.0f,1.0f);
     drawbackground(720,16,0,48,48,640,480);
@@ -1199,7 +1199,7 @@ void gamedisplay(void)
     drawtext("/i///i",0,0,0,1.0f,1.0f,1.0f,1.0f,game.score[1],game.numofbonus[5]/2);
     drawtextbitmap((576|TEXT_END),8,24,24);
     }
-  if (level.gametype==10 || level.gametype==17)
+  if (level.gametype==GAMETYPE_2FOOTBALL || level.gametype==GAMETYPE_4FOOTBALL)
     {
     if (((game.time/50)%60)>=10)
       drawtext("/i:/i",0,0,0,1.0f,1.0f,1.0f,1.0f,(game.time/3000),((game.time/50)%60));
@@ -1220,7 +1220,7 @@ void gamedisplay(void)
         drawtext(TXT_TIE,(320|TEXT_CENTER),(240|TEXT_CENTER),24,0.0f,1.0f,0.0f,1.0f);
       }
     }
-  if (level.gametype==11 || level.gametype==18)
+  if (level.gametype==GAMETYPE_2SUMO || level.gametype==GAMETYPE_4SUMO)
     {
     if (game.over!=0)
       {
@@ -1232,7 +1232,7 @@ void gamedisplay(void)
         //drawtext("Gray Wins!",(320|TEXT_CENTER),(240|TEXT_CENTER),24,0.0f,1.0f,0.0f,1.0f);
       }
     }
-  if (level.gametype==12)
+  if (level.gametype==GAMETYPE_2GREED)
     {
     if (((game.time/50)%60)>=10)
       drawtext("/i:/i",0,0,0,1.0f,1.0f,1.0f,1.0f,(game.time/3000),((game.time/50)%60));
@@ -1248,7 +1248,7 @@ void gamedisplay(void)
         drawbackground(821,640-512,480-256,512,256,640,480);
       }
     }
-  if (level.gametype==13)
+  if (level.gametype==GAMETYPE_2PITFALL)
     {
     red=1.0f;
     green=(float)(object[0].hitpoints)/500.0f;
@@ -1292,7 +1292,7 @@ void gamedisplay(void)
         drawbackground(821,640-512,480-256,512,256,640,480);
       }
     }
-  if (level.gametype==14)
+  if (level.gametype==GAMETYPE_2DRAGSTER)
     {
     if (game.over!=0)
       {
@@ -1302,7 +1302,7 @@ void gamedisplay(void)
         drawbackground(821,640-512,480-256,512,256,640,480);
       }
     }
-  if (level.gametype==15)
+  if (level.gametype==GAMETYPE_2COLLECTION)
     {
     if (game.over!=0)
       {

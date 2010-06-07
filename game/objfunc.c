@@ -214,7 +214,7 @@ void objectcycle(void)
           game.bonus[8]++;
           }
         }
-      if (level.gametype==11)
+      if (level.gametype==GAMETYPE_2SUMO)
       if (fabs(object[1].position[0]-object[count].position[0])<object[count].size[0]*0.5f)
       if (fabs(object[1].position[1]-object[count].position[1])<object[count].size[1]*0.5f)
         {
@@ -309,7 +309,7 @@ void objectcycle(void)
     if (object[count].type==1)
       {
       if (count!=0)
-      if (level.gametype==0 && game.levelnum==34)
+      if (level.gametype==GAMETYPE_CAMPAIGN && game.levelnum==34)
         objectai(count);
 
       for (count2=0;count2<16;count2++)
@@ -363,7 +363,7 @@ void objectcycle(void)
                 }
               if (level.grid[y][x]==253 || (level.grid[y][x]==253-8 && level.gridmod[y][x]==2))
                 {
-                if (level.gametype!=15)
+                if (level.gametype!=GAMETYPE_2COLLECTION)
                   {
                   game.score[0]+=50;
                   createsprite(50,vec);

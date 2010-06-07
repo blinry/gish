@@ -47,7 +47,6 @@ typedef struct
 typedef struct
   {
   int pause;
-  int type;
   int framenum;
   int levelnum;
   int bosslevel;
