@@ -1,9 +1,0 @@
-Level's license (not including textures!): Public Domain
-
-Creator: Megagun
-
-Textures:
-
-- FreeGish base textureset: Megagun (Public Domain)
-- TKaK3 textureset: TRaK (GPL/cc-by-sa 3.0)
-    http://www.trak.mercenariesguild.net/node/3
