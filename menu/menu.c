@@ -132,9 +132,9 @@ void checkmenuitems(void)
         count2=-1;
       }
 
-    if (keyboard[control[0].key[3]] && !prevkeyboard[control[0].key[3]])
+    if (keyboard[control[0].key[KEYALIAS_UP]] && !prevkeyboard[control[0].key[KEYALIAS_UP]])
       count2=-1;
-    if (keyboard[control[0].key[2]] && !prevkeyboard[control[0].key[2]])
+    if (keyboard[control[0].key[KEYALIAS_DOWN]] && !prevkeyboard[control[0].key[KEYALIAS_DOWN]])
       count2=1;
 
     joymenunum+=count2;

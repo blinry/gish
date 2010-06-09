@@ -35,7 +35,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "../video/texture.h"
 
 _option option;
-_control control[8];
+_control control[CONTROLS_LENGTH];
 
 void optionsmenu(void)
   {
@@ -231,7 +231,7 @@ void optionsmenu(void)
     count=0;
     drawtext(TXT_MOVE_LEFT,0,144+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+1].active)
-      drawtext(keyboardlabel[control[count2].key[0]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_LEFT]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+17].active)
@@ -247,7 +247,7 @@ void optionsmenu(void)
 
     drawtext(TXT_MOVE_RIGHT,0,144+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+1].active)
-      drawtext(keyboardlabel[control[count2].key[1]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_RIGHT]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+17].active)
@@ -263,7 +263,7 @@ void optionsmenu(void)
 
     drawtext(TXT_MOVE_DOWN,0,144+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+1].active)
-      drawtext(keyboardlabel[control[count2].key[2]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_DOWN]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+17].active)
@@ -279,7 +279,7 @@ void optionsmenu(void)
 
     drawtext(TXT_MOVE_UP,0,144+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+1].active)
-      drawtext(keyboardlabel[control[count2].key[3]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_UP]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+17].active)
@@ -295,7 +295,7 @@ void optionsmenu(void)
 
     drawtext(TXT_STICK,0,144+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+1].active)
-      drawtext(keyboardlabel[control[count2].key[4]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_STICK]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+17].active)
@@ -311,7 +311,7 @@ void optionsmenu(void)
 
     drawtext(TXT_JUMP,0,144+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+1].active)
-      drawtext(keyboardlabel[control[count2].key[5]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_JUMP]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+17].active)
@@ -327,7 +327,7 @@ void optionsmenu(void)
 
     drawtext(TXT_SLIDE,0,144+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+1].active)
-      drawtext(keyboardlabel[control[count2].key[6]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_SLIDE]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+17].active)
@@ -343,7 +343,7 @@ void optionsmenu(void)
 
     drawtext(TXT_HEAVY,0,144+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+1].active)
-      drawtext(keyboardlabel[control[count2].key[7]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_HEAVY]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+17].active)
@@ -375,7 +375,7 @@ void optionsmenu(void)
     count=0;
     drawtext(TXT_MOVE_LEFT,0,336+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+9].active)
-      drawtext(keyboardlabel[control[count2].key[0]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_LEFT]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+26].active)
@@ -391,7 +391,7 @@ void optionsmenu(void)
 
     drawtext(TXT_MOVE_RIGHT,0,336+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+9].active)
-      drawtext(keyboardlabel[control[count2].key[1]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_RIGHT]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+26].active)
@@ -407,7 +407,7 @@ void optionsmenu(void)
 
     drawtext(TXT_MOVE_DOWN,0,336+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+9].active)
-      drawtext(keyboardlabel[control[count2].key[2]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_DOWN]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+26].active)
@@ -423,7 +423,7 @@ void optionsmenu(void)
 
     drawtext(TXT_MOVE_UP,0,336+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+9].active)
-      drawtext(keyboardlabel[control[count2].key[3]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_UP]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+26].active)
@@ -439,7 +439,7 @@ void optionsmenu(void)
 
     drawtext(TXT_STICK,0,336+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+9].active)
-      drawtext(keyboardlabel[control[count2].key[4]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_STICK]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+26].active)
@@ -455,7 +455,7 @@ void optionsmenu(void)
 
     drawtext(TXT_JUMP,0,336+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+9].active)
-      drawtext(keyboardlabel[control[count2].key[5]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_JUMP]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+26].active)
@@ -471,7 +471,7 @@ void optionsmenu(void)
 
     drawtext(TXT_SLIDE,0,336+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+9].active)
-      drawtext(keyboardlabel[control[count2].key[6]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_SLIDE]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+26].active)
@@ -487,7 +487,7 @@ void optionsmenu(void)
 
     drawtext(TXT_HEAVY,0,336+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+9].active)
-      drawtext(keyboardlabel[control[count2].key[7]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_HEAVY]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+26].active)
@@ -514,7 +514,7 @@ void optionsmenu(void)
 
     SDL_GL_SwapBuffers();
 
-    for (count=0;count<8;count++)
+    for (count=0;count<KEYALIAS_LENGTH;count++)
     if (menuitem[count+1].active)
       {
       for (count2=1;count2<323;count2++)
@@ -550,7 +550,7 @@ void optionsmenu(void)
         {
         control[1].key[count]=count2;
 
-        for (count3=0;count3<8;count3++)
+        for (count3=0;count3<KEYALIAS_LENGTH;count3++)
         if (count3!=count)
         if (control[0].key[count3]==count2)
           control[0].key[count3]=0;
@@ -1067,7 +1067,7 @@ void optionsmenu2(void)
     count=0;
     drawtext(TXT_MOVE_LEFT,0,144+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+1].active)
-      drawtext(keyboardlabel[control[count2].key[0]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_LEFT]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+17].active)
@@ -1083,7 +1083,7 @@ void optionsmenu2(void)
 
     drawtext(TXT_MOVE_RIGHT,0,144+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+1].active)
-      drawtext(keyboardlabel[control[count2].key[1]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_RIGHT]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+17].active)
@@ -1099,7 +1099,7 @@ void optionsmenu2(void)
 
     drawtext(TXT_MOVE_DOWN,0,144+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+1].active)
-      drawtext(keyboardlabel[control[count2].key[2]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_DOWN]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+17].active)
@@ -1115,7 +1115,7 @@ void optionsmenu2(void)
 
     drawtext(TXT_MOVE_UP,0,144+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+1].active)
-      drawtext(keyboardlabel[control[count2].key[3]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_UP]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+17].active)
@@ -1131,7 +1131,7 @@ void optionsmenu2(void)
 
     drawtext(TXT_STICK,0,144+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+1].active)
-      drawtext(keyboardlabel[control[count2].key[4]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_STICK]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+17].active)
@@ -1147,7 +1147,7 @@ void optionsmenu2(void)
 
     drawtext(TXT_JUMP,0,144+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+1].active)
-      drawtext(keyboardlabel[control[count2].key[5]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_JUMP]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+17].active)
@@ -1163,7 +1163,7 @@ void optionsmenu2(void)
 
     drawtext(TXT_SLIDE,0,144+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+1].active)
-      drawtext(keyboardlabel[control[count2].key[6]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_SLIDE]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+17].active)
@@ -1179,7 +1179,7 @@ void optionsmenu2(void)
 
     drawtext(TXT_HEAVY,0,144+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+1].active)
-      drawtext(keyboardlabel[control[count2].key[7]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_HEAVY]],320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,144+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+17].active)
@@ -1212,7 +1212,7 @@ void optionsmenu2(void)
     count=0;
     drawtext(TXT_MOVE_LEFT,0,336+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+9].active)
-      drawtext(keyboardlabel[control[count2].key[0]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_LEFT]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+26].active)
@@ -1228,7 +1228,7 @@ void optionsmenu2(void)
 
     drawtext(TXT_MOVE_RIGHT,0,336+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+9].active)
-      drawtext(keyboardlabel[control[count2].key[1]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_RIGHT]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+26].active)
@@ -1244,7 +1244,7 @@ void optionsmenu2(void)
 
     drawtext(TXT_MOVE_DOWN,0,336+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+9].active)
-      drawtext(keyboardlabel[control[count2].key[2]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_DOWN]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+26].active)
@@ -1260,7 +1260,7 @@ void optionsmenu2(void)
 
     drawtext(TXT_MOVE_UP,0,336+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+9].active)
-      drawtext(keyboardlabel[control[count2].key[3]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_UP]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+26].active)
@@ -1276,7 +1276,7 @@ void optionsmenu2(void)
 
     drawtext(TXT_STICK,0,336+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+9].active)
-      drawtext(keyboardlabel[control[count2].key[4]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_STICK]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+26].active)
@@ -1292,7 +1292,7 @@ void optionsmenu2(void)
 
     drawtext(TXT_JUMP,0,336+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+9].active)
-      drawtext(keyboardlabel[control[count2].key[5]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_JUMP]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+26].active)
@@ -1308,7 +1308,7 @@ void optionsmenu2(void)
 
     drawtext(TXT_SLIDE,0,336+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+9].active)
-      drawtext(keyboardlabel[control[count2].key[6]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_SLIDE]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+26].active)
@@ -1324,7 +1324,7 @@ void optionsmenu2(void)
 
     drawtext(TXT_HEAVY,0,336+count*16,16,0.75f,0.75f,0.75f,1.0f);
     if (!menuitem[count+9].active)
-      drawtext(keyboardlabel[control[count2].key[7]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
+      drawtext(keyboardlabel[control[count2].key[KEYALIAS_HEAVY]],320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     else
       drawtext("?",320,336+count*16,16,1.0f,1.0f,1.0f,1.0f);
     if (!menuitem[count+26].active)
@@ -1349,7 +1349,7 @@ void optionsmenu2(void)
 
     SDL_GL_SwapBuffers();
 
-    for (count=0;count<8;count++)
+    for (count=0;count<KEYALIAS_LENGTH;count++)
     if (menuitem[count+1].active)
       {
       for (count2=1;count2<323;count2++)
@@ -1358,7 +1358,7 @@ void optionsmenu2(void)
         {
         control[2].key[count]=count2;
 
-        for (count3=0;count3<8;count3++)
+        for (count3=0;count3<KEYALIAS_LENGTH;count3++)
         if (count3!=count)
         if (control[2].key[count3]==count2)
           control[2].key[count3]=0;

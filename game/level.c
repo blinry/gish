@@ -270,7 +270,7 @@ void loadlevel(char *filename)
   {
   int count,count2;
   int changeddir;
-  int version;
+  int version = -1;
   unsigned int x/*,y*/;
   FILE *fp;
 
@@ -522,25 +522,26 @@ void loadlevel(char *filename)
       }
 
     fclose(fp);
+
+
+	if (changeddir==0)
+		chdir("..");
+
+	if (version<7)
+		loadleveltextures();
+	else
+	{
+		lasttextureloaded[0]=0;
+		if (level.background[0]!=0)
+			loadbackground(660,level.background);
+	}
+
+	loadtexturetga(251,"oneup.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+	loadtexturetga(252,"tarball.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+	loadtexturetga(253,"amber1.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+	loadtexturetga(254,"amber2.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+	loadtexturetga(255,"amber3.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     }
-
-  if (changeddir==0)
-    chdir("..");
-
-  if (version<7)
-    loadleveltextures();
-  else
-    {
-    lasttextureloaded[0]=0;
-    if (level.background[0]!=0)
-      loadbackground(660,level.background);
-    }
-
-  loadtexturetga(251,"oneup.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
-  loadtexturetga(252,"tarball.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
-  loadtexturetga(253,"amber1.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
-  loadtexturetga(254,"amber2.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
-  loadtexturetga(255,"amber3.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
   }
 
 void createlevel(void)
