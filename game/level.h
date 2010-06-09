@@ -41,7 +41,7 @@ typedef enum {
         GAMETYPE_2FOOTBALL = 10,
         GAMETYPE_2SUMO = 11,
         GAMETYPE_2GREED = 12,
-        GAMETYPE_2PITFALL = 13,
+        GAMETYPE_2DUEL = 13,
         GAMETYPE_2DRAGSTER = 14,
         GAMETYPE_2COLLECTION = 15,
         GAMETYPE_2RACING = 16,

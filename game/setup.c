@@ -389,7 +389,7 @@ void setupgame(void)
     view.position[1]=130.0f;
     view.position[2]=10.0f;
     }
-  if (level.gametype==GAMETYPE_2PITFALL)
+  if (level.gametype==GAMETYPE_2DUEL)
     {
     view.position[0]=127.0f;
     view.position[1]=124.5f;
