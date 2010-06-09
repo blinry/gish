@@ -58,14 +58,14 @@ void loadconfig(void)
   option.soundvolume=1.0f;
   option.musicvolume=1.0f;
 
-  control[0].key[0]=SCAN_LEFT;
-  control[0].key[1]=SCAN_RIGHT;
-  control[0].key[2]=SCAN_DOWN;
-  control[0].key[3]=SCAN_UP;
-  control[0].key[4]=SCAN_A;
-  control[0].key[5]=SCAN_SPACE;
-  control[0].key[6]=SCAN_S;
-  control[0].key[7]=SCAN_D;
+  control[0].key[KEYALIAS_LEFT]=SCAN_LEFT;
+  control[0].key[KEYALIAS_RIGHT]=SCAN_RIGHT;
+  control[0].key[KEYALIAS_DOWN]=SCAN_DOWN;
+  control[0].key[KEYALIAS_UP]=SCAN_UP;
+  control[0].key[KEYALIAS_STICK]=SCAN_A;
+  control[0].key[KEYALIAS_JUMP]=SCAN_SPACE;
+  control[0].key[KEYALIAS_SLIDE]=SCAN_S;
+  control[0].key[KEYALIAS_HEAVY]=SCAN_D;
   control[0].joysticknum=0;
   control[0].axis[0]=0;
   control[0].axis[1]=1;
@@ -121,12 +121,12 @@ void loadconfig(void)
   if (count!=-1)
     option.musicvolume=(float)count/100.0f;
 
-  for (count=0;count<4;count++)
+  for (count=0;count<CONTROLS_LENGTH;count++)
     {
-    for (count2=0;count2<16;count2++)
+    for (count2=0;count2<KEYALIAS_LENGTH;count2++)
       {
       sprintf(tempstr,"player%dkey%d=",count+1,count2+1);
-      optionreadint(&control[count].key[count2],tempstr);
+      optionreadint((int*)&control[count].key[count2],tempstr);
       }
 
     sprintf(tempstr,"player%djoysticknum=",count+1);
@@ -185,12 +185,12 @@ void saveconfig(void)
   count=option.musicvolume*100.0f;
   optionwriteint(fp, &count,"musicvolume=");
 
-  for (count=0;count<4;count++)
+  for (count=0;count<CONTROLS_LENGTH;count++)
     {
-    for (count2=0;count2<16;count2++)
+    for (count2=0;count2<KEYALIAS_LENGTH;count2++)
       {
       sprintf(tempstr,"player%dkey%d=",count+1,count2+1);
-      optionwriteint(fp, &control[count].key[count2],tempstr);
+      optionwriteint(fp, (int*)&control[count].key[count2],tempstr);
       }
 
     sprintf(tempstr,"player%djoysticknum=",count+1);
