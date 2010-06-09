@@ -1,0 +1,10 @@
+To use these texturesets (NOT RECOMMENDED - SEE BELOW) copy any of these folders to ..\tile07
+You can then load them with the texture loader and drag them into your level's textureset.
+
+These texturesets are mainly here to satisfy licensing issues and to make it easier to show players what files are licensed under what license. Maybe -in the future- textures are linked rather than embedded in level files. :)
+
+##########
+
+USING THESE TEXTURESETS MANUALLY IS NOT RECOMMENDED!!
+These texturesets lack .blk (block definition) files. Thus, you'll have to manually recreate their properties if you import them the 'classic' way.
+Please import the texturesets from the newest FreeGish map, instead!! :)
