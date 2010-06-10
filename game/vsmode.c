@@ -46,9 +46,9 @@ void versusmodemenu(int versusnum)
   int count;
   int unlocked;
   char filename[32];
-  BOOLEAN is4Player;
+  bool is4Player;
   char* gametypeName;
-  BOOLEAN menuItemClicked = FALSE;
+  bool menuItemClicked = FALSE;
 
   unlocked=0;
   for (count=0;count<6;count++)
