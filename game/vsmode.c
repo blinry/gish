@@ -24,7 +24,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "../video/opengl.h"
 
 #include <string.h>
-
 #include "../game/vsmode.h"
 #include "../game/gameaudio.h"
 #include "../game/english.h"
@@ -41,11 +40,18 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "../sdl/event.h"
 #include "../video/text.h"
 
+#define bool int
+#define TRUE 1
+#define FALSE 0
+
 void versusmodemenu(int versusnum)
   {
   int count;
   int unlocked;
   char filename[32];
+  bool is4Player;
+  char* gametypeName;
+  bool menuItemClicked = FALSE;
 
   unlocked=0;
   for (count=0;count<6;count++)
@@ -122,91 +128,40 @@ void versusmodemenu(int versusnum)
 
     SDL_GL_SwapBuffers();
 
-    if (versusnum==0)
-      strcpy(filename,"bathhouse");
-    if (versusnum==1)
-      strcpy(filename,"field");
-    if (versusnum==2)
-      strcpy(filename,"amber");
-    if (versusnum==3)
-      strcpy(filename,"fight");
-    if (versusnum==4)
-      strcpy(filename,"dragster");
-    if (versusnum==5)
-      strcpy(filename,"colvs");
-    if (versusnum==6)
-      strcpy(filename,"racing");
+	// Is item clicked?
+	if (!(menuitem[1].active || menuitem[2].active || menuitem[3].active || menuitem[4].active || menuitem[5].active || menuitem[6].active))
+		continue;
 
-    if (menuitem[1].active)
-      {
-      game.songnum=-1;
-      checkmusic();
+	is4Player = menuitem[5].active || menuitem[6].active;
+	gametypeName = NULL;
+	switch (versusnum)
+	{
+	case 0: gametypeName = is4Player ? "4sumo" : "2sumo"; break;
+	case 1: gametypeName = is4Player ? "4football" : "2football"; break;
+	case 2: gametypeName = "2greed"; break;
+	case 3: gametypeName = "2duel"; break;
+	case 4: gametypeName = "2dragster"; break;
+	case 5: gametypeName = "2collection"; break;
+	case 6: gametypeName = "2racing"; break;
+	}
+	strcpy(filename, gametypeName);
 
-      game.levelnum=0;
-      strcat(filename,".lvl");
-      loadlevel(filename);
-      gameloop();
-      }
-    if (menuitem[2].active)
-      {
-      game.songnum=-1;
-      checkmusic();
+	// 2 player.
+	if (menuitem[1].active)      strcat(filename, "1");
+	else if (menuitem[2].active) strcat(filename, "2");
+	else if (menuitem[3].active) strcat(filename, "3");
+	else if (menuitem[4].active) strcat(filename, "4");
+	// 4 player.
+	else if (menuitem[5].active) strcat(filename, "1");
+	else if (menuitem[6].active) strcat(filename, "2");
+	strcat(filename, ".lvl");
 
-      game.levelnum=0;
-      strcat(filename,"2.lvl");
-      loadlevel(filename);
-      gameloop();
-      }
-    if (menuitem[3].active)
-      {
-      game.songnum=-1;
-      checkmusic();
+	game.songnum=-1;
+	checkmusic();
 
-      game.levelnum=0;
-      strcat(filename,"3.lvl");
-      loadlevel(filename);
-      gameloop();
-      }
-    if (menuitem[4].active)
-      {
-      game.songnum=-1;
-      checkmusic();
-
-      game.levelnum=0;
-      strcat(filename,"4.lvl");
-      loadlevel(filename);
-      gameloop();
-      }
-    if (menuitem[5].active)
-      {
-      game.songnum=-1;
-      checkmusic();
-
-      if (versusnum==0)
-        strcpy(filename,"4bath");
-      if (versusnum==1)
-        strcpy(filename,"4field");
-
-      game.levelnum=0;
-      strcat(filename,".lvl");
-      loadlevel(filename);
-      gameloop();
-      }
-    if (menuitem[6].active)
-      {
-      game.songnum=-1;
-      checkmusic();
-
-      if (versusnum==0)
-        strcpy(filename,"4bath");
-      if (versusnum==1)
-        strcpy(filename,"4field");
-
-      game.levelnum=0;
-      strcat(filename,"2.lvl");
-      loadlevel(filename);
-      gameloop();
-      }
+	game.levelnum=0;
+	loadlevel(filename);
+	gameloop();
     }
 
   resetmenuitems();

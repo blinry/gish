@@ -99,7 +99,7 @@ void gamelogic(void)
       view.position[1]=130.0f;
       view.position[2]=10.0f;
       }
-    if (level.gametype==GAMETYPE_2PITFALL)
+    if (level.gametype==GAMETYPE_2DUEL)
       {
       view.position[0]=127.0f;
       view.position[1]=124.5f;
@@ -373,7 +373,7 @@ void gamelogic(void)
         }
       }
     }
-  if (level.gametype==GAMETYPE_2PITFALL)
+  if (level.gametype==GAMETYPE_2DUEL)
     {
     if (game.scoredelay==0)
       {
@@ -1248,7 +1248,7 @@ void gamedisplay(void)
         drawbackground(821,640-512,480-256,512,256,640,480);
       }
     }
-  if (level.gametype==GAMETYPE_2PITFALL)
+  if (level.gametype==GAMETYPE_2DUEL)
     {
     red=1.0f;
     green=(float)(object[0].hitpoints)/500.0f;
