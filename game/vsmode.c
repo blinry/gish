@@ -24,7 +24,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "../video/opengl.h"
 
 #include <string.h>
-
 #include "../game/vsmode.h"
 #include "../game/gameaudio.h"
 #include "../game/english.h"
@@ -41,14 +40,18 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "../sdl/event.h"
 #include "../video/text.h"
 
+#define bool int
+#define TRUE 1
+#define FALSE 0
+
 void versusmodemenu(int versusnum)
   {
   int count;
   int unlocked;
   char filename[32];
-  BOOLEAN is4Player;
+  bool is4Player;
   char* gametypeName;
-  BOOLEAN menuItemClicked = FALSE;
+  bool menuItemClicked = FALSE;
 
   unlocked=0;
   for (count=0;count<6;count++)
