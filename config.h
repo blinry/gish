@@ -23,4 +23,6 @@
   #define INLINE inline
 #endif
 
+typedef enum {FALSE = 0, TRUE = 1} BOOLEAN;
+
 #endif /* GISH_CONFIG_H */
