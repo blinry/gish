@@ -85,6 +85,7 @@ void edittextures(void)
 
     for (count=0;count<32;count++)
       {
+
       glBindTexture(GL_TEXTURE_2D,texture[count+textureedit.pagenum*32].glname);
 
       glBegin(GL_QUADS);
@@ -114,6 +115,22 @@ void edittextures(void)
       glVertex3f(vec[0],vec[1],-1.0f);
 
       glEnd();
+
+	  if (texture[count+textureedit.pagenum*32].filename[0])
+	  {
+		  char cleanFilename[256];
+		  int filenameLength;
+		  filenameLength = strlen(texture[count+textureedit.pagenum*32].filename);
+		  memcpy(cleanFilename, texture[count+textureedit.pagenum*32].filename, filenameLength);
+		  if (filenameLength>4)
+			  cleanFilename[filenameLength-4] = '\0';
+		  else
+			  cleanFilename[filenameLength] = '\0';
+		  
+		  
+		  drawtext(cleanFilename,
+			  ((count&7)*64+32)|TEXT_CENTER, 14+60+(count>>3)*64,8,1.0f,1.0f,1.0f,1.0f);
+	  }
       }
     for (count=0;count<16;count++)
       {
@@ -254,6 +271,55 @@ void edittextures(void)
 
       textureedit.texturenum=-1;
       }
+	if (mouse.rmb && !prevmouse.rmb)
+	{
+		int clickedTexture = -1;
+		for (count=0;count<32;count++)
+			if (mouse.x>=(count&7)*64+4 && mouse.x<(count&7)*64+60)
+				if (mouse.y>=16+4+(count>>3)*64 && mouse.y<16+60+(count>>3)*64)
+					clickedTexture=count+textureedit.pagenum*32;
+		if (clickedTexture>=0)
+		{
+			char filename[256];
+			strcpy(filename, texture[clickedTexture].filename);
+			while(!menuitem[1].active && !menuitem[2].active && !windowinfo.shutdown)
+			{
+				glClearColor(0.0f,0.0f,0.0f,0.0f);
+				glClear(GL_COLOR_BUFFER_BIT);
+
+				numofmenuitems=0;
+				createmenuitem("File                    ",(320|TEXT_CENTER),240,16,1.0f,1.0f,1.0f,1.0f);
+				setmenuitem(MO_STRINGINPUT,filename);
+
+				createmenuitem("Ok",(320|TEXT_CENTER),272,16,1.0f,1.0f,1.0f,1.0f);
+				setmenuitem(MO_HOTKEY,SCAN_ENTER);
+
+				createmenuitem("Cancel",(320|TEXT_CENTER),288,16,1.0f,1.0f,1.0f,1.0f);
+				setmenuitem(MO_HOTKEY,SCAN_ESC);
+
+				checksystemmessages();
+				checkkeyboard();
+				checkmouse();
+				checkmenuitems();
+
+				setuptextdisplay();
+
+				drawmenuitems();
+
+				drawmousecursor(768+font.cursornum,mouse.x,mouse.y,16,1.0f,1.0f,1.0f,1.0f);
+
+				SDL_GL_SwapBuffers();
+			}
+			if (menuitem[1].active)
+			{
+				if (strlen(filename) == 0)
+					texture[clickedTexture].filename[0] = 0;
+				else
+					loadtexturetga(clickedTexture,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+			}
+			continue;
+		}
+	}
     if (menuitem[1].active)
       {
       loadleveltiles(textureedit.filename);
@@ -286,6 +352,7 @@ void copytexture(int texturenum,int oldtexturenum)
   texture[texturenum].wrapt=texture[oldtexturenum].wrapt;
   texture[texturenum].magfilter=texture[oldtexturenum].magfilter;
   texture[texturenum].minfilter=texture[oldtexturenum].minfilter;
+  texture[texturenum].filename[0] = '\0';
 
   for (mipmaplevel=0;mipmaplevel<texture[texturenum].mipmaplevels;mipmaplevel++)
     {

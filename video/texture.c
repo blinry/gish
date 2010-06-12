@@ -40,7 +40,7 @@ char lasttextureloaded[32];
 _texture texture[2048];
 _tgaheader tgaheader;
 
-void loadtexturetga(int texturenum,char *filename,int mipmap,int wraps,int wrapt,int magfilter,int minfilter)
+int loadtexturetga(int texturenum,char *filename,int mipmap,int wraps,int wrapt,int magfilter,int minfilter)
   {
   int count,count2;
   int red,green,blue,alpha;
@@ -48,30 +48,30 @@ void loadtexturetga(int texturenum,char *filename,int mipmap,int wraps,int wrapt
   unsigned char origin;
   FILE *fp;
 
+  if (debug_texture_load) printf("Loading \"%s\" into #%i...\n", filename, texturenum);
+
   changeddir=chdir("texture");
 
   if ((fp=fopen(filename,"rb"))==NULL)
     {
-    if (debugit)
-      printf("Texture Load Failed: %d\n",texturenum);
+    if (debug_texture_load) printf("Texture #%d \"%s\" failed: fopen error\n",texturenum, filename);
 
     if (changeddir==0)
       chdir("..");
-    return;
+    return -1;
     }
 
   fseek(fp,2,SEEK_CUR);
   fread2(&tgaheader.imagetypecode,1,1,fp);
   if (tgaheader.imagetypecode!=2 && tgaheader.imagetypecode!=3)
     {
-    if (debugit)
-      printf("Texture Bad Format: %d\n",texturenum);
+    if (debug_texture_load) printf("Texture #%d \"%s\" failed: bad format\n",texturenum, filename);
 
     fclose(fp);
 
     if (changeddir==0)
       chdir("..");
-    return;
+    return -2;
     }
 
   fseek(fp,9,SEEK_CUR);
@@ -127,9 +127,9 @@ void loadtexturetga(int texturenum,char *filename,int mipmap,int wraps,int wrapt
     chdir("..");
 
   if ((tgaheader.imagewidth&(tgaheader.imagewidth-1))!=0)
-    return;
+    return -3;
   if ((tgaheader.imageheight&(tgaheader.imageheight-1))!=0)
-    return;
+    return -4;
 
   texture[texturenum].sizex=tgaheader.imagewidth;
   texture[texturenum].sizey=tgaheader.imageheight;
@@ -146,26 +146,15 @@ void loadtexturetga(int texturenum,char *filename,int mipmap,int wraps,int wrapt
   free(texture[texturenum].rgba[0]);
   texture[texturenum].rgba[0]=(unsigned int *) malloc(texture[texturenum].sizex*texture[texturenum].sizey*4);
 
-  for (count=0;count<texture[texturenum].sizey;count++)
-  for (count2=0;count2<texture[texturenum].sizex;count2++)
-    {
-    texture[texturenum].rgba[0][count*texture[texturenum].sizex+count2]=tgaheader.imagedata[count*tgaheader.imagewidth+count2];
+  memcpy(texture[texturenum].rgba[0],tgaheader.imagedata, texture[texturenum].sizex*texture[texturenum].sizey*4);
 
-    if (!bigendian)
-      {
-      if ((texture[texturenum].rgba[0][count*texture[texturenum].sizex+count2]>>24)!=255)
-        texture[texturenum].alphamap=1;
-      }
-    else
-      {
-      if ((texture[texturenum].rgba[0][count*texture[texturenum].sizex+count2]&255)!=255)
-        texture[texturenum].alphamap=1;
-      }
-    }
+  memset(texture[texturenum].filename, 0, 256);
+  strcpy(texture[texturenum].filename,filename);
 
   if (mipmap)
     generatemipmap(texturenum);
   setuptexture(texturenum);
+  return 0;
   }
 
 void loadtexturetganodir(int texturenum,char *filename,int mipmap,int wraps,int wrapt,int magfilter,int minfilter)
@@ -177,8 +166,7 @@ void loadtexturetganodir(int texturenum,char *filename,int mipmap,int wraps,int 
 
   if ((fp=fopen(filename,"rb"))==NULL)
     {
-    if (debugit)
-      printf("Texture Load Failed: %d\n",texturenum);
+    if (debug_texture_load) printf("Texture #%d \"%s\" (nodir) failed: fopen error\n",texturenum, filename);
 
     return;
     }
@@ -187,8 +175,7 @@ void loadtexturetganodir(int texturenum,char *filename,int mipmap,int wraps,int 
   fread2(&tgaheader.imagetypecode,1,1,fp);
   if (tgaheader.imagetypecode!=2 && tgaheader.imagetypecode!=3)
     {
-    if (debugit)
-      printf("Texture Bad Format: %d\n",texturenum);
+    if (debug_texture_load) printf("Texture #%d \"%s\" (nodir) failed: bad format\n",texturenum, filename);
 
     fclose(fp);
 
@@ -280,6 +267,9 @@ void loadtexturetganodir(int texturenum,char *filename,int mipmap,int wraps,int 
       }
     }
 
+  memset(texture[texturenum].filename, 0, 256);
+  strcpy(texture[texturenum].filename,filename);
+
   if (mipmap)
     generatemipmap(texturenum);
   setuptexture(texturenum);
@@ -299,8 +289,7 @@ void loadtexturetgapartial(int texturenum,char *filename,int startx,int starty,i
   
     if ((fp=fopen(filename,"rb"))==NULL)
       {
-      if (debugit)
-        printf("Texture Load Failed: %d\n",texturenum);
+      if (debug_texture_load) printf("Texture Load Failed: %d\n",texturenum);
 
       if (changeddir==0)
         chdir("..");
@@ -311,8 +300,7 @@ void loadtexturetgapartial(int texturenum,char *filename,int startx,int starty,i
     fread2(&tgaheader.imagetypecode,1,1,fp);
     if (tgaheader.imagetypecode!=2 && tgaheader.imagetypecode!=3)
       {
-      if (debugit)
-        printf("Texture Bad Format: %d\n",texturenum);
+      if (debug_texture_load) printf("Texture Bad Format: %d\n",texturenum);
   
       fclose(fp);
   
@@ -403,7 +391,7 @@ void loadtexturetgapartial(int texturenum,char *filename,int startx,int starty,i
         texture[texturenum].alphamap=1;
       }
     }
-
+  
   setuptexture(texturenum);
   }
 
