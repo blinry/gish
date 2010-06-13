@@ -30,6 +30,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <png.h>
+#include <assert.h>
 
 #include "../video/texture.h"
 #include "../game/debug.h"
@@ -39,6 +41,123 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 char lasttextureloaded[32];
 _texture texture[2048];
 _tgaheader tgaheader;
+
+/*
+ * This should handle a variety common PNG formats 
+ * most importantly 8bit palletized with alpha channel
+ */
+void loadtexturepng(int texturenum, char *filename, int mipmap, int wraps, int wrapt, int magfilter, int minfilter)
+{
+	unsigned char header[8];
+	FILE *fp;
+	int changeddir;
+	
+	png_structp png_ptr = NULL;
+	png_infop info_ptr = NULL;
+	int number_passes;
+	_texture *tex;
+	
+	int y;
+	
+	changeddir = chdir("texture");
+	
+	fp = fopen(filename, "rb");
+	if( fp == NULL ) {
+		if(debugit) fprintf(stderr, "Texture Load Failed: %s (%d)\n", filename, texturenum);
+		goto cleanup;
+		return;
+	}
+	
+	fread(header, 1, 8, fp);
+	if( png_sig_cmp(header, 0, 8) ) {
+		if(debugit) fprintf(stderr, "PNG file not recognized: %s (%d)\n", filename, texturenum);
+		goto cleanup;
+	}
+	
+	png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
+	assert( png_ptr );
+	
+	info_ptr = png_create_info_struct(png_ptr);
+	assert( info_ptr );
+	
+	if( setjmp(png_jmpbuf(png_ptr)) ) {
+			if(debugit) fprintf(stderr, "Error during init_io for %s (%d)\n", filename, texturenum);
+			goto cleanup;
+	}
+	png_init_io(png_ptr, fp);
+	png_set_sig_bytes(png_ptr, 8);
+	png_read_info(png_ptr, info_ptr);
+	
+	/* expand paletted colors into true rgb */
+	if (info_ptr->color_type == PNG_COLOR_TYPE_PALETTE)
+		png_set_expand(png_ptr);
+
+	/* expand grayscale images to the full 8 bits */
+	if (info_ptr->color_type == PNG_COLOR_TYPE_GRAY && info_ptr->bit_depth < 8)
+		png_set_expand(png_ptr);
+
+	/* expand images with transparency to full alpha channels */
+	if (info_ptr->valid & PNG_INFO_tRNS)
+		png_set_expand(png_ptr);
+		
+	/* tell libpng to strip 16 bit depth files down to 8 bits */
+	if (info_ptr->bit_depth == 16)
+		png_set_strip_16(png_ptr);
+		
+	/* fill upto 4 byte RGBA - we always want an alpha channel*/
+	if (info_ptr->bit_depth == 8 && info_ptr->color_type == PNG_COLOR_TYPE_RGB)
+		png_set_filler(png_ptr, 0xff, PNG_FILLER_AFTER);
+	
+	// XXX: is this required? we're not handling interlaced PNGs ...
+	if (info_ptr->interlace_type)
+		number_passes = png_set_interlace_handling(png_ptr);
+	else
+		number_passes = 1;
+		
+	png_start_read_image(png_ptr);
+	png_read_update_info(png_ptr, info_ptr);
+	
+	tex = &texture[texturenum];	
+	tex->sizex=info_ptr->width;
+	tex->sizey=info_ptr->height;
+  tex->mipmaplevels=1;
+  tex->format=GL_RGBA;
+  tex->alphamap=1;
+  tex->normalmap=0;
+  tex->glossmap=0;
+  tex->wraps=wraps;
+  tex->wrapt=wrapt;
+  tex->magfilter=magfilter;
+  tex->minfilter=minfilter;
+
+	if( setjmp(png_jmpbuf(png_ptr)) ) {
+			if(debugit) fprintf(stderr, "Error during read_image for %s (%d)\n", filename, texturenum);
+			if(changeddir == 0) chdir("..");
+			goto cleanup;
+	}
+
+	if( tex->rgba[0] ) {
+		free(tex->rgba[0]);
+	}
+  tex->rgba[0] = (unsigned int *) malloc(tex->sizex * tex->sizey * 4);
+	//memset(tex->rgba[0], 0, tex->sizex * tex->sizey * 4);
+	for( y = 0; y < tex->sizey; y++ ) {
+		png_read_row(png_ptr, ((png_bytep)tex->rgba[0] + (tex->sizex * 4 * y)), NULL);
+	}
+	
+	if (mipmap) {
+		generatemipmap(texturenum);
+	}
+  setuptexture(texturenum);
+	
+cleanup:
+	png_read_destroy(png_ptr, info_ptr, (png_infop)0);
+	free(png_ptr);
+	free(info_ptr);
+	if(fp) fclose(fp);
+	if(changeddir == 0) chdir("..");
+	return;
+}
 
 void loadtexturetga(int texturenum,char *filename,int mipmap,int wraps,int wrapt,int magfilter,int minfilter)
   {
