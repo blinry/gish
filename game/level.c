@@ -44,6 +44,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "../sdl/endian.h"
 #include "../sdl/file.h"
 #include "../video/texture.h"
+#include "../game/debug.h"
 
 unsigned int cryptdata[1048576];
 
@@ -183,7 +184,7 @@ void savelevel(char *filename)
 
   if ((fp=fopen(filename,"wb"))!=NULL)
     {
-    version=10;
+    version=11;
 
     fwrite2(&version,4,1,fp);
     fwrite2(level.background,1,32,fp);
@@ -231,14 +232,35 @@ void savelevel(char *filename)
       {
       if (textureused[count])
         {
-        fwrite2(&texture[count].sizex,4,1,fp);
-        if (texture[count].sizex!=0)
-          {
-          fwrite2(&texture[count].sizey,4,1,fp);
-          fwrite2(&texture[count].magfilter,4,1,fp);
-          fwrite2(&texture[count].minfilter,4,1,fp);
-          fwrite2(texture[count].rgba[0],4,texture[count].sizex*texture[count].sizey,fp);
-          }
+			if (debug_level_saveload) printf("Saving %i as ", count);
+			if (texture[count].filename[0] != 0)
+			{
+				int filenameLength;
+				if (debug_level_saveload) printf("\"%s\"...\n", texture[count].filename);
+				filenameLength = -strlen(texture[count].filename);
+				//length = -1;
+				fwrite2(&filenameLength,4,1,fp);
+				filenameLength = abs(filenameLength);
+				fwrite2(texture[count].filename,1,filenameLength,fp);
+				fflush(fp);
+			}
+			else
+			{
+				if (debug_level_saveload) printf("blob: ");
+				fwrite2(&texture[count].sizex,4,1,fp);
+				if (texture[count].sizex == 0)
+				{
+					if (debug_level_saveload) printf("empty\n");
+				}
+				else
+				{
+					if (debug_level_saveload) printf("%ix%i\n", texture[count].sizex, texture[count].sizey);
+					fwrite2(&texture[count].sizey,4,1,fp);
+					fwrite2(&texture[count].magfilter,4,1,fp);
+					fwrite2(&texture[count].minfilter,4,1,fp);
+					fwrite2(texture[count].rgba[0],4,texture[count].sizex*texture[count].sizey,fp);
+				}
+			}
         }
       else
         {
@@ -520,9 +542,148 @@ void loadlevel(char *filename)
         fread2(&block[count].animationspeed,4,1,fp);
         }
       }
+	  if (version==11)
+	  {
+		  strcpy(editor.filename,filename);
+
+		  fread2(level.background,1,32,fp);
+		  fread2(&level.tileset,4,1,fp);
+		  fread2(&level.gametype,4,1,fp);
+		  fread2(&level.time,4,1,fp);
+		  fread2(level.area,4,64*4,fp);
+
+		  fread2(level.backgrid,1,256*256,fp);
+
+		  fread2(level.grid,1,256*256,fp);
+
+		  fread2(level.foregrid,1,256*256,fp);
+
+		  fread2(level.startposition,4,3,fp);
+		  fread2(level.ambient,4,12,fp);
+		  fread2(&level.numofobjects,4,1,fp);
+
+		  if (level.numofobjects<0 || level.numofobjects>=256)
+		  {
+			  fclose(fp);
+			  if (changeddir==0)
+				  chdir("..");
+			  return;
+		  }
+		  for (count=0;count<level.numofobjects;count++)
+		  {
+			  fread2(&level.object[count].type,4,1,fp);
+			  fread2(&level.object[count].texturenum,4,1,fp);
+			  fread2(&level.object[count].link,4,1,fp);
+			  fread2(level.object[count].position,4,3,fp);
+			  fread2(&level.object[count].angle,4,1,fp);
+			  fread2(level.object[count].size,4,2,fp);
+			  fread2(&level.object[count].mass,4,1,fp);
+			  fread2(&level.object[count].friction,4,1,fp);
+			  fread2(&level.object[count].lighttype,4,1,fp);
+			  fread2(level.object[count].lightcolor,4,3,fp);
+			  fread2(&level.object[count].lightintensity,4,1,fp);
+			  fread2(&level.object[count].ai,4,1,fp);
+		  }
+		  fread2(&level.numofropes,4,1,fp);
+		  if (level.numofropes<0 || level.numofropes>=1024)
+		  {
+			  fclose(fp);
+			  if (changeddir==0)
+				  chdir("..");
+			  return;
+		  }
+		  for (count=0;count<level.numofropes;count++)
+		  {
+			  fread2(&level.rope[count].type,4,1,fp);
+			  fread2(&level.rope[count].texturenum,4,1,fp);
+			  fread2(&level.rope[count].obj1,4,1,fp);
+			  fread2(&level.rope[count].obj1part,4,1,fp);
+			  fread2(&level.rope[count].obj2,4,1,fp);
+			  fread2(&level.rope[count].obj2part,4,1,fp);
+		  }
+		  for (count=1;count<251;count++)
+		  {
+			  if (debug_level_saveload) printf("Loading %i as ", count);
+			  fread2(&texture[count].sizex,4,1,fp);
+			  if (texture[count].sizex<0)
+			  {
+				  int filenameLength = abs(texture[count].sizex);
+				  char filename[256];
+				  memset(filename,0,256);
+				  fread2(filename, 1, filenameLength, fp);
+
+				  if (debug_level_saveload) printf("\"%s\"...\n", filename);
+				  if (changeddir==0)
+					chdir("..");
+				  loadtexturetga(count, filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+				  if (changeddir==0)
+					changeddir = chdir("level");
+			  }
+			  else
+			  {
+				  if (debug_level_saveload) printf("blob: ");
+				  memset(texture[count].filename, 0, sizeof(texture[count].filename));
+				  if (texture[count].sizex>=1024)
+				  {
+					  if (debug_level_saveload) printf("Invalid blob!\n");
+					  fclose(fp);
+					  if (changeddir==0)
+						  chdir("..");
+					  return;
+				  }
+				  if (texture[count].sizex==0)
+				  {
+					  if (debug_level_saveload) printf("empty\n");
+				  }
+				  else
+				  {
+					  fread2(&texture[count].sizey,4,1,fp);
+					  fread2(&texture[count].magfilter,4,1,fp);
+					  fread2(&texture[count].minfilter,4,1,fp);
+					  free(texture[count].rgba[0]);
+					  texture[count].rgba[0]=(unsigned int *) malloc(texture[count].sizex*texture[count].sizey*4);
+					  fread(texture[count].rgba[0],4,texture[count].sizex*texture[count].sizey,fp);
+
+					  texture[count].mipmaplevels=1;
+					  texture[count].format=GL_RGBA;
+					  texture[count].alphamap=0;
+					  texture[count].normalmap=0;
+					  texture[count].glossmap=0;
+					  texture[count].wraps=GL_CLAMP_TO_EDGE;
+					  texture[count].wrapt=GL_CLAMP_TO_EDGE;
+					  texture[count].magfilter=GL_LINEAR;
+					  texture[count].minfilter=GL_LINEAR;
+
+					  if (debug_level_saveload) printf("%ix%i...\n", texture[count].sizex, texture[count].sizey);
+
+					  if ((texture[count].sizex&(texture[count].sizex-1))==0)
+						  if ((texture[count].sizey&(texture[count].sizey-1))==0)
+							  setuptexture(count);
+				  }
+			  }
+
+			  fread2(&block[count].numoflines,4,1,fp);
+			  if (block[count].numoflines<0 || block[count].numoflines>=64)
+			  {
+				  fclose(fp);
+				  if (changeddir==0)
+					  chdir("..");
+				  return;
+			  }
+			  for (count2=0;count2<block[count].numoflines;count2++)
+				  fread2(block[count].line[count2],4,8,fp);
+			  fread2(&block[count].friction,4,1,fp);
+			  fread2(&block[count].breakpoint,4,1,fp);
+			  fread2(&block[count].middamage,4,1,fp);
+			  fread2(&block[count].foredamage,4,1,fp);
+			  fread2(&block[count].density,4,1,fp);
+			  fread2(&block[count].drag,4,1,fp);
+			  fread2(&block[count].animation,4,1,fp);
+			  fread2(&block[count].animationspeed,4,1,fp);
+		  }
+	  }
 
     fclose(fp);
-
 
 	if (changeddir==0)
 		chdir("..");
