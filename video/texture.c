@@ -159,7 +159,7 @@ int loadtexturepng(int texturenum, char *filename, int mipmap, int wraps, int wr
 	load_status = 0;
 	
 cleanup:
-	png_read_destroy(png_ptr, info_ptr, (png_infop)0);
+	png_destroy_read_struct(&png_ptr, &info_ptr, (png_infop*)0);
 	free(png_ptr);
 	free(info_ptr);
 	if(fp) fclose(fp);

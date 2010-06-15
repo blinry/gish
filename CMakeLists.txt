@@ -9,12 +9,15 @@ find_package(SDL REQUIRED)
 find_package(OpenAL REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(Vorbis REQUIRED)
+find_package(PNG REQUIRED)
+
 
 include_directories(
     ${SDL_INCLUDE_DIR}
     ${OPENAL_INCLUDE_DIR}
     ${OPENGL_INCLUDE_DIR}
     ${Vorbis_INCLUDE_DIR}
+    ${PNG_INCLUDE_DIR}
 )
 
 set(GISH_SRCS
@@ -148,4 +151,5 @@ target_link_libraries(gish
     ${OPENAL_LIBRARY}
     ${OPENGL_LIBRARIES}
     ${Vorbis_LIBRARIES}
+    ${PNG_LIBRARIES}
 )
