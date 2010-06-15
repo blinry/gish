@@ -24,6 +24,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "../video/opengl.h"
 
 #include <string.h>
+
 #include "../game/vsmode.h"
 #include "../game/gameaudio.h"
 #include "../game/english.h"
@@ -39,10 +40,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "../menu/menu.h"
 #include "../sdl/event.h"
 #include "../video/text.h"
-
-#define bool int
-#define TRUE 1
-#define FALSE 0
 
 void versusmodemenu(int versusnum)
   {
