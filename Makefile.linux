@@ -1,7 +1,8 @@
 CC = gcc
-CFLAGS = -O2 $(shell pkg-config openal gl vorbisfile --cflags) $(shell sdl-config --cflags)
+CFLAGS = -O2 $(shell pkg-config sdl openal gl vorbisfile libpng --cflags)
+#CFLAGS += -DDATAPATH=/usr/share/gish
 LD = gcc
-LDFLAGS = $(shell pkg-config openal gl vorbisfile --libs) $(shell sdl-config --libs)
+LDFLAGS = $(shell pkg-config sdl openal gl vorbisfile libpng --libs)
 OBJS = audio/audio.o \
        game/ai.o \
        game/animation.o \
