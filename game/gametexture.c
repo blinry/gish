@@ -281,14 +281,23 @@ void edittextures(void)
 		if (clickedTexture>=0)
 		{
 			char filename[256];
+			char menuitemname[256];
+
+			memset(menuitemname, (int)' ', 256);
+			memcpy(menuitemname, "File", strlen("File"));
+			menuitemname[255] = 0;
+
 			strcpy(filename, texture[clickedTexture].filename);
+
+			resetmenuitems();
+
 			while(!menuitem[1].active && !menuitem[2].active && !windowinfo.shutdown)
 			{
 				glClearColor(0.0f,0.0f,0.0f,0.0f);
 				glClear(GL_COLOR_BUFFER_BIT);
 
 				numofmenuitems=0;
-				createmenuitem("File                    ",(320|TEXT_CENTER),240,16,1.0f,1.0f,1.0f,1.0f);
+				createmenuitem(menuitemname,0,240,8,1.0f,1.0f,1.0f,1.0f);
 				setmenuitem(MO_STRINGINPUT,filename);
 
 				createmenuitem("Ok",(320|TEXT_CENTER),272,16,1.0f,1.0f,1.0f,1.0f);
@@ -301,13 +310,9 @@ void edittextures(void)
 				checkkeyboard();
 				checkmouse();
 				checkmenuitems();
-
 				setuptextdisplay();
-
 				drawmenuitems();
-
 				drawmousecursor(768+font.cursornum,mouse.x,mouse.y,16,1.0f,1.0f,1.0f,1.0f);
-
 				SDL_GL_SwapBuffers();
 			}
 			if (menuitem[1].active)
@@ -317,6 +322,8 @@ void edittextures(void)
 				else
 					loadtexturetga(clickedTexture,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
 			}
+			resetmenuitems();
+			numofmenuitems = 0;
 			continue;
 		}
 	}

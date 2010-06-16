@@ -55,7 +55,7 @@ int deleteselectedtext(void);
 
 typedef struct
   {
-  char label[64];
+  char label[256];
   int x;
   int y;
   int textsize;

@@ -159,12 +159,13 @@ void checkmenuitems(void)
 
   for (currentmenuitem=0;currentmenuitem<numofmenuitems;currentmenuitem++)
     {
-    if (menuitem[currentmenuitem].active && menuitem[currentmenuitem].function!=NULL)
-      (*menuitem[currentmenuitem].function)();
-    if (menuitem[currentmenuitem].type!=1 && menuitem[currentmenuitem].function!=NULL)
-      menuitem[currentmenuitem].active=0;
+		if (menuitem[currentmenuitem].active && menuitem[currentmenuitem].function!=NULL)
+			(*menuitem[currentmenuitem].function)();
+		if (menuitem[currentmenuitem].active && menuitem[currentmenuitem].type!=1 && menuitem[currentmenuitem].function!=NULL)
+			menuitem[currentmenuitem].active=0;
 
-    menuitem[currentmenuitem].prevactive=menuitem[currentmenuitem].active;
+		if (menuitem[currentmenuitem].prevactive != menuitem[currentmenuitem].active)
+			menuitem[currentmenuitem].prevactive=menuitem[currentmenuitem].active;
     }
 
   menuinputkeyboard=0;
@@ -242,15 +243,16 @@ void drawmenuitems(void)
           else
             strcpy(menuinputtemp,menuitem[count].inputpointer);
 
-          drawtext(menuinputtemp,menuitem[count].x+xoffset,menuitem[count].y+yoffset,menuitem[count].textsize,(float)(menuitem[count].r*(menuitem[count].highlight+1))*0.25f,(float)(menuitem[count].g*(menuitem[count].highlight+1))*0.25f,(float)(menuitem[count].b*(menuitem[count].highlight+1))*0.25f,1.0f);
+          drawtextunformatted(menuinputtemp,menuitem[count].x+xoffset,menuitem[count].y+yoffset,menuitem[count].textsize,(float)(menuitem[count].r*(menuitem[count].highlight+1))*0.25f,(float)(menuitem[count].g*(menuitem[count].highlight+1))*0.25f,(float)(menuitem[count].b*(menuitem[count].highlight+1))*0.25f,1.0f);
           }
         else
           {
-          drawtext(menuinput,menuitem[count].x+xoffset,menuitem[count].y+yoffset,menuitem[count].textsize,(float)(menuitem[count].r*(menuitem[count].highlight+1))*0.25f,(float)(menuitem[count].g*(menuitem[count].highlight+1))*0.25f,(float)(menuitem[count].b*(menuitem[count].highlight+1))*0.25f,1.0f);
+          drawtextunformatted(menuinput,menuitem[count].x+xoffset,menuitem[count].y+yoffset,menuitem[count].textsize,(float)(menuitem[count].r*(menuitem[count].highlight+1))*0.25f,(float)(menuitem[count].g*(menuitem[count].highlight+1))*0.25f,(float)(menuitem[count].b*(menuitem[count].highlight+1))*0.25f,1.0f);
           for (count2=0;count2<menuitem[count].sizex;count2++)
             if ((count2>=menuinputselectpos && count2<menuinputcursorpos) ||
                 (count2>=menuinputcursorpos && count2<menuinputselectpos))
-              drawtext("",menuitem[count].x+xoffset+count2*menuitem[count].textsize,menuitem[count].y+yoffset,menuitem[count].textsize,(float)(menuitem[count].r*(menuitem[count].highlight+1))*0.25f,(float)(menuitem[count].g*(menuitem[count].highlight+1))*0.25f,(float)(menuitem[count].b*(menuitem[count].highlight+1))*0.25f,0.5f);
+				drawtext("",menuitem[count].x+xoffset+count2*menuitem[count].textsize,menuitem[count].y+yoffset,menuitem[count].textsize,1.0f,0.0f,0.0f,1.0f);
+              //drawtext("",menuitem[count].x+xoffset+count2*menuitem[count].textsize,menuitem[count].y+yoffset,menuitem[count].textsize,(float)(menuitem[count].r*(menuitem[count].highlight+1))*0.25f,(float)(menuitem[count].g*(menuitem[count].highlight+1))*0.25f,(float)(menuitem[count].b*(menuitem[count].highlight+1))*0.25f,0.5f);
 
           if (!menuinputinsert)
             drawtext("_",menuitem[count].x+xoffset+menuinputcursorpos*menuitem[count].textsize,menuitem[count].y+yoffset,menuitem[count].textsize,(float)(menuitem[count].r*(menuitem[count].highlight+1))*0.25f,(float)(menuitem[count].g*(menuitem[count].highlight+1))*0.25f,(float)(menuitem[count].b*(menuitem[count].highlight+1))*0.25f,1.0f);
@@ -430,7 +432,7 @@ void setmenuitem(int option,...)
 
 void createmenuitemempty(void)
   {
-  memset(menuitem[numofmenuitems].label,0,64);
+  memset(menuitem[numofmenuitems].label,0,sizeof(menuitem[numofmenuitems].label));
   menuitem[numofmenuitems].x=0;
   menuitem[numofmenuitems].y=0;
   menuitem[numofmenuitems].textsize=0;
@@ -885,12 +887,13 @@ void addmenuinputchar(int charinput)
   {
   int count;
   
-  if (menuinputcursorpos>=192)
-    return;
-  
+  count=strlen(menuinput);
+  if (count >= sizeof(menuinput))
+	  return;
+
   if (!menuinputinsert)
     {
-    count=192;
+	menuinput[count+1] = '\0';
     while (count>menuinputcursorpos)
       {
       menuinput[count]=menuinput[count-1];
@@ -911,7 +914,7 @@ int deleteselectedtext(void)
   count2=0;
   textdeleted=0;
   cursortemp=menuinputcursorpos;
-  for (count=0;count<192;count++)
+  for (count=0;count<sizeof(menuinput);count++)
     {
     if ((count>=menuinputselectpos && count<menuinputcursorpos) ||
         (count>=menuinputcursorpos && count<menuinputselectpos))
