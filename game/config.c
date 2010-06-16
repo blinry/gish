@@ -25,6 +25,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "../sdl/sdl.h"
 
 #include <stdio.h>
+#include <limits.h>
+
+#ifdef LINUX
+#include <stdlib.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#endif
 
 #include "../game/config.h"
 #include "../game/options.h"
@@ -38,10 +45,34 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 _config config;
 
+char* userpath(char *result, char *path)
+  {
+#ifdef LINUX
+  char *home=getenv("HOME");
+
+  if (!home)
+    return path;
+
+  if (snprintf(result,PATH_MAX,"%s/.gish",home) < 0)
+    return path;
+
+  /* Ignore failure. May exist already. */
+  mkdir(result, S_IRWXU | S_IRWXG | S_IRWXO);
+
+  if (snprintf(result,PATH_MAX,"%s/.gish/%s",home,path) < 0)
+    return path;
+
+  return result;
+#else
+  return path;
+#endif
+  }
+
 void loadconfig(void)
   {
   int count,count2;
   char tempstr[32];
+  char path[PATH_MAX];
 
   config.resolutionx=800;
   config.resolutiony=600;
@@ -99,7 +130,7 @@ void loadconfig(void)
   for (count=0;count<4;count++)
     control[3].button[count+4]=count;
 
-  loadtextfile("config.txt");
+  loadtextfile(userpath(path,"config.txt"));
   optionreadint(&config.resolutionx,"screenwidth=");
   optionreadint(&config.resolutiony,"screenheight=");
   optionreadint(&config.bitsperpixel,"bitsperpixel=");
@@ -157,6 +188,7 @@ void saveconfig(void)
   int count,count2;
   char tempstr[32];
   FILE *fp;
+  char path[PATH_MAX];
 
   config.resolutionx=windowinfo.resolutionx;
   config.resolutiony=windowinfo.resolutiony;
@@ -165,7 +197,7 @@ void saveconfig(void)
   config.stencilbits=windowinfo.stencilbits;
   config.fullscreen=windowinfo.fullscreen;
 
-  if ((fp=fopen("config.txt","wb"))==NULL)
+  if ((fp=fopen(userpath(path,"config.txt"),"wb"))==NULL)
     return;
 
   optionwriteint(fp, &config.resolutionx,"screenwidth=");
@@ -219,6 +251,7 @@ void notsupportedmenu(void)
   char *glversion;
   char *ext;
   FILE *fp;
+  char path[PATH_MAX];
 
   glvendor=(char *) glGetString(GL_VENDOR);
   glrenderer=(char *) glGetString(GL_RENDERER);
@@ -294,7 +327,7 @@ void notsupportedmenu(void)
 
   resetmenuitems();
 
-  if ((fp=fopen("glreport.txt","wb"))==NULL)
+  if ((fp=fopen(userpath(path,"glreport.txt"),"wb"))==NULL)
     return;
 
   fprintf(fp,"%s\r\n",glversion);

@@ -26,8 +26,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "../sdl/sdl.h"
 
 #include <stdio.h>
+#include <limits.h>
 
 #include "../game/player.h"
+#include "../game/config.h"
 #include "../game/gameaudio.h"
 #include "../game/custom.h"
 #include "../game/english.h"
@@ -251,8 +253,9 @@ void saveplayers(void)
   int count;
   int version;
   FILE *fp;
+  char path[PATH_MAX];
 
-  if ((fp=fopen("gish.pla","wb"))!=NULL)
+  if ((fp=fopen(userpath(path,"gish.pla"),"wb"))!=NULL)
     {
     version=3;
     fwrite2(&version,4,1,fp);
@@ -276,8 +279,9 @@ void loadplayers(void)
   int count;
   int version;
   FILE *fp;
+  char path[PATH_MAX];
 
-  if ((fp=fopen("gish.pla","rb"))!=NULL)
+  if ((fp=fopen(userpath(path,"gish.pla"),"rb"))!=NULL)
     {
     fread2(&version,4,1,fp);
     if (version==2)

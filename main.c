@@ -39,6 +39,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "video/text.h"
 #include "video/texture.h"
 
+#ifdef DATAPATH
+#include <unistd.h>
+#define DATAPATH_STR3(X) #X
+#define DATAPATH_STR2(X) DATAPATH_STR3(X)
+#define DATAPATH_STR DATAPATH_STR2(DATAPATH)
+#endif
+
 const SDL_VideoInfo *sdlvideoinfo;
 SDL_PixelFormat *sdlpixelformat;
 
@@ -81,6 +88,10 @@ int main (int argc,char *argv[])
   int count;
   int flags;
   const char *temp;
+
+#ifdef DATAPATH
+  chdir(DATAPATH_STR);
+#endif
 
   checkbigendian();
 
