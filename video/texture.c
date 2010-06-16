@@ -284,6 +284,23 @@ int loadtexturetga(int texturenum,char *filename,int mipmap,int wraps,int wrapt,
   return 0;
   }
 
+int loadtexture(int texturenum,char *filename,int mipmap,int wraps,int wrapt,int magfilter,int minfilter)
+{
+	char *extension = filename + strlen(filename);
+	while(*extension != '.' && extension != filename) { extension--; }
+	if (extension == filename) extension = NULL;
+
+	if (strcmp(extension, ".tga") == 0)
+		return loadtexturetga(texturenum, filename, mipmap, wraps, wrapt, magfilter, minfilter);
+	else
+	{
+		if (extension == NULL)
+			printf("WARNING: No extension found in filename '%s'. Defaulting to png format.", filename);
+		else if (strcmp(extension, ".png") != 0)
+			printf("WARNING: Extension '%s' in filename '%s' not recognized. Defaulting to png format.", extension, filename);
+		return loadtexturepng(texturenum, filename, mipmap, wraps, wrapt, magfilter, minfilter);
+	}
+}
 void loadtexturetgapartial(int texturenum,char *filename,int startx,int starty,int sizex,int sizey)
   {
   int count,count2;

@@ -407,7 +407,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -418,7 +418,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -429,7 +429,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -440,7 +440,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
     }
@@ -457,7 +457,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -468,7 +468,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -479,7 +479,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -490,7 +490,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
     }
@@ -507,7 +507,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -518,7 +518,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -529,7 +529,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -540,7 +540,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
     }
@@ -557,7 +557,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -568,7 +568,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -579,7 +579,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -590,30 +590,30 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
     count2+=32;
   
     animation[count2].stand[0]=numofanimations;
-    loadtexturetga(numofanimations,"mumhed01.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"mumhed01.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].walk[0]=numofanimations;
-    loadtexturetga(numofanimations,"mumhed02.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"mumhed02.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].attack[0]=numofanimations;
-    loadtexturetga(numofanimations,"mumhed03.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"mumhed03.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].stand[1]=numofanimations;
-    loadtexturetga(numofanimations,"mumhed05.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"mumhed05.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].die[0]=numofanimations;
-    loadtexturetga(numofanimations,"mumhed06.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"mumhed06.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
     }
 
@@ -629,7 +629,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -640,7 +640,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -651,7 +651,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -662,30 +662,30 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
     count2+=32;
   
     animation[count2].stand[0]=numofanimations;
-    loadtexturetga(numofanimations,"sklhed01.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"sklhed01.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].walk[0]=numofanimations;
-    loadtexturetga(numofanimations,"sklhed02.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"sklhed02.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].attack[0]=numofanimations;
-    loadtexturetga(numofanimations,"sklhed03.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"sklhed03.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].stand[1]=numofanimations;
-    loadtexturetga(numofanimations,"sklhed05.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"sklhed05.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].die[0]=numofanimations;
-    loadtexturetga(numofanimations,"sklhed06.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"sklhed06.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
     }
 
@@ -701,7 +701,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -712,7 +712,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -723,7 +723,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -734,30 +734,30 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
     count2+=32;
   
     animation[count2].stand[0]=numofanimations;
-    loadtexturetga(numofanimations,"zomhed01.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"zomhed01.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].walk[0]=numofanimations;
-    loadtexturetga(numofanimations,"zomhed02.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"zomhed02.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].attack[0]=numofanimations;
-    loadtexturetga(numofanimations,"zomhed03.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"zomhed03.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].stand[1]=numofanimations;
-    loadtexturetga(numofanimations,"zomhed05.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"zomhed05.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].die[0]=numofanimations;
-    loadtexturetga(numofanimations,"zomhed06.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"zomhed06.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
     }
 
@@ -773,7 +773,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -784,7 +784,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -795,7 +795,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -806,30 +806,30 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
     count2+=32;
   
     animation[count2].stand[0]=numofanimations;
-    loadtexturetga(numofanimations,"gimhed01.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"gimhed01.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].walk[0]=numofanimations;
-    loadtexturetga(numofanimations,"gimhed02.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"gimhed02.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].attack[0]=numofanimations;
-    loadtexturetga(numofanimations,"gimhed03.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"gimhed03.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].stand[1]=numofanimations;
-    loadtexturetga(numofanimations,"gimhed05.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"gimhed05.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].die[0]=numofanimations;
-    loadtexturetga(numofanimations,"gimhed06.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"gimhed06.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
     }
 
@@ -845,7 +845,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -856,7 +856,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -867,7 +867,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -878,7 +878,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
     }
@@ -895,7 +895,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -906,7 +906,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -917,7 +917,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -928,7 +928,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
     }
@@ -945,7 +945,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -956,7 +956,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -967,7 +967,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -978,30 +978,30 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
     count2+=32;
 
     animation[count2].stand[0]=numofanimations;
-    loadtexturetga(numofanimations,"gimhed01.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"gimhed01.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].walk[0]=numofanimations;
-    loadtexturetga(numofanimations,"gimhed02.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"gimhed02.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].attack[0]=numofanimations;
-    loadtexturetga(numofanimations,"gimhed03.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"gimhed03.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].stand[1]=numofanimations;
-    loadtexturetga(numofanimations,"gimhed05.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"gimhed05.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].die[0]=numofanimations;
-    loadtexturetga(numofanimations,"gimhed06.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"gimhed06.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
     }
 
@@ -1017,7 +1017,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -1028,7 +1028,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -1039,7 +1039,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -1050,30 +1050,30 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
     count2+=32;
   
     animation[count2].stand[0]=numofanimations;
-    loadtexturetga(numofanimations,"frkhed01.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"frkhed01.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].walk[0]=numofanimations;
-    loadtexturetga(numofanimations,"frkhed02.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"frkhed02.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].attack[0]=numofanimations;
-    loadtexturetga(numofanimations,"frkhed03.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"frkhed03.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].stand[1]=numofanimations;
-    loadtexturetga(numofanimations,"frkhed05.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"frkhed05.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].die[0]=numofanimations;
-    loadtexturetga(numofanimations,"frkhed06.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"frkhed06.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
     }
 
@@ -1089,7 +1089,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -1100,7 +1100,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -1111,7 +1111,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -1122,7 +1122,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
     }
@@ -1139,7 +1139,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -1150,7 +1150,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -1161,7 +1161,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -1172,7 +1172,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
     }
@@ -1189,7 +1189,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -1200,7 +1200,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -1211,7 +1211,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -1222,7 +1222,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
     }
@@ -1239,7 +1239,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -1250,7 +1250,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -1261,7 +1261,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -1272,7 +1272,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
     }
@@ -1289,7 +1289,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -1300,7 +1300,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -1311,7 +1311,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -1322,7 +1322,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
     }
@@ -1339,7 +1339,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -1350,7 +1350,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -1361,7 +1361,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
   
@@ -1372,7 +1372,7 @@ void loadanimations(void)
       {
       filename[6]=48+(count/10)%10;
       filename[7]=48+count%10;
-      loadtexturetga(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+      loadtexture(numofanimations,filename,0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
       numofanimations++;
       }
     }
