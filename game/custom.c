@@ -30,8 +30,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #endif
 
 #include <stdio.h>
+#include <limits.h>
 
 #include "../game/custom.h"
+#include "../game/config.h"
 #include "../game/gameaudio.h"
 #include "../game/english.h"
 #include "../game/game.h"
@@ -152,13 +154,9 @@ void loadlevelmenu(void)
   int changeddir;
   int numoffiles;
   int pagenum;
+  char path[PATH_MAX];
 
-  changeddir=chdir("level");
-
-  listfiles("*.lvl",levellist,0);
-
-  if (changeddir==0)
-    chdir("..");
+  listfiles(userpath(path,"level",NULL),"*.lvl",levellist,0);
 
   numoffiles=0;
   while (levellist[numoffiles][0]!=0)
@@ -252,13 +250,9 @@ void playcampaignmenu(void)
   int changeddir;
   int numoffiles;
   int pagenum;
+  char path[PATH_MAX];
 
-  changeddir=chdir("level");
-
-  listfiles("*.gmp",levellist,0);
-
-  if (changeddir==0)
-    chdir("..");
+  listfiles(userpath(path,"level",NULL),"*.gmp",levellist,0);
 
   numoffiles=0;
   while (levellist[numoffiles][0]!=0)
@@ -432,11 +426,9 @@ void loadplayermappack(void)
   {
   int count;
   int version;
-  int changeddir;
   char filename[32];
   FILE *fp;
-
-  changeddir=chdir("player");
+  char path[PATH_MAX];
 
   count=0;
   while (count<24 && mappack.filename[count]!='.')
@@ -450,7 +442,7 @@ void loadplayermappack(void)
 
   playermappack[playernum].levelnum=0;
 
-  if ((fp=fopen(filename,"rb"))!=NULL)
+  if ((fp=fopen(userpath(path,"player",filename),"rb"))!=NULL)
     {
     fread2(&version,4,1,fp);
     if (version==1)
@@ -466,20 +458,15 @@ void loadplayermappack(void)
       }
     fclose(fp);
     }
-
-  if (changeddir==0)
-    chdir("..");
   }
 
 void saveplayermappack(void)
   {
   int count;
   int version;
-  int changeddir;
   char filename[32];
   FILE *fp;
-
-  changeddir=chdir("player");
+  char path[PATH_MAX];
 
   count=0;
   while (count<24 && mappack.filename[count]!='.')
@@ -491,7 +478,7 @@ void saveplayermappack(void)
 
   strcat(filename,".gpp");
 
-  if ((fp=fopen(filename,"wb"))!=NULL)
+  if ((fp=fopen(userpath(path,"player",filename),"wb"))!=NULL)
     {
     version=1;
     fwrite2(&version,4,1,fp);
@@ -505,21 +492,16 @@ void saveplayermappack(void)
       }
     fclose(fp);
     }
-
-  if (changeddir==0)
-    chdir("..");
   }
 
 void loadmappack(void)
   {
   int count;
   int version;
-  int changeddir;
   FILE *fp;
+  char path[PATH_MAX];
 
-  changeddir=chdir("level");
-
-  if ((fp=fopen(mappack.filename,"rb"))!=NULL)
+  if ((fp=fopen(userpath(path,"level",mappack.filename),"rb"))!=NULL)
     {
     fread2(&version,4,1,fp);
 
@@ -539,21 +521,16 @@ void loadmappack(void)
 
     fclose(fp);
     }
-
-  if (changeddir==0)
-    chdir("..");
   }
 
 void savemappack(void)
   {
   int count;
   int version;
-  int changeddir;
   FILE *fp;
+  char path[PATH_MAX];
 
-  changeddir=chdir("level");
-
-  if ((fp=fopen(mappack.filename,"wb"))!=NULL)
+  if ((fp=fopen(userpath(path,"level",mappack.filename),"wb"))!=NULL)
     {
     version=1;
     fwrite2(&version,4,1,fp);
@@ -571,9 +548,6 @@ void savemappack(void)
 
     fclose(fp);
     }
-
-  if (changeddir==0)
-    chdir("..");
   }
 
 void newmappackmenu(void)

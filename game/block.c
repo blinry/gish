@@ -26,8 +26,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #endif
 
 #include <stdio.h>
+#include <limits.h>
 
 #include "../game/block.h"
+#include "../game/config.h"
 #include "../sdl/endian.h"
 #include "../sdl/file.h"
 #include "../video/texture.h"
@@ -39,17 +41,15 @@ _polygontemp polygontemp[16];
 void saveblock(int blocknum)
   {
   int count;
-  int changeddir;
   char filename[13]="blck000.blk";
   FILE *fp;
-
-  changeddir=chdir("block");
+  char path[PATH_MAX];
 
   filename[4]=48+(blocknum/100)%10;
   filename[5]=48+(blocknum/10)%10;
   filename[6]=48+blocknum%10;
 
-  if ((fp=fopen(filename,"wb"))!=NULL)
+  if ((fp=fopen(userpath(path,"block",filename),"wb"))!=NULL)
     {
     fwrite2(&block[blocknum].numoflines,4,1,fp);
     for (count=0;count<block[blocknum].numoflines;count++)
@@ -57,18 +57,13 @@ void saveblock(int blocknum)
 
     fclose(fp);
     }
-
-  if (changeddir==0)
-    chdir("..");
   }
 
 void loadblock(int blocknum)
   {
   int count;
-  int changeddir;
   char filename[13]="blck000.blk";
-
-  changeddir=chdir("block");
+  char path[PATH_MAX];
 
   filename[4]=48+(blocknum/100)%10;
   filename[5]=48+(blocknum/10)%10;
@@ -76,7 +71,7 @@ void loadblock(int blocknum)
 
   block[blocknum].numoflines=0;
   /*
-  if ((fp=fopen(filename,"rb"))!=NULL)
+  if ((fp=fopen(userpath(path,"block",filename),"rb"))!=NULL)
     {
     fread2(&block[blocknum].numoflines,4,1,fp);
     for (count=0;count<block[blocknum].numoflines;count++)
@@ -143,9 +138,6 @@ void loadblock(int blocknum)
   block[blocknum].animation=0;
 
   setupblockflags(blocknum);
-
-  if (changeddir==0)
-    chdir("..");
   }
 
 void setupblockflags(int blocknum)

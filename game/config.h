@@ -23,7 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include <stdio.h>
 
-char* userpath(char *result, char *path);
+char* userpath(char *result,char *subdir,char *file);
 void loadconfig(void);
 void saveconfig(void);
 void notsupportedmenu(void);

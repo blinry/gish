@@ -28,8 +28,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #endif
 
 #include <stdio.h>
+#include <limits.h>
 
 #include "../game/replay.h"
+#include "../game/config.h"
 #include "../game/custom.h"
 #include "../game/english.h"
 #include "../game/game.h"
@@ -88,9 +90,9 @@ void savereplay(int levelnum)
   {
   int count;
   int version;
-  int changeddir;
   char filename[32];
   FILE *fp;
+  char path[PATH_MAX];
 
   count=0;
   while (count<12 && player[playernum].name[count]!=0)
@@ -127,9 +129,7 @@ void savereplay(int levelnum)
   filename[count]=0;
   count++;
 
-  changeddir=chdir("replay");
-
-  if ((fp=fopen(filename,"wb"))!=NULL)
+  if ((fp=fopen(userpath(path,"replay",filename),"wb"))!=NULL)
     {
     version=1;
     fwrite2(&version,4,1,fp);
@@ -140,9 +140,6 @@ void savereplay(int levelnum)
       fwrite2(&replayframe[count].button,1,1,fp);
     fclose(fp);
     }
-
-  if (changeddir==0)
-    chdir("..");
   }
 
 int loadreplay(char *filename)
@@ -150,9 +147,9 @@ int loadreplay(char *filename)
   int count;
   int version;
   int levelnum;
-  int changeddir;
   char filenametemp[32];
   FILE *fp;
+  char path[PATH_MAX];
 
   count=0;
   while (count<16 && filename[count]!=0 && filename[count]!='.')
@@ -171,11 +168,9 @@ int loadreplay(char *filename)
   filenametemp[count]=0;
   count++;
 
-  changeddir=chdir("replay");
-
   levelnum=-1;
 
-  if ((fp=fopen(filenametemp,"rb"))!=NULL)
+  if ((fp=fopen(userpath(path,"replay",filenametemp),"rb"))!=NULL)
     {
     fread2(&version,4,1,fp);
     if (version==1)
@@ -189,9 +184,6 @@ int loadreplay(char *filename)
     fclose(fp);
     }
 
-  if (changeddir==0)
-    chdir("..");
-
   return(levelnum);
   }
 
@@ -201,13 +193,9 @@ void replaymenu(void)
   int changeddir;
   int numoffiles;
   int pagenum;
+  char path[PATH_MAX];
 
-  changeddir=chdir("replay");
-
-  listfiles("*.gre",levellist,0);
-
-  if (changeddir==0)
-    chdir("..");
+  listfiles(userpath(path,"replay",NULL),"*.gre",levellist,0);
 
   numoffiles=0;
   while (levellist[numoffiles][0]!=0)

@@ -28,8 +28,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #endif
 
 #include <stdio.h>
+#include <limits.h>
 
 #include "../game/record.h"
+#include "../game/config.h"
 #include "../sdl/event.h"
 #include "../video/glfunc.h"
 
@@ -38,7 +40,6 @@ _movie movie;
 void recordframe(void)
   {
   int count,count2;
-  int changeddir;
   char filename[16]="gish0000.bmp";
   short bmpheader[27]={19778,4150,14,0,0,54,0,40,0,480,0,272,0,1,24,0,0,4096,14,0,0,0,0,0,0,0};
   int red,green,blue;
@@ -46,6 +47,7 @@ void recordframe(void)
   //short shorttemp;
   //int inttemp;
   FILE *fp;
+  char path[PATH_MAX];
 
   glReadBuffer(GL_BACK);
   glReadPixels(0,0,windowinfo.resolutionx,windowinfo.resolutiony,GL_RGBA,GL_UNSIGNED_BYTE,screenshotbuffer);
@@ -55,9 +57,7 @@ void recordframe(void)
   filename[6]=48+(movie.framenum/10)%10;
   filename[7]=48+movie.framenum%10;
 
-  changeddir=chdir("movie");
-
-  if((fp=fopen(filename,"wb"))!=NULL)
+  if((fp=fopen(userpath(path,"movie",filename),"wb"))!=NULL)
     {
     /*
     bytetemp=0;
@@ -103,9 +103,6 @@ void recordframe(void)
       }
     fclose(fp);
     }
-
-  if (changeddir==0)
-    chdir("..");
 
   movie.framenum++;
   }

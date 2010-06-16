@@ -30,8 +30,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <limits.h>
 
 #include "../game/level.h"
+#include "../game/config.h"
 #include "../game/block.h"
 #include "../game/editor.h"
 #include "../game/game.h"
@@ -148,6 +150,7 @@ void savelevel(char *filename)
   int changeddir;
   int version;
   FILE *fp;
+  char path[PATH_MAX];
 
   for (count=0;count<256;count++)
     textureused[count]=1;
@@ -180,9 +183,7 @@ void savelevel(char *filename)
     texture[count].sizex=0;
   */
 
-  changeddir=chdir("level");
-
-  if ((fp=fopen(filename,"wb"))!=NULL)
+  if ((fp=fopen(userpath(path,"level",filename),"wb"))!=NULL)
     {
     version=11;
 
@@ -283,9 +284,6 @@ void savelevel(char *filename)
 
     fclose(fp);
     }
-
-  if (changeddir==0)
-    chdir("..");
   }
 
 void loadlevel(char *filename)
