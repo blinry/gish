@@ -70,8 +70,11 @@ void listfiles(char *path,char *filespec,char filelist[1024][32],int directories
   int count,count2;
   int handle;
   struct _finddata_t fileinfo;
+  size_t len;
 
-  strncat(path,filespec,PATH_MAX);
+  len=strlen(path);
+  path[len]='/';
+  strncpy(path+len+1,filespec,PATH_MAX-len-1);
   path[PATH_MAX-1] = '\0'; /* Safety first! */
   handle=_findfirst(path,&fileinfo);
 
