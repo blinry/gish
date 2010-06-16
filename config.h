@@ -23,6 +23,10 @@
   #define INLINE inline
 #endif
 
+#ifndef PATH_MAX
+#define PATH_MAX 256
+#endif
+
 typedef enum {FALSE = 0, TRUE = 1} bool;
 
 #endif /* GISH_CONFIG_H */
