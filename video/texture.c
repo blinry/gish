@@ -232,6 +232,7 @@ int loadtexturetga(char *filename, void **rgba, int *width, int *height)
 int loadtexture(int texturenum,char *filename,int mipmap,int wraps,int wrapt,int magfilter,int minfilter)
 {
 	int changeddir;
+	int result;
 	char *extension = filename + strlen(filename);
 	while(*extension != '.' && extension != filename) { extension--; }
 
@@ -247,7 +248,7 @@ int loadtexture(int texturenum,char *filename,int mipmap,int wraps,int wrapt,int
 
 	changeddir=chdir("texture");
 	if (strcmp(extension, ".tga") == 0)
-		loadtexturetga(filename, &(texture[texturenum].rgba[0]), &(texture[texturenum].sizex), &(texture[texturenum].sizey));
+		result = loadtexturetga(filename, &(texture[texturenum].rgba[0]), &(texture[texturenum].sizex), &(texture[texturenum].sizey));
 	else
 	{
 		if (extension == NULL)
@@ -255,7 +256,7 @@ int loadtexture(int texturenum,char *filename,int mipmap,int wraps,int wrapt,int
 		else if (strcmp(extension, ".png") != 0)
 			printf("WARNING: Extension '%s' in filename '%s' not recognized. Defaulting to png format.", extension, filename);
 
-		loadtexturepng(filename, &(texture[texturenum].rgba[0]), &(texture[texturenum].sizex), &(texture[texturenum].sizey));
+		result = loadtexturepng(filename, &(texture[texturenum].rgba[0]), &(texture[texturenum].sizex), &(texture[texturenum].sizey));
 	}
 	if (changeddir==0)
 		chdir("..");
@@ -277,6 +278,8 @@ int loadtexture(int texturenum,char *filename,int mipmap,int wraps,int wrapt,int
 
 	memset(texture[texturenum].filename, 0, 256);
 	strcpy(texture[texturenum].filename,filename);
+
+	return result;
 }
 void loadtexturetgapartial(int texturenum,char *filename,int startx,int starty,int sizex,int sizey)
   {
