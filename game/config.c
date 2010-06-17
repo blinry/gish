@@ -26,12 +26,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include <stdio.h>
 #include <limits.h>
-
-#ifdef LINUX
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#endif
 
 #include "../game/config.h"
 #include "../game/options.h"
@@ -45,27 +42,78 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 _config config;
 
-char* userpath(char *result, char *path)
+#ifdef WINDOWS
+#define USERPATH(X) "%s/Gish" X
+#elseif MAC
+#define USERPATH(X) "%s/Library/Application Support/Gish" X
+#else
+#define USERPATH(X) "%s/.gish" X
+#endif
+
+#ifdef WINDOWS
+#include <direct.h>
+#define MKDIR(PATHNAME,MODE) _mkdir(PATHNAME)
+#define USERENV "APPDATA"
+#else
+#include <unistd.h>
+#define MKDIR(PATHNAME,MODE) mkdir(PATHNAME, S_IRWXU | S_IRWXG | S_IRWXO)
+#define USERENV "HOME"
+#endif
+
+char* userpath(char *result, char *subdir, char *file)
   {
-#ifdef LINUX
-  char *home=getenv("HOME");
+  struct stat st;
+  char *env=getenv(USERENV);
 
-  if (!home)
-    return path;
+  if (!env)
+    goto fail;
 
-  if (snprintf(result,PATH_MAX,"%s/.gish",home) < 0)
-    return path;
+  if (snprintf(result,PATH_MAX,USERPATH(""),env) < 0)
+    goto fail;
 
   /* Ignore failure. May exist already. */
-  mkdir(result, S_IRWXU | S_IRWXG | S_IRWXO);
+  MKDIR(result);
 
-  if (snprintf(result,PATH_MAX,"%s/.gish/%s",home,path) < 0)
-    return path;
+  if (stat(result,&st)==-1 || !(st.st_mode & S_IFDIR))
+    goto fail;
 
+  if (subdir)
+    {
+    if (snprintf(result,PATH_MAX,USERPATH("/%s"),env,subdir) < 0)
+      goto fail;
+
+    /* Ignore failure. May exist already. */
+    MKDIR(result);
+
+    if (stat(result,&st)==-1 || !(st.st_mode & S_IFDIR))
+      goto fail;
+
+    if (!file)
+      return result;
+
+    if (snprintf(result,PATH_MAX,USERPATH("/%s/%s"),env,subdir,file) < 0)
+      goto fail;
+    else
+      return result;
+    }
+
+  else
+    {
+    if (snprintf(result,PATH_MAX,USERPATH("/%s"),env,file) < 0)
+      goto fail;
+    else
+      return result;
+    }
+
+  fail:
+
+  if (file)
+    strncpy(result,file,PATH_MAX);
+  else
+    strncpy(result,".",PATH_MAX);
+
+  result[PATH_MAX-1]='\0'; /* Safety first! */
   return result;
-#else
-  return path;
-#endif
   }
 
 void loadconfig(void)
@@ -130,7 +178,7 @@ void loadconfig(void)
   for (count=0;count<4;count++)
     control[3].button[count+4]=count;
 
-  loadtextfile(userpath(path,"config.txt"));
+  loadtextfile(userpath(path,NULL,"config.txt"));
   optionreadint(&config.resolutionx,"screenwidth=");
   optionreadint(&config.resolutiony,"screenheight=");
   optionreadint(&config.bitsperpixel,"bitsperpixel=");
@@ -197,7 +245,7 @@ void saveconfig(void)
   config.stencilbits=windowinfo.stencilbits;
   config.fullscreen=windowinfo.fullscreen;
 
-  if ((fp=fopen(userpath(path,"config.txt"),"wb"))==NULL)
+  if ((fp=fopen(userpath(path,NULL,"config.txt"),"wb"))==NULL)
     return;
 
   optionwriteint(fp, &config.resolutionx,"screenwidth=");
@@ -327,7 +375,7 @@ void notsupportedmenu(void)
 
   resetmenuitems();
 
-  if ((fp=fopen(userpath(path,"glreport.txt"),"wb"))==NULL)
+  if ((fp=fopen(userpath(path,NULL,"glreport.txt"),"wb"))==NULL)
     return;
 
   fprintf(fp,"%s\r\n",glversion);

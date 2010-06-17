@@ -242,7 +242,7 @@ void savescores(void)
   FILE *fp;
   char path[PATH_MAX];
 
-  if ((fp=fopen(userpath(path,"gish.his"),"wb"))!=NULL)
+  if ((fp=fopen(userpath(path,NULL,"gish.his"),"wb"))!=NULL)
     {
     version=2;
     fwrite2(&version,4,1,fp);
@@ -270,7 +270,7 @@ void loadscores(void)
     strcpy(highscore[count][count2].name,"Empty");
     }
 
-  if ((fp=fopen(userpath(path,"gish.his"),"rb"))!=NULL)
+  if ((fp=fopen(userpath(path,NULL,"gish.his"),"rb"))!=NULL)
     {
     fread2(&version,4,1,fp);
     if (version==2)

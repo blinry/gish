@@ -255,7 +255,7 @@ void saveplayers(void)
   FILE *fp;
   char path[PATH_MAX];
 
-  if ((fp=fopen(userpath(path,"gish.pla"),"wb"))!=NULL)
+  if ((fp=fopen(userpath(path,NULL,"gish.pla"),"wb"))!=NULL)
     {
     version=3;
     fwrite2(&version,4,1,fp);
@@ -281,7 +281,7 @@ void loadplayers(void)
   FILE *fp;
   char path[PATH_MAX];
 
-  if ((fp=fopen(userpath(path,"gish.pla"),"rb"))!=NULL)
+  if ((fp=fopen(userpath(path,NULL,"gish.pla"),"rb"))!=NULL)
     {
     fread2(&version,4,1,fp);
     if (version==2)
