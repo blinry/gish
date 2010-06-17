@@ -23,8 +23,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "../video/opengl.h"
 
-void loadtexturetga(int texturenum,char *filename,int mipmap,int wraps,int wrapt,int magfilter,int minfilter);
-void loadtexturetganodir(int texturenum,char *filename,int mipmap,int wraps,int wrapt,int magfilter,int minfilter);
+int loadtexturepng(int texturenum, char *filename, int mipmap, int wraps, int wrapt, int magfilter, int minfilter);
+int loadtexturetga(int texturenum,char *filename,int mipmap,int wraps,int wrapt,int magfilter,int minfilter);
+int loadtexture(int texturenum,char *filename,int mipmap,int wraps,int wrapt,int magfilter,int minfilter);
 void loadtexturetgapartial(int texturenum,char *filename,int startx,int starty,int sizex,int sizey);
 void generatemipmap(int texturenum);
 void setuptexture(int texturenum);
@@ -44,11 +45,12 @@ typedef struct
   int normalmap;
   int glossmap;
   GLuint glname;
-  unsigned int *rgba[16];
+  unsigned int *rgba[16];	// XXX: use uint32_t
   int glnamenormal;
-  unsigned int *normal[16];
+  unsigned int *normal[16];	// XXX: use uint32_t
   int glnamegloss;
   unsigned char *gloss[16];
+  char filename[256];
   } _texture;
 
 typedef struct

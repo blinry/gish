@@ -26,6 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include <stdarg.h>
 
+void drawtextunformatted(char *textstring,int textposx,int textposy,int textsize,float red,float green,float blue,float alpha);
 void drawtext(char *textstring,int textposx,int textposy,int textsize,float red,float green,float blue,float alpha,...);
 void setuptextdisplay(void);
 void convertscreenvertex(float vec[3],int resolutionx,int resolutiony);

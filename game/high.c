@@ -27,8 +27,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include <stdio.h>
 #include <string.h>
+#include <limits.h>
 
 #include "../game/high.h"
+#include "../game/config.h"
 #include "../game/gameaudio.h"
 #include "../game/english.h"
 #include "../game/game.h"
@@ -238,8 +240,9 @@ void savescores(void)
   int count,count2;
   int version;
   FILE *fp;
+  char path[PATH_MAX];
 
-  if ((fp=fopen("gish.his","wb"))!=NULL)
+  if ((fp=fopen(userpath(path,"gish.his"),"wb"))!=NULL)
     {
     version=2;
     fwrite2(&version,4,1,fp);
@@ -258,6 +261,7 @@ void loadscores(void)
   int count,count2;
   int version;
   FILE *fp;
+  char path[PATH_MAX];
 
   for (count=0;count<32;count++)
   for (count2=0;count2<16;count2++)
@@ -266,7 +270,7 @@ void loadscores(void)
     strcpy(highscore[count][count2].name,"Empty");
     }
 
-  if ((fp=fopen("gish.his","rb"))!=NULL)
+  if ((fp=fopen(userpath(path,"gish.his"),"rb"))!=NULL)
     {
     fread2(&version,4,1,fp);
     if (version==2)

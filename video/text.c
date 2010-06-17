@@ -34,14 +34,125 @@ char textstring2[1024];
 char textstring3[1024];
 _font font;
 
+void drawtextunformatted(char *textstring,int x,int y,int textsize,float red,float green,float blue,float alpha)
+{
+	int count,count2;
+	float vec[3];
+	float texcoord[2];
+
+	count2 = strlen(textstring);
+
+	if ((x&TEXT_CENTER)==TEXT_CENTER)
+		x=x-(count2*textsize)/2;
+	if ((y&TEXT_CENTER)==TEXT_CENTER)
+		y=y-(textsize)/2;
+	if ((x&TEXT_END)==TEXT_END)
+		x=x-(count2*textsize);
+	if ((y&TEXT_END)==TEXT_END)
+		y=y-textsize;
+	x&=0xFFFF;
+	y&=0xFFFF;
+
+	glBindTexture(GL_TEXTURE_2D,texture[1000+font.texturenum].glname);
+
+	count=0;
+	while (textstring[count]!=0)
+	{
+		if (textstring[count]!=127)
+		{
+			glBegin(GL_QUADS);
+
+			glColor4f(red,green,blue,alpha);
+
+			vec[0]=(float)x+(float)count*(float)textsize;
+			vec[1]=(float)y;
+			convertscreenvertex(vec,font.sizex,font.sizey);
+			texcoord[0]=(float)(textstring[count]&15)*16.0f+0.5f;
+			texcoord[1]=(float)(textstring[count]>>4)*16.0f+0.5f;
+			texcoord[0]/=256.0f;
+			texcoord[1]/=256.0f;
+
+			glTexCoord2fv(texcoord);
+			glVertex3fv(vec);
+
+			vec[0]=(float)x+(float)textsize+(float)(count)*(float)textsize;
+			vec[1]=(float)y;
+			convertscreenvertex(vec,font.sizex,font.sizey);
+			texcoord[0]=(float)(textstring[count]&15)*16.0f+16.0f-0.5f;
+			texcoord[1]=(float)(textstring[count]>>4)*16.0f+0.5f;
+			texcoord[0]/=256.0f;
+			texcoord[1]/=256.0f;
+
+			glTexCoord2fv(texcoord);
+			glVertex3fv(vec);
+
+			vec[0]=(float)x+(float)textsize+(float)(count)*(float)textsize;
+			vec[1]=(float)y+(float)textsize;
+			convertscreenvertex(vec,font.sizex,font.sizey);
+			texcoord[0]=(float)(textstring[count]&15)*16.0f+16.0f-0.5f;
+			texcoord[1]=(float)(textstring[count]>>4)*16.0f+16.0f-0.5f;
+			texcoord[0]/=256.0f;
+			texcoord[1]/=256.0f;
+
+			glTexCoord2fv(texcoord);
+			glVertex3fv(vec);
+
+			vec[0]=(float)x+(float)(count)*(float)textsize;
+			vec[1]=(float)y+(float)textsize;
+			convertscreenvertex(vec,font.sizex,font.sizey);
+			texcoord[0]=(float)(textstring[count]&15)*16.0f+0.5f;
+			texcoord[1]=(float)(textstring[count]>>4)*16.0f+16.0f-0.5f;
+			texcoord[0]/=256.0f;
+			texcoord[1]/=256.0f;
+
+			glTexCoord2fv(texcoord);
+			glVertex3fv(vec);
+
+			glEnd();
+		}
+		else
+		{
+			glDisable(GL_TEXTURE_2D);
+
+			glBegin(GL_QUADS);
+
+			glColor4f(red,green,blue,alpha);
+
+			vec[0]=(float)x+(float)count*(float)textsize;
+			vec[1]=(float)y;
+			convertscreenvertex(vec,font.sizex,font.sizey);
+			glVertex3fv(vec);
+
+			vec[0]=(float)x+(float)textsize+(float)(count)*(float)textsize;
+			vec[1]=(float)y;
+			convertscreenvertex(vec,font.sizex,font.sizey);
+			glVertex3fv(vec);
+
+			vec[0]=(float)x+(float)textsize+(float)(count)*(float)textsize;
+			vec[1]=(float)y+(float)textsize;
+			convertscreenvertex(vec,font.sizex,font.sizey);
+			glVertex3fv(vec);
+
+			vec[0]=(float)x+(float)(count)*(float)textsize;
+			vec[1]=(float)y+(float)textsize;
+			convertscreenvertex(vec,font.sizex,font.sizey);
+			glVertex3fv(vec);
+
+			glEnd();
+
+			glEnable(GL_TEXTURE_2D);
+		}
+
+		count++;
+	}
+}
+
 void drawtext(char *textstring,int x,int y,int textsize,float red,float green,float blue,float alpha,...)
   {
   int count,count2;
   int variabletemp;
   //int texturenum;
   va_list ap;
-  float vec[3];
-  float texcoord[2];
 
   count=0;
   count2=0;
@@ -138,109 +249,7 @@ void drawtext(char *textstring,int x,int y,int textsize,float red,float green,fl
 
   textstring2[count2]=0;
 
-  if ((x&TEXT_CENTER)==TEXT_CENTER)
-    x=x-(count2*textsize)/2;
-  if ((y&TEXT_CENTER)==TEXT_CENTER)
-    y=y-(textsize)/2;
-  if ((x&TEXT_END)==TEXT_END)
-    x=x-(count2*textsize);
-  if ((y&TEXT_END)==TEXT_END)
-    y=y-textsize;
-  x&=0xFFFF;
-  y&=0xFFFF;
-
-  glBindTexture(GL_TEXTURE_2D,texture[1000+font.texturenum].glname);
-
-  count=0;
-  while (textstring2[count]!=0)
-    {
-    if (textstring2[count]!=127)
-      {
-      glBegin(GL_QUADS);
-
-      glColor4f(red,green,blue,alpha);
-
-      vec[0]=(float)x+(float)count*(float)textsize;
-      vec[1]=(float)y;
-      convertscreenvertex(vec,font.sizex,font.sizey);
-      texcoord[0]=(float)(textstring2[count]&15)*16.0f+0.5f;
-      texcoord[1]=(float)(textstring2[count]>>4)*16.0f+0.5f;
-      texcoord[0]/=256.0f;
-      texcoord[1]/=256.0f;
-  
-      glTexCoord2fv(texcoord);
-      glVertex3fv(vec);
-  
-      vec[0]=(float)x+(float)textsize+(float)(count)*(float)textsize;
-      vec[1]=(float)y;
-      convertscreenvertex(vec,font.sizex,font.sizey);
-      texcoord[0]=(float)(textstring2[count]&15)*16.0f+16.0f-0.5f;
-      texcoord[1]=(float)(textstring2[count]>>4)*16.0f+0.5f;
-      texcoord[0]/=256.0f;
-      texcoord[1]/=256.0f;
-  
-      glTexCoord2fv(texcoord);
-      glVertex3fv(vec);
-  
-      vec[0]=(float)x+(float)textsize+(float)(count)*(float)textsize;
-      vec[1]=(float)y+(float)textsize;
-      convertscreenvertex(vec,font.sizex,font.sizey);
-      texcoord[0]=(float)(textstring2[count]&15)*16.0f+16.0f-0.5f;
-      texcoord[1]=(float)(textstring2[count]>>4)*16.0f+16.0f-0.5f;
-      texcoord[0]/=256.0f;
-      texcoord[1]/=256.0f;
-  
-      glTexCoord2fv(texcoord);
-      glVertex3fv(vec);
-  
-      vec[0]=(float)x+(float)(count)*(float)textsize;
-      vec[1]=(float)y+(float)textsize;
-      convertscreenvertex(vec,font.sizex,font.sizey);
-      texcoord[0]=(float)(textstring2[count]&15)*16.0f+0.5f;
-      texcoord[1]=(float)(textstring2[count]>>4)*16.0f+16.0f-0.5f;
-      texcoord[0]/=256.0f;
-      texcoord[1]/=256.0f;
-  
-      glTexCoord2fv(texcoord);
-      glVertex3fv(vec);
-  
-      glEnd();
-      }
-    else
-      {
-      glDisable(GL_TEXTURE_2D);
-
-      glBegin(GL_QUADS);
-
-      glColor4f(red,green,blue,alpha);
-
-      vec[0]=(float)x+(float)count*(float)textsize;
-      vec[1]=(float)y;
-      convertscreenvertex(vec,font.sizex,font.sizey);
-      glVertex3fv(vec);
-  
-      vec[0]=(float)x+(float)textsize+(float)(count)*(float)textsize;
-      vec[1]=(float)y;
-      convertscreenvertex(vec,font.sizex,font.sizey);
-      glVertex3fv(vec);
-  
-      vec[0]=(float)x+(float)textsize+(float)(count)*(float)textsize;
-      vec[1]=(float)y+(float)textsize;
-      convertscreenvertex(vec,font.sizex,font.sizey);
-      glVertex3fv(vec);
-  
-      vec[0]=(float)x+(float)(count)*(float)textsize;
-      vec[1]=(float)y+(float)textsize;
-      convertscreenvertex(vec,font.sizex,font.sizey);
-      glVertex3fv(vec);
-  
-      glEnd();
-
-      glEnable(GL_TEXTURE_2D);
-      }
-
-    count++;
-    }
+  drawtextunformatted(textstring2, x, y, textsize, red, green, blue, alpha);
   }
 
 void setuptextdisplay(void)

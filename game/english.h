@@ -222,7 +222,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define TXT_SUMO												"Sumo"
 #define TXT_FOOTBALL										"Football"
 #define TXT_GREED												"Greed"
-#define TXT_PITFIGHT										"Pitfight"
+#define TXT_DUEL										"Duel"
 #define TXT_DRAGSTER										"Dragster"
 #define TXT_COLLECTION									"Collection"
 #define TXT_RACING											"Racing"

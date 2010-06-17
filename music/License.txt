@@ -7,7 +7,15 @@ boss.ogg:   "Balrog Boogie"
 cave.ogg:   "D'angelo"
 church.ogg: "Rag Doll Physics"
 egypt.ogg:  "Porcelain Judas"
-hell.ogg:   "Zodiac Virtues"
 intro.ogg:  "Gunpowder Chant"
 sewer.ogg:  "Heroines"
 versus.ogg: "Gunpowder Chant"
+
+------------------------------
+
+Music by "Gladius Noctis", released under
+http://creativecommons.org/licenses/by-nc-sa/3.0/
+
+Album       "Croaton"
+
+hell.ogg:   Part of "Ursa Major"

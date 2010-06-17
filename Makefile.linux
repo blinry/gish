@@ -1,21 +1,24 @@
 CC = gcc
-CFLAGS = -O2 $(shell pkg-config openal gl vorbisfile --cflags) $(shell sdl-config --cflags)
+CFLAGS = -O2 $(shell pkg-config sdl openal gl vorbisfile libpng --cflags)
+#CFLAGS += -DDATAPATH=/usr/share/gish
 LD = gcc
-LDFLAGS = $(shell pkg-config openal gl vorbisfile --libs) $(shell sdl-config --libs)
+LDFLAGS = $(shell pkg-config sdl openal gl vorbisfile libpng --libs)
 OBJS = audio/audio.o \
        game/ai.o \
        game/animation.o \
-       game/audio.o \
        game/block.o \
        game/boss.o \
        game/config.o \
        game/credits.o \
        game/custom.o \
        game/damage.o \
+       game/debug.o \
        game/editor.o \
+       game/gameaudio.o \
        game/game.o \
        game/gamemenu.o \
-       game/glext.o \
+       game/gameobject.o \
+       game/gametexture.o \
        game/high.o \
        game/level.o \
        game/lighting.o \
@@ -23,7 +26,6 @@ OBJS = audio/audio.o \
        game/mainmenu.o \
        game/mappack.o \
        game/music.o \
-       game/object.o \
        game/objedit.o \
        game/objfunc.o \
        game/options.o \
@@ -38,11 +40,11 @@ OBJS = audio/audio.o \
        game/setup.o \
        game/socket.o \
        game/sprite.o \
-       game/texture.o \
        game/vsmode.o \
        input/joystick.o \
        input/keyboard.o \
        input/mouse.o \
+       main.o \
        math/intersec.o \
        math/vector.o \
        menu/menu.o \
@@ -55,9 +57,9 @@ OBJS = audio/audio.o \
        sdl/file.o \
        sdl/video.o \
        video/glfunc.o \
+       video/opengl.o \
        video/text.o \
-       video/texture.o \
-       main.o
+       video/texture.o
 EXE = gish
 
 all: $(EXE)
