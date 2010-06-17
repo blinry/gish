@@ -29,7 +29,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <unistd.h>
 
 #include "../game/config.h"
 #include "../game/options.h"
@@ -52,8 +51,12 @@ _config config;
 #endif
 
 #ifdef WINDOWS
+#include <direct.h>
+#define MKDIR(PATHNAME,MODE) _mkdir(PATHNAME)
 #define USERENV "APPDATA"
 #else
+#include <unistd.h>
+#define MKDIR(PATHNAME,MODE) mkdir(PATHNAME, S_IRWXU | S_IRWXG | S_IRWXO)
 #define USERENV "HOME"
 #endif
 
@@ -69,7 +72,7 @@ char* userpath(char *result, char *subdir, char *file)
     goto fail;
 
   /* Ignore failure. May exist already. */
-  mkdir(result, S_IRWXU | S_IRWXG | S_IRWXO);
+  MKDIR(result);
 
   if (stat(result,&st)==-1 || !(st.st_mode & S_IFDIR))
     goto fail;
@@ -80,7 +83,7 @@ char* userpath(char *result, char *subdir, char *file)
       goto fail;
 
     /* Ignore failure. May exist already. */
-    mkdir(result, S_IRWXU | S_IRWXG | S_IRWXO);
+    MKDIR(result);
 
     if (stat(result,&st)==-1 || !(st.st_mode & S_IFDIR))
       goto fail;
