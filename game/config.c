@@ -58,7 +58,7 @@ _config config;
 #define snprintf sprintf_s
 #else
 #include <unistd.h>
-#define MKDIR(PATHNAME,MODE) mkdir(PATHNAME, S_IRWXU | S_IRWXG | S_IRWXO)
+#define MKDIR(PATHNAME) mkdir(PATHNAME, S_IRWXU | S_IRWXG | S_IRWXO)
 #define USERENV "HOME"
 #endif
 
