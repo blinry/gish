@@ -44,16 +44,18 @@ _config config;
 
 #ifdef WINDOWS
 #define USERPATH(X) "%s/Gish" X
-#elseif MAC
+#else
+#if MAC
 #define USERPATH(X) "%s/Library/Application Support/Gish" X
 #else
 #define USERPATH(X) "%s/.gish" X
 #endif
-
+#endif
 #ifdef WINDOWS
 #include <direct.h>
-#define MKDIR(PATHNAME,MODE) _mkdir(PATHNAME)
+#define MKDIR(PATHNAME) _mkdir(PATHNAME)
 #define USERENV "APPDATA"
+#define snprintf sprintf_s
 #else
 #include <unistd.h>
 #define MKDIR(PATHNAME,MODE) mkdir(PATHNAME, S_IRWXU | S_IRWXG | S_IRWXO)
