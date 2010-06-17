@@ -50,7 +50,6 @@ int loadtexturepng(char *filename, void **rgba, int *width, int *height)
 {
 	unsigned char header[8];
 	FILE *fp;
-	int changeddir;
 	
 	png_structp png_ptr = NULL;
 	png_infop info_ptr = NULL;
@@ -59,8 +58,6 @@ int loadtexturepng(char *filename, void **rgba, int *width, int *height)
 	int load_status;
 	
 	int y;
-	
-	changeddir = chdir("texture");
 	
 	fp = fopen(filename, "rb");
 	if( fp == NULL ) {
@@ -142,7 +139,6 @@ cleanup:
 	free(png_ptr);
 	free(info_ptr);
 	if(fp) fclose(fp);
-	if(changeddir == 0) chdir("..");
 	return load_status;
 }
 
@@ -151,18 +147,12 @@ int loadtexturetga(char *filename, void **rgba, int *width, int *height)
 	bool isAlpha = FALSE;
   int count,count2;
   int red,green,blue,alpha;
-  int changeddir;
   unsigned char origin;
   FILE *fp;
-
-  changeddir=chdir("texture");
 
   if ((fp=fopen(filename,"rb"))==NULL)
     {
     if (debug_texture_load) printf("Texture \"%s\" failed: fopen error\n",filename);
-
-    if (changeddir==0)
-      chdir("..");
     return -1;
     }
 
@@ -171,11 +161,7 @@ int loadtexturetga(char *filename, void **rgba, int *width, int *height)
   if (tgaheader.imagetypecode!=2 && tgaheader.imagetypecode!=3)
     {
     if (debug_texture_load) printf("Texture \"%s\" failed: bad format\n",filename);
-
     fclose(fp);
-
-    if (changeddir==0)
-      chdir("..");
     return -2;
     }
 
@@ -228,9 +214,6 @@ int loadtexturetga(char *filename, void **rgba, int *width, int *height)
 
   fclose(fp);
 
-  if (changeddir==0)
-    chdir("..");
-
   if ((tgaheader.imagewidth&(tgaheader.imagewidth-1))!=0)
     return -3;
   if ((tgaheader.imageheight&(tgaheader.imageheight-1))!=0)
@@ -248,6 +231,7 @@ int loadtexturetga(char *filename, void **rgba, int *width, int *height)
 
 int loadtexture(int texturenum,char *filename,int mipmap,int wraps,int wrapt,int magfilter,int minfilter)
 {
+	int changeddir;
 	char *extension = filename + strlen(filename);
 	while(*extension != '.' && extension != filename) { extension--; }
 
@@ -261,6 +245,7 @@ int loadtexture(int texturenum,char *filename,int mipmap,int wraps,int wrapt,int
 		texture[texturenum].rgba[0] = NULL;
 	}
 
+	changeddir=chdir("texture");
 	if (strcmp(extension, ".tga") == 0)
 		loadtexturetga(filename, &(texture[texturenum].rgba[0]), &(texture[texturenum].sizex), &(texture[texturenum].sizey));
 	else
@@ -272,6 +257,8 @@ int loadtexture(int texturenum,char *filename,int mipmap,int wraps,int wrapt,int
 
 		loadtexturepng(filename, &(texture[texturenum].rgba[0]), &(texture[texturenum].sizex), &(texture[texturenum].sizey));
 	}
+	if (changeddir==0)
+		chdir("..");
 
 	texture[texturenum].mipmaplevels=1;
 	texture[texturenum].format=GL_RGBA;
