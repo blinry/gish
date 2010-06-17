@@ -46,7 +46,7 @@ _tgaheader tgaheader;
  * This should handle a variety common PNG formats 
  * most importantly 8bit palletized with alpha channel
  */
-int loadtexturepng(int texturenum, char *filename, int mipmap, int wraps, int wrapt, int magfilter, int minfilter)
+int loadtexturepng(char *filename, void **rgba, int *width, int *height)
 {
 	unsigned char header[8];
 	FILE *fp;
@@ -55,7 +55,6 @@ int loadtexturepng(int texturenum, char *filename, int mipmap, int wraps, int wr
 	png_structp png_ptr = NULL;
 	png_infop info_ptr = NULL;
 	int number_passes;
-	_texture *tex;
 	
 	int load_status;
 	
@@ -63,18 +62,16 @@ int loadtexturepng(int texturenum, char *filename, int mipmap, int wraps, int wr
 	
 	changeddir = chdir("texture");
 	
-	if (debug_texture_load) printf("Loading \"%s\" into #%i...\n", filename, texturenum);
-	
 	fp = fopen(filename, "rb");
 	if( fp == NULL ) {
-		if(debug_texture_load) fprintf(stderr, "Texture Load Failed: %s (%d)\n", filename, texturenum);
+		if(debug_texture_load) fprintf(stderr, "Texture Load Failed: %s\n", filename);
 		load_status = -1;
 		goto cleanup;
 	}
 	
 	fread(header, 1, 8, fp);
 	if( png_sig_cmp(header, 0, 8) ) {
-		if(debug_texture_load) fprintf(stderr, "PNG file not recognized: %s (%d)\n", filename, texturenum);
+		if(debug_texture_load) fprintf(stderr, "PNG file not recognized: %s\n", filename);
 		load_status = -2;
 		goto cleanup;
 	}
@@ -86,7 +83,7 @@ int loadtexturepng(int texturenum, char *filename, int mipmap, int wraps, int wr
 	assert( info_ptr );
 	
 	if( setjmp(png_jmpbuf(png_ptr)) ) {
-			if(debug_texture_load) fprintf(stderr, "Error during init_io for %s (%d)\n", filename, texturenum);
+			if(debug_texture_load) fprintf(stderr, "Error during init_io for %s\n", filename);
 			load_status = -3;
 			goto cleanup;
 	}
@@ -122,39 +119,21 @@ int loadtexturepng(int texturenum, char *filename, int mipmap, int wraps, int wr
 		
 	png_start_read_image(png_ptr);
 	png_read_update_info(png_ptr, info_ptr);
-	
-	tex = &texture[texturenum];	
-	tex->sizex=info_ptr->width;
-	tex->sizey=info_ptr->height;
-  tex->mipmaplevels=1;
-  tex->format=GL_RGBA;
-  tex->alphamap=1;
-  tex->normalmap=0;
-  tex->glossmap=0;
-  tex->wraps=wraps;
-  tex->wrapt=wrapt;
-  tex->magfilter=magfilter;
-  tex->minfilter=minfilter;
 
 	if( setjmp(png_jmpbuf(png_ptr)) ) {
-			if(debug_texture_load) fprintf(stderr, "Error during read_image for %s (%d)\n", filename, texturenum);
+			if(debug_texture_load) fprintf(stderr, "Error during read_image for %s\n", filename);
 			load_status = -4;
 			goto cleanup;
 	}
 
-	if( tex->rgba[0] ) {
-		free(tex->rgba[0]);
+	*width = info_ptr->width;
+	*height = info_ptr->height;
+
+	*rgba = (unsigned int *) malloc((*width) * (*height) * 4);
+
+	for( y = 0; y < *height; y++ ) {
+		png_read_row(png_ptr, ((png_bytep)*rgba + (*width * 4 * y)), NULL);
 	}
-  tex->rgba[0] = (unsigned int *) malloc(tex->sizex * tex->sizey * 4);
-	//memset(tex->rgba[0], 0, tex->sizex * tex->sizey * 4);
-	for( y = 0; y < tex->sizey; y++ ) {
-		png_read_row(png_ptr, ((png_bytep)tex->rgba[0] + (tex->sizex * 4 * y)), NULL);
-	}
-	
-	if (mipmap) {
-		generatemipmap(texturenum);
-	}
-  setuptexture(texturenum);
 
 	load_status = 0;
 	
@@ -167,21 +146,20 @@ cleanup:
 	return load_status;
 }
 
-int loadtexturetga(int texturenum,char *filename,int mipmap,int wraps,int wrapt,int magfilter,int minfilter)
+int loadtexturetga(char *filename, void **rgba, int *width, int *height)
   {
+	bool isAlpha = FALSE;
   int count,count2;
   int red,green,blue,alpha;
   int changeddir;
   unsigned char origin;
   FILE *fp;
 
-  if (debug_texture_load) printf("Loading \"%s\" into #%i...\n", filename, texturenum);
-
   changeddir=chdir("texture");
 
   if ((fp=fopen(filename,"rb"))==NULL)
     {
-    if (debug_texture_load) printf("Texture #%d \"%s\" failed: fopen error\n",texturenum, filename);
+    if (debug_texture_load) printf("Texture \"%s\" failed: fopen error\n",filename);
 
     if (changeddir==0)
       chdir("..");
@@ -192,7 +170,7 @@ int loadtexturetga(int texturenum,char *filename,int mipmap,int wraps,int wrapt,
   fread2(&tgaheader.imagetypecode,1,1,fp);
   if (tgaheader.imagetypecode!=2 && tgaheader.imagetypecode!=3)
     {
-    if (debug_texture_load) printf("Texture #%d \"%s\" failed: bad format\n",texturenum, filename);
+    if (debug_texture_load) printf("Texture \"%s\" failed: bad format\n",filename);
 
     fclose(fp);
 
@@ -208,7 +186,7 @@ int loadtexturetga(int texturenum,char *filename,int mipmap,int wraps,int wrapt,
   fread2(&origin,1,1,fp);
   origin=(origin>>4)&3;
 
-  texture[texturenum].isalpha=0;
+  isAlpha = FALSE;
 
   for (count=0;count<tgaheader.imageheight;count++)
   for (count2=0;count2<tgaheader.imagewidth;count2++)
@@ -222,7 +200,7 @@ int loadtexturetga(int texturenum,char *filename,int mipmap,int wraps,int wrapt,
       alpha=255;
 
     if (alpha!=255)
-      texture[texturenum].isalpha=1;
+      isAlpha = TRUE;
 
     if (!bigendian)
       {
@@ -258,29 +236,13 @@ int loadtexturetga(int texturenum,char *filename,int mipmap,int wraps,int wrapt,
   if ((tgaheader.imageheight&(tgaheader.imageheight-1))!=0)
     return -4;
 
-  texture[texturenum].sizex=tgaheader.imagewidth;
-  texture[texturenum].sizey=tgaheader.imageheight;
-  texture[texturenum].mipmaplevels=1;
-  texture[texturenum].format=GL_RGBA;
-  texture[texturenum].alphamap=0;
-  texture[texturenum].normalmap=0;
-  texture[texturenum].glossmap=0;
-  texture[texturenum].wraps=wraps;
-  texture[texturenum].wrapt=wrapt;
-  texture[texturenum].magfilter=magfilter;
-  texture[texturenum].minfilter=minfilter;
+  *width = tgaheader.imagewidth;
+  *height = tgaheader.imageheight;
 
-  free(texture[texturenum].rgba[0]);
-  texture[texturenum].rgba[0]=(unsigned int *) malloc(texture[texturenum].sizex*texture[texturenum].sizey*4);
+  *rgba = (unsigned int *) malloc((*width) * (*height) * 4);
 
-  memcpy(texture[texturenum].rgba[0],tgaheader.imagedata, texture[texturenum].sizex*texture[texturenum].sizey*4);
+  memcpy(*rgba,tgaheader.imagedata, (*width) * (*height) * 4);
 
-  memset(texture[texturenum].filename, 0, 256);
-  strcpy(texture[texturenum].filename,filename);
-
-  if (mipmap)
-    generatemipmap(texturenum);
-  setuptexture(texturenum);
   return 0;
   }
 
@@ -288,18 +250,46 @@ int loadtexture(int texturenum,char *filename,int mipmap,int wraps,int wrapt,int
 {
 	char *extension = filename + strlen(filename);
 	while(*extension != '.' && extension != filename) { extension--; }
+
+	if (debug_texture_load) printf("Loading \"%s\" into #%i...\n", filename, texturenum);
+
 	if (extension == filename) extension = NULL;
 
+	if (texture[texturenum].rgba[0])
+	{
+		free(texture[texturenum].rgba[0]);
+		texture[texturenum].rgba[0] = NULL;
+	}
+
 	if (strcmp(extension, ".tga") == 0)
-		return loadtexturetga(texturenum, filename, mipmap, wraps, wrapt, magfilter, minfilter);
+		loadtexturetga(filename, &(texture[texturenum].rgba[0]), &(texture[texturenum].sizex), &(texture[texturenum].sizey));
 	else
 	{
 		if (extension == NULL)
 			printf("WARNING: No extension found in filename '%s'. Defaulting to png format.", filename);
 		else if (strcmp(extension, ".png") != 0)
 			printf("WARNING: Extension '%s' in filename '%s' not recognized. Defaulting to png format.", extension, filename);
-		return loadtexturepng(texturenum, filename, mipmap, wraps, wrapt, magfilter, minfilter);
+
+		loadtexturepng(filename, &(texture[texturenum].rgba[0]), &(texture[texturenum].sizex), &(texture[texturenum].sizey));
 	}
+
+	texture[texturenum].mipmaplevels=1;
+	texture[texturenum].format=GL_RGBA;
+	texture[texturenum].alphamap=1;
+	texture[texturenum].normalmap=0;
+	texture[texturenum].glossmap=0;
+	texture[texturenum].wraps=wraps;
+	texture[texturenum].wrapt=wrapt;
+	texture[texturenum].magfilter=magfilter;
+	texture[texturenum].minfilter=minfilter;
+
+	if (mipmap) {
+		generatemipmap(texturenum);
+	}
+	setuptexture(texturenum);
+
+	memset(texture[texturenum].filename, 0, 256);
+	strcpy(texture[texturenum].filename,filename);
 }
 void loadtexturetgapartial(int texturenum,char *filename,int startx,int starty,int sizex,int sizey)
   {
@@ -308,7 +298,7 @@ void loadtexturetgapartial(int texturenum,char *filename,int startx,int starty,i
   int changeddir;
   unsigned char origin;
   FILE *fp;
-
+  printf("loadtexturepartial: %s.\n", filename);
   if (strcmp(lasttextureloaded,filename)!=0)
     {
     changeddir=chdir("texture");
