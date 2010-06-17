@@ -23,9 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #ifdef WINDOWS
   #include <io.h>
-#endif
-
-#ifdef LINUX
+#else
   #include <dirent.h>
   #include <sys/stat.h>
 #endif
@@ -109,9 +107,7 @@ void listfiles(char *path,char *filespec,char filelist[1024][32],int directories
   _findclose(handle);
 
   qsort(filelist,count,32,comparestrings);
-#endif
-
-#ifdef LINUX
+#else
   int count;
   struct dirent *dp;
   DIR *dfd;
