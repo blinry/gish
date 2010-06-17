@@ -24,8 +24,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "../video/opengl.h"
 
 #include <stdio.h>
+#include <limits.h>
 
 #include "../video/glfunc.h"
+#include "../game/config.h"
 #include "../video/text.h"
 #include "../sdl/event.h"
 
@@ -145,13 +147,14 @@ void screenshot(void)
   short shorttemp;
   //int inttemp;
   FILE *fp;
+  char path[PATH_MAX];
 
   glReadBuffer(GL_BACK);
   glReadPixels(0,0,windowinfo.resolutionx,windowinfo.resolutiony,GL_RGBA,GL_UNSIGNED_BYTE,screenshotbuffer);
 
   count=0;
 
-  while ((fp=fopen(filename,"rb"))!=NULL && count<1000) 
+  while ((fp=fopen(userpath(path,NULL,filename),"rb"))!=NULL && count<1000)
     {
     count++;
     filename[5]=48+count/100;
@@ -160,7 +163,7 @@ void screenshot(void)
     fclose(fp);
     }
 
-  if((fp=fopen(filename,"wb"))!=NULL)
+  if((fp=fopen(userpath(path,NULL,filename),"wb"))!=NULL)
     {
     bytetemp=0;
     fwrite(&bytetemp,1,1,fp);

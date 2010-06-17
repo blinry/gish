@@ -23,15 +23,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #ifdef WINDOWS
   #include <io.h>
-#endif
-
-#ifdef LINUX
+#else
   #include <dirent.h>
   #include <sys/stat.h>
 #endif
 
 #include <stdlib.h>
 #include <string.h>
+#include <limits.h>
 
 #include "../sdl/file.h"
 
@@ -63,14 +62,19 @@ int checkfilespec(char *filespec,char *filename)
   return(1);
   }
 
-void listfiles(char *filespec,char filelist[1024][32],int directories)
+void listfiles(char *path,char *filespec,char filelist[1024][32],int directories)
   {
 #ifdef WINDOWS
   int count,count2;
   int handle;
   struct _finddata_t fileinfo;
+  size_t len;
 
-  handle=_findfirst(filespec,&fileinfo);
+  len=strlen(path);
+  path[len]='/';
+  strncpy(path+len+1,filespec,PATH_MAX-len-1);
+  path[PATH_MAX-1] = '\0'; /* Safety first! */
+  handle=_findfirst(path,&fileinfo);
 
   count=0;
   count2=handle;
@@ -80,7 +84,8 @@ void listfiles(char *filespec,char filelist[1024][32],int directories)
       {
       if ((fileinfo.attrib&_A_SUBDIR)==0)
         {
-        strcpy(filelist[count],fileinfo.name);
+        strncpy(filelist[count],fileinfo.name,32);
+        filelist[count][31]='\0'; /* Safety first! */
         count++;
         }
       }
@@ -89,7 +94,8 @@ void listfiles(char *filespec,char filelist[1024][32],int directories)
       if ((fileinfo.attrib&_A_SUBDIR)!=0)
       if (fileinfo.name[0]!='.')
         {
-        strcpy(filelist[count],fileinfo.name);
+        strncpy(filelist[count],fileinfo.name,32);
+        filelist[count][31]='\0'; /* Safety first! */
         count++;
         }
       }
@@ -101,29 +107,33 @@ void listfiles(char *filespec,char filelist[1024][32],int directories)
   _findclose(handle);
 
   qsort(filelist,count,32,comparestrings);
-#endif
-
-#ifdef LINUX
+#else
   int count;
   struct dirent *dp;
   DIR *dfd;
   struct stat stbuf;
+  size_t len;
 
-  dfd=opendir(".");
+  len=strlen(path);
+  dfd=opendir(path);
+  path[len]='/';
 
   count=0;
   if (dfd!=NULL)
     {
     while ((dp=readdir(dfd))!=NULL)
       {
-      stat(dp->d_name,&stbuf);
+      strncpy(path+len+1,dp->d_name,PATH_MAX-len-1);
+      path[PATH_MAX-1] = '\0'; /* Safety first! */
+      stat(path,&stbuf);
       if (!directories)
         {
         if ((stbuf.st_mode&S_IFMT)!=S_IFDIR)
         if (dp->d_name[0]!='<')
         if (checkfilespec(filespec,dp->d_name))
           {
-          strcpy(filelist[count],dp->d_name);
+          strncpy(filelist[count],dp->d_name,32);
+          filelist[count][31]='\0'; /* Safety first! */
           count++;
           }
         }
@@ -134,7 +144,8 @@ void listfiles(char *filespec,char filelist[1024][32],int directories)
         if (dp->d_name[0]!='<')
         if (checkfilespec(filespec,dp->d_name))
           { 
-          strcpy(filelist[count],dp->d_name);
+          strncpy(filelist[count],dp->d_name,32);
+          filelist[count][31]='\0'; /* Safety first! */
           count++;
           }
         }
