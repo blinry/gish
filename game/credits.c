@@ -57,18 +57,10 @@ void creditsmenu(void)
     createmenuitem(TXT_BACK,0,0,16,1.0f,1.0f,1.0f,1.0f);
     setmenuitem(MO_HOTKEY,SCAN_ESC);
 
-		count=sizeof(TXT_GISHUSES+1)*12+64;
-    createmenuitem("SDL",count,400,12,1.0f,1.0f,1.0f,1.0f);
-    createmenuitem("OpenGL",count+5*12,400,12,1.0f,1.0f,1.0f,1.0f);
-    createmenuitem("OpenAL",count+5*12+8*12,400,12,1.0f,1.0f,1.0f,1.0f);
-    createmenuitem("Ogg Vorbis",count+5*12+8*12+8*12,400,12,1.0f,1.0f,1.0f,1.0f);
-    createmenuitem("Mendo Mate",64,388,12,1.0f,1.0f,1.0f,1.0f);
-
     checksystemmessages();
     checkkeyboard();
     checkmouse();
     checkjoystick();
-    checkmenuitems();
 
     if (secretsequence==0)
       count2=SCAN_S;
@@ -130,54 +122,65 @@ void creditsmenu(void)
     count+=12;
     drawtext(TXT_DESIGN,64,count,12,0.5f,0.5f,0.5f,1.0f);
     count+=12;
-    drawtext("Edmund McMillen",64,count,12,1.0f,1.0f,1.0f,1.0f);
+    drawtext("Edmund McMillen",64,count,12,1.0f,1.0f,1.0f,1.0f); // original gish
     count+=12;
-    drawtext("Alex Austin",64,count,12,1.0f,1.0f,1.0f,1.0f);
+    drawtext("Alex Austin",64,count,12,1.0f,1.0f,1.0f,1.0f); // original gish
     count+=12;
-    drawtext("Josiah Pisciotta",64,count,12,1.0f,1.0f,1.0f,1.0f);
+    drawtext("Josiah Pisciotta",64,count,12,1.0f,1.0f,1.0f,1.0f); // original gish
     count+=12;
     count+=12;
     drawtext(TXT_PROGRAMMING,64,count,12,0.5f,0.5f,0.5f,1.0f);
     count+=12;
-    drawtext("Alex Austin",64,count,12,1.0f,1.0f,1.0f,1.0f);
+    drawtext("Alex Austin, Josiah Pisciotta",64,count,12,1.0f,1.0f,1.0f,1.0f); // original gish
     count+=12;
-    drawtext("Josiah Pisciotta",64,count,12,1.0f,1.0f,1.0f,1.0f);
+    drawtext("Sebastian Morr, FrozenCow",64,count,12,1.0f,1.0f,1.0f,1.0f); // freegish
+    count+=12;
+    drawtext("Sven-Hendrik Haase, Steve Pinkham, Etam",64,count,12,1.0f,1.0f,1.0f,1.0f); // freegish
+    count+=12;
+    drawtext("Shish Moom, Harry Roberts, James Le Cuirot",64,count,12,1.0f,1.0f,1.0f,1.0f); // freegish
     count+=12;
     count+=12;
     drawtext(TXT_ART,64,count,12,0.5f,0.5f,0.5f,1.0f);
     count+=12;
-    drawtext("Edmund McMillen",64,count,12,1.0f,1.0f,1.0f,1.0f);
+    drawtext("Megagun, Asmageddon",64,count,12,1.0f,1.0f,1.0f,1.0f); // freegish
     count+=12;
     count+=12;
     drawtext(TXT_SOUND_MUSIC,64,count,12,0.5f,0.5f,0.5f,1.0f);
     count+=12;
-    drawtext("Game Audio Magic",64,count,12,1.0f,1.0f,1.0f,1.0f);
+    drawtext("Diablo Swing Orchestra, Gladius Noctis",64,count,12,1.0f,1.0f,1.0f,1.0f); // freegish
     count+=12;
     count+=12;
-    drawtext(TXT_ADDITIONAL_DIALOG,64,count,12,0.5f,0.5f,0.5f,1.0f);
+    /*drawtext(TXT_ADDITIONAL_DIALOG,64,count,12,0.5f,0.5f,0.5f,1.0f);
     count+=12;
-    drawtext("Dave Strock",64,count,12,1.0f,1.0f,1.0f,1.0f);
+    drawtext("Dave Strock",64,count,12,1.0f,1.0f,1.0f,1.0f); // original gish
     count+=12;
     count+=12;
     drawtext(TXT_ADDITIONAL_CONTENT,64,count,12,0.5f,0.5f,0.5f,1.0f);
     count+=12;
-    drawtext("Riftmaster",64,count,12,1.0f,1.0f,1.0f,1.0f);
+    drawtext("Riftmaster",64,count,12,1.0f,1.0f,1.0f,1.0f); // original gish
     count+=12;
-    drawtext("Will Stamper",64,count,12,1.0f,1.0f,1.0f,1.0f);
+    drawtext("Will Stamper",64,count,12,1.0f,1.0f,1.0f,1.0f); // original gish
     count+=12;
-    count+=12;
+    count+=12;*/
     drawtext(TXT_THANKS,64,count,12,0.5f,0.5f,0.5f,1.0f);
     count+=12;
-    drawtext("Ed thanks Danielle",64,count,12,1.0f,1.0f,1.0f,1.0f);
+    drawtext("Ed thanks Danielle",64,count,12,1.0f,1.0f,1.0f,1.0f); // original gish
     count+=12;
-    drawtext("Beta Testers",64,count,12,1.0f,1.0f,1.0f,1.0f);
+    drawtext("Beta Testers",64,count,12,1.0f,1.0f,1.0f,1.0f); // original gish
     count+=12;
-    drawtext("Roy Sawyers",64,count,12,1.0f,1.0f,1.0f,1.0f);
+    drawtext("Roy Sawyers",64,count,12,1.0f,1.0f,1.0f,1.0f); // original gish
     count+=12;
     //drawtext("Mendo Mate",64,count,12,1.0f,1.0f,1.0f,1.0f);
+    createmenuitem("Mendo Mate",64,count,12,1.0f,1.0f,1.0f,1.0f); // original gish
+    count+=12;
     count+=12;
     drawtext(TXT_GISHUSES"    ,       ,       , ",64,count,12,1.0f,1.0f,1.0f,1.0f);
+    createmenuitem("SDL",        sizeof(TXT_GISHUSES)       *12+64,count,12,1.0f,1.0f,1.0f,1.0f);
+    createmenuitem("OpenGL",    (sizeof(TXT_GISHUSES)+5)    *12+64,count,12,1.0f,1.0f,1.0f,1.0f);
+    createmenuitem("OpenAL",    (sizeof(TXT_GISHUSES)+5+8)  *12+64,count,12,1.0f,1.0f,1.0f,1.0f);
+    createmenuitem("Ogg Vorbis",(sizeof(TXT_GISHUSES)+5+8+8)*12+64,count,12,1.0f,1.0f,1.0f,1.0f);
 
+    checkmenuitems();
     drawmenuitems();
 
     drawmousecursor(768+font.cursornum,mouse.x,mouse.y,16,1.0f,1.0f,1.0f,1.0f);
