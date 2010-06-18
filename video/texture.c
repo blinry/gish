@@ -48,97 +48,101 @@ _tgaheader tgaheader;
  */
 int loadtexturepng(char *filename, void **rgba, int *width, int *height)
 {
-	unsigned char header[8];
 	FILE *fp;
-	
-	png_structp png_ptr = NULL;
-	png_infop info_ptr = NULL;
-	int number_passes;
-	
 	int load_status;
 	
-	int y;
-	
-	fp = fopen(filename, "rb");
-	if( fp == NULL ) {
+	if((fp = fopen(filename, "rb")) == NULL)
+	{
 		if(debug_texture_load) fprintf(stderr, "Texture Load Failed: %s\n", filename);
 		load_status = -1;
-		goto cleanup;
 	}
-	
-	fread(header, 1, 8, fp);
-	if( png_sig_cmp(header, 0, 8) ) {
-		if(debug_texture_load) fprintf(stderr, "PNG file not recognized: %s\n", filename);
-		load_status = -2;
-		goto cleanup;
-	}
-	
-	png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
-	assert( png_ptr );
-	
-	info_ptr = png_create_info_struct(png_ptr);
-	assert( info_ptr );
-	
-	if( setjmp(png_jmpbuf(png_ptr)) ) {
-			if(debug_texture_load) fprintf(stderr, "Error during init_io for %s\n", filename);
-			load_status = -3;
-			goto cleanup;
-	}
-	png_init_io(png_ptr, fp);
-	png_set_sig_bytes(png_ptr, 8);
-	png_read_info(png_ptr, info_ptr);
-	
-	/* expand paletted colors into true rgb */
-	if (info_ptr->color_type == PNG_COLOR_TYPE_PALETTE)
-		png_set_expand(png_ptr);
-
-	/* expand grayscale images to the full 8 bits */
-	if (info_ptr->color_type == PNG_COLOR_TYPE_GRAY && info_ptr->bit_depth < 8)
-		png_set_expand(png_ptr);
-
-	/* expand images with transparency to full alpha channels */
-	if (info_ptr->valid & PNG_INFO_tRNS)
-		png_set_expand(png_ptr);
-		
-	/* tell libpng to strip 16 bit depth files down to 8 bits */
-	if (info_ptr->bit_depth == 16)
-		png_set_strip_16(png_ptr);
-		
-	/* fill upto 4 byte RGBA - we always want an alpha channel*/
-	if (info_ptr->bit_depth == 8 && info_ptr->color_type == PNG_COLOR_TYPE_RGB)
-		png_set_filler(png_ptr, 0xff, PNG_FILLER_AFTER);
-	
-	// XXX: is this required? we're not handling interlaced PNGs ...
-	if (info_ptr->interlace_type)
-		number_passes = png_set_interlace_handling(png_ptr);
 	else
-		number_passes = 1;
-		
-	png_start_read_image(png_ptr);
-	png_read_update_info(png_ptr, info_ptr);
+	{
+		unsigned char header[8];
+		fread(header, 1, 8, fp);
+		if(png_sig_cmp(header, 0, 8))
+		{
+			if(debug_texture_load) fprintf(stderr, "PNG file not recognized: %s\n", filename);
+			load_status = -2;
+		}
+		else
+		{
+			png_structp png_ptr;
+			png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
+			if (png_ptr)
+			{
+				png_infop info_ptr;
+				if (info_ptr = png_create_info_struct(png_ptr))
+				{
+					if(setjmp(png_jmpbuf(png_ptr)))
+					{
+						if(debug_texture_load) fprintf(stderr, "Error during init_io for %s\n", filename);
+						load_status = -3;
+					}
+					else
+					{
+						int number_passes;
+						png_init_io(png_ptr, fp);
+						png_set_sig_bytes(png_ptr, 8);
+						png_read_info(png_ptr, info_ptr);
 
-	if( setjmp(png_jmpbuf(png_ptr)) ) {
-			if(debug_texture_load) fprintf(stderr, "Error during read_image for %s\n", filename);
-			load_status = -4;
-			goto cleanup;
+						/* expand paletted colors into true rgb */
+						if (info_ptr->color_type == PNG_COLOR_TYPE_PALETTE)
+							png_set_expand(png_ptr);
+
+						/* expand grayscale images to the full 8 bits */
+						if (info_ptr->color_type == PNG_COLOR_TYPE_GRAY && info_ptr->bit_depth < 8)
+							png_set_expand(png_ptr);
+
+						/* expand images with transparency to full alpha channels */
+						if (info_ptr->valid & PNG_INFO_tRNS)
+							png_set_expand(png_ptr);
+
+						/* tell libpng to strip 16 bit depth files down to 8 bits */
+						if (info_ptr->bit_depth == 16)
+							png_set_strip_16(png_ptr);
+
+						/* fill upto 4 byte RGBA - we always want an alpha channel*/
+						if (info_ptr->bit_depth == 8 && info_ptr->color_type != PNG_COLOR_TYPE_RGB_ALPHA)
+							png_set_filler(png_ptr, 0xff, PNG_FILLER_AFTER);
+
+						// XXX: is this required? we're not handling interlaced PNGs ...
+						if (info_ptr->interlace_type)
+							number_passes = png_set_interlace_handling(png_ptr);
+						else
+							number_passes = 1;
+
+						png_start_read_image(png_ptr);
+						//png_read_update_info(png_ptr, info_ptr);
+
+						if(setjmp(png_jmpbuf(png_ptr)))
+						{
+							if(debug_texture_load) fprintf(stderr, "Error during read_image for %s\n", filename);
+							load_status = -4;
+						}
+						else
+						{
+							int w, h, y;
+							w = info_ptr->width;
+							h = info_ptr->height;
+							*width = w;
+							*height = h;
+							*rgba = (unsigned int *) malloc(w*h*4);
+							memset(*rgba, 0, w*h*4);
+							for(y = 0; y < h; y++)
+								png_read_row(png_ptr, ((png_bytep)*rgba + (w*4*y)), NULL);
+							load_status = 0;
+						}
+					}
+					png_read_end(png_ptr, info_ptr);
+					png_destroy_read_struct(&png_ptr, &info_ptr, (png_infop*)0);
+				}
+				free(info_ptr);
+			}
+			free(png_ptr);
+		}
+		fclose(fp);
 	}
-
-	*width = info_ptr->width;
-	*height = info_ptr->height;
-
-	*rgba = (unsigned int *) malloc((*width) * (*height) * 4);
-
-	for( y = 0; y < *height; y++ ) {
-		png_read_row(png_ptr, ((png_bytep)*rgba + (*width * 4 * y)), NULL);
-	}
-
-	load_status = 0;
-	
-cleanup:
-	png_destroy_read_struct(&png_ptr, &info_ptr, (png_infop*)0);
-	free(png_ptr);
-	free(info_ptr);
-	if(fp) fclose(fp);
 	return load_status;
 }
 
