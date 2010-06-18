@@ -5,6 +5,11 @@ project(Gish C)
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake-extras/;${CMAKE_MODULE_PATH}")
 set(EXECUTABLE_OUTPUT_PATH "${PROJECT_SOURCE_DIR}")
 
+# Uncomment this to hardcode the data path. On the command line, you
+# would actually give -DDATAPATH='"/usr/share/games/gish"' or similar
+# but CMake does the extra quoting for us.
+#add_definitions(-DDATAPATH="/usr/share/games/gish")
+
 find_package(SDL REQUIRED)
 find_package(OpenAL REQUIRED)
 find_package(OpenGL REQUIRED)
