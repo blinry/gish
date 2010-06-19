@@ -140,12 +140,12 @@ void mainmenu(void)
   loadbackground(600,"vsmode.tga");
   loadbackground(620,"storymode.tga");
 
-  loadtexturetgapartial(640,"border.tga",0,0,256,256);
-  loadtexturetgapartial(641,"border.tga",256,0,256,256);
-  loadtexturetgapartial(642,"border.tga",512,0,256,256);
-  loadtexturetgapartial(643,"border.tga",0,256,256,256);
-  loadtexturetgapartial(644,"border.tga",256,256,256,256);
-  loadtexturetgapartial(645,"border.tga",512,256,256,256);
+  loadtexturepartial(640,"border.tga",0,0,256,256);
+  loadtexturepartial(641,"border.tga",256,0,256,256);
+  loadtexturepartial(642,"border.tga",512,0,256,256);
+  loadtexturepartial(643,"border.tga",0,256,256,256);
+  loadtexturepartial(644,"border.tga",256,256,256,256);
+  loadtexturepartial(645,"border.tga",512,256,256,256);
 
   loadtexture(820,"gishwin.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
   loadtexture(821,"graywin.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
@@ -371,18 +371,18 @@ void mainmenu(void)
 
 void loadbackground(int texturenum,char *filename)
   {
-  loadtexturetgapartial(texturenum,filename,0,0,256,256);
-  loadtexturetgapartial(texturenum+1,filename,256,0,256,256);
-  loadtexturetgapartial(texturenum+2,filename,512,0,256,256);
-  loadtexturetgapartial(texturenum+3,filename,768,0,256,256);
-  loadtexturetgapartial(texturenum+4,filename,0,256,256,256);
-  loadtexturetgapartial(texturenum+5,filename,256,256,256,256);
-  loadtexturetgapartial(texturenum+6,filename,512,256,256,256);
-  loadtexturetgapartial(texturenum+7,filename,768,256,256,256);
-  loadtexturetgapartial(texturenum+8,filename,0,512,256,256);
-  loadtexturetgapartial(texturenum+9,filename,256,512,256,256);
-  loadtexturetgapartial(texturenum+10,filename,512,512,256,256);
-  loadtexturetgapartial(texturenum+11,filename,768,512,256,256);
+  loadtexturepartial(texturenum,filename,0,0,256,256);
+  loadtexturepartial(texturenum+1,filename,256,0,256,256);
+  loadtexturepartial(texturenum+2,filename,512,0,256,256);
+  loadtexturepartial(texturenum+3,filename,768,0,256,256);
+  loadtexturepartial(texturenum+4,filename,0,256,256,256);
+  loadtexturepartial(texturenum+5,filename,256,256,256,256);
+  loadtexturepartial(texturenum+6,filename,512,256,256,256);
+  loadtexturepartial(texturenum+7,filename,768,256,256,256);
+  loadtexturepartial(texturenum+8,filename,0,512,256,256);
+  loadtexturepartial(texturenum+9,filename,256,512,256,256);
+  loadtexturepartial(texturenum+10,filename,512,512,256,256);
+  loadtexturepartial(texturenum+11,filename,768,512,256,256);
   }
 
 void displaybackground(int texturenum)

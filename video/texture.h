@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 int loadtexturepng(char *filename, void **rgba, int *width, int *height);
 int loadtexturetga(char *filename, void **rgba, int *width, int *height);
 int loadtexture(int texturenum,char *filename,int mipmap,int wraps,int wrapt,int magfilter,int minfilter);
-void loadtexturetgapartial(int texturenum,char *filename,int startx,int starty,int sizex,int sizey);
+void loadtexturepartial(int texturenum,char *filename,int startx,int starty,int sizex,int sizey);
 void generatemipmap(int texturenum);
 void setuptexture(int texturenum);
 

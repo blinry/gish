@@ -690,7 +690,6 @@ void loadlevel(char *filename)
 		loadleveltextures();
 	else
 	{
-		lasttextureloaded[0]=0;
 		if (level.background[0]!=0)
 			loadbackground(660,level.background);
 	}
@@ -948,7 +947,6 @@ void loadleveltextures(void)
 
   changeddir=changetilesetdir();
 
-  lasttextureloaded[0]=0;
   loadbackground(660,"bg.tga");
 
   for (count=1;count<251;count++)

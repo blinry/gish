@@ -38,7 +38,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "../sdl/endian.h"
 #include "../sdl/file.h"
 
-char lasttextureloaded[32];
+unsigned int *lastrgba = NULL;
+int lastfullwidth, lastfullheight;
+char lastfilename[256] = "";
 _texture texture[2048];
 _tgaheader tgaheader;
 
@@ -218,10 +220,10 @@ int loadtexturetga(char *filename, void **rgba, int *width, int *height)
 
   fclose(fp);
 
-  if ((tgaheader.imagewidth&(tgaheader.imagewidth-1))!=0)
-    return -3;
-  if ((tgaheader.imageheight&(tgaheader.imageheight-1))!=0)
-    return -4;
+  //if ((tgaheader.imagewidth&(tgaheader.imagewidth-1))!=0)
+  //  return -3;
+  //if ((tgaheader.imageheight&(tgaheader.imageheight-1))!=0)
+  //  return -4;
 
   *width = tgaheader.imagewidth;
   *height = tgaheader.imageheight;
@@ -233,26 +235,18 @@ int loadtexturetga(char *filename, void **rgba, int *width, int *height)
   return 0;
   }
 
-int loadtexture(int texturenum,char *filename,int mipmap,int wraps,int wrapt,int magfilter,int minfilter)
+int loadtexturefile(char *filename, void **rgba, int *width, int *height)
 {
 	int changeddir;
 	int result;
 	char *extension = filename + strlen(filename);
 	while(*extension != '.' && extension != filename) { extension--; }
 
-	if (debug_texture_load) printf("Loading \"%s\" into #%i...\n", filename, texturenum);
-
 	if (extension == filename) extension = NULL;
-
-	if (texture[texturenum].rgba[0])
-	{
-		free(texture[texturenum].rgba[0]);
-		texture[texturenum].rgba[0] = NULL;
-	}
 
 	changeddir=chdir("texture");
 	if (strcmp(extension, ".tga") == 0)
-		result = loadtexturetga(filename, &(texture[texturenum].rgba[0]), &(texture[texturenum].sizex), &(texture[texturenum].sizey));
+		result = loadtexturetga(filename, rgba, width, height);
 	else
 	{
 		if (extension == NULL)
@@ -260,10 +254,24 @@ int loadtexture(int texturenum,char *filename,int mipmap,int wraps,int wrapt,int
 		else if (strcmp(extension, ".png") != 0)
 			printf("WARNING: Extension '%s' in filename '%s' not recognized. Defaulting to png format.", extension, filename);
 
-		result = loadtexturepng(filename, &(texture[texturenum].rgba[0]), &(texture[texturenum].sizex), &(texture[texturenum].sizey));
+		result = loadtexturepng(filename, rgba, width, height);
 	}
 	if (changeddir==0)
 		chdir("..");
+	return result;
+}
+int loadtexture(int texturenum,char *filename,int mipmap,int wraps,int wrapt,int magfilter,int minfilter)
+{
+	int result;
+
+	if (debug_texture_load) printf("Loading \"%s\" into #%i...\n", filename, texturenum);
+
+	if (texture[texturenum].rgba[0])
+	{
+		free(texture[texturenum].rgba[0]);
+		texture[texturenum].rgba[0] = NULL;
+	}
+	result = loadtexturefile(filename, &(texture[texturenum].rgba[0]), &(texture[texturenum].sizex), &(texture[texturenum].sizey));
 
 	texture[texturenum].mipmaplevels=1;
 	texture[texturenum].format=GL_RGBA;
@@ -285,125 +293,72 @@ int loadtexture(int texturenum,char *filename,int mipmap,int wraps,int wrapt,int
 
 	return result;
 }
-void loadtexturetgapartial(int texturenum,char *filename,int startx,int starty,int sizex,int sizey)
-  {
-  int count,count2;
-  int red,green,blue,alpha;
-  int changeddir;
-  unsigned char origin;
-  FILE *fp;
-  printf("loadtexturepartial: %s.\n", filename);
-  if (strcmp(lasttextureloaded,filename)!=0)
-    {
-    changeddir=chdir("texture");
-  
-    if ((fp=fopen(filename,"rb"))==NULL)
-      {
-      if (debug_texture_load) printf("Texture Load Failed: %d\n",texturenum);
+void loadtexturepartial(int texturenum,char *filename,int startx,int starty,int sizex,int sizey)
+{
+	int result;
+	unsigned int *fullrgba;
+	int fullwidth, fullheight;
+	int x, y;
 
-      if (changeddir==0)
-        chdir("..");
-      return;
-      }
-  
-    fseek(fp,2,SEEK_CUR);
-    fread2(&tgaheader.imagetypecode,1,1,fp);
-    if (tgaheader.imagetypecode!=2 && tgaheader.imagetypecode!=3)
-      {
-      if (debug_texture_load) printf("Texture Bad Format: %d\n",texturenum);
-  
-      fclose(fp);
-  
-      if (changeddir==0)
-        chdir("..");
-      return;
-      }
-  
-    fseek(fp,9,SEEK_CUR);
-    fread2(&tgaheader.imagewidth,2,1,fp);
-    fread2(&tgaheader.imageheight,2,1,fp);
-    fread2(&tgaheader.pixeldepth,1,1,fp);
-    fread2(&origin,1,1,fp);
-    origin=(origin>>4)&3;
-  
-    for (count=0;count<tgaheader.imageheight;count++)
-    for (count2=0;count2<tgaheader.imagewidth;count2++)
-      {
-      blue=fgetc(fp);
-      green=fgetc(fp);
-      red=fgetc(fp);
-      if (tgaheader.pixeldepth==32)
-        alpha=fgetc(fp);
-      else
-        alpha=255;
-  
-    if (!bigendian)
-      {
-      if (origin==0)
-        tgaheader.imagedata[(tgaheader.imageheight-1-count)*tgaheader.imagewidth+count2]=(alpha<<24)+(blue<<16)+(green<<8)+red;
-      if (origin==1)
-        tgaheader.imagedata[(tgaheader.imageheight-1-count)*tgaheader.imagewidth+(tgaheader.imagewidth-1-count2)]=(alpha<<24)+(blue<<16)+(green<<8)+red;
-      if (origin==2)
-        tgaheader.imagedata[count*tgaheader.imagewidth+count2]=(alpha<<24)+(blue<<16)+(green<<8)+red;
-      if (origin==3)
-        tgaheader.imagedata[count*tgaheader.imagewidth+(tgaheader.imagewidth-1-count2)]=(alpha<<24)+(blue<<16)+(green<<8)+red;
-      }
-    else
-      {
-      if (origin==0)
-        tgaheader.imagedata[(tgaheader.imageheight-1-count)*tgaheader.imagewidth+count2]=(red<<24)+(green<<16)+(blue<<8)+alpha;
-      if (origin==1)
-        tgaheader.imagedata[(tgaheader.imageheight-1-count)*tgaheader.imagewidth+(tgaheader.imagewidth-1-count2)]=(red<<24)+(green<<16)+(blue<<8)+alpha;
-      if (origin==2)
-        tgaheader.imagedata[count*tgaheader.imagewidth+count2]=(red<<24)+(green<<16)+(blue<<8)+alpha;
-      if (origin==3)
-        tgaheader.imagedata[count*tgaheader.imagewidth+(tgaheader.imagewidth-1-count2)]=(red<<24)+(green<<16)+(blue<<8)+alpha;
-      }
-    }
-  
-    fclose(fp);
-  
-    if (changeddir==0)
-      chdir("..");
+	if (debug_texture_load) printf("Loading \"%s\" partially into #%i...\n", filename, texturenum);
 
-    strcpy(lasttextureloaded,filename);
-    }
+	if (texture[texturenum].rgba[0])
+	{
+		free(texture[texturenum].rgba[0]);
+		texture[texturenum].rgba[0] = NULL;
+	}
 
-  texture[texturenum].sizex=sizex;
-  texture[texturenum].sizey=sizey;
-  texture[texturenum].mipmaplevels=1;
-  texture[texturenum].format=GL_RGBA;
-  texture[texturenum].alphamap=0;
-  texture[texturenum].normalmap=0;
-  texture[texturenum].glossmap=0;
-  texture[texturenum].wraps=GL_CLAMP;
-  texture[texturenum].wrapt=GL_CLAMP;
-  texture[texturenum].magfilter=GL_NEAREST;
-  texture[texturenum].minfilter=GL_NEAREST;
+	if (strcmp(lastfilename, filename) == 0)
+	{
+		fullrgba = lastrgba;
+		fullwidth = lastfullwidth;
+		fullheight = lastfullheight;
+	}
+	else
+	{
+		result = loadtexturefile(filename, &fullrgba, &fullwidth, &fullheight);
 
-  free(texture[texturenum].rgba[0]);
-  texture[texturenum].rgba[0]=(unsigned int *) malloc(texture[texturenum].sizex*texture[texturenum].sizey*4);
+		if (result != 0)
+			return;
 
-  for (count=0;count<texture[texturenum].sizey;count++)
-  if (count<tgaheader.imageheight)
-  for (count2=0;count2<texture[texturenum].sizex;count2++)
-  if (count2<tgaheader.imagewidth)
-    {
-    texture[texturenum].rgba[0][count*texture[texturenum].sizex+count2]=tgaheader.imagedata[(starty+count)*tgaheader.imagewidth+(startx+count2)];
-    if (!bigendian)
-      {
-      if ((texture[texturenum].rgba[0][count*texture[texturenum].sizex+count2]>>24)!=255)
-        texture[texturenum].alphamap=1;
-      }
-    else
-      {
-      if ((texture[texturenum].rgba[0][count*texture[texturenum].sizex+count2]&255)!=255)
-        texture[texturenum].alphamap=1;
-      }
-    }
+		if (lastrgba)
+			free(lastrgba);
 
-  setuptexture(texturenum);
-  }
+		strcpy(lastfilename, filename);
+		lastrgba = fullrgba;
+		lastfullwidth = fullwidth;
+		lastfullheight = fullheight;
+	}
+
+	texture[texturenum].rgba[0] = (unsigned int *)malloc(sizex*sizey*4);
+
+	memset(texture[texturenum].rgba[0], 128, sizex*sizey*4);
+	{
+		int maxy = min(fullheight, starty+sizey)-starty;
+		for (y = 0; y < maxy; y++)
+		{
+			int maxx = min(fullwidth, startx+sizex)-startx;
+			for (x = 0; x < maxx; x++)
+			{
+				texture[texturenum].rgba[0][x + y * sizex]=fullrgba[(startx+x) + (starty+y) * fullwidth];
+			}
+		}
+	}
+
+	texture[texturenum].sizex = sizex;
+	texture[texturenum].sizey = sizey;
+	texture[texturenum].mipmaplevels=1;
+	texture[texturenum].format=GL_RGBA;
+	texture[texturenum].alphamap=1;
+	texture[texturenum].normalmap=0;
+	texture[texturenum].glossmap=0;
+	texture[texturenum].wraps=GL_CLAMP;
+	texture[texturenum].wrapt=GL_CLAMP;
+	texture[texturenum].magfilter=GL_NEAREST;
+	texture[texturenum].minfilter=GL_NEAREST;
+	texture[texturenum].filename[0] = 0;
+	setuptexture(texturenum);
+}
 
 void generatemipmap(int texturenum)
   {
