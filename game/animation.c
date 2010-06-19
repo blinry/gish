@@ -391,7 +391,7 @@ void loadanimations(void)
   {
   int count,count2;
   int changeddir;
-  char filename[32]="bibatk01.tga";
+  char filename[32]="bibatk01.png";
 
   changeddir=chdir("animation");
 
@@ -597,23 +597,23 @@ void loadanimations(void)
     count2+=32;
   
     animation[count2].stand[0]=numofanimations;
-    loadtexture(numofanimations,"mumhed01.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"mumhed01.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].walk[0]=numofanimations;
-    loadtexture(numofanimations,"mumhed02.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"mumhed02.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].attack[0]=numofanimations;
-    loadtexture(numofanimations,"mumhed03.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"mumhed03.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].stand[1]=numofanimations;
-    loadtexture(numofanimations,"mumhed05.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"mumhed05.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].die[0]=numofanimations;
-    loadtexture(numofanimations,"mumhed06.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"mumhed06.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
     }
 
@@ -669,23 +669,23 @@ void loadanimations(void)
     count2+=32;
   
     animation[count2].stand[0]=numofanimations;
-    loadtexture(numofanimations,"sklhed01.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"sklhed01.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].walk[0]=numofanimations;
-    loadtexture(numofanimations,"sklhed02.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"sklhed02.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].attack[0]=numofanimations;
-    loadtexture(numofanimations,"sklhed03.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"sklhed03.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].stand[1]=numofanimations;
-    loadtexture(numofanimations,"sklhed05.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"sklhed05.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].die[0]=numofanimations;
-    loadtexture(numofanimations,"sklhed06.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"sklhed06.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
     }
 
@@ -741,23 +741,23 @@ void loadanimations(void)
     count2+=32;
   
     animation[count2].stand[0]=numofanimations;
-    loadtexture(numofanimations,"zomhed01.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"zomhed01.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].walk[0]=numofanimations;
-    loadtexture(numofanimations,"zomhed02.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"zomhed02.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].attack[0]=numofanimations;
-    loadtexture(numofanimations,"zomhed03.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"zomhed03.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].stand[1]=numofanimations;
-    loadtexture(numofanimations,"zomhed05.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"zomhed05.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].die[0]=numofanimations;
-    loadtexture(numofanimations,"zomhed06.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"zomhed06.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
     }
 
@@ -813,23 +813,23 @@ void loadanimations(void)
     count2+=32;
   
     animation[count2].stand[0]=numofanimations;
-    loadtexture(numofanimations,"gimhed01.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"gimhed01.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].walk[0]=numofanimations;
-    loadtexture(numofanimations,"gimhed02.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"gimhed02.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].attack[0]=numofanimations;
-    loadtexture(numofanimations,"gimhed03.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"gimhed03.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].stand[1]=numofanimations;
-    loadtexture(numofanimations,"gimhed05.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"gimhed05.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].die[0]=numofanimations;
-    loadtexture(numofanimations,"gimhed06.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"gimhed06.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
     }
 
@@ -985,23 +985,23 @@ void loadanimations(void)
     count2+=32;
 
     animation[count2].stand[0]=numofanimations;
-    loadtexture(numofanimations,"gimhed01.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"gimhed01.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].walk[0]=numofanimations;
-    loadtexture(numofanimations,"gimhed02.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"gimhed02.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].attack[0]=numofanimations;
-    loadtexture(numofanimations,"gimhed03.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"gimhed03.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].stand[1]=numofanimations;
-    loadtexture(numofanimations,"gimhed05.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"gimhed05.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].die[0]=numofanimations;
-    loadtexture(numofanimations,"gimhed06.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"gimhed06.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
     }
 
@@ -1057,23 +1057,23 @@ void loadanimations(void)
     count2+=32;
   
     animation[count2].stand[0]=numofanimations;
-    loadtexture(numofanimations,"frkhed01.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"frkhed01.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].walk[0]=numofanimations;
-    loadtexture(numofanimations,"frkhed02.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"frkhed02.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].attack[0]=numofanimations;
-    loadtexture(numofanimations,"frkhed03.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"frkhed03.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].stand[1]=numofanimations;
-    loadtexture(numofanimations,"frkhed05.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"frkhed05.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
   
     animation[count2].die[0]=numofanimations;
-    loadtexture(numofanimations,"frkhed06.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+    loadtexture(numofanimations,"frkhed06.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     numofanimations++;
     }
 

@@ -571,7 +571,7 @@ void editblock(void)
   float friction;
   float vec[3]/*,vec2[3]*/;
   //float normal[3];
-  //char filename[13]="text000.tga";
+  //char filename[13]="text000.png";
   //int changeddir;
 
   /*

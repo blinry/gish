@@ -74,7 +74,7 @@ void gameloop(void)
   int simcount;
   int frametimer,fps;
   //float vec[3];
-  //char filename[13]="text000.tga";
+  //char filename[13]="text000.png";
   int scorenum;
   //unsigned int x;
 

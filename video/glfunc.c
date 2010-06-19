@@ -141,7 +141,7 @@ void setupobjectrender(float *position,float orientation[3][3])
 void screenshot(void)
   {
   int count,count2;
-  char filename[16]="scsht000.tga";
+  char filename[16]="scsht000.png";
   int red,green,blue;
   unsigned char bytetemp;
   short shorttemp;

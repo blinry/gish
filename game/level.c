@@ -694,11 +694,11 @@ void loadlevel(char *filename)
 			loadbackground(660,level.background);
 	}
 
-	loadtexture(251,"oneup.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
-	loadtexture(252,"tarball.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
-	loadtexture(253,"amber1.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
-	loadtexture(254,"amber2.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
-	loadtexture(255,"amber3.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+	loadtexture(251,"oneup.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+	loadtexture(252,"tarball.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+	loadtexture(253,"amber1.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+	loadtexture(254,"amber2.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+	loadtexture(255,"amber3.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
     }
   }
 
@@ -742,11 +742,11 @@ void createlevel(void)
 
   loadleveltextures();
 
-  loadtexture(251,"oneup.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
-  loadtexture(252,"tarball.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
-  loadtexture(253,"amber1.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
-  loadtexture(254,"amber2.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
-  loadtexture(255,"amber3.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+  loadtexture(251,"oneup.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+  loadtexture(252,"tarball.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+  loadtexture(253,"amber1.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+  loadtexture(254,"amber2.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+  loadtexture(255,"amber3.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
 
   editor.filename[0]=0;
   }
@@ -943,11 +943,11 @@ void loadleveltextures(void)
   {
   int count;
   int changeddir;
-  char texfilename[32]="text000.tga";
+  char texfilename[32]="text000.png";
 
   changeddir=changetilesetdir();
 
-  loadbackground(660,"bg.tga");
+  loadbackground(660,"bg.png");
 
   for (count=1;count<251;count++)
     loadblock(count);

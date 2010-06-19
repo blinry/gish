@@ -378,7 +378,7 @@ void loadtilesettemp(void)
   {
   int count;
   int changeddir;
-  char texfilename[13]="text000.tga";
+  char texfilename[13]="text000.png";
 
   changeddir=1;
 
@@ -664,9 +664,9 @@ void loadleveltiles(char *filename)
   if (changeddir==0)
     chdir("..");
 
-  loadtexture(251,"oneup.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
-  loadtexture(252,"tarball.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
-  loadtexture(253,"amber1.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
-  loadtexture(254,"amber2.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
-  loadtexture(255,"amber3.tga",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+  loadtexture(251,"oneup.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+  loadtexture(252,"tarball.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+  loadtexture(253,"amber1.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+  loadtexture(254,"amber2.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
+  loadtexture(255,"amber3.png",0,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_LINEAR,GL_LINEAR);
   }
