@@ -48,7 +48,7 @@ _tgaheader tgaheader;
  * This should handle a variety common PNG formats 
  * most importantly 8bit palletized with alpha channel
  */
-int loadtexturepng(char *filename, void **rgba, int *width, int *height)
+int loadtexturepng(char *filename, unsigned int **rgba, int *width, int *height)
 {
 	FILE *fp;
 	int load_status;
@@ -148,7 +148,7 @@ int loadtexturepng(char *filename, void **rgba, int *width, int *height)
 	return load_status;
 }
 
-int loadtexturetga(char *filename, void **rgba, int *width, int *height)
+int loadtexturetga(char *filename, unsigned int **rgba, int *width, int *height)
   {
 	bool isAlpha = FALSE;
   int count,count2;
@@ -235,7 +235,7 @@ int loadtexturetga(char *filename, void **rgba, int *width, int *height)
   return 0;
   }
 
-int loadtexturefile(char *filename, void **rgba, int *width, int *height)
+int loadtexturefile(char *filename, unsigned int **rgba, int *width, int *height)
 {
 	int changeddir;
 	int result;
