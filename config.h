@@ -27,6 +27,14 @@
 #define PATH_MAX 256
 #endif
 
+#ifndef min
+#define min(x1,x2) ((x1) > (x2) ? (x2):(x1))
+#endif
+
+#ifndef max
+#define max(x1,x2) ((x1) > (x2) ? (x1):(x2))
+#endif
+
 typedef enum {FALSE = 0, TRUE = 1} bool;
 
 #endif /* GISH_CONFIG_H */
