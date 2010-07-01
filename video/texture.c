@@ -48,7 +48,7 @@ _tgaheader tgaheader;
  * This should handle a variety common PNG formats 
  * most importantly 8bit palletized with alpha channel
  */
-int loadtexturepng(char *filename, unsigned int **rgba, int *width, int *height)
+int loadtexturepng(const char *filename, unsigned int **rgba, int *width, int *height)
 {
 	FILE *fp;
 	int load_status;
@@ -148,7 +148,7 @@ int loadtexturepng(char *filename, unsigned int **rgba, int *width, int *height)
 	return load_status;
 }
 
-int loadtexturetga(char *filename, unsigned int **rgba, int *width, int *height)
+int loadtexturetga(const char *filename, unsigned int **rgba, int *width, int *height)
   {
 	bool isAlpha = FALSE;
   int count,count2;
@@ -235,7 +235,7 @@ int loadtexturetga(char *filename, unsigned int **rgba, int *width, int *height)
   return 0;
   }
 
-int loadtexturefile(char *filename, unsigned int **rgba, int *width, int *height)
+int loadtexturefile(const char *filename, unsigned int **rgba, int *width, int *height)
 {
 	int changeddir;
 	int result;
@@ -255,12 +255,21 @@ int loadtexturefile(char *filename, unsigned int **rgba, int *width, int *height
 			printf("WARNING: Extension '%s' in filename '%s' not recognized. Defaulting to png format.", extension, filename);
 
 		result = loadtexturepng(filename, rgba, width, height);
+
+		// fopen failed loading .png: try to load .tga
+		if (result == -1)
+		{
+			const char tgaFilename[extension - filename + 5];
+			strcpy(tgaFilename, filename);
+			strcpy(tgaFilename + (extension - filename), ".tga");
+			result = loadtexturefile(tgaFilename, rgba, width, height);
+		}
 	}
 	if (changeddir==0)
 		chdir("..");
 	return result;
 }
-int loadtexture(int texturenum,char *filename,int mipmap,int wraps,int wrapt,int magfilter,int minfilter)
+int loadtexture(int texturenum,const char *filename,int mipmap,int wraps,int wrapt,int magfilter,int minfilter)
 {
 	int result;
 
@@ -271,6 +280,7 @@ int loadtexture(int texturenum,char *filename,int mipmap,int wraps,int wrapt,int
 		free(texture[texturenum].rgba[0]);
 		texture[texturenum].rgba[0] = NULL;
 	}
+
 	result = loadtexturefile(filename, &(texture[texturenum].rgba[0]), &(texture[texturenum].sizex), &(texture[texturenum].sizey));
 
 	texture[texturenum].mipmaplevels=1;
@@ -293,7 +303,7 @@ int loadtexture(int texturenum,char *filename,int mipmap,int wraps,int wrapt,int
 
 	return result;
 }
-void loadtexturepartial(int texturenum,char *filename,int startx,int starty,int sizex,int sizey)
+void loadtexturepartial(int texturenum,const char *filename,int startx,int starty,int sizex,int sizey)
 {
 	int result;
 	unsigned int *fullrgba;

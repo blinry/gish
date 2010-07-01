@@ -23,10 +23,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "../video/opengl.h"
 
-int loadtexturepng(char *filename, unsigned int **rgba, int *width, int *height);
-int loadtexturetga(char *filename, unsigned int **rgba, int *width, int *height);
-int loadtexture(int texturenum,char *filename,int mipmap,int wraps,int wrapt,int magfilter,int minfilter);
-void loadtexturepartial(int texturenum,char *filename,int startx,int starty,int sizex,int sizey);
+int loadtexturepng(const char *filename, unsigned int **rgba, int *width, int *height);
+int loadtexturetga(const char *filename, unsigned int **rgba, int *width, int *height);
+int loadtexture(int texturenum,const char *filename,int mipmap,int wraps,int wrapt,int magfilter,int minfilter);
+void loadtexturepartial(int texturenum,const char *filename,int startx,int starty,int sizex,int sizey);
 void generatemipmap(int texturenum);
 void setuptexture(int texturenum);
 
