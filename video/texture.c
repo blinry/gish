@@ -259,10 +259,12 @@ int loadtexturefile(const char *filename, unsigned int **rgba, int *width, int *
 		// fopen failed loading .png: try to load .tga
 		if (result == -1)
 		{
-			const char tgaFilename[extension - filename + 5];
+			char *tgaFilename;
+			tgaFilename = (char*)malloc(extension - filename + 5);
 			strcpy(tgaFilename, filename);
 			strcpy(tgaFilename + (extension - filename), ".tga");
 			result = loadtexturefile(tgaFilename, rgba, width, height);
+			free(tgaFilename);
 		}
 	}
 	if (changeddir==0)
