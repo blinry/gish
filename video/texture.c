@@ -269,6 +269,12 @@ int loadtexturefile(const char *filename, unsigned int **rgba, int *width, int *
 	}
 	if (changeddir==0)
 		chdir("..");
+
+	if (result != 0)
+	{
+		(*width) = 0;
+		(*height) = 0;
+	}
 	return result;
 }
 int loadtexture(int texturenum,const char *filename,int mipmap,int wraps,int wrapt,int magfilter,int minfilter)
