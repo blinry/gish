@@ -1,2 +1,2 @@
-Gishleveltool is in the Public Domain
+GishLevelTool is licensed under the Public Domain, with the exception of the "FileTree.java" file, which is licensed under the Simplified BSD License.
 Have fun. :)

@@ -1,11 +1,11 @@
-The contents of
+FreeGish uses a few mixed licenses.
 
-- animation
-- sound
-- texture
-- tile01
-- tile02
-- tile03
-
-were created by Megagun and are licensed under
+UNLESS OTHERWISE NOTED (see text files in directories!) content is licensed under the Creative Commons attribution-shareAlike license:
 http://creativecommons.org/licenses/by-sa/3.0/
+
+
+
+
+
+The sourcecodes are licenced under the GPL (see COPYING.txt)
+
