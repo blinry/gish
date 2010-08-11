@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <stdio.h>
 #include <limits.h>
 
-#ifdef LINUX
+#if defined(LINUX) || defined(__FreeBSD__)
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -47,7 +47,7 @@ _config config;
 
 char* userpath(char *result, char *path)
   {
-#ifdef LINUX
+#if defined(LINUX) || defined(__FreeBSD__)
   char *home=getenv("HOME");
 
   if (!home)

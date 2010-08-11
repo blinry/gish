@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
   #include <io.h>
 #endif
 
-#ifdef LINUX
+#if defined(LINUX) || defined(__FreeBSD__)
   #include <dirent.h>
   #include <sys/stat.h>
 #endif
@@ -103,7 +103,7 @@ void listfiles(char *filespec,char filelist[1024][32],int directories)
   qsort(filelist,count,32,comparestrings);
 #endif
 
-#ifdef LINUX
+#if defined(LINUX) || defined(__FreeBSD__)
   int count;
   struct dirent *dp;
   DIR *dfd;
