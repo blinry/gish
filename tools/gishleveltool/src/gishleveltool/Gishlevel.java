@@ -10,9 +10,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.EOFException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
@@ -20,7 +22,7 @@ public class Gishlevel {
 
     static int BITYPE = BufferedImage.TYPE_4BYTE_ABGR;
     byte[] version = new byte[4];
-    byte[][] level_background = new byte[32][1];
+    byte[] level_background = new byte[32];
     byte[] level_tileset = new byte[4];
     byte[] level_gametype = new byte[4];
     byte[] level_time = new byte[4];
@@ -107,10 +109,20 @@ public class Gishlevel {
          */
 
         fs.read(version);
-        for (int i = 0; i < level_background.length; i++) {
-            int j = fs.read(level_background[i]);
-            //System.out.println("Read bytes for " + i + ": " + j);
+        int offset, read;
+
+        for (offset = 0; offset < level_background.length; offset += read) {
+            read = fs.read(level_background, offset, level_background.length - offset);
+            if (read < 0) throw new EOFException("Failed to read level background");
         }
+
+        // Need to use trim() here otherwise length() always returns 32.
+        String fns = new String(level_background).trim();
+
+        if (fns.endsWith(".tga")) {
+            Arrays.fill(level_background, fns.length() - 4, level_background.length, (byte) 0);
+        }
+
         fs.read(level_tileset);
         fs.read(level_gametype);
         fs.read(level_time);
@@ -395,7 +407,7 @@ public class Gishlevel {
             FileOutputStream fos = new FileOutputStream(new File(path));
 
             fos.write(version);
-            write_dbarray(level_background, fos);
+            fos.write(level_background);
             fos.write(level_tileset);
             fos.write(level_gametype);
             fos.write(level_time);
