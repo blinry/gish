@@ -238,45 +238,72 @@ int loadtexturetga(const char *filename, unsigned int **rgba, int *width, int *h
 int loadtexturefile(const char *filename, unsigned int **rgba, int *width, int *height)
 {
 	int changeddir;
-	int result;
-	char *extension = filename + strlen(filename);
-	while(*extension != '.' && extension != filename) { extension--; }
+	int result = -1;
 
-	if (extension == filename) extension = NULL;
+	char *newfilename = (char*) filename;
+	size_t len = strlen(newfilename);
+
+	char *extension = newfilename + len;
+	while (*extension != '.' && extension != newfilename) { extension--; }
+	if (extension == newfilename) extension = NULL;
 
 	changeddir=chdir("texture");
-	if (strcmp(extension, ".tga") == 0)
-		result = loadtexturetga(filename, rgba, width, height);
-	else
-	{
-		if (extension == NULL)
-			printf("WARNING: No extension found in filename '%s'. Defaulting to png format.", filename);
-		else if (strcmp(extension, ".png") != 0)
-			printf("WARNING: Extension '%s' in filename '%s' not recognized. Defaulting to png format.", extension, filename);
 
-		result = loadtexturepng(filename, rgba, width, height);
+	if (extension == NULL) {
+		if (debug_texture_load)
+			printf("No extension found in filename \"%s\". Appending PNG extension.\n", filename);
 
-		// fopen failed loading .png: try to load .tga
-		if (result == -1)
-		{
-			char *tgaFilename;
-			tgaFilename = (char*)malloc(extension - filename + 5);
-			strcpy(tgaFilename, filename);
-			strcpy(tgaFilename + (extension - filename), ".tga");
-			result = loadtexturefile(tgaFilename, rgba, width, height);
-			free(tgaFilename);
+		newfilename = (char*) malloc(sizeof(char) * (len + 5));
+		strcpy(newfilename, filename);
+		strcpy(newfilename + len, ".png");
+		result = loadtexturepng(newfilename, rgba, width, height);
+
+		if (result < 0) {
+			if (debug_texture_load)
+				printf("\"%s\" failed to load. Trying TGA extension instead.\n", newfilename);
+
+			strcpy(newfilename + len, ".tga");
+			result = loadtexturetga(newfilename, rgba, width, height);
 		}
 	}
-	if (changeddir==0)
-		chdir("..");
 
-	if (result != 0)
-	{
+	else {
+		if (strcmp(extension, ".tga") == 0) {
+			result = loadtexturetga(filename, rgba, width, height);
+
+			if (result < 0) {
+				newfilename = strdup(filename);
+				strcpy(newfilename + len - 3, "png");
+
+				if (debug_texture_load)
+					printf("\"%s\" failed to load. Trying \"%s\" instead.\n", filename, newfilename);
+			}
+		}
+
+		else if (debug_texture_load && strcmp(extension, ".png") != 0)
+			printf("Extension \"%s\" in filename \"%s\" not recognized. Assuming PNG format.\n", extension, filename);
+
+		if (result < 0)
+			result = loadtexturepng(newfilename, rgba, width, height);
+	}
+
+	if (result < 0) {
+		if (debug_texture_load)
+			printf("\"%s\" failed to load. Giving up.\n", newfilename);
+
 		(*width) = 0;
 		(*height) = 0;
 	}
+
+	if (newfilename != filename)
+		free(newfilename);
+
+	if (changeddir==0)
+		chdir("..");
+
 	return result;
 }
+
 int loadtexture(int texturenum,const char *filename,int mipmap,int wraps,int wrapt,int magfilter,int minfilter)
 {
 	int result;
