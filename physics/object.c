@@ -133,7 +133,7 @@ int pointintersectobject(float *intersectpoint,float *normal,float *scale,float 
       {
       subtractvectors(vec,intersectpointtemp,object[objectnum2].position);
       normalizevector(vec,vec);
-      if (object[objectnum2].type==1)
+      if (object[objectnum2].type==OBJ_TYPE_GISH)
         angle=0.707f;
       else
         angle=0.0f;

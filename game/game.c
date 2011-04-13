@@ -67,33 +67,41 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 _view view;
 _game game;
 
+//for fps display
+int fps, fps_cache = 0, fps_renew = 0, fps_mean;
+int fps_enabled = 1;
+
 void gameloop(void)
   {
   int count,count2;
   unsigned int simtimer;
   int simcount;
-  int frametimer,fps;
-  //float vec[3];
-  //char filename[13]="text000.tga";
+  int frametimer; //,fps;
   int scorenum;
-  //unsigned int x;
+
+  /*** setup for loop ***/
 
   game.godparticle=-1;
 
   game.oldschool=0;
+  
+  //
   if (game.levelnum==64)
     game.oldschool=1;
+  //
   if (game.levelnum==65)
     {
     game.oldschool=2;
     game.oldschoolsound=-200;
     }
+  //
   if (game.levelnum==66)
     game.oldschool=3;
 
   srand(time(NULL));
 
-  setuplevel();
+  //
+  setuplevel();  
   setupgame();
 
   simtimer=SDL_GetTicks();
@@ -103,6 +111,56 @@ void gameloop(void)
   scorenum=-1;
 
   resetmenuitems();
+
+  /* (HACKish) Level zooms */
+  view.zoom=10.0f;
+  if (game.oldschool==2)
+    view.zoom=16.0f;
+  if (game.oldschool==3)
+    view.zoom=26.0f;
+
+  if (level.gametype==GAMETYPE_2COLLECTION)
+    view.zoom=24.0f;
+  if (level.gametype==GAMETYPE_2RACING)
+    view.zoom=24.0f;
+  if (level.gametype==GAMETYPE_4FOOTBALL || level.gametype==GAMETYPE_4SUMO)
+    view.zoom=14.0f;
+
+  /** HACK level music assignment **/
+  if (game.levelnum>=1 && game.levelnum<=7)
+    game.songnum=0;
+  if (game.levelnum>=8 && game.levelnum<=14)
+    game.songnum=1;
+  if (game.levelnum>=15 && game.levelnum<=21)
+    game.songnum=2;
+  if (game.levelnum>=22 && game.levelnum<=28)
+    game.songnum=3;
+  if (game.levelnum>=29 && game.levelnum<=32)
+    game.songnum=4;
+  if (game.bosslevel)
+    game.songnum=5;
+  if (game.levelnum==64)
+    game.songnum=6;
+  if (game.levelnum==67)
+    game.songnum=2;
+
+  if (game.levelnum==0)
+    {
+    if (game.songnum==-1)
+      game.songnum=rand()%5;
+    }
+  if (level.gametype==GAMETYPE_2SUMO)
+    game.songnum=7;
+  /*
+  if (level.gametype==GAMETYPE_2FOOTBALL)
+    game.songnum=4;
+  if (level.gametype==GAMETYPE_2SUMO)
+    game.songnum=5;
+  if (level.gametype==GAMETYPE_2GREED)
+    game.songnum=4;
+  */
+
+  /*** GAME LOOP ***/
 
   while ((game.exit<GAMEEXIT_EXITGAME || game.exitdelay>0) && !windowinfo.shutdown)
     {
@@ -120,27 +178,35 @@ void gameloop(void)
     glColor3fv(level.ambient[3]);
     if (level.background[0]!=0)
       displaybackground(660);
-
+    
+    /* HACK gametype < ... */
     if (game.over!=0 && level.gametype<GAMETYPE_2FOOTBALL)
-    if (game.exit==GAMEEXIT_NONE)
-      {
-      if (game.over>=3 && game.over<=5)
-        {
-        game.exit=GAMEXIT_WARPZONE;
-        game.exitdelay=100;
+      if (game.exit==GAMEEXIT_NONE)
+      {        
+        if (game.over>=3 && game.over<=5)
+          {
+          game.exit=GAMEXIT_WARPZONE;
+          game.exitdelay=100;
+          }
+        else if (game.over==2)
+          {
+          game.exit=GAMEEXIT_WON;
+          game.exitdelay=100;
+          }
+        else if (game.over==1)
+          {
+          game.exit=GAMEEXIT_DIED;
+          game.exitdelay=100;
+          if (game.levelnum==65)
+            game.exitdelay=200;
         }
-      if (game.over==2)
-        {
-        game.exit=GAMEEXIT_WON;
-        game.exitdelay=100;
-        }
-      if (game.over==1)
-        {
-        game.exit=GAMEEXIT_DIED;
-        game.exitdelay=100;
-        if (game.levelnum==65)
-          game.exitdelay=200;
-        }
+        /* If we didnt die, we have won. */
+        /*  DIDNT WORK
+        else
+        {     
+          game.exit=GAMEEXIT_WON;
+          game.exitdelay=100;
+        }*/
       }
 
     numofmenuitems=0;
@@ -150,6 +216,7 @@ void gameloop(void)
       setmenuitem(MO_HOTKEY,SCAN_ESC);
       setmenuitem(MO_SET,&game.exit,GAMEEXIT_INGAMEMENU);
       }
+    
     if (game.exit==GAMEEXIT_INGAMEMENU)
       {
       count=240;
@@ -186,6 +253,7 @@ void gameloop(void)
       setmenuitem(MO_SET,&game.exit,GAMEEXIT_EXITGAME);
       count+=16;
       }
+    
     if (game.exit==GAMEEXIT_DIED)
       {
       if (game.time>0)
@@ -224,14 +292,17 @@ void gameloop(void)
         }
       }
 
+    //
     checksystemmessages();
     checkkeyboard();
     checkmouse();
     checkjoystick();
+    //
     checkmenuitems();
 
     if (game.exit==GAMEEXIT_INGAMEMENU)
     if (level.gametype!=GAMETYPE_CAMPAIGN)
+    //
     if (menuitem[1].active)
       {
       setuplevel();
@@ -241,6 +312,7 @@ void gameloop(void)
       menuitem[1].active=0;
       }
 
+    //
     if (game.dialog>0)
       {
       if (game.levelnum!=68 || (game.dialog!=13 && game.dialog!=14))
@@ -317,62 +389,45 @@ void gameloop(void)
       }
     checkmusic();
 
-    if (game.levelnum>=1 && game.levelnum<=7)
-      game.songnum=0;
-    if (game.levelnum>=8 && game.levelnum<=14)
-      game.songnum=1;
-    if (game.levelnum>=15 && game.levelnum<=21)
-      game.songnum=2;
-    if (game.levelnum>=22 && game.levelnum<=28)
-      game.songnum=3;
-    if (game.levelnum>=29 && game.levelnum<=32)
-      game.songnum=4;
-    if (game.bosslevel)
-      game.songnum=5;
-    if (game.levelnum==64)
-      game.songnum=6;
-    if (game.levelnum==67)
-      game.songnum=2;
+    
+    /* in game keys */
 
+    // 0 == ?
     if (game.levelnum==0)
+      if (keyboard[SCAN_F5] && !prevkeyboard[SCAN_F5])
       {
-      if (game.songnum==-1)
-        game.songnum=rand()%5;
+        setuplevel();
+        setupgame();
       }
-    if (level.gametype==GAMETYPE_2SUMO)
-      game.songnum=7;
-    /*
-    if (level.gametype==GAMETYPE_2FOOTBALL)
-      game.songnum=4;
-    if (level.gametype==GAMETYPE_2SUMO)
-      game.songnum=5;
-    if (level.gametype==GAMETYPE_2GREED)
-      game.songnum=4;
-    */
-    if (game.levelnum==0)
-    if (keyboard[SCAN_F5] && !prevkeyboard[SCAN_F5])
-      {
-      setuplevel();
-      setupgame();
-      }
+        
+    // pause game
     if (keyboard[SCAN_P] && !prevkeyboard[SCAN_P] && game.exit==GAMEEXIT_NONE)
       game.pause^=1;
-    //if (keyboard[SCAN_R] && !prevkeyboard[SCAN_R])
-    //  movie.record^=1;
+    
+    // godmode key
+    if (keyboard[SCAN_G] && !prevkeyboard[SCAN_G] && game.exit==GAMEEXIT_NONE)
+      game.godmode^=1;
+    
+    // fps enabled
+    if (keyboard[SCAN_F] && !prevkeyboard[SCAN_F] && game.exit==GAMEEXIT_NONE)
+      fps_enabled^=1;
 
-    view.zoom=10.0f;
-    if (game.oldschool==2)
-      view.zoom=16.0f;
-    if (game.oldschool==3)
-      view.zoom=26.0f;
+	  // record bitmaps
+	  movie.record = 0;
+	  if (keyboard[SCAN_R] && !prevkeyboard[SCAN_R])
+        movie.record = 1;
+	
+    // Keyboard zoom
+	  if (keyboard[SCAN_Y])
+	    view.zoom*=1.01f;
+	    if (view.zoom > 50.0f)
+	      view.zoom=50.0f;
+	  if (keyboard[SCAN_Z])
+	    view.zoom/=1.01f;
+	    if (view.zoom < 4.0f)
+	      view.zoom=4.0f;
 
-    if (level.gametype==GAMETYPE_2COLLECTION)
-      view.zoom=24.0f;
-    if (level.gametype==GAMETYPE_2RACING)
-      view.zoom=24.0f;
-    if (level.gametype==GAMETYPE_4FOOTBALL || level.gametype==GAMETYPE_4SUMO)
-      view.zoom=14.0f;
-
+    /* view calc */
     view.zoomx=view.zoom+0.5f;
     view.zoomy=view.zoom*0.75f+0.5f;
     //view.zoomy=view.zoom*0.5625f+0.5f;
@@ -381,31 +436,25 @@ void gameloop(void)
     //setuporthoviewport(0,0,640,480,view.zoom,view.zoom*0.5625f,20.0f);
     setupviewpoint(view.position,view.orientation);
 
+    /* HACK overrides viewport setup */
     if (game.oldschool==1)// || game.oldschool==3)
       glViewport(0,0,256,256);
     if (game.oldschool==2)
       glViewport(0,0,128,128);
 
     soundsimulation(view.position,view.orientation);
-
     setupframelighting();
-
     setuprenderobjects();
-
     rendershadows();
-
     renderlevelback();
-
     renderparticles();
-
-    //if (!keyboard[SCAN_B])
     renderobjects();
-
     renderparticles2();
 
     renderlevel();
     renderlevelfore();
 
+    /* HACK oldschool level video specials */
     if (game.oldschool==1)// || game.oldschool==3)
       {
       glBindTexture(GL_TEXTURE_2D,texture[334].glname);
@@ -445,8 +494,24 @@ void gameloop(void)
       glEnd();
       }
 
+
     setuptextdisplay();
 
+	  /* draw fps */
+    if (fps_enabled)
+    {
+      fps_mean += fps;
+      fps_renew--;
+	    if (fps_renew <= 0)
+	    {
+	      fps_cache= (float)fps_mean / 5.0;
+	      fps_renew=5;
+        fps_mean = 0;
+	    }	  
+	    drawtext("/i",40,64,16,1.0f,1.0f,0.0f,1.0f, fps_cache);
+    }
+
+    /* Game exit stuff */
     if (game.exit==GAMEEXIT_WON || game.exit==GAMEXIT_WARPZONE)
       {
       glDisable(GL_TEXTURE_2D);
@@ -522,25 +587,30 @@ void gameloop(void)
 
       glEnable(GL_TEXTURE_2D);
       }
+    
     if (movie.record)
-      {
+    {
       if (movie.framenum<game.framenum/2)
         recordframe();
       drawtext("RECORD",0,64,16,1.0f,0.0f,0.0f,1.0f);
-      }
-
+    }
+    
+    /* replay text */
     if (game.playreplay)
       drawtext(TXT_REPLAY,(612|TEXT_END),64,16,1.0f,1.0f,0.0f,1.0f);
-
+    
+    /* pause text */
     if (game.pause && game.exit==GAMEEXIT_NONE)
       {
       drawtext(TXT_PAUSED,(320|TEXT_CENTER),240,16,1.0f,1.0f,1.0f,1.0f);
       drawtext(TXT_PRESS_P,(320|TEXT_CENTER),256,12,1.0f,1.0f,1.0f,1.0f);
       }
 
+    /* godmode mousecursor */
     if (game.exit!=GAMEEXIT_NONE || game.godmode)
       drawmousecursor(768+font.cursornum,mouse.x,mouse.y,16,1.0f,1.0f,1.0f,1.0f);
-
+    
+    /* Simulation speed */
     simcount=0;
     game.simspeed=20;
     if (game.turbomode)
@@ -611,11 +681,12 @@ void gameloop(void)
 
     if ((SDL_GetTicks()-frametimer)!=0)
       fps=1000/(SDL_GetTicks()-frametimer);
-    }
+    } /* GAME LOOP */
 
   game.songnum=-1;
   checkmusic();
 
+  /* delete all sounds */
   for (count=numofsounds-1;count>=0;count--)
     deletesound(count);
 
@@ -722,7 +793,7 @@ void simulation(void)
 
   for (count=0;count<numofobjects;count++)
     {
-    if (object[count].type==1)
+    if (object[count].type==OBJ_TYPE_GISH)
       {
       if (object[count].hitpoints<0)
         object[count].hitpoints=0;
@@ -756,17 +827,19 @@ void simulation(void)
   }
 
 void getinputs(void)
-  {
+{
   int count;
-
-  for (count=0;count<4;count++)
-    {
+  
+  /* maximum 4 gishs? */
+  for (count = 0; count < CONTROLS_LENGTH; count++)
+  {
     object[count].axis[0]=0.0f;
     object[count].axis[1]=0.0f;
-    object[count].button=0;
-    }
-  for (count=0;count<CONTROLS_LENGTH;count++)
-    {
+    object[count].button = KEYALIAS_BUTTON_NONE;
+  }
+
+  for (count = 0; count < CONTROLS_LENGTH; count++)
+  {
     if (keyboard[control[count].key[KEYALIAS_LEFT]])
       object[count].axis[0]-=1.0f;
     if (keyboard[control[count].key[KEYALIAS_RIGHT]])
@@ -776,13 +849,13 @@ void getinputs(void)
     if (keyboard[control[count].key[KEYALIAS_UP]])
       object[count].axis[1]+=1.0f;
     if (keyboard[control[count].key[KEYALIAS_STICK]])
-      object[count].button|=1;
+      object[count].button |= KEYALIAS_BUTTON_STICK;
     if (keyboard[control[count].key[KEYALIAS_JUMP]])
-      object[count].button|=2;
+      object[count].button |= KEYALIAS_BUTTON_JUMP;
     if (keyboard[control[count].key[KEYALIAS_SLIDE]])
-      object[count].button|=4;
+      object[count].button |= KEYALIAS_BUTTON_SLIDE;
     if (keyboard[control[count].key[KEYALIAS_HEAVY]])
-      object[count].button|=8;
+      object[count].button |= KEYALIAS_BUTTON_HEAVY;
 
     if (control[count].joysticknum!=-1)
       {
@@ -804,16 +877,16 @@ void getinputs(void)
 
       if (control[count].button[4]!=-1)
       if (joystick[control[count].joysticknum].button[control[count].button[4]])
-        object[count].button|=1;
+        object[count].button|=KEYALIAS_BUTTON_STICK;
       if (control[count].button[5]!=-1)
       if (joystick[control[count].joysticknum].button[control[count].button[5]])
-        object[count].button|=2;
+        object[count].button|=KEYALIAS_BUTTON_JUMP;
       if (control[count].button[6]!=-1)
       if (joystick[control[count].joysticknum].button[control[count].button[6]])
-        object[count].button|=4;
+        object[count].button|=KEYALIAS_BUTTON_SLIDE;
       if (control[count].button[7]!=-1)
       if (joystick[control[count].joysticknum].button[control[count].button[7]])
-        object[count].button|=8;
+        object[count].button|=KEYALIAS_BUTTON_HEAVY;
       }
     if (object[count].axis[0]<-1.0f)
       object[count].axis[0]=-1.0f;
@@ -823,5 +896,5 @@ void getinputs(void)
       object[count].axis[1]=-1.0f;
     if (object[count].axis[1]>1.0f)
       object[count].axis[1]=1.0f;
-    }
   }
+}

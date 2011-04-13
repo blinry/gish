@@ -213,6 +213,7 @@ void setupblockalpha(int blocknum)
       polygontemp[count2].vertex[polygontemp[count2].numofverts][1]=y;
       polygontemp[count2].numofverts++;
 
+      // TODO remove goto
       goto createpolybypass;
       }
 

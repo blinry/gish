@@ -40,6 +40,26 @@ void deleterope(int ropenum);
 void objecttimetolive(void);
 void createcar(float position[3],float sizex,float sizey,float mass,float friction);
 
+typedef enum
+{
+  OBJ_TYPE_GISH = 1,
+  OBJ_TYPE_BOX = 2,
+  OBJ_TYPE_WHEEL = 3,
+  OBJ_TYPE_BEAST = 4,
+  OBJ_TYPE_HEAD = 5,
+  OBJ_TYPE_AMBER = 6,
+  //??
+  OBJ_TYPE_ANCHOR = 8,
+  OBJ_TYPE_BUTTON = 9,
+  OBJ_TYPE_SWITCH = 10,
+  //??
+  OBJ_TYPE_GENERATOR = 15,
+  OBJ_TYPE_AREASWITCH = 16,
+  //??
+  OBJ_TYPE_CAR = 20
+
+} object_types;
+
 typedef struct
   {
   int type;

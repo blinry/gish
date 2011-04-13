@@ -325,7 +325,7 @@ void objectcollision(int objectnum)
         if (object[objectnum].timetolive==10001)
           object[objectnum].timetolive=50;
 
-        if (object[objectnum].type==1 || object[objectnum].type==4)
+        if (object[objectnum].type==OBJ_TYPE_GISH || object[objectnum].type==4)
           {
           blocknum=collision.blocknum;
 
@@ -335,7 +335,7 @@ void objectcollision(int objectnum)
 
           if (block[blocknum].middamage!=0)
             {
-            if (object[objectnum].type==1)
+            if (object[objectnum].type==OBJ_TYPE_GISH)
               object[objectnum].hitpoints-=block[blocknum].middamage;
             if (object[objectnum].type==4)
               object[objectnum].hitpoints-=block[blocknum].middamage*4;
@@ -362,7 +362,7 @@ void objectcollision(int objectnum)
         copyvector(physicstemp.bond[physicstemp.numofbonds].normal,normal);
         physicstemp.numofbonds++;
 
-        if ((object[objectnum].button&1)==1 && object[objectnum].type==1)
+        if ((object[objectnum].button&1)==1 && object[objectnum].type==OBJ_TYPE_GISH)
         if (collision.friction>0.1f)
           {
           if (!object[objectnum].particlestick[count])
@@ -483,7 +483,7 @@ void objectcollisionobject(int objectnum)
           scaleaddvectors(object[objectnum].orientation[1],object[objectnum].orientation[1],normal,0.5f);
           object[objectnum].numoforientations++;
 
-          if (object[objectnum].type==1)
+          if (object[objectnum].type==OBJ_TYPE_GISH)
           if (game.levelnum==29)
           if (objectcount==38)
           if (game.godmode==0)
@@ -492,12 +492,12 @@ void objectcollisionobject(int objectnum)
             playsound(10,object[objectnum].position,NULL,0.4f,0,1.0f,-1,0);
             }
 
-          if (object[objectnum].type==1)
+          if (object[objectnum].type==OBJ_TYPE_GISH)
           if (object[objectcount].type==4)
           if (object[objectcount].beasttype==15)
             object[objectnum].hitpoints--;
             
-          if (object[objectnum].type==1)
+          if (object[objectnum].type==OBJ_TYPE_GISH)
           if (object[objectcount].type==6)
           if (object[objectcount].timetolive>16)
             {
@@ -553,7 +553,7 @@ void objectcollisionobject(int objectnum)
           physicstemp.bond[physicstemp.numofbonds].blocky=0;
           physicstemp.numofbonds++;
 
-          if ((object[objectnum].button&1)==1 && object[objectnum].type==1)
+          if ((object[objectnum].button&1)==1 && object[objectnum].type==OBJ_TYPE_GISH)
           if (object[objectcount].type!=1 || (object[objectcount].button&4)==0)
             {
             //if (!object[objectnum].particlestick[count])
@@ -610,7 +610,7 @@ void objectcollisionobject(int objectnum)
 
   if (level.gametype>=GAMETYPE_2FOOTBALL)
   for (objectcount=0;objectcount<numofobjects;objectcount++)
-  if (object[objectcount].type==1)
+  if (object[objectcount].type==OBJ_TYPE_GISH)
     {
     for (count=0;count<object[objectcount].numofparticles;count++)
       {

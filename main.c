@@ -88,6 +88,8 @@ int main (int argc,char *argv[])
   int count;
   int flags;
   const char *temp;
+  
+  /*printf("ABC");*/
 
 #ifdef DATAPATH
   chdir(DATAPATH_STR);

@@ -289,7 +289,8 @@ void mainmenu(void)
     setmenuitem(MO_HOTKEY,SCAN_C);
     createmenuitem("Cryptic Sea",0,0,1,1.0f,1.0f,1.0f,1.0f);
     setmenuitem(MO_IMAGE,528);
-    setmenuitem(MO_RESIZE,16,0,96,48);
+    setmenuitem(MO_RESIZE,16,0,6,6);
+	/*setmenuitem(MO_RESIZE,16,0,96,48);*/
 
     checksystemmessages();
     checkkeyboard();
@@ -297,6 +298,7 @@ void mainmenu(void)
     checkjoystick();
     checkmenuitems();
 
+    /* Toggle Turbo mode (HACK, because can overridden)*/
     if (keyboard[SCAN_T] && !prevkeyboard[SCAN_T])
       game.turbomode^=1;
 

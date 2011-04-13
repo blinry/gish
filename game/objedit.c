@@ -403,6 +403,7 @@ void renderlevelobjects(void)
 
   for (count=0;count<level.numofobjects;count++)
     {
+      // gish? OBJ_TYPE_GISH
     if (level.object[count].type==1)
       {
       glDisable(GL_TEXTURE_2D);

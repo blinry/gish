@@ -514,6 +514,15 @@ void setupmenuitems(void)
   strcpy(keyboardlabel[SCAN_UP],"~");
   strcpy(keyboardlabel[SCAN_DOWN],"}");
 #endif
+
+  /* TODO fix arrows */
+#ifndef HACKHACK    
+  strcpy(keyboardlabel[SCAN_LEFT],"LEFT");
+  strcpy(keyboardlabel[SCAN_RIGHT],"RIGHT");
+  strcpy(keyboardlabel[SCAN_UP],"UP");
+  strcpy(keyboardlabel[SCAN_DOWN],"DOWN");
+#endif
+
   strcpy(keyboardlabel[SCAN_SPACE],"Space");
   strcpy(keyboardlabel[SCAN_ENTER],"Enter");
   strcpy(keyboardlabel[SCAN_CENTER],"Center");
