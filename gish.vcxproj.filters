@@ -1,0 +1,375 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="game\ai.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\animation.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="audio\audio.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\block.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="physics\bond.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\boss.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\config.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\credits.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\custom.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\damage.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\debug.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\editor.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdl\endian.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdl\event.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdl\file.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\game.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\gameaudio.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\gamemenu.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\gameobject.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\gametexture.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="video\glfunc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\high.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="math\intersec.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="input\joystick.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="input\keyboard.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\level.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\lighting.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\logic.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\mainmenu.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\mappack.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="menu\menu.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="input\mouse.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\music.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="physics\object.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\objedit.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\objfunc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="video\opengl.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\options.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parser\parser.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="physics\particle.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\physics.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\player.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\prerender.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\random.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\record.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\render.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\replay.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\ropeedit.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\setup.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\socket.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\sprite.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="video\text.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="video\texture.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="math\vector.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdl\video.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\vsmode.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="game\ai.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\animation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="audio\audio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\block.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="physics\bond.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\boss.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\credits.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\custom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\damage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\debug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\editor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdl\endian.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\english.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdl\event.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdl\file.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\gameaudio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\gamemenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\gameobject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\gametexture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="video\glext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="video\glfunc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\high.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\intersec.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="input\joystick.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="input\keyboard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\level.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\lighting.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\logic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\mainmenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\mappack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\math.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="menu\menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="input\mouse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\music.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="physics\object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\objedit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\objfunc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="video\opengl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\options.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parser\parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="physics\particle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\physics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\prerender.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\random.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\record.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\render.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\replay.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\ropeedit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdl\sdl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\setup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\socket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\sprite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="video\text.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="video\texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdl\video.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\vsmode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
