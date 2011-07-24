@@ -7,3 +7,9 @@ Thumbs.db
 gish.ncb
 gish.pdb
 gish.vcproj.*
+
+# Mac
+.DS_Store
+build/
+*.mode1v3
+*.pbxuser
