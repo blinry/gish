@@ -1,63 +1,80 @@
-# About
+# How to compile (Linux)
 
-- Building under WinXP with Visual Studio 2010 Express.
-- I use a VirtualBox to keep the for compilation configured system detached from my normal system.
-- Added #define PATH\_MAX 255 (HACK)
-- I test Gish with the original Levels, because I want to keep the original functionality.
-- LF, not CRLF.
+Make sure CMake and the development libraries for SDL, OpenAL and Vorbis are installed. In Debian-based systems, you need to install the following packages:
 
-- convert this to a fork, although I don't know if one ever wants to merge.
+    cmake libsdl1.2-dev libopenal-dev libvorbis-dev
+
+Then simply issue
+
+    mkdir build && cd build
+    cmake ..
+    make
+
+# How to compile (Windows with VS2008)
+
+Download and install the required libraries:
+
+- <http://www.libsdl.org/release/SDL-devel-1.2.14-VC8.zip>
+- <http://www.libsdl.org/projects/SDL_mixer/release/SDL_mixer-devel-1.2.11-VC.zip>
+- <http://downloads.xiph.org/releases/ogg/libogg-1.2.0.zip>
+    - compile using *win32\VS2008\libogg_static.vcproj*
+- <http://downloads.xiph.org/releases/vorbis/libvorbis-1.3.1.zip>
+    - compile *win32\VS2008\libvorbis\libvorbis_static.vcproj*
+    - compile *win32\VS2008\libvorbisfile\libvorbisfile_static.vcproj*
+- <http://connect.creativelabs.com/openal/Downloads/OpenAL11CoreSDK.zip>
+    - install
+    - create *C:\Program Files\OpenAL 1.1 SDK\include\AL* and copy all files from *C:\Program Files\OpenAL 1.1 SDK\include*
+
+In Visual Studio add to your include-paths:
+
+- *...\libvorbis-1.3.1\include*
+- *...\libogg-1.2.0\include*
+- *C:\Program Files\OpenAL 1.1 SDK\include*
+- *...\SDL-1.2.14_VC8\include*
+- *...\SDL_mixer-1.2.11\include*
+
+In Visual Studio add to your library-paths:
+
+- *...\libvorbis-1.3.1\win32\VS2008\libvorbisfile\Win32\Debug*
+- *...\libogg-1.2.0\win32\VS2008\Win32\Debug*
+- *...\libvorbis-1.3.1\win32\VS2008\libvorbis\Win32\Debug*
+- *C:\Program Files\OpenAL 1.1 SDK\libs\Win32*
+- *...\SDL_mixer-1.2.11\lib*
+- *...\SDL-1.2.14_VC8\lib*
+
+Open *gish.sln* and compile.
+
+You will need the following files to be present:
+
+- OpenAL32.dll
+- SDL.DLL
+
+# How to compile (Mac OS X)
+
+Open the Xcode project in the main directory.
+'Get info' on the Gish executable and change its working directory to "Project Directory"
+If the build fails, check the dependencies. The Xcode project currently does not use the ./externals directory:
+- Frameworks: Cocoa, SDL, OpenAL, Ogg, Vorbis
+    Ogg and Vorbis Frameworks built from from http://xiph.org/downloads/ and installed in /Library/Frameworks/.
+- libpng; macports is an option. Change appropriate search paths:
+    Change (Gish target -> get info -> "Header Search Paths") to point to libpng headers. (e.g. /opt/local/include/libpng14/)
+    Using recursive header search of /opt/local/include may slow things down or present conflicts, not recommended.
+
+Note: If you own the original assets, you can use them simply by changing the working directory mentioned above to /Applications/Gish.app/Contents/Resources
+An note of caution, this will use the original apps user file as well.
+
+# How to play
+
+Simply run `./gish` or `gish.exe`. There are some assets included (codenamed the *FreeGish* project), making Gish a completely free game! There is also one level available, `freegish.lvl`, you'll find it under "Custom Levels". Try it and replace what you don't like.
+
+If you own the original assets, you may also copy those into this directory. You'll need:
+
+- animation
+- level
+- music
+- sound
+- texture
+- tile01 ... tile07
 
 
-# Features
-
-- g toggle godmode
-- y,z zoom in and out
-- f toggle framerate
-- k shows keys like in tutorial (TODO: toggle)
-
-- moved some init code out of game loop
-- started to replace some magic numbers.
-
-
-# Wishlist
-
-- COMMENTS in code! Naa, I like riddles.
-- gish resolution from 16 particles to 32. Depends on scattered magic nums.
-- spawn objects ingame
-- enlarge ai and godmode 'area' if zoomed out.
-- Change physics to simulate gishs volume (unkompressable tar)
-- Whole level screenshot (with a good resolution)
-- make time measure real seconds
-- fix sticky-spikes texture stretching. sticky-spikes should always be the same size
-- make shattered blocks stay longer.
-- make gish stickable only on a section (one third to a quarter or something)
-  Perhaps makes funny things possible, like going up pipes.
-- improve options to setup all additional keys
-- measure ai, physics, video times to find out what eats performance.
-- stats for userlevels
-- stats with enemy kills: killed 4 of 6
-- other stats for other gamemodes
-  1. Don't kill enemies
-  2. Kill with lava
-  3. Other weird ideas.
-
-
-# TODOs / BUGs
-
-- some Gish (1.6) Levels are painfully slow at the beginning. Why?
-- Arrows for keyboard cursors are not displayed. I don't get it, as A is ascii 65 and at pos 65 there is an A in the texture. So the texture matches the ascii table. The arrows (I think) are at pos 81 82 83 84 and the labels are (proved with hex editor) the chars with these values.
-- movie (image) save results in damaged image files
-- replace magic numbers. You just cannot understand anything.
-
-
-# I don't know
-- I don't know which VS2010 files have to be included.
-- if git keeps the LF and does not replace it with CRLF.
-
-
-
-
-
-
-
+# Note: this branch has been merged with SysLord, who added a few fun features, documented in Note-SysLord.markdown

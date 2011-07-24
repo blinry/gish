@@ -213,6 +213,8 @@
 		0233F54413DBC36900414EAE /* SDLMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLMain.m; sourceTree = "<group>"; };
 		0233F54913DBC37C00414EAE /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		0233F55D13DBC40200414EAE /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		02A80AD613DC045A00B891B9 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
+		02A80ADB13DC091400B891B9 /* Notes-SysLord.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Notes-SysLord.txt"; sourceTree = "<group>"; };
 		8DD76F6C0486A84900D96B5E /* Gish */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Gish; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -422,10 +424,20 @@
 			path = macSDLhack;
 			sourceTree = "<group>";
 		};
+		02A80AD713DC045C00B891B9 /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+				02A80AD613DC045A00B891B9 /* README.markdown */,
+				02A80ADB13DC091400B891B9 /* Notes-SysLord.txt */,
+			);
+			name = Documentation;
+			sourceTree = "<group>";
+		};
 		08FB7794FE84155DC02AAC07 /* Gish */ = {
 			isa = PBXGroup;
 			children = (
 				08FB7795FE84155DC02AAC07 /* Source */,
+				02A80AD713DC045C00B891B9 /* Documentation */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 				0233F52F13DBC2BF00414EAE /* OpenGL.framework */,
 				0233F53113DBC2CD00414EAE /* SDL.framework */,
