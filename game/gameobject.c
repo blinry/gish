@@ -128,7 +128,7 @@ void createbox(float position[3],float sizex,float sizey,float mass,float fricti
 
 void createtarboy(float position[3])
 {
-  int resolution = 16; //standard: 16
+  int resolution = 16; // Default: 16 (not exactly adjustable yet)
   int count;
   float vec[3];
   float angle;
@@ -137,32 +137,32 @@ void createtarboy(float position[3])
   memset(&object[numofobjects],0,sizeof(object[numofobjects]));
 
   object[numofobjects].type = OBJ_TYPE_GISH;
-  object[numofobjects].timetolive=10000;
-  object[numofobjects].radius=1.5f;
-  object[numofobjects].mass=4.0f;
-  object[numofobjects].friction=1.2f;
+  object[numofobjects].timetolive = 10000;
+  object[numofobjects].radius = 1.5f;
+  object[numofobjects].mass = 4.0f;
+  object[numofobjects].friction = 1.2f;
  
-  if (numofobjects==0)
-    object[numofobjects].direction=1;
+  if (numofobjects == 0)
+    object[numofobjects].direction = 1;
 
-  object[numofobjects].hitpoints=1000;
+  object[numofobjects].hitpoints = 1000;
   
 
   /* Particles */
   object[numofobjects].numofparticles = resolution;
-  for (count=0; count < resolution; count++)
+  for (count = 0; count < resolution; count++)
   {
     // Changing resolution changes count range.
-    angle=(float)count*pi/8.0f;
-    size=0.9f;
+    angle = ((float)count / (float)resolution) * 2*pi;
+    size = 0.9f;
     if (game.supersize)
-      size=0.9f*1.25f;
-    if (game.difficulty==4)
-      size=0.9f*0.8f;
-    vec[0]=position[0]+cos(angle)*size;
-    vec[1]=position[1]-sin(angle)*size;
-    vec[2]=0.0f;
-    createparticle(1,vec,NULL,0.25f,numofobjects,10000);
+      size = 0.9f * 1.25f;
+    if (game.difficulty == 4)
+      size = 0.9f * 0.8f;
+    vec[0] = position[0] + cos(angle)*size;
+    vec[1] = position[1] - sin(angle)*size;
+    vec[2] = 0.0f; // Just a quick aside... What's with all the 3d vectors?
+    createparticle(1, vec, NULL, 0.25f, numofobjects, 10000);
     object[numofobjects].particle[count] = numofparticles - 1;
   }
   
@@ -174,11 +174,11 @@ void createtarboy(float position[3])
 
     o = &object[numofobjects];
 
-    i1 = o->particle[(count+1)&(resolution-1)];
+    i1 = o->particle[count + 1 %resolution];
     i2 = o->particle[(count&(resolution-1))];
     createbond(i1, i2, 3, -1);
     
-    i1 = o->particle[((count+2)&(resolution-1))];
+    i1 = o->particle[count + 2 %resolution];
     i2 = o->particle[(count&(resolution-1))];
     createbond(i1, i2, 3, -1);
 
@@ -190,18 +190,18 @@ void createtarboy(float position[3])
 
   object[numofobjects].numofcdlines = resolution;
 
-  /* lines around */
+  /* Perimeter bonds */
   for (count = 0; count < resolution; count++)
   {
-    object[numofobjects].cdline[count][0]=count;
-    object[numofobjects].cdline[count][1]=((count+1)&(resolution-1));
+    object[numofobjects].cdline[count][0] = count;
+    object[numofobjects].cdline[count][1] = (count+1) %resolution;
   }
 
   /* set no sounds */
-  object[numofobjects].soundnum[0]=-1;
-  object[numofobjects].soundnum[1]=-1;
-  object[numofobjects].soundnum[2]=-1;
-  object[numofobjects].soundnum[3]=-1;
+  object[numofobjects].soundnum[0] =- 1;
+  object[numofobjects].soundnum[1] =- 1;
+  object[numofobjects].soundnum[2] =- 1;
+  object[numofobjects].soundnum[3] =- 1;
 
   numofobjects++;
 }

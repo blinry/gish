@@ -134,22 +134,22 @@ void particlesimulation(void)
         scale+=1.0f;
       */
 
-      scale=scale*0.5f*block[blocknum].density/particle[count].mass;
-      if (scale>6.0f)
-        scale=6.0f;
-      if (level.gametype!=16)
-        particle[count].velocity[1]+=particle[count].gravity*scale;
+      scale = scale * 0.5f * block[blocknum].density / particle[count].mass;
+      if (scale > 6.0f)
+        scale = 6.0f;
+      if (level.gametype != 16)
+        particle[count].velocity[1] += particle[count].gravity * scale;
       }
     else
       {
-      if (particle[count].texturenum==366)
-      if (particle[count].timetolive>5)
-        particle[count].timetolive=5;
+      if (particle[count].texturenum == 366)
+      if (particle[count].timetolive > 5)
+        particle[count].timetolive = 5;
       }
-    if (block[blocknum].drag!=0.0f)
+    if (block[blocknum].drag != 0.0f)
       scalevector(particle[count].velocity,particle[count].velocity,(1.0f-block[blocknum].drag));
-
-    copyvector(particle[count].prevvelocity,particle[count].velocity);
+    
+    copyvector(particle[count].prevvelocity, particle[count].velocity);
     }
 
   for (count=0;count<numofparticles;count++)

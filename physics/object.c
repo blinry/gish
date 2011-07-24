@@ -37,10 +37,11 @@ int lineintersectobject(float *intersectpoint,float *normal,float *scale,float *
   float intersectpointtemp[3];
   float normaltemp[3];
   float scaletemp;
-
-  if (fabs(startpoint[0]-object[objectnum].position[0])>10.0f)
+  
+  // Abort check if too far from object
+  if (fabs(startpoint[0] - object[objectnum].position[0]) > 10.0f)
     return(0);
-  if (fabs(startpoint[1]-object[objectnum].position[1])>10.0f)
+  if (fabs(startpoint[1] - object[objectnum].position[1]) > 10.0f)
     return(0);
 
   *scale=1.0f;
