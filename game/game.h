@@ -26,6 +26,18 @@ void renderlevel(void);
 void simulation(void);
 void getinputs(void);
 
+/* Key button alias.
+ * Used to pass button to object (objfunc.c). 
+ * TODO: Finish replacing all magic numbers.
+ */
+typedef enum {
+  KEYALIAS_BUTTON_NONE = 0,
+  KEYALIAS_BUTTON_STICK = 1,
+  KEYALIAS_BUTTON_JUMP = 2,
+  KEYALIAS_BUTTON_SLIDE = 4,
+  KEYALIAS_BUTTON_HEAVY = 8
+} keyalias_button;
+
 typedef enum {
 	GAMEEXIT_NONE = 0,
 	GAMEEXIT_INGAMEMENU = 1,

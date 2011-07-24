@@ -306,7 +306,7 @@ void objectcycle(void)
         if (object[object[count].link].idata[0]==1)
           object[count].idata[0]=1;
       }
-    if (object[count].type==1)
+    if (object[count].type==OBJ_TYPE_GISH)
       {
       if (count!=0)
       if (level.gametype==GAMETYPE_CAMPAIGN && game.levelnum==34)
@@ -415,6 +415,7 @@ void objectcycle(void)
         //  object[count].hitpoints-=(0.2f-veclength)*500.0f;
         }
 
+      /* Gish death by deformation (TODO: rename count4 etc.) */
       if (count4>=2)
         object[count].hitpoints-=(count4-1)*50;
 
@@ -478,11 +479,12 @@ void objectcycle(void)
           }
         }
 
-      if ((object[count].button&4)==4)
+
+      if ((object[count].button & KEYALIAS_BUTTON_SLIDE)==KEYALIAS_BUTTON_SLIDE)
         object[count].friction=0.01f;
       else
         object[count].friction=1.2f;
-      if ((object[count].button&2)==2 || (object[count].button&8)==8)
+      if ((object[count].button & KEYALIAS_BUTTON_JUMP) == KEYALIAS_BUTTON_JUMP || (object[count].button&8)==8)
         {
         for (count2=0;count2<numofbonds;count2++)
         if (bond[count2].objectnum==count && bond[count2].type==2)
@@ -505,7 +507,7 @@ void objectcycle(void)
           */
           }
         }
-      if ((object[count].button&8)==8)
+      if ((object[count].button & KEYALIAS_BUTTON_HEAVY)==KEYALIAS_BUTTON_HEAVY)
         {
         for (count2=0;count2<object[count].numofparticles;count2++)
           {
@@ -541,7 +543,7 @@ void objectcycle(void)
         object[count].data[0]=0.5f;
 
       object[count].data[1]+=object[count].axis[1]*0.008f;
-      if ((object[count].button&2)==2)
+      if ((object[count].button & KEYALIAS_BUTTON_JUMP)==KEYALIAS_BUTTON_JUMP)
         object[count].data[1]=0.0f;
       if (object[count].data[1]<0.0f)
         object[count].data[1]+=0.004f;
@@ -658,7 +660,7 @@ void objectcycle(void)
 
       if (object[count].beasttype==0 || object[count].beasttype==2 || object[count].beasttype==8 || object[count].beasttype==16)
       if (object[count].numoforientations!=0)
-      if ((object[count].button&2)==2)
+      if ((object[count].button & KEYALIAS_BUTTON_JUMP)==KEYALIAS_BUTTON_JUMP)
         for (count2=0;count2<4;count2++)
           {
           if (object[count].beasttype!=8)
@@ -668,7 +670,7 @@ void objectcycle(void)
           }
       if (object[count].beasttype==15)
       if (object[count].numoforientations!=0)
-      if ((object[count].button&2)==2)
+      if ((object[count].button & KEYALIAS_BUTTON_JUMP)==KEYALIAS_BUTTON_JUMP)
         for (count2=0;count2<2;count2++)
           scaleaddvectors(particle[object[count].particle[count2]].velocity,particle[object[count].particle[count2]].velocity,yaxis,0.08f);
 
@@ -806,13 +808,13 @@ void objectsound(int objectnum)
       playsound(2,object[objectnum].position,NULL,scale*5.0f,0,pitch,objectnum,0);
       }
     }
-  if (object[objectnum].type==1)
+  if (object[objectnum].type==OBJ_TYPE_GISH)
     {
     subtractvectors(vec,object[objectnum].velocity,object[objectnum].prevvelocity);
     scale=vectorlength(vec);
     if (scale>0.025f)
       {
-      if ((object[objectnum].button&8)==0)
+      if ((object[objectnum].button & KEYALIAS_BUTTON_HEAVY)==0)
         playsound(5,object[objectnum].position,NULL,scale*7.0f,0,1.0f,objectnum,0);
       else
         playsound(2,object[objectnum].position,NULL,scale*7.0f,0,1.0f,objectnum,0);

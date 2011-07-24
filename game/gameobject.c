@@ -47,7 +47,7 @@ void createbox(float position[3],float sizex,float sizey,float mass,float fricti
 
   memset(&object[numofobjects],0,sizeof(object[numofobjects]));
 
-  object[numofobjects].type=2;
+  object[numofobjects].type = OBJ_TYPE_BOX;
   object[numofobjects].timetolive=10000;
   object[numofobjects].mass=mass;
 
@@ -127,7 +127,8 @@ void createbox(float position[3],float sizex,float sizey,float mass,float fricti
   }
 
 void createtarboy(float position[3])
-  {
+{
+  int resolution = 16; //standard: 16
   int count;
   float vec[3];
   float angle;
@@ -135,22 +136,23 @@ void createtarboy(float position[3])
 
   memset(&object[numofobjects],0,sizeof(object[numofobjects]));
 
-  object[numofobjects].type=1;
+  object[numofobjects].type = OBJ_TYPE_GISH;
   object[numofobjects].timetolive=10000;
   object[numofobjects].radius=1.5f;
-
   object[numofobjects].mass=4.0f;
-
   object[numofobjects].friction=1.2f;
-
+ 
   if (numofobjects==0)
     object[numofobjects].direction=1;
 
   object[numofobjects].hitpoints=1000;
+  
 
-  object[numofobjects].numofparticles=16;
-  for (count=0;count<16;count++)
-    {
+  /* Particles */
+  object[numofobjects].numofparticles = resolution;
+  for (count=0; count < resolution; count++)
+  {
+    // Changing resolution changes count range.
     angle=(float)count*pi/8.0f;
     size=0.9f;
     if (game.supersize)
@@ -161,32 +163,48 @@ void createtarboy(float position[3])
     vec[1]=position[1]-sin(angle)*size;
     vec[2]=0.0f;
     createparticle(1,vec,NULL,0.25f,numofobjects,10000);
-    object[numofobjects].particle[count]=numofparticles-1;
-    }
+    object[numofobjects].particle[count] = numofparticles - 1;
+  }
+  
+  /* Create bonds */
+  for (count = 0; count < resolution; count++)
+  {
+    _object *o;
+    int i1, i2;
 
-  for (count=0;count<16;count++)
-    {
-    createbond(object[numofobjects].particle[((count+1)&15)],object[numofobjects].particle[(count&15)],3,-1);
-    createbond(object[numofobjects].particle[((count+2)&15)],object[numofobjects].particle[(count&15)],3,-1);
-    createbond(object[numofobjects].particle[((count+8)&15)],object[numofobjects].particle[(count&15)],2,numofobjects);
-    }
-  copyvector(object[numofobjects].position,position);
+    o = &object[numofobjects];
 
-  object[numofobjects].numofcdlines=16;
+    i1 = o->particle[(count+1)&(resolution-1)];
+    i2 = o->particle[(count&(resolution-1))];
+    createbond(i1, i2, 3, -1);
+    
+    i1 = o->particle[((count+2)&(resolution-1))];
+    i2 = o->particle[(count&(resolution-1))];
+    createbond(i1, i2, 3, -1);
 
-  for (count=0;count<16;count++)
-    {
+    i1 = o->particle[((count+(resolution / 2))&(resolution-1))];
+    i2 = o->particle[(count&(resolution-1))];
+    createbond(i1, i2, 2, numofobjects);
+  }
+  copyvector(object[numofobjects].position, position);
+
+  object[numofobjects].numofcdlines = resolution;
+
+  /* lines around */
+  for (count = 0; count < resolution; count++)
+  {
     object[numofobjects].cdline[count][0]=count;
-    object[numofobjects].cdline[count][1]=((count+1)&15);
-    }
+    object[numofobjects].cdline[count][1]=((count+1)&(resolution-1));
+  }
 
+  /* set no sounds */
   object[numofobjects].soundnum[0]=-1;
   object[numofobjects].soundnum[1]=-1;
   object[numofobjects].soundnum[2]=-1;
   object[numofobjects].soundnum[3]=-1;
 
   numofobjects++;
-  }
+}
 
 void createwheel(float position[3],float sizex,float sizey,float mass,float friction,int anchor)
   {
@@ -196,7 +214,7 @@ void createwheel(float position[3],float sizex,float sizey,float mass,float fric
 
   memset(&object[numofobjects],0,sizeof(object[numofobjects]));
 
-  object[numofobjects].type=3;
+  object[numofobjects].type = OBJ_TYPE_WHEEL;
   object[numofobjects].timetolive=10000;
   if (sizex>=sizey)
     object[numofobjects].radius=sizex*1.25f;
@@ -508,7 +526,7 @@ void createanchor(float position[3])
 
   memset(&object[numofobjects],0,sizeof(object[numofobjects]));
 
-  object[numofobjects].type=8;
+  object[numofobjects].type = OBJ_TYPE_ANCHOR;
   object[numofobjects].timetolive=10000;
 
   object[numofobjects].radius=1.0f;
@@ -540,7 +558,7 @@ void createbutton(float position[3],float mass)
 
   memset(&object[numofobjects],0,sizeof(object[numofobjects]));
 
-  object[numofobjects].type=9;
+  object[numofobjects].type = OBJ_TYPE_BUTTON;
   object[numofobjects].timetolive=10000;
 
   object[numofobjects].friction=0.3f;
@@ -657,7 +675,7 @@ void createswitch(float position[3],float mass,int rotate)
 
   memset(&object[numofobjects],0,sizeof(object[numofobjects]));
 
-  object[numofobjects].type=10;
+  object[numofobjects].type = OBJ_TYPE_SWITCH;
   object[numofobjects].timetolive=10000;
 
   object[numofobjects].radius=1.5f;
@@ -758,7 +776,7 @@ void createbeast(int beasttype,float position[3],float sizex,float sizey,float m
 
   memset(&object[numofobjects],0,sizeof(object[numofobjects]));
 
-  object[numofobjects].type=4;
+  object[numofobjects].type = OBJ_TYPE_BEAST;
   object[numofobjects].timetolive=10000;
 
   object[numofobjects].beasttype=beasttype;
@@ -851,7 +869,7 @@ void createbobble(int beasttype,float position[3],float sizex,float sizey,float 
 
   memset(&object[numofobjects],0,sizeof(object[numofobjects]));
 
-  object[numofobjects].type=4;
+  object[numofobjects].type = OBJ_TYPE_BEAST;
   object[numofobjects].timetolive=10000;
   object[numofobjects].mass=mass;
 
@@ -961,7 +979,7 @@ void createhead(float position[3],float sizex,float sizey,float mass,float frict
 
   memset(&object[numofobjects],0,sizeof(object[numofobjects]));
 
-  object[numofobjects].type=5;
+  object[numofobjects].type = OBJ_TYPE_HEAD;
   object[numofobjects].timetolive=10000;
   if (sizex>=sizey)
     object[numofobjects].radius=sizex*1.25f;
@@ -1018,7 +1036,7 @@ void createamber(float position[3])
 
   memset(&object[numofobjects],0,sizeof(object[numofobjects]));
 
-  object[numofobjects].type=6;
+  object[numofobjects].type = OBJ_TYPE_AMBER;
   object[numofobjects].timetolive=10000;
   object[numofobjects].radius=1.0f;
   object[numofobjects].texturenum=369;
@@ -1065,7 +1083,7 @@ void createareaswitch(float position[3],float sizex,float sizey)
   {
   memset(&object[numofobjects],0,sizeof(object[numofobjects]));
 
-  object[numofobjects].type=16;
+  object[numofobjects].type = OBJ_TYPE_AREASWITCH;
   object[numofobjects].timetolive=10000;
   copyvector(object[numofobjects].position,position);
   object[numofobjects].size[0]=sizex;
@@ -1083,7 +1101,7 @@ void creategenerator(float position[3],float mass)
   {
   memset(&object[numofobjects],0,sizeof(object[numofobjects]));
 
-  object[numofobjects].type=15;
+  object[numofobjects].type = OBJ_TYPE_GENERATOR;
   object[numofobjects].timetolive=10000;
   object[numofobjects].mass=mass;
   copyvector(object[numofobjects].position,position);
@@ -1217,7 +1235,7 @@ void createcar(float position[3],float sizex,float sizey,float mass,float fricti
 
   memset(&object[numofobjects],0,sizeof(object[numofobjects]));
 
-  object[numofobjects].type=20;
+  object[numofobjects].type = OBJ_TYPE_CAR;
   object[numofobjects].timetolive=10000;
   object[numofobjects].mass=mass;
 

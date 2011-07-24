@@ -399,6 +399,8 @@ void campaignmenu(void)
         if (game.difficulty==-1)
           {
           game.difficulty=0;
+          
+          // TODO remove goto
           goto newgamebypass;
           }
 

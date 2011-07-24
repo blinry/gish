@@ -41,7 +41,7 @@ void objectai(int objectnum)
   object[objectnum].axis[1]=0.0f;
   object[objectnum].button=0;
 
-  if (object[objectnum].type==1)
+  if (object[objectnum].type==OBJ_TYPE_GISH)
   if (game.levelnum==34)
     {
     /*
@@ -55,7 +55,7 @@ void objectai(int objectnum)
     if (vec[0]>0.5f)
       object[objectnum].axis[0]=1.0f;
     if (vectorlength(vec)<2.0f)
-      object[objectnum].button|=8;
+      object[objectnum].button |= KEYALIAS_BUTTON_HEAVY;
     /*
     subtractvectors(vec,object[2].position,object[objectnum].position);
     if (vectorlength(vec)>3.0f)
@@ -73,11 +73,11 @@ void objectai(int objectnum)
         subtractvectors(vec,object[0].position,object[objectnum].position);
         if ((vec[0]>-2.5f && vec[0]<0.0f && object[objectnum].direction==0) || (vec[0]<2.5f && vec[0]>0.0f && object[objectnum].direction==1))
         if (fabs(vec[1])<1.0f)
-          object[objectnum].button|=1;
+          object[objectnum].button |= KEYALIAS_BUTTON_STICK;
 
         //if (object[objectnum].beasttype==12)
         //if ((game.framenum&511)==0)
-        //  object[objectnum].button|=2;
+        //  object[objectnum].button|=KEYALIAS_BUTTON_JUMP;
 
         if ((rnd()&7)!=7)
           {
@@ -88,11 +88,11 @@ void objectai(int objectnum)
   
           if (object[objectnum].beasttype!=12)
           if ((rnd()&255)==0)
-            object[objectnum].button|=2;
+            object[objectnum].button|=KEYALIAS_BUTTON_JUMP;
 
           if (object[objectnum].beasttype==12)
           if ((rnd()&255)==0 && (rnd()&1)==0)
-            object[objectnum].button|=2;
+            object[objectnum].button|=KEYALIAS_BUTTON_JUMP;
           }
         }
       else
@@ -101,7 +101,7 @@ void objectai(int objectnum)
         if (vec[0]>-8.0f && vec[0]<8.0f)
         if (fabs(vec[1])<6.0f)
         if ((game.framenum&127)==0)
-          object[objectnum].button|=1;
+          object[objectnum].button|=KEYALIAS_BUTTON_STICK;
         /*
           if (object[0].position[0]<object[objectnum].position[0]-5.0f)
             object[objectnum].axis[0]-=1.0f;

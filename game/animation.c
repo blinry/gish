@@ -54,7 +54,7 @@ void objectanimation(void)
 
   for (count=0;count<numofobjects;count++)
     {
-    if (object[count].type==1)
+    if (object[count].type==OBJ_TYPE_GISH)
       {
       /*
       for (count2=0;count2<object[count].numofparticles;count2++)
@@ -113,7 +113,7 @@ void objectanimation(void)
             }
           }
         }
-      if ((object[count].button&8)==8)
+      if ((object[count].button&KEYALIAS_BUTTON_HEAVY)==KEYALIAS_BUTTON_HEAVY)
       if (object[count].frame<8)
         {
         object[count].frame=8;
@@ -125,7 +125,7 @@ void objectanimation(void)
         object[count].framedelay+=1.0f;
         if (object[count].framedelay>=4.0f)
           {
-          if ((object[count].button&8)==8)
+          if ((object[count].button & KEYALIAS_BUTTON_HEAVY)==KEYALIAS_BUTTON_HEAVY)
             {
             if (object[count].frame<11)
               object[count].frame++;
@@ -144,7 +144,7 @@ void objectanimation(void)
     if (object[count].type==4)
       {
       if (object[count].animationtype==0 || object[count].animationtype==1)
-      if ((object[count].button&1)==1)
+      if ((object[count].button & KEYALIAS_BUTTON_STICK) == KEYALIAS_BUTTON_STICK)
         {
         object[count].animationtype=2;
         object[count].frame=0;
@@ -152,7 +152,7 @@ void objectanimation(void)
         }
       if (object[count].beasttype==12)
       if (object[count].animationtype==0)
-      if ((object[count].button&2)==2)
+      if ((object[count].button & KEYALIAS_BUTTON_JUMP)==KEYALIAS_BUTTON_JUMP)
         {
         object[count].animationtype=1;
         object[count].frame=0;
