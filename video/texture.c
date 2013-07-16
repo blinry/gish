@@ -74,7 +74,8 @@ int loadtexturepng(const char *filename, unsigned int **rgba, int *width, int *h
 			if (png_ptr)
 			{
 				png_infop info_ptr;
-				if (info_ptr = png_create_info_struct(png_ptr))
+				info_ptr = png_create_info_struct(png_ptr);
+				if (info_ptr)
 				{
 					if(setjmp(png_jmpbuf(png_ptr)))
 					{
@@ -87,29 +88,35 @@ int loadtexturepng(const char *filename, unsigned int **rgba, int *width, int *h
 						png_init_io(png_ptr, fp);
 						png_set_sig_bytes(png_ptr, 8);
 						png_read_info(png_ptr, info_ptr);
+						png_uint_32 texwidth = 0;
+						png_uint_32 texheight = 0;
+						int bit_depth = 0;
+                        			int color_type = 0;
+                        			int interlace_type = 0;
+			                        png_get_IHDR(png_ptr, info_ptr, &texwidth, &texheight, &bit_depth, &color_type, 0, 0, 0);
 
 						/* expand paletted colors into true rgb */
-						if (info_ptr->color_type == PNG_COLOR_TYPE_PALETTE)
+						if (color_type == PNG_COLOR_TYPE_PALETTE)
 							png_set_expand(png_ptr);
 
 						/* expand grayscale images to the full 8 bits */
-						if (info_ptr->color_type == PNG_COLOR_TYPE_GRAY && info_ptr->bit_depth < 8)
+						if (color_type == PNG_COLOR_TYPE_GRAY && bit_depth < 8)
 							png_set_expand(png_ptr);
 
 						/* expand images with transparency to full alpha channels */
-						if (info_ptr->valid & PNG_INFO_tRNS)
-							png_set_expand(png_ptr);
+						if(png_get_valid(png_ptr, info_ptr, PNG_INFO_tRNS))
+                            			png_set_expand(png_ptr);
 
 						/* tell libpng to strip 16 bit depth files down to 8 bits */
-						if (info_ptr->bit_depth == 16)
+						if (bit_depth == 16)
 							png_set_strip_16(png_ptr);
 
 						/* fill upto 4 byte RGBA - we always want an alpha channel*/
-						if (info_ptr->bit_depth == 8 && info_ptr->color_type != PNG_COLOR_TYPE_RGB_ALPHA)
+						if (bit_depth == 8 && color_type != PNG_COLOR_TYPE_RGB_ALPHA)
 							png_set_filler(png_ptr, 0xff, PNG_FILLER_AFTER);
 
 						// XXX: is this required? we're not handling interlaced PNGs ...
-						if (info_ptr->interlace_type)
+						if (interlace_type)
 							number_passes = png_set_interlace_handling(png_ptr);
 						else
 							number_passes = 1;
@@ -125,8 +132,8 @@ int loadtexturepng(const char *filename, unsigned int **rgba, int *width, int *h
 						else
 						{
 							int w, h, y;
-							w = info_ptr->width;
-							h = info_ptr->height;
+							w = texwidth;
+							h = texheight;
 							*width = w;
 							*height = h;
 							*rgba = (unsigned int *) malloc(w*h*4);
