@@ -127,7 +127,7 @@ int main (int argc,char *argv[])
 
   listvideomodes();
 
-  SDL_WM_SetCaption("Gish","SDL");
+  SDL_WM_SetCaption("FreeGish", NULL);
   SDL_WM_SetIcon(SDL_LoadBMP("gish.bmp"),iconmask);
 
   if (windowinfo.bitsperpixel==16)
