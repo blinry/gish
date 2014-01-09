@@ -170,8 +170,7 @@ void creditsmenu(void)
     count+=12;
     drawtext("Roy Sawyers",64,count,12,1.0f,1.0f,1.0f,1.0f); // original gish
     count+=12;
-    //drawtext("Mendo Mate",64,count,12,1.0f,1.0f,1.0f,1.0f);
-    createmenuitem("Mendo Mate",64,count,12,1.0f,1.0f,1.0f,1.0f); // original gish
+    drawtext("Mendo Mate",64,count,12,1.0f,1.0f,1.0f,1.0f); // original gish
     count+=12;
     count+=12;
     drawtext(TXT_GISHUSES"    ,       ,       , ",64,count,12,1.0f,1.0f,1.0f,1.0f);
@@ -206,11 +205,6 @@ void creditsmenu(void)
       {
       launchwebpage("www.xiph.org");
       menuitem[4].active=0;
-      }
-    if (menuitem[5].active)
-      {
-      launchwebpage("www.mendomate.com");
-      menuitem[5].active=0;
       }
     }
 
