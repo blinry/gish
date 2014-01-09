@@ -384,6 +384,8 @@ void notsupportedmenu(void)
   fprintf(fp,"%s\r\n",glvendor);
   fprintf(fp,"%s\r\n",glrenderer);
   fprintf(fp,"%s\r\n",ext);
+
+  fclose(fp);
   }
 
 void optionreadint(int *ptr,char *str)
