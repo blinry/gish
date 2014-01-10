@@ -253,9 +253,9 @@ char * getextension(char *filename)
 	return extension;
 }
 
-bool hasextension(const char *filename, const char *desiredextension)
+bool hasextension(char *filename, const char *desiredextension)
 {
-	const char * extension = getextension(filename);
+	char * extension = getextension(filename);
 	return (extension != NULL && strcmp(extension, desiredextension) == 0) ? TRUE : FALSE;
 }
 
@@ -274,7 +274,7 @@ int loadtexturefile(const char *filename, unsigned int **rgba, int *width, int *
 	int result = -1;
 
 	char *newfilename = strdup(filename);
-	char *extension = getextension(filename);
+	char *extension = getextension(newfilename);
 
 	changeddir=chdir("texture");
 
@@ -291,7 +291,6 @@ int loadtexturefile(const char *filename, unsigned int **rgba, int *width, int *
 		newfilename = newnewfilename;
 
 		strcpy(newfilename + len, ".png");
-		extension = getextension(newfilename);
 	}
 
 	if (hasextension(newfilename, ".png")) {
