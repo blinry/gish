@@ -1,9 +1,15 @@
 cmake_minimum_required(VERSION 2.6)
 
-project(Gish C)
+project(FreeGish C)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake-extras/;${CMAKE_MODULE_PATH}")
-set(EXECUTABLE_OUTPUT_PATH "${PROJECT_SOURCE_DIR}")
+
+option(INSTALL_FHS "Install into Linux FHS" OFF)
+
+#don't pollute source dir
+if(NOT ${INSTALL_FHS})
+    set(EXECUTABLE_OUTPUT_PATH "${PROJECT_SOURCE_DIR}")
+endif(NOT ${INSTALL_FHS})
 
 # Uncomment this to hardcode the data path. On the command line, you
 # would actually give -DDATAPATH='"/usr/share/games/gish"' or similar
@@ -143,7 +149,6 @@ set(GISH_H
     sdl/file.h
     sdl/sdl.h
     sdl/video.h
-    video/glext.h
     video/glfunc.h
     video/opengl.h
     video/text.h
@@ -151,14 +156,48 @@ set(GISH_H
     config.h
 )
 
-add_executable(gish ${GISH_SRCS} ${GISH_H})
+if(WIN32)
+    list(append GISH_H video/glext.h)
+endif(WIN32)
 
-target_link_libraries(gish
+add_executable(freegish ${GISH_SRCS} ${GISH_H})
+
+target_link_libraries(freegish
     ${SDL_LIBRARY}
     ${OPENAL_LIBRARY}
     ${OPENGL_LIBRARIES}
     ${Vorbis_LIBRARIES}
     ${PNG_LIBRARIES}
-    ${Threads_LIBRARIES}
     ${M_LIBRARIES}
 )
+
+if(NOT BIN_DIR)
+    if(UNIX)
+	SET(BIN_DIR "${CMAKE_INSTALL_PREFIX}/bin")
+    endif(UNIX)
+endif(NOT BIN_DIR)
+
+if(NOT DATA_DIR)
+    if(UNIX)
+	SET(DATA_DIR "${CMAKE_INSTALL_PREFIX}/share/freegish")
+    endif(UNIX)
+endif(NOT DATA_DIR)
+
+if(${INSTALL_FHS})
+    ADD_DEFINITIONS(-DDATAPATH="${DATA_DIR}")
+endif(${INSTALL_FHS})
+
+install(TARGETS freegish DESTINATION ${BIN_DIR})
+
+install(FILES gish.bmp DESTINATION ${DATA_DIR})
+
+set(DDIRS animation level sound texture)
+
+foreach(DIR_NAME ${DDIRS})
+    install(DIRECTORY ${DIR_NAME}
+	DESTINATION ${DATA_DIR}
+	PATTERN .gitignore EXCLUDE
+	PATTERN *.txt EXCLUDE
+	PATTERN backup EXCLUDE
+	)
+endforeach(DIR_NAME ${DDIRS})
