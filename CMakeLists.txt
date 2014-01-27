@@ -21,7 +21,6 @@ find_package(OpenAL REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(Vorbis REQUIRED)
 find_package(PNG REQUIRED)
-find_package(Threads)
 find_library(M_LIBRARIES m)
 
 include_directories(
@@ -30,7 +29,6 @@ include_directories(
     ${OPENGL_INCLUDE_DIR}
     ${Vorbis_INCLUDE_DIR}
     ${PNG_INCLUDE_DIR}
-    ${Threads_INCLUDE_DIR}
 )
 
 set(GISH_SRCS
