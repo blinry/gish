@@ -47,17 +47,44 @@ if(${INSTALL_FHS})
     ADD_DEFINITIONS(-DDATAPATH="${DATA_DIR}")
 endif(${INSTALL_FHS})
 
+
 add_subdirectory(src)
 
-install(FILES gish.bmp DESTINATION ${DATA_DIR})
 
-set(DDIRS animation level sound texture)
+if(UNIX)
 
-foreach(DIR_NAME ${DDIRS})
-    install(DIRECTORY ${DIR_NAME}
-	DESTINATION ${DATA_DIR}
-	PATTERN .gitignore EXCLUDE
-	PATTERN *.txt EXCLUDE
-	PATTERN backup EXCLUDE
+    if(NOT ICONS_DIR)
+	SET(ICONS_DIR "${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/32x32/apps")
+    endif(NOT ICONS_DIR)
+
+    if(NOT PIXMAPS_DIR)
+	SET(PIXMAPS_DIR "${CMAKE_INSTALL_PREFIX}/share/pixmaps")
+    endif(NOT PIXMAPS_DIR)
+
+    if(NOT APPLICATIONS_DIR)
+	SET(APPLICATIONS_DIR "${CMAKE_INSTALL_PREFIX}/share/applications")
+    endif(NOT APPLICATIONS_DIR)
+
+    if(NOT MAN_DIR)
+	SET(MAN_DIR "${CMAKE_INSTALL_PREFIX}/share/man/man6")
+    endif(NOT MAN_DIR)
+
+    set(DDIRS animation level sound texture)
+
+    foreach(DIR_NAME ${DDIRS})
+	install(DIRECTORY ${DIR_NAME}
+	    DESTINATION ${DATA_DIR}
+	    PATTERN .gitignore EXCLUDE
+	    PATTERN *.txt EXCLUDE
+	    PATTERN backup EXCLUDE
 	)
-endforeach(DIR_NAME ${DDIRS})
+    endforeach(DIR_NAME ${DDIRS})
+
+
+    install(FILES "gish.bmp" DESTINATION ${DATA_DIR})
+    install(FILES "icons/freegish.png" DESTINATION ${ICONS_DIR})
+    install(FILES "icons/freegish.xpm" DESTINATION ${PIXMAPS_DIR})
+    install(FILES "icons/freegish.desktop" DESTINATION ${APPLICATIONS_DIR})
+    install(FILES "freegish.6" DESTINATION ${MAN_DIR})
+
+endif(UNIX)

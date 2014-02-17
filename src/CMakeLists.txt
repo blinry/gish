@@ -137,4 +137,6 @@ target_link_libraries(freegish
     ${M_LIBRARIES}
 )
 
-install(TARGETS freegish DESTINATION ${BIN_DIR})
+if(UNIX)
+    install(TARGETS freegish DESTINATION ${BIN_DIR})
+endif(UNIX)
