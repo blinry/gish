@@ -81,7 +81,7 @@ if(UNIX)
     endforeach(DIR_NAME ${DDIRS})
 
 
-    install(FILES "gish.bmp" DESTINATION ${DATA_DIR})
+    install(FILES "freegish.bmp" DESTINATION ${DATA_DIR})
     install(FILES "icons/freegish.png" DESTINATION ${ICONS_DIR})
     install(FILES "icons/freegish.xpm" DESTINATION ${PIXMAPS_DIR})
     install(FILES "icons/freegish.desktop" DESTINATION ${APPLICATIONS_DIR})
