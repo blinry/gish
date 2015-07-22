@@ -102,7 +102,11 @@ int main (int argc,char *argv[])
   if (config.joystick)
     flags|=SDL_INIT_JOYSTICK;
 
-  SDL_Init(flags);
+  if (SDL_Init(flags) < 0)
+    {
+    fprintf(stderr, "Failed to initialize SDL:\n%s\n",SDL_GetError());
+    return 1;
+    }
 
   sdlvideoinfo=SDL_GetVideoInfo();
   sdlpixelformat=sdlvideoinfo->vfmt;
@@ -129,8 +133,8 @@ int main (int argc,char *argv[])
 
   listvideomodes();
 
-  SDL_WM_SetCaption("Gish","SDL");
-  SDL_WM_SetIcon(SDL_LoadBMP("gish.bmp"),iconmask);
+  SDL_WM_SetCaption("FreeGish", NULL);
+  SDL_WM_SetIcon(SDL_LoadBMP("freegish.bmp"),iconmask);
 
   if (windowinfo.bitsperpixel==16)
     {
@@ -150,11 +154,16 @@ int main (int argc,char *argv[])
   SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,windowinfo.stencilbits);
   SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
 
-  if (windowinfo.fullscreen)
-    SDL_SetVideoMode(windowinfo.resolutionx,windowinfo.resolutiony,windowinfo.bitsperpixel,SDL_OPENGL|SDL_FULLSCREEN);
-  else
-    SDL_SetVideoMode(windowinfo.resolutionx,windowinfo.resolutiony,windowinfo.bitsperpixel,SDL_OPENGL);
 
+  Uint32 videoModeFlags = SDL_OPENGL;
+  if (windowinfo.fullscreen)
+    videoModeFlags |= SDL_FULLSCREEN;
+  SDL_Surface *surface = SDL_SetVideoMode(windowinfo.resolutionx,windowinfo.resolutiony,windowinfo.bitsperpixel,videoModeFlags);
+  if (!surface)
+    {
+    fprintf(stderr, "Failed to initialize video:\n%s\n",SDL_GetError());
+    return 1;
+    }
   loadglextentions();
 
   for (count=0;count<2048;count++)

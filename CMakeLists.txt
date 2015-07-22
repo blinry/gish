@@ -1,9 +1,15 @@
 cmake_minimum_required(VERSION 2.6)
 
-project(Gish C)
+project(FreeGish C)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake-extras/;${CMAKE_MODULE_PATH}")
-set(EXECUTABLE_OUTPUT_PATH "${PROJECT_SOURCE_DIR}")
+
+option(INSTALL_FHS "Install into Linux FHS" OFF)
+
+#don't pollute source dir
+if(NOT ${INSTALL_FHS})
+    set(EXECUTABLE_OUTPUT_PATH "${PROJECT_SOURCE_DIR}")
+endif(NOT ${INSTALL_FHS})
 
 # Uncomment this to hardcode the data path. On the command line, you
 # would actually give -DDATAPATH='"/usr/share/games/gish"' or similar
@@ -15,7 +21,6 @@ find_package(OpenAL REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(Vorbis REQUIRED)
 find_package(PNG REQUIRED)
-find_package(Threads)
 find_library(M_LIBRARIES m)
 
 include_directories(
@@ -24,141 +29,62 @@ include_directories(
     ${OPENGL_INCLUDE_DIR}
     ${Vorbis_INCLUDE_DIR}
     ${PNG_INCLUDE_DIR}
-    ${Threads_INCLUDE_DIR}
 )
 
-set(GISH_SRCS
-    audio/audio.c
-    game/ai.c
-    game/animation.c
-    game/block.c
-    game/boss.c
-    game/config.c
-    game/credits.c
-    game/custom.c
-    game/damage.c
-    game/debug.c
-    game/editor.c
-    game/game.c
-    game/gameaudio.c
-    game/gamemenu.c
-    game/gameobject.c
-    game/gametexture.c
-    game/high.c
-    game/level.c
-    game/lighting.c
-    game/logic.c
-    game/mainmenu.c
-    game/mappack.c
-    game/music.c
-    game/objedit.c
-    game/objfunc.c
-    game/options.c
-    game/physics.c
-    game/player.c
-    game/prerender.c
-    game/random.c
-    game/record.c
-    game/render.c
-    game/replay.c
-    game/ropeedit.c
-    game/setup.c
-    game/socket.c
-    game/sprite.c
-    game/vsmode.c
-    input/joystick.c
-    input/keyboard.c
-    input/mouse.c
-    math/intersec.c
-    math/vector.c
-    menu/menu.c
-    parser/parser.c
-    physics/bond.c
-    physics/object.c
-    physics/particle.c
-    sdl/endian.c
-    sdl/event.c
-    sdl/file.c
-    sdl/video.c
-    video/glfunc.c
-    video/opengl.c
-    video/text.c
-    video/texture.c
-    main.c
-)
+if(NOT BIN_DIR)
+    if(UNIX)
+	SET(BIN_DIR "${CMAKE_INSTALL_PREFIX}/bin")
+    endif(UNIX)
+endif(NOT BIN_DIR)
 
-set(GISH_H
-    audio/audio.h
-    game/ai.h
-    game/animation.h
-    game/block.h
-    game/boss.h
-    game/config.h
-    game/credits.h
-    game/custom.h
-    game/damage.h
-    game/debug.h
-    game/editor.h
-    game/english.h
-    game/game.h
-    game/gameaudio.h
-    game/gamemenu.h
-    game/gameobject.h
-    game/gametexture.h
-    game/high.h
-    game/level.h
-    game/lighting.h
-    game/logic.h
-    game/mainmenu.h
-    game/mappack.h
-    game/music.h
-    game/objedit.h
-    game/objfunc.h
-    game/options.h
-    game/physics.h
-    game/player.h
-    game/prerender.h
-    game/random.h
-    game/record.h
-    game/render.h
-    game/replay.h
-    game/ropeedit.h
-    game/setup.h
-    game/socket.h
-    game/sprite.h
-    game/vsmode.h
-    input/joystick.h
-    input/keyboard.h
-    input/mouse.h
-    math/intersec.h
-    math/math.h
-    math/vector.h
-    menu/menu.h
-    parser/parser.h
-    physics/bond.h
-    physics/object.h
-    physics/particle.h
-    sdl/endian.h
-    sdl/event.h
-    sdl/file.h
-    sdl/sdl.h
-    sdl/video.h
-    video/glext.h
-    video/glfunc.h
-    video/opengl.h
-    video/text.h
-    video/texture.h
-    config.h
-)
+if(NOT DATA_DIR)
+    if(UNIX)
+	SET(DATA_DIR "${CMAKE_INSTALL_PREFIX}/share/freegish")
+    endif(UNIX)
+endif(NOT DATA_DIR)
 
-add_executable(gish ${GISH_SRCS} ${GISH_H})
+if(${INSTALL_FHS})
+    ADD_DEFINITIONS(-DDATAPATH="${DATA_DIR}")
+endif(${INSTALL_FHS})
 
-target_link_libraries(gish
-    ${SDL_LIBRARY}
-    ${OPENAL_LIBRARY}
-    ${OPENGL_LIBRARIES}
-    ${Vorbis_LIBRARIES}
-    ${PNG_LIBRARIES}
-    ${Threads_LIBRARIES}
-    ${M_LIBRARIES}
-)
+
+add_subdirectory(src)
+
+
+if(UNIX)
+
+    if(NOT ICONS_DIR)
+	SET(ICONS_DIR "${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/32x32/apps")
+    endif(NOT ICONS_DIR)
+
+    if(NOT PIXMAPS_DIR)
+	SET(PIXMAPS_DIR "${CMAKE_INSTALL_PREFIX}/share/pixmaps")
+    endif(NOT PIXMAPS_DIR)
+
+    if(NOT APPLICATIONS_DIR)
+	SET(APPLICATIONS_DIR "${CMAKE_INSTALL_PREFIX}/share/applications")
+    endif(NOT APPLICATIONS_DIR)
+
+    if(NOT MAN_DIR)
+	SET(MAN_DIR "${CMAKE_INSTALL_PREFIX}/share/man/man6")
+    endif(NOT MAN_DIR)
+
+    set(DDIRS animation level sound texture)
+
+    foreach(DIR_NAME ${DDIRS})
+	install(DIRECTORY ${DIR_NAME}
+	    DESTINATION ${DATA_DIR}
+	    PATTERN .gitignore EXCLUDE
+	    PATTERN *.txt EXCLUDE
+	    PATTERN backup EXCLUDE
+	)
+    endforeach(DIR_NAME ${DDIRS})
+
+
+    install(FILES "freegish.bmp" DESTINATION ${DATA_DIR})
+    install(FILES "icons/freegish.png" DESTINATION ${ICONS_DIR})
+    install(FILES "icons/freegish.xpm" DESTINATION ${PIXMAPS_DIR})
+    install(FILES "icons/freegish.desktop" DESTINATION ${APPLICATIONS_DIR})
+    install(FILES "freegish.6" DESTINATION ${MAN_DIR})
+
+endif(UNIX)

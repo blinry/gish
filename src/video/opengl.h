@@ -37,7 +37,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "../video/glext.h"
 #endif
 
-#if defined(LINUX) || defined(__FreeBSD__)
+#if defined(LINUX) || defined(__FreeBSD_kernel__) || defined(__GNU__)
 #include <GL/gl.h>
 #include <GL/glext.h>
 #endif

@@ -214,7 +214,7 @@ void objectcycle(void)
           game.bonus[8]++;
           }
         }
-      if (level.gametype==GAMETYPE_2SUMO)
+      if (level.gametype==GAMETYPE_2SUMO || level.gametype==GAMETYPE_2COLLECTION)
       if (fabs(object[1].position[0]-object[count].position[0])<object[count].size[0]*0.5f)
       if (fabs(object[1].position[1]-object[count].position[1])<object[count].size[1]*0.5f)
         {

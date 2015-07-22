@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Name=FreeGish
+Comment=A physics based arcade game
+Type=Application
+Icon=freegish
+Terminal=false
+Exec=freegish
+Categories=Game;ArcadeGame;
+Keywords=game;2D;arcade;platform;

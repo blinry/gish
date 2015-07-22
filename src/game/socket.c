@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
   #include <SDL.h>
   #include <windows.h>
 #endif
-#if defined(LINUX) || defined(__FreeBSD__)
+#if defined(LINUX) || defined(__FreeBSD_kernel__) || defined(__GNU__)
   #include <SDL/SDL.h>
   #include <stdlib.h>
   #include <string.h>
@@ -75,7 +75,7 @@ void launchwebpage(char *webpagename)
   ICStop(inst);
   */
 #endif
-#if defined(LINUX) || defined(__FreeBSD__)
+#if defined(LINUX) || defined(__FreeBSD_kernel__) || defined(__GNU__)
   char command[100] = "xdg-open http://";
   strcat(command, webpagename);
   SDL_WM_IconifyWindow();
