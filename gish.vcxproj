@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{85923215-9572-4F52-8CC3-CF3222B1E678}</ProjectGuid>
+    <RootNamespace>gish</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\Obj\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Gish Coder\mylibpng;C:\Gish Coder\SDL_mixer-devel-1.2.11-VC\SDL_mixer-1.2.11\include;C:\Gish Coder\SDL-devel-1.2.14-VC8\SDL-1.2.14\lib;C:\Gish Coder\External-VC10Precompiled-static-mt-Win32\include;C:\Programme\OpenAL 1.1 SDK\include;$(IncludePath)</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Gish Coder\mylibpng;C:\Gish Coder\External-VC10Precompiled-static-mt-Win32\lib\Win32;C:\Gish Coder\SDL_mixer-devel-1.2.11-VC\SDL_mixer-1.2.11\lib;C:\Gish Coder\SDL-devel-1.2.14-VC8\SDL-1.2.14\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>C:\Gish Coder\SDL-devel-1.2.14-VC8\SDL-1.2.14\include;C:\Gish Coder\External-VC10Precompiled-static-mt-Win32\include\vorbis;C:\Gish Coder\External-VC10Precompiled-static-mt-Win32\include\ogg;c:\Programme\OpenAL 1.1 SDK\include;C:\Gish Coder\External-VC10Precompiled-static-mt-Win32\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <CompileAs>CompileAsC</CompileAs>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>C:\Gish Coder\External-VC10Precompiled-static-mt-Win32\lib\Win32\zlib-static-mt.lib;C:\Gish Coder\mylibpng\libpng14.lib;C:\Gish Coder\External-VC10Precompiled-static-mt-Win32\lib\Win32\libogg-static-mt.lib;C:\Gish Coder\External-VC10Precompiled-static-mt-Win32\lib\Win32\libvorbis-static-mt.lib;C:\Gish Coder\SDL_mixer-devel-1.2.11-VC\SDL_mixer-1.2.11\lib\SDL_mixer.lib;C:\Gish Coder\SDL-devel-1.2.14-VC8\SDL-1.2.14\lib\SDL.lib;C:\Gish Coder\SDL-devel-1.2.14-VC8\SDL-1.2.14\lib\SDLmain.lib;C:\Programme\OpenAL 1.1 SDK\libs\Win32\OpenAL32.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>Full</Optimization>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>externals\libogg-1.2.0\include;externals\libvorbis-1.3.1\include;externals\OpenAL-1.1\include;externals\SDL-1.2.14\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <CompileAs>CompileAsC</CompileAs>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>shell32.lib;externals\SDL-1.2.14\lib\SDL.lib;externals\SDL-1.2.14\lib\SDLmain.lib;OpenGL32.lib;externals\OpenAL-1.1\lib\OpenAL32.lib;externals\libogg-1.2.0\lib\libogg_static.lib;externals\libvorbis-1.3.1\lib\libvorbisfile_static.lib;externals\libvorbis-1.3.1\lib\libvorbis_static.lib</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="game\ai.c" />
+    <ClCompile Include="game\animation.c" />
+    <ClCompile Include="audio\audio.c" />
+    <ClCompile Include="game\block.c" />
+    <ClCompile Include="physics\bond.c" />
+    <ClCompile Include="game\boss.c" />
+    <ClCompile Include="game\config.c" />
+    <ClCompile Include="game\credits.c" />
+    <ClCompile Include="game\custom.c" />
+    <ClCompile Include="game\damage.c" />
+    <ClCompile Include="game\debug.c" />
+    <ClCompile Include="game\editor.c" />
+    <ClCompile Include="sdl\endian.c" />
+    <ClCompile Include="sdl\event.c" />
+    <ClCompile Include="sdl\file.c" />
+    <ClCompile Include="game\game.c" />
+    <ClCompile Include="game\gameaudio.c" />
+    <ClCompile Include="game\gamemenu.c" />
+    <ClCompile Include="game\gameobject.c" />
+    <ClCompile Include="game\gametexture.c" />
+    <ClCompile Include="video\glfunc.c" />
+    <ClCompile Include="game\high.c" />
+    <ClCompile Include="math\intersec.c" />
+    <ClCompile Include="input\joystick.c" />
+    <ClCompile Include="input\keyboard.c" />
+    <ClCompile Include="game\level.c" />
+    <ClCompile Include="game\lighting.c" />
+    <ClCompile Include="game\logic.c" />
+    <ClCompile Include="main.c" />
+    <ClCompile Include="game\mainmenu.c" />
+    <ClCompile Include="game\mappack.c" />
+    <ClCompile Include="menu\menu.c" />
+    <ClCompile Include="input\mouse.c" />
+    <ClCompile Include="game\music.c" />
+    <ClCompile Include="physics\object.c" />
+    <ClCompile Include="game\objedit.c" />
+    <ClCompile Include="game\objfunc.c" />
+    <ClCompile Include="video\opengl.c" />
+    <ClCompile Include="game\options.c" />
+    <ClCompile Include="parser\parser.c" />
+    <ClCompile Include="physics\particle.c" />
+    <ClCompile Include="game\physics.c" />
+    <ClCompile Include="game\player.c" />
+    <ClCompile Include="game\prerender.c" />
+    <ClCompile Include="game\random.c" />
+    <ClCompile Include="game\record.c" />
+    <ClCompile Include="game\render.c" />
+    <ClCompile Include="game\replay.c" />
+    <ClCompile Include="game\ropeedit.c" />
+    <ClCompile Include="game\setup.c" />
+    <ClCompile Include="game\socket.c" />
+    <ClCompile Include="game\sprite.c" />
+    <ClCompile Include="video\text.c" />
+    <ClCompile Include="video\texture.c" />
+    <ClCompile Include="math\vector.c" />
+    <ClCompile Include="sdl\video.c" />
+    <ClCompile Include="game\vsmode.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="game\ai.h" />
+    <ClInclude Include="game\animation.h" />
+    <ClInclude Include="audio\audio.h" />
+    <ClInclude Include="game\block.h" />
+    <ClInclude Include="physics\bond.h" />
+    <ClInclude Include="game\boss.h" />
+    <ClInclude Include="config.h" />
+    <ClInclude Include="game\config.h" />
+    <ClInclude Include="game\credits.h" />
+    <ClInclude Include="game\custom.h" />
+    <ClInclude Include="game\damage.h" />
+    <ClInclude Include="game\debug.h" />
+    <ClInclude Include="game\editor.h" />
+    <ClInclude Include="sdl\endian.h" />
+    <ClInclude Include="game\english.h" />
+    <ClInclude Include="sdl\event.h" />
+    <ClInclude Include="sdl\file.h" />
+    <ClInclude Include="game\game.h" />
+    <ClInclude Include="game\gameaudio.h" />
+    <ClInclude Include="game\gamemenu.h" />
+    <ClInclude Include="game\gameobject.h" />
+    <ClInclude Include="game\gametexture.h" />
+    <ClInclude Include="video\glext.h" />
+    <ClInclude Include="video\glfunc.h" />
+    <ClInclude Include="game\high.h" />
+    <ClInclude Include="math\intersec.h" />
+    <ClInclude Include="input\joystick.h" />
+    <ClInclude Include="input\keyboard.h" />
+    <ClInclude Include="game\level.h" />
+    <ClInclude Include="game\lighting.h" />
+    <ClInclude Include="game\logic.h" />
+    <ClInclude Include="game\mainmenu.h" />
+    <ClInclude Include="game\mappack.h" />
+    <ClInclude Include="math\math.h" />
+    <ClInclude Include="menu\menu.h" />
+    <ClInclude Include="input\mouse.h" />
+    <ClInclude Include="game\music.h" />
+    <ClInclude Include="physics\object.h" />
+    <ClInclude Include="game\objedit.h" />
+    <ClInclude Include="game\objfunc.h" />
+    <ClInclude Include="video\opengl.h" />
+    <ClInclude Include="game\options.h" />
+    <ClInclude Include="parser\parser.h" />
+    <ClInclude Include="physics\particle.h" />
+    <ClInclude Include="game\physics.h" />
+    <ClInclude Include="game\player.h" />
+    <ClInclude Include="game\prerender.h" />
+    <ClInclude Include="game\random.h" />
+    <ClInclude Include="game\record.h" />
+    <ClInclude Include="game\render.h" />
+    <ClInclude Include="game\replay.h" />
+    <ClInclude Include="game\ropeedit.h" />
+    <ClInclude Include="sdl\sdl.h" />
+    <ClInclude Include="game\setup.h" />
+    <ClInclude Include="game\socket.h" />
+    <ClInclude Include="game\sprite.h" />
+    <ClInclude Include="video\text.h" />
+    <ClInclude Include="video\texture.h" />
+    <ClInclude Include="math\vector.h" />
+    <ClInclude Include="sdl\video.h" />
+    <ClInclude Include="game\vsmode.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

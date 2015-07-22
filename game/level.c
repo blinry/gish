@@ -734,7 +734,7 @@ void createlevel(void)
   level.ambient[3][1]=1.0f;
   level.ambient[3][2]=1.0f;
 
-  level.object[0].type=1;
+  level.object[0].type = OBJ_TYPE_GISH;
   level.object[0].position[0]=127.5f;
   level.object[0].position[1]=127.5f;
   level.object[0].position[2]=0.0f;

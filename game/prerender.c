@@ -233,7 +233,9 @@ void setuprenderobjects(void)
   for (count=0;count<numofobjects;count++)
   if (object[count].texturenum!=0)
     {
-    if (object[count].type==1)
+
+    /* gish */
+    if (object[count].type==OBJ_TYPE_GISH)
       {
       subtractvectors(vec,view.position,object[count].position);
       if (fabs(vec[0])-object[count].radius<view.zoom)

@@ -49,6 +49,20 @@ You will need the following files to be present:
 - OpenAL32.dll
 - SDL.DLL
 
+# How to compile (Mac OS X)
+
+Open the Xcode project in the main directory.
+'Get info' on the Gish executable and change its working directory to "Project Directory"
+If the build fails, check the dependencies. The Xcode project currently does not use the ./externals directory:
+- Frameworks: Cocoa, SDL, OpenAL, Ogg, Vorbis
+    Ogg and Vorbis Frameworks built from from http://xiph.org/downloads/ and installed in /Library/Frameworks/.
+- libpng; macports is an option. Change appropriate search paths:
+    Change (Gish target -> get info -> "Header Search Paths") to point to libpng headers. (e.g. /opt/local/include/libpng14/)
+    Using recursive header search of /opt/local/include may slow things down or present conflicts, not recommended.
+
+Note: If you own the original assets, you can use them simply by changing the working directory mentioned above to /Applications/Gish.app/Contents/Resources
+An note of caution, this will use the original apps user file as well.
+
 # How to play
 
 Simply run `./gish` or `gish.exe`. There are some assets included (codenamed the *FreeGish* project), making Gish a completely free game! There is also one level available, `freegish.lvl`, you'll find it under "Custom Levels". Try it and replace what you don't like.
@@ -61,3 +75,6 @@ If you own the original assets, you may also copy those into this directory. You
 - sound
 - texture
 - tile01 ... tile07
+
+
+# Note: this branch has been merged with SysLord, who added a few fun features, documented in Note-SysLord.markdown

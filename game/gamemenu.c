@@ -404,6 +404,7 @@ void pregamemenu(void)
         goto changelevelbypass;
         }
 
+      // TODO: remove goto
       changelevelbypass:;
 
       simtimer=SDL_GetTicks();

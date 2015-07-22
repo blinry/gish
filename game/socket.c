@@ -54,7 +54,7 @@ void launchwebpage(char *webpagename)
   {
 #ifdef WINDOWS
   SDL_WM_IconifyWindow();
-  ShellExecute(NULL,"open",webpagename,"","c:\\",SW_SHOWNORMAL);
+  ShellExecute(NULL,L"open",(LPTSTR)webpagename,L"",L"c:\\",SW_SHOWNORMAL);
 #endif
 #ifdef MAC
   /*

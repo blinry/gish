@@ -143,7 +143,7 @@ void createbond(int part1,int part2,int type,int objectnum)
   {
   int count;
   float vec[3];
-  float length;
+  float length; // Set to starting length
 
   if (part1>=numofparticles)
     return;
@@ -165,19 +165,19 @@ void createbond(int part1,int part2,int type,int objectnum)
 
   memset(&bond[numofbonds],0,sizeof(bond[numofbonds]));
 
-  bond[numofbonds].part1=part1;
-  bond[numofbonds].part2=part2;
-  bond[numofbonds].type=type;
-  bond[numofbonds].timetolive=10000;
-  bond[numofbonds].length=length;
-  bond[numofbonds].maxlength=length;
+  bond[numofbonds].part1 = part1;
+  bond[numofbonds].part2 = part2;
+  bond[numofbonds].type = type;
+  bond[numofbonds].timetolive = 10000;
+  bond[numofbonds].length = length;
+  bond[numofbonds].maxlength = length;
 
-  bond[numofbonds].elasticity=bondtype[type].elasticity;
-  bond[numofbonds].cycles=bondtype[type].cycles;
-  bond[numofbonds].compression=bondtype[type].compression;
-  bond[numofbonds].tension=bondtype[type].tension;
+  bond[numofbonds].elasticity = bondtype[type].elasticity;
+  bond[numofbonds].cycles = bondtype[type].cycles;
+  bond[numofbonds].compression = bondtype[type].compression;
+  bond[numofbonds].tension = bondtype[type].tension;
 
-  bond[numofbonds].objectnum=objectnum;
+  bond[numofbonds].objectnum = objectnum;
 
   numofbonds++;
   }

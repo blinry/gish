@@ -37,10 +37,11 @@ int lineintersectobject(float *intersectpoint,float *normal,float *scale,float *
   float intersectpointtemp[3];
   float normaltemp[3];
   float scaletemp;
-
-  if (fabs(startpoint[0]-object[objectnum].position[0])>10.0f)
+  
+  // Abort check if too far from object
+  if (fabs(startpoint[0] - object[objectnum].position[0]) > 10.0f)
     return(0);
-  if (fabs(startpoint[1]-object[objectnum].position[1])>10.0f)
+  if (fabs(startpoint[1] - object[objectnum].position[1]) > 10.0f)
     return(0);
 
   *scale=1.0f;
@@ -133,7 +134,7 @@ int pointintersectobject(float *intersectpoint,float *normal,float *scale,float 
       {
       subtractvectors(vec,intersectpointtemp,object[objectnum2].position);
       normalizevector(vec,vec);
-      if (object[objectnum2].type==1)
+      if (object[objectnum2].type==OBJ_TYPE_GISH)
         angle=0.707f;
       else
         angle=0.0f;
