@@ -214,10 +214,10 @@ void setuplevel(void)
         object[numofobjects-1].lighton=1;
       if (level.object[count].lighttype==2)
         object[numofobjects-1].lighton=0;
-  
+
       object[numofobjects-1].size[0]=level.object[count].size[0];
       object[numofobjects-1].size[1]=level.object[count].size[1];
-  
+
       object[numofobjects-1].lightcolor[0]=level.object[count].lightcolor[0];
       object[numofobjects-1].lightcolor[1]=level.object[count].lightcolor[1];
       object[numofobjects-1].lightcolor[2]=level.object[count].lightcolor[2];

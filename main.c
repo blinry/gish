@@ -85,7 +85,7 @@ int main (int argc,char *argv[])
   int count;
   int flags;
   const char *temp;
-  
+
   /*printf("ABC");*/
 
 #ifdef DATAPATH
@@ -199,7 +199,7 @@ int main (int argc,char *argv[])
     SDL_Quit();
     return(0);
     }
-    
+
   if (config.sound)
     setupaudio();
 

@@ -766,7 +766,7 @@ void videooptionsmenu(void)
     windowinfo.resolutiony=sdlvideomode[videomodenum].resolutiony;
     windowinfo.fullscreen=fullscreen;
     windowinfo.bitsperpixel=bitsperpixel;
-  
+
     if (windowinfo.bitsperpixel==16)
       {
       SDL_GL_SetAttribute(SDL_GL_RED_SIZE,5);
@@ -781,7 +781,7 @@ void videooptionsmenu(void)
       SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,8);
       SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,8);
       }
-  
+
     if (windowinfo.fullscreen)
       SDL_SetVideoMode(windowinfo.resolutionx,windowinfo.resolutiony,windowinfo.bitsperpixel,SDL_OPENGL|SDL_FULLSCREEN);
     else
@@ -811,17 +811,17 @@ void drawsliderbars(void)
     vec[1]=40.0f-1.0f;
     convertscreenvertex(vec,font.sizex,font.sizey);
     glVertex3fv(vec);
-  
+
     vec[0]=160.0f+128.0f;
     vec[1]=40.0f-5.0f;
     convertscreenvertex(vec,font.sizex,font.sizey);
     glVertex3fv(vec);
-  
+
     vec[0]=160.0f+128.0f;
     vec[1]=40.0f+5.0f;
     convertscreenvertex(vec,font.sizex,font.sizey);
     glVertex3fv(vec);
-  
+
     vec[0]=160.0f;
     vec[1]=40.0f+1.0f;
     convertscreenvertex(vec,font.sizex,font.sizey);
@@ -857,17 +857,17 @@ void drawsliderbars(void)
     vec[1]=56.0f-1.0f;
     convertscreenvertex(vec,font.sizex,font.sizey);
     glVertex3fv(vec);
-  
+
     vec[0]=160.0f+128.0f;
     vec[1]=56.0f-5.0f;
     convertscreenvertex(vec,font.sizex,font.sizey);
     glVertex3fv(vec);
-  
+
     vec[0]=160.0f+128.0f;
     vec[1]=56.0f+5.0f;
     convertscreenvertex(vec,font.sizex,font.sizey);
     glVertex3fv(vec);
-  
+
     vec[0]=160.0f;
     vec[1]=56.0f+1.0f;
     convertscreenvertex(vec,font.sizex,font.sizey);

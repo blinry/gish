@@ -23,8 +23,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "../video/opengl.h"
 
-#if defined(LINUX) || defined(MAC) 
-  #include <unistd.h> 
+#if defined(LINUX) || defined(MAC)
+  #include <unistd.h>
 #endif
 
 #include <stdio.h>
@@ -406,7 +406,7 @@ void loadlevel(char *filename)
           if ((texture[count].sizey&(texture[count].sizey-1))==0)
             setuptexture(count);
           }
-  
+
         fread2(&block[count].numoflines,4,1,fp);
         if (block[count].numoflines<0 || block[count].numoflines>=64)
           {
@@ -519,7 +519,7 @@ void loadlevel(char *filename)
           if ((texture[count].sizey&(texture[count].sizey-1))==0)
             setuptexture(count);
           }
-  
+
         fread2(&block[count].numoflines,4,1,fp);
         if (block[count].numoflines<0 || block[count].numoflines>=64)
           {

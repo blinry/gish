@@ -105,7 +105,7 @@ void creditsmenu(void)
       else
         secretsequence=0;
       }
-  
+
     updateogg();
     checkmusic();
     game.songnum=8;
