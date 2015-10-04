@@ -51,7 +51,7 @@ void bondsimulation(void)
       {
       part1=bond[count2].part1;
       part2=bond[count2].part2;
-  
+
       subtractvectors(bondnormal,particle[part2].position,particle[part1].position);
       veclength=vectorlength(bondnormal)-bond[count2].length;
       normalizevector(bondnormal,bondnormal);

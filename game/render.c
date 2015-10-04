@@ -82,31 +82,31 @@ void renderlevelback(void)
     if (blocknum!=0)
       {
       glBindTexture(GL_TEXTURE_2D,texture[blocknum].glname);
-  
+
       glBegin(GL_QUADS);
-  
+
       glColor3fv(level.ambient[0]);
-  
+
       vec[0]=(float)count2;
       vec[1]=(float)count+1.0f;
       glTexCoord2f(0.0f,0.0f);
       glVertex3f(vec[0],vec[1],0.0f);
-  
+
       vec[0]=(float)count2+1.0f;
       vec[1]=(float)count+1.0f;
       glTexCoord2f(1.0f,0.0f);
       glVertex3f(vec[0],vec[1],0.0f);
-  
+
       vec[0]=(float)count2+1.0f;
       vec[1]=(float)count;
       glTexCoord2f(1.0f,1.0f);
       glVertex3f(vec[0],vec[1],0.0f);
-  
+
       vec[0]=(float)count2;
       vec[1]=(float)count;
       glTexCoord2f(0.0f,1.0f);
       glVertex3f(vec[0],vec[1],0.0f);
-  
+
       glEnd();
       }
     }
@@ -156,40 +156,40 @@ void renderlevelback(void)
       if (blocknum!=0)
         {
         glBindTexture(GL_TEXTURE_2D,texture[blocknum].glname);
-    
+
         glActiveTextureARB(GL_TEXTURE1_ARB);
         glEnable(GL_TEXTURE_2D);
-    
+
         glBegin(GL_QUADS);
-    
+
         glColor3fv(frame.light[lightcount].color);
-    
+
         vec[0]=(float)count2;
         vec[1]=(float)count+1.0f;
         glMultiTexCoord2fARB(GL_TEXTURE0_ARB,0.0f,0.0f);
         setuplighttexcoord(lightcount,vec);
         glVertex3f(vec[0],vec[1],0.0f);
-    
+
         vec[0]=(float)count2+1.0f;
         vec[1]=(float)count+1.0f;
         glMultiTexCoord2fARB(GL_TEXTURE0_ARB,1.0f,0.0f);
         setuplighttexcoord(lightcount,vec);
         glVertex3f(vec[0],vec[1],0.0f);
-    
+
         vec[0]=(float)count2+1.0f;
         vec[1]=(float)count;
         glMultiTexCoord2fARB(GL_TEXTURE0_ARB,1.0f,1.0f);
         setuplighttexcoord(lightcount,vec);
         glVertex3f(vec[0],vec[1],0.0f);
-    
+
         vec[0]=(float)count2;
         vec[1]=(float)count;
         glMultiTexCoord2fARB(GL_TEXTURE0_ARB,0.0f,1.0f);
         setuplighttexcoord(lightcount,vec);
         glVertex3f(vec[0],vec[1],0.0f);
-    
+
         glEnd();
-    
+
         glDisable(GL_TEXTURE_2D);
         glActiveTextureARB(GL_TEXTURE0_ARB);
         }
@@ -248,22 +248,22 @@ void renderlevel(void)
       vec[1]=(float)count+1.0f;
       glTexCoord2f(0.0f,0.0f);
       glVertex3f(vec[0],vec[1],0.0f);
-  
+
       vec[0]=(float)count2+1.0f;
       vec[1]=(float)count+1.0f;
       glTexCoord2f(1.0f,0.0f);
       glVertex3f(vec[0],vec[1],0.0f);
-  
+
       vec[0]=(float)count2+1.0f;
       vec[1]=(float)count;
       glTexCoord2f(1.0f,1.0f);
       glVertex3f(vec[0],vec[1],0.0f);
-  
+
       vec[0]=(float)count2;
       vec[1]=(float)count;
       glTexCoord2f(0.0f,1.0f);
       glVertex3f(vec[0],vec[1],0.0f);
-  
+
       glEnd();
       /*
       if (block[blocknum].friction<0.1f)
@@ -298,7 +298,7 @@ void renderlevel(void)
           vec[1]=(float)count+block[blocknum].line[count3][3]-normal[1]*0.125f*0.5f;
           vec[2]=0.0f;
           glVertex3fv(vec);
-  
+
           vec[0]=(float)count2+block[blocknum].line[count3][0]-normal[0]*0.125f*0.5f;
           vec[1]=(float)count+block[blocknum].line[count3][1]-normal[1]*0.125f*0.5f;
           vec[2]=0.0f;
@@ -356,7 +356,7 @@ void renderlevel(void)
       if (blocknum!=0)
         {
         glBindTexture(GL_TEXTURE_2D,texture[blocknum].glname);
-  
+
         for (count3=0;count3<block[blocknum].numoflines;count3++)
         if (((level.gridflags[count][count2]>>count3)&1)==0)
           {
@@ -364,9 +364,9 @@ void renderlevel(void)
           normal[1]=(block[blocknum].line[count3][2]-block[blocknum].line[count3][0]);
           normal[2]=0.0f;
           normalizevector(normal,normal);
-  
+
           glBegin(GL_QUADS);
-  
+
           vec[0]=(float)count2+block[blocknum].line[count3][0];
           vec[1]=(float)count+block[blocknum].line[count3][1];
           vec[2]=0.0f;
@@ -377,7 +377,7 @@ void renderlevel(void)
           glColor3fv(vec2);
           glTexCoord2f(block[blocknum].line[count3][0],1.0f-block[blocknum].line[count3][1]);
           glVertex3f(vec[0],vec[1],0.0f);
-      
+
           vec[0]=(float)count2+block[blocknum].line[count3][2];
           vec[1]=(float)count+block[blocknum].line[count3][3];
           vec[2]=0.0f;
@@ -388,19 +388,19 @@ void renderlevel(void)
           glColor3fv(vec2);
           glTexCoord2f(block[blocknum].line[count3][2],1.0f-block[blocknum].line[count3][3]);
           glVertex3f(vec[0],vec[1],0.0f);
-  
+
           vec[0]=(float)count2+block[blocknum].line[count3][2]-normal[0]*0.125f;
           vec[1]=(float)count+block[blocknum].line[count3][3]-normal[1]*0.125f;
           glColor3f(0.0f,0.0f,0.0f);
           glTexCoord2f((block[blocknum].line[count3][2]-normal[0]*0.125f),1.0f-(block[blocknum].line[count3][3]-normal[1]*0.125f));
           glVertex3f(vec[0],vec[1],0.0f);
-  
+
           vec[0]=(float)count2+block[blocknum].line[count3][0]-normal[0]*0.125f;
           vec[1]=(float)count+block[blocknum].line[count3][1]-normal[1]*0.125f;
           glColor3f(0.0f,0.0f,0.0f);
           glTexCoord2f((block[blocknum].line[count3][0]-normal[0]*0.125f),1.0f-(block[blocknum].line[count3][1]-normal[1]*0.125f));
           glVertex3f(vec[0],vec[1],0.0f);
-  
+
           glEnd();
           }
         }
@@ -443,22 +443,22 @@ void renderlevelfore(void)
       vec[1]=(float)count+1.0f;
       glTexCoord2f(0.0f,0.0f);
       glVertex3f(vec[0],vec[1],0.0f);
-  
+
       vec[0]=(float)count2+1.0f;
       vec[1]=(float)count+1.0f;
       glTexCoord2f(1.0f,0.0f);
       glVertex3f(vec[0],vec[1],0.0f);
-  
+
       vec[0]=(float)count2+1.0f;
       vec[1]=(float)count;
       glTexCoord2f(1.0f,1.0f);
       glVertex3f(vec[0],vec[1],0.0f);
-  
+
       vec[0]=(float)count2;
       vec[1]=(float)count;
       glTexCoord2f(0.0f,1.0f);
       glVertex3f(vec[0],vec[1],0.0f);
-  
+
       glEnd();
       }
     }
@@ -731,9 +731,9 @@ void renderobjects(void)
       else
         {
         glDisable(GL_TEXTURE_2D);
-  
+
         glBegin(GL_TRIANGLES);
-  
+
         glColor4f(0.0f,0.0f,0.0f,1.0f);
         if (objectrender[count].objectnum==1)
           glColor4f(0.5f,0.5f,0.5f,1.0f);
@@ -741,17 +741,17 @@ void renderobjects(void)
           glColor4f(0.355f,0.31f,0.15f,1.0f);
         if (objectrender[count].objectnum==3)
           glColor4f(0.453f,0.3f,0.28f,1.0f);
-  
+
         if (object[objectrender[count].objectnum].hitpoints<object[objectrender[count].objectnum].prevhitpoints)
           glColor4f(0.25f,0.0f,0.0f,1.0f);
-  
+
         for (count2=0;count2<32;count2++)
           {
           glVertex3fv(objectrender[count].vertex[count2]);
           glVertex3fv(objectrender[count].vertex[((count2+1)&31)]);
           glVertex3fv(objectrender[count].vertex[32]);
           }
-  
+
         glEnd();
 
         glEnable(GL_TEXTURE_2D);
@@ -764,9 +764,9 @@ void renderobjects(void)
       glBindTexture(GL_TEXTURE_2D,texture[objectrender[count].texturenum].glname);
 
       glBegin(GL_QUADS);
-    
+
       glColor4f(1.0f,1.0f,1.0f,1.0f);
-    
+
       vec[0]=objectrender[count].vertex[32][0]+size*cos(objectrender[count].angle+pi/4.0f);
       vec[1]=objectrender[count].vertex[32][1]+size*sin(objectrender[count].angle+pi/4.0f);
       vec[2]=0.0f;
@@ -775,7 +775,7 @@ void renderobjects(void)
       else
         glTexCoord2f(1.0f,0.0f);
       glVertex3fv(vec);
-    
+
       vec[0]=objectrender[count].vertex[32][0]+size*cos(objectrender[count].angle+3.0f*pi/4.0f);
       vec[1]=objectrender[count].vertex[32][1]+size*sin(objectrender[count].angle+3.0f*pi/4.0f);
       vec[2]=0.0f;
@@ -784,16 +784,16 @@ void renderobjects(void)
       else
         glTexCoord2f(0.0f,0.0f);
       glVertex3fv(vec);
-    
+
       vec[0]=objectrender[count].vertex[32][0]+size*cos(objectrender[count].angle+5.0f*pi/4.0f);
       vec[1]=objectrender[count].vertex[32][1]+size*sin(objectrender[count].angle+5.0f*pi/4.0f);
       vec[2]=0.0f;
       if (object[objectrender[count].objectnum].direction==0)
         glTexCoord2f(1.0f,1.0f);
       else
-        glTexCoord2f(0.0f,1.0f);   
+        glTexCoord2f(0.0f,1.0f);
       glVertex3fv(vec);
-    
+
       vec[0]=objectrender[count].vertex[32][0]+size*cos(objectrender[count].angle+7.0f*pi/4.0f);
       vec[1]=objectrender[count].vertex[32][1]+size*sin(objectrender[count].angle+7.0f*pi/4.0f);
       vec[2]=0.0f;
@@ -802,7 +802,7 @@ void renderobjects(void)
       else
         glTexCoord2f(1.0f,1.0f);
       glVertex3fv(vec);
-    
+
       glEnd();
 
       if (!object[objectrender[count].objectnum].idata[0])
@@ -811,54 +811,54 @@ void renderobjects(void)
           glEnable(GL_LINE_SMOOTH);
 
         glDisable(GL_TEXTURE_2D);
-  
+
         for (count2=0;count2<32;count2++)
           {
           glBegin(GL_LINES);
-  
+
           if (objectrender[count].objectnum==0)
             glColor4f(0.5f,0.5f,0.5f,0.5f);
           else
             glColor4f(0.25f,0.25f,0.25f,0.5f);
-  
+
           glVertex3fv(objectrender[count].vertex[count2]);
           glVertex3fv(objectrender[count].vertex[((count2+1)&31)]);
-  
+
           glEnd();
           }
         if ((object[objectrender[count].objectnum].button&4)==4)
         for (count2=0;count2<32;count2++)
           {
           glBegin(GL_LINES);
-  
+
           if (objectrender[count].objectnum==0)
             glColor4f(0.5f,0.5f,0.5f,0.5f);
           else
             glColor4f(0.25f,0.25f,0.25f,0.5f);
-  
+
           normal[0]=objectrender[count].vertex[count2][1]-objectrender[count].vertex[((count2+1)&31)][1];
           normal[1]=objectrender[count].vertex[((count2+1)&31)][0]-objectrender[count].vertex[count2][0];
           normal[2]=0.0f;
-  
+
           copyvector(vec,objectrender[count].vertex[count2]);
           scaleaddvectors(vec,vec,normal,0.1f);
           glVertex3fv(vec);
-  
+
           normal[0]=objectrender[count].vertex[((count2+1)&31)][1]-objectrender[count].vertex[((count2+2)&31)][1];
           normal[1]=objectrender[count].vertex[((count2+2)&31)][0]-objectrender[count].vertex[((count2+1)&31)][0];
           normal[2]=0.0f;
-  
+
           copyvector(vec,objectrender[count].vertex[((count2+1)&31)]);
           scaleaddvectors(vec,vec,normal,0.1f);
           glVertex3fv(vec);
-  
+
           glEnd();
           }
         if ((object[objectrender[count].objectnum].button&1)==1)
         for (count2=0;count2<32;count2++)
           {
           glBegin(GL_LINES);
-  
+
           if (objectrender[count].objectnum==0)
             {
             color[0]=0.5f;
@@ -871,12 +871,12 @@ void renderobjects(void)
             color[1]=0.25f;
             color[2]=0.25f;
             }
-  
+
           normal[0]=objectrender[count].vertex[count2][1]-objectrender[count].vertex[((count2+1)&31)][1];
           normal[1]=objectrender[count].vertex[((count2+1)&31)][0]-objectrender[count].vertex[count2][0];
           normal[2]=0.0f;
           scalevector(normal,normal,0.8f);
-  
+
           copyvector(vec,objectrender[count].vertex[count2]);
           color[3]=1.0f;
           glColor4fv(color);
@@ -898,7 +898,7 @@ void renderobjects(void)
 
           glEnd();
           }
-  
+
         glEnable(GL_TEXTURE_2D);
 
         glDisable(GL_LINE_SMOOTH);
@@ -945,24 +945,24 @@ void renderobjects(void)
         if (objectrender[count].type!=2 && objectrender[count].type!=10)
           {
           glBegin(GL_TRIANGLES);
-  
+
           glColor4f(level.ambient[1][0],level.ambient[1][1],level.ambient[1][2],objectrender[count].alpha);
-  
+
           for (count2=0;count2<objectrender[count].numoftris;count2++)
             {
             glTexCoord2fv(objectrender[count].texcoord[objectrender[count].tri[count2][0]]);
             setuplighttexcoord(lightcount,objectrender[count].vertex[objectrender[count].tri[count2][0]]);
             glVertex3fv(objectrender[count].vertex[objectrender[count].tri[count2][0]]);
-  
+
             glTexCoord2fv(objectrender[count].texcoord[objectrender[count].tri[count2][1]]);
             setuplighttexcoord(lightcount,objectrender[count].vertex[objectrender[count].tri[count2][1]]);
             glVertex3fv(objectrender[count].vertex[objectrender[count].tri[count2][1]]);
-  
+
             glTexCoord2fv(objectrender[count].texcoord[objectrender[count].tri[count2][2]]);
             setuplighttexcoord(lightcount,objectrender[count].vertex[objectrender[count].tri[count2][2]]);
             glVertex3fv(objectrender[count].vertex[objectrender[count].tri[count2][2]]);
             }
-  
+
           glEnd();
           }
         else

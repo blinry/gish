@@ -77,7 +77,7 @@ void highscoremenu(int levelnum)
       memcpy(highscore[levelnum][count2].name,player[playernum].name,32);
       }
     }
-  
+
   resetmenuitems();
 
   while (!menuitem[0].active && !windowinfo.shutdown)
@@ -120,7 +120,7 @@ void highscoremenu(int levelnum)
       createmenuitem(TXT_LEVEL" 8",64,count,16,1.0f,1.0f,1.0f,1.0f);
       setmenuitem(MO_SET,&levelnum,8);
       count+=16;
-  
+
       count=320;
       createmenuitem(TXT_LEVEL" 9",240,count,16,1.0f,1.0f,1.0f,1.0f);
       setmenuitem(MO_SET,&levelnum,9);
@@ -146,7 +146,7 @@ void highscoremenu(int levelnum)
       createmenuitem(TXT_LEVEL" 16",240,count,16,1.0f,1.0f,1.0f,1.0f);
       setmenuitem(MO_SET,&levelnum,16);
       count+=16;
-  
+
       count=320;
       createmenuitem(TXT_LEVEL" 17",416,count,16,1.0f,1.0f,1.0f,1.0f);
       setmenuitem(MO_SET,&levelnum,17);

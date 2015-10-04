@@ -531,7 +531,7 @@ public class Gishlevel {
 //        return b;
 //    }
 
-    
+
     public void extract_and_convert(ArrayList<MD5db> md5dbs) throws IOException {
         if (readCInt(version) == 10) {
             version = inttoBarray(11);
@@ -574,7 +574,7 @@ public class Gishlevel {
                                     }
 
                                     //Image saved, or reference caught.
-                                    
+
                                     if (filenameTo.startsWith("texture/")) {
                                         filenameTo = filenameTo.substring("texture/".length());
                                     }

@@ -27,7 +27,7 @@ void simulation(void);
 void getinputs(void);
 
 /* Key button alias.
- * Used to pass button to object (objfunc.c). 
+ * Used to pass button to object (objfunc.c).
  * TODO: Finish replacing all magic numbers.
  */
 typedef enum {

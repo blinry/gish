@@ -85,7 +85,7 @@ void objectai(int objectnum)
             object[objectnum].axis[0]-=1.0f;
           else
             object[objectnum].axis[0]+=1.0f;
-  
+
           if (object[objectnum].beasttype!=12)
           if ((rnd()&255)==0)
             object[objectnum].button|=KEYALIAS_BUTTON_JUMP;

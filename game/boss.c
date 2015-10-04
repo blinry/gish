@@ -108,7 +108,7 @@ void bosssimulation(void)
         boss[count].direction=0;
       else
         boss[count].direction=1;
-  
+
       if (frame.numoflights>1)
       if (boss[count].timetolive>150)
         boss[count].timetolive=150;

@@ -39,7 +39,7 @@ public class Tile {
     public byte[] get(String identifier) {
         return hashmap.get(identifier);
     }
-    
+
     public byte[] getTileData() {
         return getTileData(false);
     }

@@ -7,7 +7,7 @@
 
 #ifdef _WIN32
   #define WINDOWS 1
-  
+
   /* HACK */
   #define PATH_MAX 255
 #endif

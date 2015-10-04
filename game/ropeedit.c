@@ -228,11 +228,11 @@ void editlevelrope(void)
             level.rope[level.numofropes].type=10;
           level.rope[level.numofropes].obj1=ropeedit.point[ropeedit.pointnum].objectnum;
           level.rope[level.numofropes].obj1part=ropeedit.point[ropeedit.pointnum].particlenum;
-  
+
           level.rope[level.numofropes].obj2=ropeedit.point[ropeedit.pointhighlight].objectnum;
           level.rope[level.numofropes].obj2part=ropeedit.point[ropeedit.pointhighlight].particlenum;
           level.rope[level.numofropes].texturenum=ropeedit.texturenum;
-  
+
           level.numofropes++;
           }
         ropeedit.pointnum=-1;
