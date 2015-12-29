@@ -37,10 +37,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "../math/vector.h"
 #include "../physics/bond.h"
 #include "../physics/particle.h"
-
 void objectcycle(void)
   {
-  int count,count2,count3,count4;
+  int count,count2,count3;
+  float deformation;
   int x,y;
   float vec[3],vec2[3];
   float veclength/*,bondlength*/;
@@ -117,7 +117,7 @@ void objectcycle(void)
       for (count2=0;count2<object[count].numofparticles;count2++)
         addvectors(object[count].velocity,object[count].velocity,particle[object[count].particle[count2]].velocity);
       scalevector(object[count].velocity,object[count].velocity,1.0f/(float)object[count].numofparticles);
-  
+
       zerovector(object[count].position);
       for (count2=0;count2<object[count].numofparticles;count2++)
         addvectors(object[count].position,object[count].position,particle[object[count].particle[count2]].position);
@@ -402,23 +402,38 @@ void objectcycle(void)
           }
         }
 
-      count4=0;
+      deformation=0;
+      /* Hooke's law: the force on a spring F = k * X where X is the
+         distance it's being stretched or compressed, and k is an arbitrary
+         constant depending on what Gish is made out of.
+
+         integrate force over distance to get energy (aka damage)
+
+         so damage = k * X * X / 2
+       */
+      // these constants determined by science
+#define NORMALVECLENGTH object[count].radius
+#define SEVERITY 0.36
+#define THRESHOLD 8
       for (count2=0;count2<16;count2++)
       for (count3=0;count3<16;count3++)
       if (abs(count2-count3)>6)
         {
         subtractvectors(vec,particle[object[count].particle[count3]].position,particle[object[count].particle[count2]].position);
         veclength=vectorlength(vec);
-        if (veclength<0.15f)
-          count4++;
+        deformation += (veclength-NORMALVECLENGTH) *
+	        (veclength-NORMALVECLENGTH) *
+	        SEVERITY / 2;
         //if (veclength<0.15f)
         //  object[count].hitpoints-=(0.2f-veclength)*500.0f;
         }
 
-      /* Gish death by deformation (TODO: rename count4 etc.) */
-      if (count4>=2)
-        object[count].hitpoints-=(count4-1)*50;
-
+      /* Gish death by deformation */
+      if(deformation > THRESHOLD)
+	      object[count].hitpoints-=(deformation-1);
+#undef THRESHOLD
+#undef MINLENGTH
+#undef SEVERITY
       if (object[count].numoforientations==0)
         copyvector(object[count].orientation[1],yaxis);
       else
@@ -686,7 +701,7 @@ void objectcycle(void)
           subtractvectors(vec,particle[object[count].particle[count2]].position,object[count].position);
           crossproduct(vec2,zaxis,vec);
           normalizevector(vec2,vec2);
-  
+
           scaleaddvectors(particle[object[count].particle[count2]].velocity,particle[object[count].particle[count2]].velocity,vec2,spin*0.003f);
           }
         }
