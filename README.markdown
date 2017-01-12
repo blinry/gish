@@ -2,7 +2,7 @@
 
 Make sure CMake and the development libraries for SDL, OpenAL and Vorbis are installed. In Debian-based systems, you need to install the following packages:
 
-    cmake libsdl1.2-dev libopenal-dev libvorbis-dev
+    sudo apt-get install libsdl1.2-dev libopenal-dev libvorbis-dev
 
 Then simply issue
 
