@@ -258,20 +258,20 @@ void objectcollision(int objectnum)
           {
           part1=particlelist[0];
           part2=particlelist[1];
-  
+
           if (dotproduct(normal,levelline[count].normal)<-0.707f)
             {
             subtractvectors(object[objectnum].orientation[1],object[objectnum].orientation[1],normal);
             object[objectnum].numoforientations++;
-  
+
             collision.friction=levelline[count].friction;
             collision.blocknum=levelline[count].blocknum;
             collision.blockx=levelline[count].blockx;
             collision.blocky=levelline[count].blocky;
-  
+
             subtractvectors(vec,intersectpoint,levelline[count].line[1]);
             scaleaddvectors(vec2,levelline[count].line[1],normal,dotproduct(vec,normal));
-  
+
             subtractvectors(vec,particle[object[objectnum].particle[part2]].position,particle[object[objectnum].particle[part1]].position);
             scale=vectorlength(vec);
             subtractvectors(vec,particle[object[objectnum].particle[part1]].position,intersectpoint);
@@ -282,13 +282,13 @@ void objectcollision(int objectnum)
               force[0]=1.0f;
             if (force[1]>1.0f)
               force[1]=1.0f;
-  
+
             physicstemp.bond[physicstemp.numofbonds].part1=object[objectnum].particle[part1];
             physicstemp.bond[physicstemp.numofbonds].part2=object[objectnum].particle[part2];
             physicstemp.bond[physicstemp.numofbonds].type=2;
             subtractvectors(vec,vec2,intersectpoint);
             physicstemp.bond[physicstemp.numofbonds].length=vectorlength(vec);
-  
+
             copyvector(physicstemp.bond[physicstemp.numofbonds].normal,normal);
             physicstemp.bond[physicstemp.numofbonds].cycles=0;
             physicstemp.bond[physicstemp.numofbonds].elasticity=0.2f;
@@ -302,7 +302,7 @@ void objectcollision(int objectnum)
             physicstemp.bond[physicstemp.numofbonds].blocknum=collision.blocknum;
             physicstemp.bond[physicstemp.numofbonds].blockx=collision.blockx;
             physicstemp.bond[physicstemp.numofbonds].blocky=collision.blocky;
-    
+
             physicstemp.numofbonds++;
             }
           }
@@ -386,7 +386,7 @@ void objectcollision(int objectnum)
             physicstemp.bond[physicstemp.numofbonds].blockx=collision.blockx;
             physicstemp.bond[physicstemp.numofbonds].blocky=collision.blocky;
 
-    
+
             copyvector(physicstemp.bond[physicstemp.numofbonds].point,vec);
             copyvector(physicstemp.bond[physicstemp.numofbonds].normal,normal);
             physicstemp.numofbonds++;
@@ -440,7 +440,7 @@ void objectcollisionobject(int objectnum)
         physicstemp.bond[physicstemp.numofbonds].type=4;
         subtractvectors(vec,vec2,intersectpoint);
         physicstemp.bond[physicstemp.numofbonds].length=vectorlength(vec);
-  
+
         copyvector(physicstemp.bond[physicstemp.numofbonds].normal,normal);
         physicstemp.bond[physicstemp.numofbonds].cycles=0;
         physicstemp.bond[physicstemp.numofbonds].elasticity=0.2f;
@@ -496,7 +496,7 @@ void objectcollisionobject(int objectnum)
           if (object[objectcount].type==4)
           if (object[objectcount].beasttype==15)
             object[objectnum].hitpoints--;
-            
+
           if (object[objectnum].type==OBJ_TYPE_GISH)
           if (object[objectcount].type==6)
           if (object[objectcount].timetolive>16)
@@ -575,7 +575,7 @@ void objectcollisionobject(int objectnum)
               physicstemp.bond[physicstemp.numofbonds].part4=count;
               physicstemp.bond[physicstemp.numofbonds].type=5;
               physicstemp.bond[physicstemp.numofbonds].length=vectorlength(vec);
-    
+
               copyvector(physicstemp.bond[physicstemp.numofbonds].normal,normal);
               physicstemp.bond[physicstemp.numofbonds].cycles=0;
               physicstemp.bond[physicstemp.numofbonds].elasticity=0.2f;
@@ -648,14 +648,14 @@ void objectcollisionobject(int objectnum)
             force[0]=1.0f;
           if (force[1]>1.0f)
             force[1]=1.0f;
-  
+
           physicstemp.bond[physicstemp.numofbonds].part1=part1;
           physicstemp.bond[physicstemp.numofbonds].part2=part2;
           physicstemp.bond[physicstemp.numofbonds].part3=particlenum;
           physicstemp.bond[physicstemp.numofbonds].type=4;
           subtractvectors(vec,particle[particlenum].position,intersectpoint);
           physicstemp.bond[physicstemp.numofbonds].length=vectorlength(vec);
-  
+
           copyvector(physicstemp.bond[physicstemp.numofbonds].normal,normal);
           physicstemp.bond[physicstemp.numofbonds].cycles=0;
           physicstemp.bond[physicstemp.numofbonds].elasticity=0.5f;
@@ -751,12 +751,12 @@ void bondsimulation2(void)
       if (physicstemp.bond[count2].type==0)
         {
         part1=physicstemp.bond[count2].part1;
-    
+
         subtractvectors2(bondnormal,physicstemp.bond[count2].point,particle[part1].position);
         scalevector2(vec,bondnormal,0.2f);
         veclength=(vectorlength(bondnormal)-physicstemp.bond[count2].length);
         scaleaddvectors2(vec,vec,particle[part1].prevvelocity,-1.0f);
-  
+
         if (dotproduct(vec,physicstemp.bond[count2].normal)>0.0f)
           {
           scalevector2(vec,vec,physicstemp.bond[count2].elasticity);
@@ -779,7 +779,7 @@ void bondsimulation2(void)
       if (physicstemp.bond[count2].type==1)
         {
         part1=physicstemp.bond[count2].part1;
-    
+
         subtractvectors2(bondnormal,physicstemp.bond[count2].point,particle[part1].position);
         scalevector2(vec,bondnormal,1.0f);
         veclength=(vectorlength(bondnormal)-physicstemp.bond[count2].length);
@@ -805,12 +805,12 @@ void bondsimulation2(void)
         {
         part1=physicstemp.bond[count2].part1;
         part2=physicstemp.bond[count2].part2;
-    
+
         scalevector2(bondnormal,physicstemp.bond[count2].normal,-physicstemp.bond[count2].length*0.2f);
         scaleaddvectors2(bondnormal,bondnormal,particle[part2].prevvelocity,-physicstemp.bond[count2].force[1]);
         scaleaddvectors2(bondnormal,bondnormal,particle[part1].prevvelocity,-physicstemp.bond[count2].force[0]);
         copyvector(vec,bondnormal);
-  
+
         if (dotproduct(vec,physicstemp.bond[count2].normal)<0.0f)
           {
           scalevector2(vec,vec,physicstemp.bond[count2].elasticity);
@@ -832,34 +832,34 @@ void bondsimulation2(void)
         part1=physicstemp.bond[count2].part1;
         part2=physicstemp.bond[count2].part2;
         part3=physicstemp.bond[count2].part3;
-    
+
         scalevector2(bondnormal,physicstemp.bond[count2].normal,-physicstemp.bond[count2].length*0.2f);
-  
+
         scaleaddvectors2(bondnormal,bondnormal,particle[part3].prevvelocity,1.0f);
         scaleaddvectors2(bondnormal,bondnormal,particle[part2].prevvelocity,-physicstemp.bond[count2].force[1]);
         scaleaddvectors2(bondnormal,bondnormal,particle[part1].prevvelocity,-physicstemp.bond[count2].force[0]);
-  
+
         veclength=physicstemp.bond[count2].elasticity/(particle[part1].mass*physicstemp.bond[count2].force[0]+particle[part2].mass*physicstemp.bond[count2].force[1]+particle[part3].mass);
-  
+
         force[0]=veclength*particle[part3].mass;
         force[1]=veclength*(particle[part1].mass*physicstemp.bond[count2].force[0]+particle[part2].mass*physicstemp.bond[count2].force[1]);
-  
+
         if (dotproduct(bondnormal,physicstemp.bond[count2].normal)*force[0]<0.0f)
           {
           scalevector2(vec,bondnormal,force[0]);
-  
+
           calculatefriction(vec,vec2,physicstemp.bond[count2].normal,physicstemp.bond[count2].friction);
           addvectors2(vec,vec,vec2);
-  
+
           scaleaddvectors2(particle[part1].velocity,particle[part1].velocity,vec,physicstemp.bond[count2].force[0]);
           scaleaddvectors2(particle[part2].velocity,particle[part2].velocity,vec,physicstemp.bond[count2].force[1]);
           addvectors2(physicstemp.bond[count2].forceapplied[0],physicstemp.bond[count2].forceapplied[0],vec);
-  
+
           scalevector2(vec,bondnormal,-force[1]);
-  
+
           calculatefriction(vec,vec2,physicstemp.bond[count2].normal,physicstemp.bond[count2].friction);
           addvectors2(vec,vec,vec2);
-  
+
           addvectors2(particle[part3].velocity,particle[part3].velocity,vec);
           addvectors2(physicstemp.bond[count2].forceapplied[1],physicstemp.bond[count2].forceapplied[1],vec);
           }
@@ -869,13 +869,13 @@ void bondsimulation2(void)
         part1=physicstemp.bond[count2].part1;
         part2=physicstemp.bond[count2].part2;
         part3=physicstemp.bond[count2].part3;
-    
+
         //scalevector(bondnormal,physicstemp.bond[count2].normal,-physicstemp.bond[count2].length*0.2f);
         scalevector2(vec,particle[part1].position,physicstemp.bond[count2].force[0]);
         scaleaddvectors2(vec,vec,particle[part2].position,physicstemp.bond[count2].force[1]);
         subtractvectors2(bondnormal,particle[part3].position,vec);
 
-  
+
         scaleaddvectors2(bondnormal,bondnormal,particle[part3].prevvelocity,1.0f);
         scaleaddvectors2(bondnormal,bondnormal,particle[part2].prevvelocity,-physicstemp.bond[count2].force[1]*1.0f);
         scaleaddvectors2(bondnormal,bondnormal,particle[part1].prevvelocity,-physicstemp.bond[count2].force[0]*1.0f);
@@ -883,10 +883,10 @@ void bondsimulation2(void)
         veclength=physicstemp.bond[count2].elasticity/(particle[part1].mass*physicstemp.bond[count2].force[0]+particle[part2].mass*physicstemp.bond[count2].force[1]+particle[part3].mass);
         veclength*=0.2f;
         veclength*=0.2f;
-  
+
         force[0]=veclength*particle[part3].mass;
         force[1]=veclength*(particle[part1].mass*physicstemp.bond[count2].force[0]+particle[part2].mass*physicstemp.bond[count2].force[1]);
-  
+
         scalevector2(vec,bondnormal,force[0]);
 
         scaleaddvectors2(particle[part1].velocity,particle[part1].velocity,vec,physicstemp.bond[count2].force[0]);
@@ -920,7 +920,7 @@ void bondsimulation2(void)
     if (physicstemp.bond[count2].type==1)
       {
       part1=physicstemp.bond[count2].part1;
-  
+
       subtractvectors(bondnormal,physicstemp.bond[count2].point,particle[part1].position);
       scalevector(vec,bondnormal,1.0f);
       veclength=(vectorlength(bondnormal)-physicstemp.bond[count2].length);
@@ -938,7 +938,7 @@ void bondsimulation2(void)
       part1=physicstemp.bond[count2].part1;
       part2=physicstemp.bond[count2].part2;
       part3=physicstemp.bond[count2].part3;
-  
+
       scalevector(vec,particle[part1].position,physicstemp.bond[count2].force[0]);
       scaleaddvectors(vec,vec,particle[part2].position,physicstemp.bond[count2].force[1]);
 
@@ -1016,7 +1016,7 @@ void bondsimulation2(void)
           object[numofobjects-1].texcoord[2][1]=0.5f;
           object[numofobjects-1].texcoord[3][0]=0.0f;
           object[numofobjects-1].texcoord[3][1]=0.5f;
-  
+
           vec[0]=(float)physicstemp.bond[count2].blockx+0.75f;
           vec[1]=(float)physicstemp.bond[count2].blocky+0.75f;
           vec[2]=0.0f;
@@ -1031,7 +1031,7 @@ void bondsimulation2(void)
           object[numofobjects-1].texcoord[2][1]=0.5f;
           object[numofobjects-1].texcoord[3][0]=0.0f+0.5f;
           object[numofobjects-1].texcoord[3][1]=0.5f;
-  
+
           vec[0]=(float)physicstemp.bond[count2].blockx+0.75f;
           vec[1]=(float)physicstemp.bond[count2].blocky+0.25f;
           vec[2]=0.0f;
@@ -1046,7 +1046,7 @@ void bondsimulation2(void)
           object[numofobjects-1].texcoord[2][1]=0.5f+0.5f;
           object[numofobjects-1].texcoord[3][0]=0.0f+0.5f;
           object[numofobjects-1].texcoord[3][1]=0.5f+0.5f;
-  
+
           vec[0]=(float)physicstemp.bond[count2].blockx+0.25f;
           vec[1]=(float)physicstemp.bond[count2].blocky+0.25f;
           vec[2]=0.0f;

@@ -199,9 +199,9 @@ void screenshot(void)
         red=screenshotbuffer[count*windowinfo.resolutionx+count2]&0xFF;
         green=(screenshotbuffer[count*windowinfo.resolutionx+count2]>>8)&0xFF;
         blue=(screenshotbuffer[count*windowinfo.resolutionx+count2]>>16)&0xFF;
-        fputc(blue,fp); 
-        fputc(green,fp); 
-        fputc(red,fp); 
+        fputc(blue,fp);
+        fputc(green,fp);
+        fputc(red,fp);
         }
       }
     fclose(fp);

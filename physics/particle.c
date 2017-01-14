@@ -61,7 +61,7 @@ void particlecollisionlevel(int particlenum)
       {
       copyvector(vec,particle[particlenum].velocity);
       calculatefriction(vec,vec2,normal,particle[particlenum].friction);
-  
+
       scaleaddvectors(particle[particlenum].velocity,particle[particlenum].velocity,vec,-particle[particlenum].elasticity);
       scaleaddvectors(particle[particlenum].velocity,particle[particlenum].velocity,vec2,-1.0f);
 
@@ -148,7 +148,7 @@ void particlesimulation(void)
       }
     if (block[blocknum].drag != 0.0f)
       scalevector(particle[count].velocity,particle[count].velocity,(1.0f-block[blocknum].drag));
-    
+
     copyvector(particle[count].prevvelocity, particle[count].velocity);
     }
 

@@ -141,12 +141,12 @@ void createtarboy(float position[3])
   object[numofobjects].radius = 1.5f;
   object[numofobjects].mass = 4.0f;
   object[numofobjects].friction = 1.2f;
- 
+
   if (numofobjects == 0)
     object[numofobjects].direction = 1;
 
   object[numofobjects].hitpoints = 1000;
-  
+
 
   /* Particles */
   object[numofobjects].numofparticles = resolution;
@@ -165,7 +165,7 @@ void createtarboy(float position[3])
     createparticle(1, vec, NULL, 0.25f, numofobjects, 10000);
     object[numofobjects].particle[count] = numofparticles - 1;
   }
-  
+
   /* Create bonds */
   for (count = 0; count < resolution; count++)
   {
@@ -177,7 +177,7 @@ void createtarboy(float position[3])
     i1 = o->particle[count + 1 %resolution];
     i2 = o->particle[(count&(resolution-1))];
     createbond(i1, i2, 3, -1);
-    
+
     i1 = o->particle[count + 2 %resolution];
     i2 = o->particle[(count&(resolution-1))];
     createbond(i1, i2, 3, -1);
@@ -399,7 +399,7 @@ void createrope(int type,int particlenum,int particlenum2,int objectnum,int obje
     if (length<1)
       length=1;
     length*=2;
-  
+
     scalevector(vec,vec,1.0f/(float)length);
     copyvector(vec2,particle[particlenum].position);
     addvectors(vec2,vec2,vec);
@@ -413,7 +413,7 @@ void createrope(int type,int particlenum,int particlenum2,int objectnum,int obje
     else
       rope[numofropes].texturenum=361;
     numofropes++;
-  
+
     for (count=1;count<length-1;count++)
       {
       addvectors(vec2,vec2,vec);
@@ -438,7 +438,7 @@ void createrope(int type,int particlenum,int particlenum2,int objectnum,int obje
       rope[numofropes].texturenum=361;
     numofropes++;
     }
-  else 
+  else
     {
     if (type<10)
       createbond(particlenum,particlenum2,7,numofropes);
@@ -452,7 +452,7 @@ void createrope(int type,int particlenum,int particlenum2,int objectnum,int obje
         subtractvectors(vec,level.object[objectnum2].position,particle[particlenum].position);
         subtractvectors(vec2,particle[particlenum2].position,object[objectnum2].position);
         rope[numofropes].range=vectorlength(vec2);
-  
+
         bond[numofbonds-1].length=vectorlength(vec)-rope[numofropes].range;
         bond[numofbonds-1].maxlength=vectorlength(vec)-rope[numofropes].range;
         }
@@ -460,14 +460,14 @@ void createrope(int type,int particlenum,int particlenum2,int objectnum,int obje
         {
         subtractvectors(vec2,level.object[objectnum2].position,object[objectnum].position);
         subtractvectors(vec,particle[particlenum2].position,particle[particlenum].position);
-  
+
         if (fabs(vec2[0])>fabs(vec2[1]))
           vec[1]=0.0f;
         else
           vec[0]=0.0f;
-  
+
         normalizevector(vec,vec);
-  
+
         if (type==5 || type==9)
           copyvector(vec2,particle[particlenum2].position);
         if (type==6 || type==8)
@@ -477,7 +477,7 @@ void createrope(int type,int particlenum,int particlenum2,int objectnum,int obje
         subtractvectors(vec2,particle[particlenum].position,vec2);
         bond[numofbonds-1].length=vectorlength(vec2);
         bond[numofbonds-1].maxlength=vectorlength(vec2);
-  
+
         if (type==5)
           scaleaddvectors(vec2,particle[particlenum2].position,vec,level.object[objectnum].lightcolor[0]);
         if (type==6 || type==8)

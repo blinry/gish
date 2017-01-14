@@ -264,7 +264,7 @@ void rendershadows(void)
       blocknum=level.grid[count][count2];
       if (level.gridmod[count][count2]!=0)
         blocknum=0;
-  
+
       if (blocknum!=0)
         {
         for (count3=0;count3<block[blocknum].numoflines;count3++)
@@ -295,7 +295,7 @@ void rendershadows(void)
             vec[1]=(float)count+block[blocknum].line[count3][1];
             vec[2]=0.0f;
             glVertex3fv(vec);
-        
+
             vec[0]=(float)count2+block[blocknum].line[count3][2];
             vec[1]=(float)count+block[blocknum].line[count3][3];
             vec[2]=0.0f;
@@ -312,7 +312,7 @@ void rendershadows(void)
             vec[2]=0.0f;
             scaleaddvectors(vec,vec,vec2,-frame.light[lightcount].intensity*0.55f);
             glVertex3fv(vec);
-    
+
             glEnd();
             }
           }
@@ -480,7 +480,7 @@ void renderobjectspecular(int objectnum)
       glTexCoord2f(0.5f,0.5f);
       glMultiTexCoord2fARB(GL_TEXTURE1_ARB,0.0f,0.0f);
       glVertex3fv(objectrender[objectnum].vertex[32]);
-  
+
       glEnd();
       }
     /*
@@ -559,7 +559,7 @@ void renderobjectspecular(int objectnum)
       glTexCoord2f(0.5f,0.5f);
       glMultiTexCoord2fARB(GL_TEXTURE1_ARB,0.0f,0.0f);
       glVertex3fv(objectrender[objectnum].vertex[32]);
-  
+
       glEnd();
       }
     */
@@ -570,7 +570,7 @@ void renderobjectspecular(int objectnum)
     glDisable(GL_ALPHA_TEST);
 
     glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
-   
+
     glDisable(GL_STENCIL_TEST);
 
     glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
