@@ -21,10 +21,10 @@ available on my website.
 
 All normalmaps are in the files with the _nm suffix. The heightmaps are in the alpha channel
 of the normalmap. Also, I've included two directories that contain a single copy of each normal
-map in different formats, for easier batch renaming/converting/whatever. All specular maps(_s) 
+map in different formats, for easier batch renaming/converting/whatever. All specular maps(_s)
 are completely untested, and probably need a significant amount of tweaking. Also, there a several
-textures that do not have specular maps yet. If you make a set of speculars for this pack, 
-please let me know and I'll mirror them on my website. 
+textures that do not have specular maps yet. If you make a set of speculars for this pack,
+please let me know and I'll mirror them on my website.
 
 If you are mapping for quake2world, the normalmaps in the base directory should work fine.
 For nexuiz, use the ones in the +y folder. Apologies for all the redundancy.
@@ -45,11 +45,11 @@ Inspiration:
   Dawid Michalczyk              http://www.art.eonworks.com/index.html
  This pack does not contain any material taken from these sources.
 
-Thanks: 
+Thanks:
  Lava_Croft, for providing the honest criticism that got this pack under way.
  jdolan, for the excellent quake2world, and the helpful feedback.
  Nilium/NoodleCower, for reminding me how bad my texturing really is ;)
- Stefan Morell, Polycount, and Mapcore for the helpful information and inspiration. 
+ Stefan Morell, Polycount, and Mapcore for the helpful information and inspiration.
 
 ---------------------
  LICENSE  ("MIT license")

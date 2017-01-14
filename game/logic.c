@@ -262,7 +262,7 @@ void gamelogic(void)
         vec[0]=126.5f+(float)((rand()%15)-7);
         vec[1]=136.5f;
         vec[2]=10.0f;
-    
+
         createamber(vec);
         }
       for (count=0;count<numofobjects;count++)
@@ -605,7 +605,7 @@ void gamelogic(void)
     {
     //if (level.gametype==GAMETYPE_2SUMO && game.startdelay==100)
     //  playsound(8,vec,NULL,0.8f,0,1.0f);
-      
+
     game.startdelay--;
     }
   }
@@ -1411,7 +1411,7 @@ void gamedisplay(void)
       keyhighlight=control[0].key[KEYALIAS_STICK];
       keyhighlight2=control[0].key[KEYALIAS_UP];
       }
-    
+
     drawtext(TXT_TUTORIAL_MOVEMENT,(536|TEXT_CENTER),(382|TEXT_CENTER),12,0.75f,0.75f,0.75f,1.0f);
     drawkeybitmap((512|TEXT_CENTER),(424|TEXT_CENTER),12,12,control[0].key[KEYALIAS_LEFT],keyhighlight,keyhighlight2);
     drawkeybitmap((536|TEXT_CENTER),(424|TEXT_CENTER),12,12,control[0].key[KEYALIAS_DOWN],keyhighlight,keyhighlight2);
@@ -1431,7 +1431,7 @@ void gamedisplay(void)
     drawtext(TXT_TUTORIAL_HEAVY,(count|TEXT_CENTER),(406|TEXT_CENTER),12,0.75f,0.75f,0.75f,1.0f);
     drawkeybitmap((count|TEXT_CENTER),(424|TEXT_CENTER),12,12,control[0].key[KEYALIAS_HEAVY],keyhighlight,keyhighlight2);
     count+=96;
-    
+
     }
 
   if (game.playreplay)

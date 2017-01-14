@@ -117,7 +117,7 @@ void objectcycle(void)
       for (count2=0;count2<object[count].numofparticles;count2++)
         addvectors(object[count].velocity,object[count].velocity,particle[object[count].particle[count2]].velocity);
       scalevector(object[count].velocity,object[count].velocity,1.0f/(float)object[count].numofparticles);
-  
+
       zerovector(object[count].position);
       for (count2=0;count2<object[count].numofparticles;count2++)
         addvectors(object[count].position,object[count].position,particle[object[count].particle[count2]].position);
@@ -686,7 +686,7 @@ void objectcycle(void)
           subtractvectors(vec,particle[object[count].particle[count2]].position,object[count].position);
           crossproduct(vec2,zaxis,vec);
           normalizevector(vec2,vec2);
-  
+
           scaleaddvectors(particle[object[count].particle[count2]].velocity,particle[object[count].particle[count2]].velocity,vec2,spin*0.003f);
           }
         }

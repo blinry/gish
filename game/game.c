@@ -85,7 +85,7 @@ void gameloop(void)
   game.godparticle=-1;
 
   game.oldschool=0;
-  
+
   //
   if (game.levelnum==64)
     game.oldschool=1;
@@ -102,7 +102,7 @@ void gameloop(void)
   srand(time(NULL));
 
   //
-  setuplevel();  
+  setuplevel();
   setupgame();
 
   simtimer=SDL_GetTicks();
@@ -179,11 +179,11 @@ void gameloop(void)
     glColor3fv(level.ambient[3]);
     if (level.background[0]!=0)
       displaybackground(660);
-    
+
     /* HACK gametype < ... */
     if (game.over!=0 && level.gametype<GAMETYPE_2FOOTBALL)
       if (game.exit==GAMEEXIT_NONE)
-      {        
+      {
         if (game.over>=3 && game.over<=5)
           {
           game.exit=GAMEXIT_WARPZONE;
@@ -204,7 +204,7 @@ void gameloop(void)
         /* If we didnt die, we have won. */
         /*  DIDNT WORK
         else
-        {     
+        {
           game.exit=GAMEEXIT_WON;
           game.exitdelay=100;
         }*/
@@ -217,7 +217,7 @@ void gameloop(void)
       setmenuitem(MO_HOTKEY,SCAN_ESC);
       setmenuitem(MO_SET,&game.exit,GAMEEXIT_INGAMEMENU);
       }
-    
+
     if (game.exit==GAMEEXIT_INGAMEMENU)
       {
       count=240;
@@ -254,7 +254,7 @@ void gameloop(void)
       setmenuitem(MO_SET,&game.exit,GAMEEXIT_EXITGAME);
       count+=16;
       }
-    
+
     if (game.exit==GAMEEXIT_DIED)
       {
       if (game.time>0)
@@ -320,7 +320,7 @@ void gameloop(void)
         {
         if (game.dialogdelay>0)
           game.dialogdelay--;
-  
+
         count2=0;
         if (game.dialogdelay==0)
           count2=1;
@@ -332,7 +332,7 @@ void gameloop(void)
         if (control[0].button[count]!=-1)
         if (joystick[control[0].joysticknum].button[control[0].button[count]] && !prevjoystick[control[0].joysticknum].button[control[0].button[count]])
           count2=1;
-  
+
         if (count2==1)
           {
           game.dialog--;
@@ -390,7 +390,7 @@ void gameloop(void)
       }
     checkmusic();
 
-    
+
     /* in game keys */
 
     // 0 == ?
@@ -400,15 +400,15 @@ void gameloop(void)
         setuplevel();
         setupgame();
       }
-        
+
     // pause game
     if (keyboard[SCAN_P] && !prevkeyboard[SCAN_P] && game.exit==GAMEEXIT_NONE)
       game.pause^=1;
-    
+
     // godmode key
     if (keyboard[SCAN_G] && !prevkeyboard[SCAN_G] && game.exit==GAMEEXIT_NONE)
       game.godmode^=1;
-    
+
     // fps enabled
     if (keyboard[SCAN_F] && !prevkeyboard[SCAN_F] && game.exit==GAMEEXIT_NONE)
       fps_enabled^=1;
@@ -417,7 +417,7 @@ void gameloop(void)
 	  movie.record = 0;
 	  if (keyboard[SCAN_R] && !prevkeyboard[SCAN_R])
         movie.record = 1;
-	
+
     // Keyboard zoom
 	  if (keyboard[SCAN_Y])
 	    view.zoom*=1.01f;
@@ -470,28 +470,28 @@ void gameloop(void)
     if (game.oldschool==1 || game.oldschool==2)// || game.oldschool==3)
       {
       setuptextdisplay();
-  
+
       if (game.oldschool==1)// || game.oldschool==3)
         glBindTexture(GL_TEXTURE_2D,texture[334].glname);
       if (game.oldschool==2)
         glBindTexture(GL_TEXTURE_2D,texture[333].glname);
-  
+
       glBegin(GL_QUADS);
-    
+
       glColor4f(1.0f,1.0f,1.0f,1.0f);
-    
+
       glTexCoord2f(0.0f,1.0f);
       glVertex3f(-1.0f,0.75f,-1.0f);
-    
+
       glTexCoord2f(1.0f,1.0f);
       glVertex3f(1.0f,0.75f,-1.0f);
-    
+
       glTexCoord2f(1.0f,0.0f);
       glVertex3f(1.0f,-0.75f,-1.0f);
-    
+
       glTexCoord2f(0.0f,0.0f);
       glVertex3f(-1.0f,-0.75f,-1.0f);
-    
+
       glEnd();
       }
 
@@ -508,7 +508,7 @@ void gameloop(void)
 	      fps_cache= (float)fps_mean / 5.0;
 	      fps_renew=5;
         fps_mean = 0;
-	    }	  
+	    }
 	    drawtext("/i",40,64,16,1.0f,1.0f,0.0f,1.0f, fps_cache);
     }
 
@@ -518,14 +518,14 @@ void gameloop(void)
       glDisable(GL_TEXTURE_2D);
 
       glBegin(GL_QUADS);
-    
+
       glColor4f(0.0f,0.0f,0.0f,(float)(100-game.exitdelay)*0.01f);
-    
+
       glVertex3f(-1.0f,0.75f,-1.0f);
       glVertex3f(1.0f,0.75f,-1.0f);
       glVertex3f(1.0f,-0.75f,-1.0f);
       glVertex3f(-1.0f,-0.75f,-1.0f);
-    
+
       glEnd();
 
       glEnable(GL_TEXTURE_2D);
@@ -540,12 +540,12 @@ void gameloop(void)
         glColor4f(0.5f,0.0f,0.0f,(float)(100-game.exitdelay)*0.01f);
       else
         glColor4f(1.0f-(float)(100-game.exitdelay)*0.01f,0.0f,0.0f,(float)(100-game.exitdelay)*0.01f);
-    
+
       glVertex3f(-1.0f,0.75f,-1.0f);
       glVertex3f(1.0f,0.75f,-1.0f);
       glVertex3f(1.0f,-0.75f,-1.0f);
       glVertex3f(-1.0f,-0.75f,-1.0f);
-    
+
       glEnd();
 
       glEnable(GL_TEXTURE_2D);
@@ -576,30 +576,30 @@ void gameloop(void)
       glDisable(GL_TEXTURE_2D);
 
       glBegin(GL_QUADS);
-    
+
       glColor4f(0.0f,0.0f,0.0f,(float)(20-game.exitdelay)*0.05f);
-    
+
       glVertex3f(-1.0f,0.75f,-1.0f);
       glVertex3f(1.0f,0.75f,-1.0f);
       glVertex3f(1.0f,-0.75f,-1.0f);
       glVertex3f(-1.0f,-0.75f,-1.0f);
-    
+
       glEnd();
 
       glEnable(GL_TEXTURE_2D);
       }
-    
+
     if (movie.record)
     {
       if (movie.framenum<game.framenum/2)
         recordframe();
       drawtext("RECORD",0,64,16,1.0f,0.0f,0.0f,1.0f);
     }
-    
+
     /* replay text */
     if (game.playreplay)
       drawtext(TXT_REPLAY,(612|TEXT_END),64,16,1.0f,1.0f,0.0f,1.0f);
-    
+
     /* pause text */
     if (game.pause && game.exit==GAMEEXIT_NONE)
       {
@@ -610,7 +610,7 @@ void gameloop(void)
     /* godmode mousecursor */
     if (game.exit!=GAMEEXIT_NONE || game.godmode)
       drawmousecursor(768+font.cursornum,mouse.x,mouse.y,16,1.0f,1.0f,1.0f,1.0f);
-    
+
     /* Simulation speed */
     simcount=0;
     game.simspeed=20;
@@ -660,9 +660,9 @@ void gameloop(void)
         deletesound(count);
 
       setuptextdisplay();
-    
+
       drawtext(TXT_LOADINGEDITOR,(320|TEXT_CENTER),240,16,1.0f,1.0f,1.0f,1.0f);
-    
+
       SDL_GL_SwapBuffers();
 
       for (count=0;count<20;count++)
@@ -807,7 +807,7 @@ void simulation(void)
           vec[1]=(float)((rnd()&255)-127)/1270.0f;
           vec[2]=0.0f;
           addvectors(vec,vec,object[count].velocity);
-  
+
           createparticle(5,object[count].position,vec,0.25f,-1,100+(rnd()&63));
           particle[numofparticles-1].rendersize=0.125+(float)(rnd()&127)/1000.0f;
           if (count==0)
@@ -830,7 +830,7 @@ void simulation(void)
 void getinputs(void)
 {
   int count;
-  
+
   /* maximum 4 gishs? */
   for (count = 0; count < CONTROLS_LENGTH; count++)
   {

@@ -45,14 +45,14 @@ _texture texture[2048];
 _tgaheader tgaheader;
 
 /*
- * This should handle a variety common PNG formats 
+ * This should handle a variety common PNG formats
  * most importantly 8bit palletized with alpha channel
  */
 int loadtexturepng(const char *filename, unsigned int **rgba, int *width, int *height)
 {
 	FILE *fp;
 	int load_status;
-	
+
 	if((fp = fopen(filename, "rb")) == NULL)
 	{
 		if(debug_texture_load) fprintf(stderr, "Texture Load Failed: %s\n", filename);
@@ -497,7 +497,7 @@ void generatemipmap(int texturenum)
             blue+=(temp>>16)&0xFF;
             alpha+=(temp>>24)&0xFF;
             }
-  
+
           red>>=2;
           green>>=2;
           blue>>=2;
@@ -562,12 +562,12 @@ void setuptexture(int texturenum)
   if (texture[texturenum].glossmap)
     {
     glBindTexture(GL_TEXTURE_2D,texture[texturenum].glnamegloss);
-  
+
     glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,texture[texturenum].wraps);
     glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,texture[texturenum].wrapt);
     glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,texture[texturenum].magfilter);
     glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,texture[texturenum].minfilter);
-  
+
     for (count=0;count<texture[texturenum].mipmaplevels;count++)
       glTexImage2D(GL_TEXTURE_2D,count,GL_ALPHA,(texture[texturenum].sizex>>count),(texture[texturenum].sizey>>count),
                    0,GL_ALPHA,GL_UNSIGNED_BYTE,texture[texturenum].gloss[count]);

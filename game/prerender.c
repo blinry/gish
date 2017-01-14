@@ -448,7 +448,7 @@ void setuprenderobjects(void)
         objectrender[numofobjectrenders].alpha=1.0f;
         if (object[count].timetolive<50)
           objectrender[numofobjectrenders].alpha=(float)object[count].timetolive/50.0f;
-  
+
         objectrender[numofobjectrenders].numofverts=17;
         for (count2=0;count2<16;count2++)
           {

@@ -126,8 +126,8 @@ void edittextures(void)
 			  cleanFilename[filenameLength-4] = '\0';
 		  else
 			  cleanFilename[filenameLength] = '\0';
-		  
-		  
+
+
 		  drawtext(cleanFilename,
 			  ((count&7)*64+32)|TEXT_CENTER, 14+60+(count>>3)*64,8,1.0f,1.0f,1.0f,1.0f);
 	  }
@@ -523,7 +523,7 @@ void loadleveltiles(char *filename)
           if ((texture[count].sizey&(texture[count].sizey-1))==0)
             setuptexture(count);
           }
-  
+
         fread2(&block[count].numoflines,4,1,fp);
         if (block[count].numoflines<0 || block[count].numoflines>=64)
           {
@@ -636,7 +636,7 @@ void loadleveltiles(char *filename)
           if ((texture[count].sizey&(texture[count].sizey-1))==0)
             setuptexture(count);
           }
-  
+
         fread2(&block[count].numoflines,4,1,fp);
         if (block[count].numoflines<0 || block[count].numoflines>=64)
           {

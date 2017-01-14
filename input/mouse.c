@@ -35,9 +35,9 @@ void checkmouse(void)
   Uint8 buttons;
 
   memcpy(&prevmouse,&mouse,sizeof(mouse));
-  //buttons=SDL_GetRelativeMouseState(&mouse.xdif,&mouse.ydif); 
+  //buttons=SDL_GetRelativeMouseState(&mouse.xdif,&mouse.ydif);
   //SDL_PumpEvents();
-  buttons=SDL_GetMouseState(&mouse.x,&mouse.y); 
+  buttons=SDL_GetMouseState(&mouse.x,&mouse.y);
   mouse.x=mouse.x*640/windowinfo.resolutionx;
   mouse.y=mouse.y*480/windowinfo.resolutiony;
 

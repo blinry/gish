@@ -152,19 +152,19 @@ void setupblockflags(int blocknum)
     if (block[blocknum].line[count][2]==1.0f)
     if (block[blocknum].line[count][3]==1.0f)
       block[blocknum].flags|=1;
-    
+
     if (block[blocknum].line[count][0]==1.0f)
     if (block[blocknum].line[count][1]==1.0f)
     if (block[blocknum].line[count][2]==1.0f)
     if (block[blocknum].line[count][3]==0.0f)
       block[blocknum].flags|=2;
-    
+
     if (block[blocknum].line[count][0]==1.0f)
     if (block[blocknum].line[count][1]==0.0f)
     if (block[blocknum].line[count][2]==0.0f)
     if (block[blocknum].line[count][3]==0.0f)
       block[blocknum].flags|=4;
-    
+
     if (block[blocknum].line[count][0]==0.0f)
     if (block[blocknum].line[count][1]==0.0f)
     if (block[blocknum].line[count][2]==0.0f)
@@ -308,7 +308,7 @@ void setupblockalpha(int blocknum)
         vertright=vertrightnext;
 
         vertrightnext=(vertright+1)%polygontemp[count2].numofverts;
-    
+
         xrightadd=(polygontemp[count2].ivertex[vertrightnext][0]<<16)-xright;
         if ((polygontemp[count2].ivertex[vertrightnext][1]-yline)>0)
           xrightadd/=(polygontemp[count2].ivertex[vertrightnext][1]-yline);

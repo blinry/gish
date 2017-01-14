@@ -143,7 +143,7 @@ void listfiles(char *path,char *filespec,char filelist[1024][32],int directories
         if (dp->d_name[0]!='.')
         if (dp->d_name[0]!='<')
         if (checkfilespec(filespec,dp->d_name))
-          { 
+          {
           strncpy(filelist[count],dp->d_name,32);
           filelist[count][31]='\0'; /* Safety first! */
           count++;
